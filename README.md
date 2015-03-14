@@ -42,3 +42,7 @@ _TetrEscape_ is designed for the web first, but the intent is to port it to othe
  */
 function sum(a, b) { ... }
 ```
+
+### Dependencies
+
+* Clone [Erik Möller and Paul Irish's requestAnimationFrame polyfill](https://gist.github.com/paulirish/1579671) into `game/scripts`.
