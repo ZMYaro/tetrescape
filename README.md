@@ -1,16 +1,16 @@
 # TetrEscape
 
-## General concept
+### General concept
 
 Room escape meets block-pushing puzzles meets _Tetris_.
 
 
-## Platform
+### Platform
 
 _TetrEscape_ is designed for the web first, but the intent is to port it to other platforms in the future.
 
 
-## Gameplay
+### Gameplay
 
 * The player can move in four directions.
 * If the player moves in the direction of a block, the player will push the block if possible.
@@ -20,7 +20,7 @@ _TetrEscape_ is designed for the web first, but the intent is to port it to othe
 * A level is completed by the player reaching the exit/goal space.
 
 
-## Code styling
+### Code styling
 
 * Commits should follow [standard Git commit guidelines](http://git-scm.com/book/ch5-2.html#Commit-Guidelines).
   - Commits should fit in the sentence, “If applied, this commit will ___.”
