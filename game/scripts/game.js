@@ -67,12 +67,12 @@ Game.prototype = {
 			[0, 1, 0],
 			[1, 1, 1]
 		];
-		new Tetromino(tBlock, 1, 7, this._grid);
+		new Tetromino(tBlock, 1, 7, this._grid, new Color(0, 192, 255));
 		var zBlock = [
 			[1, 1, 0],
 			[0, 1, 1]
 		];
-		new Tetromino(zBlock, 7, 7, this._grid);
+		new Tetromino(zBlock, 7, 7, this._grid, new Color(0, 192, 0));
 		
 		// Start the main game loop.
 		this._update();

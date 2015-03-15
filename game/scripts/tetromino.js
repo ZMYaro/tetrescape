@@ -7,13 +7,14 @@
  * @param {Number} x - The the x-coordinate of the top-left corner of the tetromino
  * @param {Number} y - The the y-coordinate of the top-left corner of the tetromino
  * @param {Grid} grid - The grid to which the tetromino's blocks are to be added
+ * @param {Color} color - The color of the tetromino
  */
-function Tetromino(blockArrangement, x, y, grid) {
+function Tetromino(blockArrangement, x, y, grid, color) {
 	this._blocks = [];
 	for (var r = 0; r < blockArrangement.length; r++) {
 		for (var c = 0; c < blockArrangement[r].length; c++) { // Heh, C++
 			if (blockArrangement[r][c]) {
-				this._blocks.push(new Block(x + c, y + r, grid, this));
+				this._blocks.push(new Block(x + c, y + r, grid, color, this));
 			}
 		}
 	}
