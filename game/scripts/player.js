@@ -42,7 +42,7 @@ Player.prototype.tryMove = function (movement) {
 			break;
 	}
 	// Call the superclass implementation of the function.
-	return GridOccupant.tryMove.call(this, movement);
+	return GridOccupant.prototype.tryMove.call(this, movement);
 };
 
 /**

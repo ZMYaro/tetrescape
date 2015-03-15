@@ -9,6 +9,7 @@ function Game(canvas) {
 	// Initialize private variables.
 	this._canvas = canvas;
 	this._ctx = canvas.getContext('2d');
+	this._im = new InputManager();
 	// Add placeholders for additional private variables.
 	this._grid = undefined;
 	this._player = undefined;
@@ -20,10 +21,22 @@ function Game(canvas) {
 Game.prototype = {
 	/**
 	 * The main game loop
+	 * @private
 	 */
 	_update: function () {
 		// Clear the screen.
 		this._ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
+		
+		// Handle player movement.
+		if (this._im.left && !this._im.right && !this._im.up && !this._im.down) {
+			this._player.tryMove(Vector2D.LEFT);
+		} else if (this._im.right && !this._im.left && !this._im.up && !this._im.down) {
+			this._player.tryMove(Vector2D.RIGHT);
+		} else if (this._im.up && !this._im.left && !this._im.right && !this._im.down) {
+			this._player.tryMove(Vector2D.UP);
+		} else if (this._im.down && !this._im.left && !this._im.right && !this._im.up) {
+			this._player.tryMove(Vector2D.DOWN);
+		}
 		
 		// Draw grid elements.
 		this._grid.draw(this._ctx);
