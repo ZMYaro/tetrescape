@@ -54,9 +54,11 @@ Grid.prototype = {
 			return false;
 		}
 		
-		// If the destination space is occupied, attempt to push the occupant.
-		if (this._occupants[newPos.x][newPos.y]) {
-			if (this._occupants[newPos.x][newPos.y].canMove(movement)) {
+		// If the destination space is occupied by an occupant that is not a member of
+		// this occupant's group, attempt to push the blocking occupant.
+		var blocker = this._occupants[newPos.x][newPos.y];
+		if (blocker && !(blocker.tetromino && blocker.tetromino === occupant.tetromino)) {
+			if (blocker.canMove(movement)) {
 				return true;
 			} else {
 				return false;
