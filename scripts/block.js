@@ -7,14 +7,20 @@
  * @param {Number} x - The x-coordinate of the block on the grid
  * @param {Number} y - The y-coordinate of the block on the grid
  * @param {Grid} grid - The grid to which the block is to be added
+ * @param {Color} color - The color of the block
  * @param {Tetromino} [tetromino] - The tetromino the block belongs to, if any
  */
-function Block(x, y, grid, tetromino) {
+function Block(x, y, grid, color, tetromino) {
 	// Call the superclass constructor.
 	GridOccupant.call(this, x, y, grid);
 	
 	this.tetromino = tetromino;
+	this._color = color || Block.DEFAULT_COLOR;
 }
+
+// Initialize static constants.
+/** {Color} The default block color */
+Block.DEFAULT_COLOR = new Color(0, 0, 255); // Blue
 
 // Inherit from GridOccupant.
 Block.prototype = Object.create(GridOccupant.prototype);
@@ -73,6 +79,6 @@ Block.prototype.tryMoveSingle = function (movement) {
  * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
  */
 Block.prototype.draw = function (ctx) {
-	ctx.fillStyle = 'blue';
+	ctx.fillStyle = this._color.hex;
 	ctx.fillRect(this.x * Grid.SQUARE_SIZE, this.y * Grid.SQUARE_SIZE, Grid.SQUARE_SIZE, Grid.SQUARE_SIZE);
 };
