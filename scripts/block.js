@@ -13,11 +13,35 @@ function Block(x, y, grid, tetromino) {
 	// Call the superclass constructor.
 	GridOccupant.call(this, x, y, grid);
 	
-	this._tetromino = tetromino;
+	this.tetromino = tetromino;
 }
 
 // Inherit from GridOccupant.
 Block.prototype = Object.create(GridOccupant.prototype);
+
+/**
+ * Check whether the block's tetromino can be moved to a new location.
+ * @override
+ * @param {Vector2D} movement - The vector by which the block would be moved
+ * @returns {Boolean} - Whether the block could be moved
+ */
+Block.prototype.canMove = function (movement) {
+	if (this.tetromino) {
+		return this.tetromino.canMove(movement);
+	} else {
+		return this.canMoveSingle(movement);
+	}
+};
+
+/**
+ * Check whether the block can be moved to a new location, independent of its tetromino.
+ * @override
+ * @param {Vector2D} movement - The vector by which the block would be moved
+ * @returns {Boolean} - Whether the block could be moved
+ */
+Block.prototype.canMoveSingle = function (movement) {
+	return GridOccupant.prototype.canMove.call(this, movement);
+};
 
 /**
  * Move the block's tetromino to a new location, if possible.
@@ -26,10 +50,10 @@ Block.prototype = Object.create(GridOccupant.prototype);
  * @returns {Boolean} - Whether the block could be moved
  */
 Block.prototype.tryMove = function (movement) {
-	if (this._tetromino) {
-		this._tetromino.tryMove(movement);
+	if (this.tetromino) {
+		return this.tetromino.tryMove(movement);
 	} else {
-		this.moveSingle(movement);
+		return this.tryMoveSingle(movement);
 	}
 };
 
@@ -38,7 +62,7 @@ Block.prototype.tryMove = function (movement) {
  * @param {Vector2D} movement - The vector by which to move the block
  * @return {Boolean} - Whether the block could be moved
  */
-Block.prototype.moveSingle = function (movement) {
+Block.prototype.tryMoveSingle = function (movement) {
 	// Call the superclass implementation of the tryMove.
 	return GridOccupant.prototype.tryMove.call(this, movement);
 };
