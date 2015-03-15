@@ -9,6 +9,7 @@
  */
 function GridOccupant(x, y, grid) {
 	this._grid = grid;
+	this._moving = false;
 	this.x = x;
 	this.y = y;
 	
@@ -17,12 +18,33 @@ function GridOccupant(x, y, grid) {
 
 GridOccupant.prototype = {
 	/**
-	 * Move a grid occupant to a new location, if possible.
+	 * Check whether the grid occupant can be moved to a location.
+	 * @param {Vector2D} movement - The vector by which the occupant would be moved
+	 * @returns {Boolean} - Whether the occupant could be moved
+	 */
+	canMove: function (movement) {
+		return this._grid.canMove(this, movement);
+	},
+	
+	/**
+	 * Move the grid occupant to a new location, if possible.
 	 * @param {Vector2D} movement - The vector by which to move the occupant
 	 * @returns {Boolean} - Whether the occupant could be moved
 	 */
 	tryMove: function (movement) {
-		return this._grid.tryMove(this, movement);
+		if (this._moving) {
+			return false;
+		}
+		if (this._grid.tryMove(this, movement)) {
+			this._moving = true;
+			// TODO: Replace this with the actual animation timer.
+			setTimeout((function () {
+				this._moving = false;
+			}).bind(this), 150);
+			return true;
+		} else {
+			return false;
+		}
 	},
 	
 	/**

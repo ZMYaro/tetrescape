@@ -55,13 +55,13 @@ Game.prototype = {
 		// Create the player.
 		this._player = new Player(5, 9, this._grid);
 		// Create some blocks.
-		/*for (var x = 0; x < grid.width; x++) {
-			for (var y = 0; y < 0.5 * grid.height; y++) {
+		for (var x = 0; x < this._grid.width; x++) {
+			for (var y = 0; y < 0.5 * this._grid.height; y++) {
 				if ((y + x) % 2 === 0) {
 					new Block(x, y, this._grid);
 				}
 			}
-		}*/
+		}
 		
 		// Start the main game loop.
 		this._update();
