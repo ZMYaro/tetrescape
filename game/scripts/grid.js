@@ -23,18 +23,6 @@ Grid.SQUARE_SIZE = 32;
 
 Grid.prototype = {
 	/**
-	 * Move a grid occupant to a new location, overwriting whatever may be at that location.
-	 * @param {GridOccupant} occupant - The occupant to move
-	 * @param {Vector2D} movement - The vector by which to move the occupant
-	 */
-	_move: function (occupant, movement) {
-		this._occupants[occupant.x][occupant.y] = undefined;
-		occupant.x += vector.x;
-		occupant.y += vector.y;
-		this._occupants[occupant.x][occupant.y] = occupant;
-	},
-	
-	/**
 	 * Add a new occupant to the grid.
 	 * @param {GridOccupant} occupant - The new occupant to add
 	 * @returns {Boolean} - Whether the occupant could be added
@@ -49,13 +37,12 @@ Grid.prototype = {
 	},
 	
 	/**
-	 * Move a grid occupant to a new location, if possible, pushing any other grid
-	 * occupants in its way.
+	 * Check whether a grid occupant can be moved to a new location.
 	 * @param {GridOccupant} occupant - The occupant to move
-	 * @param {Vector2D} movement - The vector by which to move the occupant
+	 * @param {Vector2D} movement - The vector by which the occupant would be moved
 	 * @returns {Boolean} - Whether the occupant could be moved
 	 */
-	tryMove: function (occupant, movement) {
+	canMove: function (occupant, movement) {
 		// Calculate the potential new position of the occupant.
 		var newPos = new Vector2D(occupant.x + movement.x, occupant.y + movement.y);
 		
@@ -67,14 +54,40 @@ Grid.prototype = {
 			return false;
 		}
 		
-		// If the grid space is occupied, attempt to push the occupant.
+		// If the destination space is occupied, attempt to push the occupant.
 		if (this._occupants[newPos.x][newPos.y]) {
-			if (this._occupants[newPos.x][newPos.y].move(movement)) {
-				this._move(occupant, movement);
+			if (this._occupants[newPos.x][newPos.y].canMove(movement)) {
 				return true;
 			} else {
 				return false;
 			}
+		}
+		return true;
+	},
+	
+	/**
+	 * Move a grid occupant to a new location, if possible, pushing any other grid
+	 * occupants in its way.
+	 * @param {GridOccupant} occupant - The occupant to move
+	 * @param {Vector2D} movement - The vector by which to move the occupant
+	 * @returns {Boolean} - Whether the occupant could be moved
+	 */
+	tryMove: function (occupant, movement) {
+		if (this.canMove(occupant, movement)) {
+			// If the destination space is occupied, attempt to push the opponent.
+			var newPos = new Vector2D(occupant.x + movement.x, occupant.y + movement.y);
+			if (this._occupants[newPos.x][newPos.y] && !this._occupants[newPos.x][newPos.y].tryMove(movement)) {
+				return false;
+			}
+			
+			// Move to the new location.
+			this._occupants[occupant.x][occupant.y] = undefined;
+			occupant.x += movement.x;
+			occupant.y += movement.y;
+			this._occupants[occupant.x][occupant.y] = occupant;
+			return true;
+		} else {
+			return false;
 		}
 	},
 	
