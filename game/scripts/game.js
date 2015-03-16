@@ -5,7 +5,7 @@
  * @class
  * @param {HTMLCanvasElement} canvas - The canvas on whch the game will appear
  */
-function Game(canvas) {
+function Game(canvas, level) {
 	// Initialize private variables.
 	this._canvas = canvas;
 	this._ctx = canvas.getContext('2d');
@@ -16,6 +16,8 @@ function Game(canvas) {
 	this._currentLevel = undefined;
 	
 	this._boundUpdate = this._update.bind(this);
+	
+	this.startLevel(level);
 }
 
 Game.prototype = {
@@ -51,28 +53,17 @@ Game.prototype = {
 	startLevel: function (level) {
 		// TODO: Replace this with proper level loading.
 		// Create the grid.
-		this._grid = new Grid(10, 10);
+		this._grid = new Grid(level.width, level.height);
 		// Create the player.
-		this._player = new Player(5, 9, this._grid);
-		// Create some blocks.
-		for (var x = 0; x < this._grid.width; x++) {
-			for (var y = 0; y < 0.5 * this._grid.height; y++) {
-				if ((y + x) % 2 === 0) {
-					new Block(x, y, this._grid);
-				}
-			}
-		}
-		// Create some tetrominos.
-		var tBlock = [
-			[0, 1, 0],
-			[1, 1, 1]
-		];
-		new Tetromino(tBlock, 1, 7, this._grid, new Color(0, 192, 255));
-		var zBlock = [
-			[1, 1, 0],
-			[0, 1, 1]
-		];
-		new Tetromino(zBlock, 7, 7, this._grid, new Color(0, 192, 0));
+		this._player = new Player(level.playerSpawn.x, level.playerSpawn.y, this._grid);
+		// Create the tetrominos.
+		level.tetrominos.forEach(function (tetromino) {
+			new Tetromino(Tetromino.BLOCKS[tetromino.type][tetromino.orientation],
+				tetromino.x,
+				tetromino.y,
+				this._grid,
+				Tetromino.BLOCKS[tetromino.type].color);
+		}, this);
 		
 		// Start the main game loop.
 		this._update();
