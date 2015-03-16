@@ -30,14 +30,21 @@ Game.prototype = {
 		this._ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
 		
 		// Handle player movement.
+		var movement;
 		if (this._im.left && !this._im.right && !this._im.up && !this._im.down) {
-			this._player.tryMove(Vector2D.LEFT);
+			movement = Vector2D.LEFT;
 		} else if (this._im.right && !this._im.left && !this._im.up && !this._im.down) {
-			this._player.tryMove(Vector2D.RIGHT);
+			movement = Vector2D.RIGHT;
 		} else if (this._im.up && !this._im.left && !this._im.right && !this._im.down) {
-			this._player.tryMove(Vector2D.UP);
+			movement = Vector2D.UP;
 		} else if (this._im.down && !this._im.left && !this._im.right && !this._im.up) {
-			this._player.tryMove(Vector2D.DOWN);
+			movement = Vector2D.DOWN;
+		}
+		if (movement) {
+			if (this._player.tryMove(movement)) {
+				// Check whether a new row has been formed and eliminate it.
+				this._grid.clearRows();
+			}
 		}
 		
 		// Draw grid elements.

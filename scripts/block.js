@@ -76,6 +76,19 @@ Block.prototype.tryMoveSingle = function (movement) {
 };
 
 /**
+ * Remove the block from the game.
+ */
+Block.prototype.kill = function () {
+	// Remove the block from its tetromino if it has one.
+	if (this.tetromino) {
+		this.tetromino.removeBlock(this);
+	}
+	// TODO: Replace this with death animation.
+	// Remove the block from the grid.
+	this._grid.removeOccupant(this);
+};
+
+/**
  * Draw the block to the canvas.
  * @override
  * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas

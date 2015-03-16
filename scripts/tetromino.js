@@ -222,5 +222,15 @@ Tetromino.prototype = {
 			this._blocks[i].tryMoveSingle(movement);
 		}
 		return true;
+	},
+	
+	/**
+	 * Remove a block from the tetromino.
+	 * @param {Block} block - The block to remove
+	 */
+	removeBlock: function (block) {
+		if (this._blocks.indexOf(block) !== -1) {
+			this._blocks.splice(this._blocks.indexOf(block), 1);
+		}
 	}
 };
