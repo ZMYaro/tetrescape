@@ -20,6 +20,13 @@ _TetrEscape_ is designed for the web first, but the intent is to port it to othe
 * A level is completed by the player reaching the exit/goal space.
 
 
+### Controls
+
+* Keyboard - arrow keys, WASD, or ,AOE
+* Touch - directional swiping
+* Potential support for gamepads in the future
+
+
 ### Code styling
 
 * Commits should follow [standard Git commit guidelines](http://git-scm.com/book/ch5-2.html#Commit-Guidelines).
