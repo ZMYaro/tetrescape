@@ -18,6 +18,8 @@ function Grid(width, height) {
 }
 
 // Define static constants.
+/** {Color} The color of the grid background */
+Grid.COLOR = new Color(240, 240, 240);
 /** {Number} The size of each grid square in pixels */
 Grid.SQUARE_SIZE = 32;
 
@@ -102,8 +104,13 @@ Grid.prototype = {
 	 * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
 	 */
 	draw: function (ctx) {
+		// Draw the grid background.
+		ctx.fillStyle = Grid.COLOR.hex;
+		ctx.fillRect(0, 0, this.width * Grid.SQUARE_SIZE, this.height * Grid.SQUARE_SIZE);
+		
 		// Draw the grid.
-		ctx.strokeStyle = '#808080';
+		ctx.lineWidth = 1;
+		ctx.strokeStyle = Grid.COLOR.darken(0.9).hex;
 		ctx.beginPath();
 		for (var x = 0; x <= this.width; x++) {
 			ctx.moveTo(x * Grid.SQUARE_SIZE, 0);

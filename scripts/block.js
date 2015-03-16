@@ -20,7 +20,9 @@ function Block(x, y, grid, color, tetromino) {
 
 // Initialize static constants.
 /** {Color} The default block color */
-Block.DEFAULT_COLOR = new Color(0, 0, 255); // Blue
+Block.DEFAULT_COLOR = new Color(160, 160, 160); // Gray
+/** {Number} The width of block outlines */
+Block.LINE_WIDTH = 3;
 
 // Inherit from GridOccupant.
 Block.prototype = Object.create(GridOccupant.prototype);
@@ -79,6 +81,17 @@ Block.prototype.tryMoveSingle = function (movement) {
  * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
  */
 Block.prototype.draw = function (ctx) {
+	var x = this.x * Grid.SQUARE_SIZE + Block.LINE_WIDTH / 2,
+		y = this.y * Grid.SQUARE_SIZE + Block.LINE_WIDTH / 2,
+		size = Grid.SQUARE_SIZE - Block.LINE_WIDTH / 2 - Block.LINE_WIDTH / 2;
+	
+	ctx.lineWidth = Block.LINE_WIDTH;
 	ctx.fillStyle = this._color.hex;
-	ctx.fillRect(this.x * Grid.SQUARE_SIZE, this.y * Grid.SQUARE_SIZE, Grid.SQUARE_SIZE, Grid.SQUARE_SIZE);
+	ctx.strokeStyle = this._color.darken(0.8).hex;
+	
+	ctx.beginPath();
+	ctx.rect(x, y, size, size);
+	ctx.fill();
+	ctx.stroke();
+	ctx.closePath();
 };
