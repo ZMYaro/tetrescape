@@ -12,10 +12,10 @@
 		<script type="text/javascript" src="scripts/player.js"></script>
 		<script type="text/javascript" src="scripts/block.js"></script>
 		<script type="text/javascript" src="scripts/tetromino.js"></script>
+		<script type="text/javascript" src="scripts/level.js"></script>
 		<script type="text/javascript">
 			window.onload = function () {
-				var game = new Game(document.getElementById('canvas'));
-				game.startLevel();
+				var game = new Game(document.getElementById('canvas'), LEVELS[0]);
 			};
 		</script>
 	</head>
