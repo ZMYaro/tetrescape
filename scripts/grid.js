@@ -87,6 +87,10 @@ Grid.prototype = {
 			occupant.x += movement.x;
 			occupant.y += movement.y;
 			this._occupants[occupant.x][occupant.y] = occupant;
+			
+			// Check whether a new row has been formed and eliminate it.
+			this._clearRows();
+			
 			return true;
 		} else {
 			return false;
@@ -120,5 +124,57 @@ Grid.prototype = {
 				}
 			}
 		}
+	},
+	
+	/**
+	 * Check for and clear any complete rows.
+	 */
+	_clearRows: function () {
+		var counter;
+		
+		// Check all columns.
+		for (var x = 0; x < this.width; x++) {
+			// Reset the counter.
+			counter = 0;
+			for (var y = 0; y < this.height; y++) {
+				// For each block found in the row, increment the counter.
+				if (this._occupants[x][y] instanceof Block) {
+					counter++;
+				}
+			}
+			// If the row is full, remove all blocks in it.
+			if (counter === this.height) {
+				for (var y = 0; y < this.height; y++) {
+					// For each block found in the row, increment the counter.
+					if (this._occupants[x][y] instanceof Block) {
+						// TODO: Replace this with death animation.
+						this._occupants[x][y] = undefined;
+					}
+				}
+			}
+		}
+		
+		// Check all rows.
+		for (var y = 0; y < this.height; y++) {
+			// Reset the counter.
+			counter = 0;
+			for (var x = 0; x < this.width; x++) {
+				// For each block found in the row, increment the counter.
+				if (this._occupants[x][y] instanceof Block) {
+					counter++;
+				}
+			}
+			// If the row is full, remove all blocks in it.
+			if (counter === this.width) {
+				for (var x = 0; x < this.width; x++) {
+					// For each block found in the row, increment the counter.
+					if (this._occupants[x][y] instanceof Block) {
+						// TODO: Replace this with death animation.
+						this._occupants[x][y] = undefined;
+					}
+				}
+			}
+		}
+		
 	}
 };
