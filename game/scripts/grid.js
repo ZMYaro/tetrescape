@@ -26,7 +26,7 @@ Grid.SQUARE_SIZE = 32;
 Grid.prototype = {
 	/**
 	 * Add a new occupant to the grid.
-	 * @param {GridOccupant} occupant - The new occupant to add
+	 * @param {GridOccupant} newOccupant - The new occupant to add
 	 * @returns {Boolean} - Whether the occupant could be added
 	 */
 	addOccupant: function (newOccupant) {
@@ -36,6 +36,19 @@ Grid.prototype = {
 			this._occupants[newOccupant.x][newOccupant.y] = newOccupant;
 			return true;
 		}
+	},
+	
+	/**
+	 * Remove an occupant from the grid.
+	 * @param {GridOccupant} occupant - The occupant to remove
+	 * @returns {Boolean} - Whether the occupant was found and removed
+	 */
+	removeOccupant: function (occupant) {
+		if (this._occupants[occupant.x][occupant.y] === occupant) {
+			this._occupants[occupant.x][occupant.y] = undefined;
+			return true;
+		}
+		return false;
 	},
 	
 	/**
@@ -90,9 +103,6 @@ Grid.prototype = {
 			occupant.y += movement.y;
 			this._occupants[occupant.x][occupant.y] = occupant;
 			
-			// Check whether a new row has been formed and eliminate it.
-			this._clearRows();
-			
 			return true;
 		} else {
 			return false;
@@ -136,7 +146,7 @@ Grid.prototype = {
 	/**
 	 * Check for and clear any complete rows.
 	 */
-	_clearRows: function () {
+	clearRows: function () {
 		var counter;
 		
 		// Check all columns.
@@ -152,10 +162,9 @@ Grid.prototype = {
 			// If the row is full, remove all blocks in it.
 			if (counter === this.height) {
 				for (var y = 0; y < this.height; y++) {
-					// For each block found in the row, increment the counter.
+					// For each block found in the row, remove the block.
 					if (this._occupants[x][y] instanceof Block) {
-						// TODO: Replace this with death animation.
-						this._occupants[x][y] = undefined;
+						this._occupants[x][y].kill();
 					}
 				}
 			}
@@ -174,10 +183,9 @@ Grid.prototype = {
 			// If the row is full, remove all blocks in it.
 			if (counter === this.width) {
 				for (var x = 0; x < this.width; x++) {
-					// For each block found in the row, increment the counter.
+					// For each block found in the row, remove the block.
 					if (this._occupants[x][y] instanceof Block) {
-						// TODO: Replace this with death animation.
-						this._occupants[x][y] = undefined;
+						this._occupants[x][y].kill();
 					}
 				}
 			}
