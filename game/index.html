@@ -27,17 +27,22 @@
 				game;
 			
 			window.onload = function () {
-				var levelButtons = document.getElementsByClassName('levelButton');
-				for (var i = 0; i < levelButtons.length; i++) {
-					levelButtons[i].onclick = function () {
+				var levelMenuElement = document.getElementById('levelMenu');
+				for (var i = 0; i < LEVELS.length; i++) {
+					var levelButton = document.createElement('button');
+					levelButton.innerHTML = (i + 1);
+					levelButton.className = "z1";
+					levelButton.dataset.level = i;
+					levelButton.onclick = function () {
 						this.menu.suspend();
 						menus.game.open();
 						startGame(this.dataset.level);
 					};
+					levelMenuElement.appendChild(levelButton);
 				}
 				
 				menus = {
-					level: new Menu(document.getElementById('levelMenu')),
+					level: new Menu(levelMenuElement),
 					game: new Menu(document.getElementById('canvas'))
 				};
 				
@@ -60,27 +65,6 @@
 		
 		<div class="menu z1" id="levelMenu">
 			<header class="appBar">Select level</header>
-			<button class="levelButton z1" data-level="0">
-				1
-			</button>
-			<button class="levelButton z1" data-level="1">
-				2
-			</button>
-			<button class="levelButton z1" data-level="2">
-				3
-			</button>
-			<button class="levelButton z1" data-level="3">
-				4
-			</button>
-			<button class="levelButton z1" data-level="4">
-				5
-			</button>
-			<button class="levelButton z1" data-level="5">
-				6
-			</button>
-			<button class="levelButton z1" data-level="6">
-				7
-			</button>
 		</div>
 		
 		<canvas class="menu z1" id="canvas" width="640" height="480"></canvas>
