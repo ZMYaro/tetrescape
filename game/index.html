@@ -3,6 +3,11 @@
 	<head>
 		<title>TetrEscape</title>
 		
+		<link rel="stylesheet" type="text/css" href="styles/material-elements.css" />
+		<link rel="stylesheet" type="text/css" href="styles/material-widgets.css" />
+		<link rel="stylesheet" type="text/css" href="styles/material-depth.css" />
+		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
+		
 		<script type="text/javascript" src="scripts/color.js"></script>
 		<script type="text/javascript" src="scripts/vector2d.js"></script>
 		<script type="text/javascript" src="scripts/game.js"></script>
@@ -14,19 +19,70 @@
 		<script type="text/javascript" src="scripts/block.js"></script>
 		<script type="text/javascript" src="scripts/tetromino.js"></script>
 		<script type="text/javascript" src="scripts/level.js"></script>
+		
+		<script type="text/javascript" src="scripts/menu.js"></script>
+		
 		<script type="text/javascript">
-			var level = 0,
+			var menus,
 				game;
 			
-			window.onload = startGame;
+			window.onload = function () {
+				var levelButtons = document.getElementsByClassName('levelButton');
+				for (var i = 0; i < levelButtons.length; i++) {
+					levelButtons[i].onclick = function () {
+						this.menu.suspend();
+						menus.game.open();
+						startGame(this.dataset.level);
+					};
+				}
+				
+				menus = {
+					level: new Menu(document.getElementById('levelMenu')),
+					game: new Menu(document.getElementById('canvas'))
+				};
+				
+				menus.level.open();
+			};
 			
-			function startGame() {
+			function startGame(level) {
 				game = null;
-				game = new Game(document.getElementById('canvas'), LEVELS[level++], startGame);
+				game = new Game(menus.game.elem, LEVELS[level], endGame);
+			}
+			
+			function endGame() {
+				game = undefined;
+				menus.game.close();
+				menus.level.resume();
 			}
 		</script>
 	</head>
 	<body>
-		<canvas id="canvas" width="640" height="480"></canvas>
+		
+		<div class="menu z1" id="levelMenu">
+			<header class="appBar">Select level</header>
+			<button class="levelButton z1" data-level="0">
+				1
+			</button>
+			<button class="levelButton z1" data-level="1">
+				2
+			</button>
+			<button class="levelButton z1" data-level="2">
+				3
+			</button>
+			<button class="levelButton z1" data-level="3">
+				4
+			</button>
+			<button class="levelButton z1" data-level="4">
+				5
+			</button>
+			<button class="levelButton z1" data-level="5">
+				6
+			</button>
+			<button class="levelButton z1" data-level="6">
+				7
+			</button>
+		</div>
+		
+		<canvas class="menu z1" id="canvas" width="640" height="480"></canvas>
 	</body>
 </html>
