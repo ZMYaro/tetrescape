@@ -47,7 +47,6 @@ Game.prototype = {
 				// Check whether a new row has been formed and eliminate it.
 				this._grid.clearRows();
 				// Check whether the player has reached the goal.
-				console.log(this._player.x + ',' + this._player.y + '|' + this._goal.x + ',' + this._goal.y);
 				if (this._player.x === this._goal.x && this._player.y === this._goal.y) {
 					// End the game.
 					this._endCallback();
