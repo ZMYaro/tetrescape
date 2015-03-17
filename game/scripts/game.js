@@ -5,14 +5,16 @@
  * @class
  * @param {HTMLCanvasElement} canvas - The canvas on whch the game will appear
  */
-function Game(canvas, level) {
+function Game(canvas, level, endCallback) {
 	// Initialize private variables.
 	this._canvas = canvas;
 	this._ctx = canvas.getContext('2d');
 	this._im = new InputManager();
+	this._endCallback = endCallback;
 	// Add placeholders for additional private variables.
 	this._grid = undefined;
 	this._player = undefined;
+	this._goal = undefined;
 	this._currentLevel = undefined;
 	
 	this._boundUpdate = this._update.bind(this);
@@ -44,6 +46,14 @@ Game.prototype = {
 			if (this._player.tryMove(movement)) {
 				// Check whether a new row has been formed and eliminate it.
 				this._grid.clearRows();
+				// Check whether the player has reached the goal.
+				console.log(this._player.x + ',' + this._player.y + '|' + this._goal.x + ',' + this._goal.y);
+				if (this._player.x === this._goal.x && this._player.y === this._goal.y) {
+					// End the game.
+					this._endCallback();
+					// End the loop.
+					return;
+				}
 			}
 		}
 		
@@ -63,6 +73,8 @@ Game.prototype = {
 		this._grid = new Grid(level.width, level.height);
 		// Create the player.
 		this._player = new Player(level.playerSpawn.x, level.playerSpawn.y, this._grid);
+		// Create the goal tile.
+		this._goal = new Goal(level.goal.x, level.goal.y, this._grid);
 		// Create the tetrominos.
 		level.tetrominos.forEach(function (tetromino) {
 			new Tetromino(Tetromino.BLOCKS[tetromino.type][tetromino.orientation],

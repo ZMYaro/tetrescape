@@ -70,9 +70,11 @@ Grid.prototype = {
 		}
 		
 		// If the destination space is occupied by an occupant that is not a member of
-		// this occupant's group, attempt to push the blocking occupant.
+		// this occupant's group, attempt to push the blocking occupant unless it is the
+		// goal tile blocking the player.
 		var blocker = this._occupants[newPos.x][newPos.y];
-		if (blocker && !(blocker.tetromino && blocker.tetromino === occupant.tetromino)) {
+		if (blocker && !(blocker.tetromino && blocker.tetromino === occupant.tetromino) &&
+				!(occupant instanceof Player && blocker instanceof Goal)) {
 			if (blocker.canMove(movement)) {
 				return true;
 			} else {
@@ -92,9 +94,10 @@ Grid.prototype = {
 	tryMove: function (occupant, movement) {
 		if (this.canMove(occupant, movement)) {
 			// If the destination space is occupied, attempt to push the opponent.
-			var newPos = new Vector2D(occupant.x + movement.x, occupant.y + movement.y);
-			if (this._occupants[newPos.x][newPos.y] && !this._occupants[newPos.x][newPos.y].tryMove(movement)) {
-				return false;
+			var newPos = new Vector2D(occupant.x + movement.x, occupant.y + movement.y),
+				blocker = this._occupants[newPos.x][newPos.y];
+			if (blocker) {
+				blocker.tryMove(movement);
 			}
 			
 			// Move to the new location.
