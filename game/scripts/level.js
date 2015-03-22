@@ -1,5 +1,8 @@
 'use strict';
 
+// ([A-Z]),([0-9]+),([0-9]+),([0-9]+)\n
+// type: '\1',\norientation: \2,\nx: \3,\ny: \4\n\n
+
 var LEVELS = [{
 	/*
 	*  I  i  i  i  *
@@ -294,6 +297,209 @@ var LEVELS = [{
 	}]
 }, {
 	/*
+	*  *  *  *  *  *  * [G] *
+	Z  z  *  *  *  *  J  j  j
+	I  z  z  *  *  J  j  j  j
+	i  O  o  *  S  Z  z  j  I
+	i  o  o  *  s  s  z  z  i
+	i  z  *  *  J  s  L  l  i
+	z  z  *  *  j  j  j  l  i
+	z  z  O  o  *  *  *  l  *
+	z  z  o  o  *  *  *  *  *
+	z  z  *  L  *  *  *  z  *
+	z  z  *  l  *  *  z  z  *
+	z  z  *  l  l  *  z  z  *
+	z  z  I  i  i  i  z  z  *
+	z  I  i  i  i  P  z  B  *
+	*/
+	width: 9,
+	height: 14,
+	playerSpawn: {x: 5, y: 13},
+	goal: {x: 7, y: 0},
+	staticBlocks: [{x: 7, y: 13}],
+	tetrominos: [{
+		type: 'Z',
+		orientation: 0,
+		x: 0,
+		y: 1
+	}, {
+		type: 'J',
+		orientation: 270,
+		x: 6,
+		y: 1
+	}, {
+		type: 'I',
+		orientation: 0,
+		x: 0,
+		y: 2
+	}, {
+		type: 'J',
+		orientation: 270,
+		x: 5,
+		y: 2
+	}, {
+		type: 'O',
+		orientation: 0,
+		x: 1,
+		y: 3
+	}, {
+		type: 'S',
+		orientation: 90,
+		x: 4,
+		y: 3
+	}, {
+		type: 'Z',
+		orientation: 0,
+		x: 5,
+		y: 3
+	}, {
+		type: 'I',
+		orientation: 0,
+		x: 8,
+		y: 3
+	}, {
+		type: 'Z',
+		orientation: 90,
+		x: 0,
+		y: 5
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 4,
+		y: 5
+	}, {
+		type: 'L',
+		orientation: 180,
+		x: 6,
+		y: 5
+	}, {
+		type: 'Z',
+		orientation: 90,
+		x: 0,
+		y: 7
+	}, {
+		type: 'O',
+		orientation: 0,
+		x: 2,
+		y: 7
+	}, {
+		type: 'T',
+		orientation: 270,
+		x: 6,
+		y: 7
+	}, {
+		type: 'Z',
+		orientation: 90,
+		x: 0,
+		y: 9
+	}, {
+		type: 'L',
+		orientation: 0,
+		x: 3,
+		y: 9
+	}, {
+		type: 'Z',
+		orientation: 90,
+		x: 6,
+		y: 9
+	}, {
+		type: 'Z',
+		orientation: 90,
+		x: 0,
+		y: 11
+	}, {
+		type: 'Z',
+		orientation: 90,
+		x: 6,
+		y: 11
+	}, {
+		type: 'I',
+		orientation: 90,
+		x: 2,
+		y: 12
+	}, {
+		type: 'I',
+		orientation: 90,
+		x: 1,
+		y: 13
+	}]
+}, {
+	/*
+	*  *  B  j  *  *  *  *  *  I  I  *  *
+	*  *  B  j  *  *  *  *  *  i  i  *  *
+	*  *  j  j  *  *  *  *  *  i  i  *  z
+	L  l  *  *  *  *  *  *  *  i  i  z  z
+	*  l  I  I  *  I  i  i  i  * [P] z  z
+	*  l  i  i  *  *  *  *  *  J  j  z  z
+	*  *  i  i  *  *  *  *  *  j  J  z [G]
+	*  *  i  i  *  *  *  *  *  j  j  j  j
+	*/
+	width: 13,
+	height: 8,
+	playerSpawn: {x: 10, y: 4},
+	goal: {x: 12, y: 6},
+	staticBlocks: [
+		{x: 2, y: 0},
+		{x: 2, y: 1}
+	],
+	tetrominos: [{
+		type: 'J',
+		orientation: 0,
+		x: 2,
+		y: 0
+	}, {
+		type: 'I',
+		orientation: 0,
+		x: 9,
+		y: 0
+	}, {
+		type: 'I',
+		orientation: 0,
+		x: 10,
+		y: 0
+	}, {
+		type: 'Z',
+		orientation: 90,
+		x: 11,
+		y: 2
+	}, {
+		type: 'L',
+		orientation: 180,
+		x: 0,
+		y: 3
+	}, {
+		type: 'I',
+		orientation: 0,
+		x: 2,
+		y: 4
+	}, {
+		type: 'I',
+		orientation: 0,
+		x: 3,
+		y: 4
+	}, {
+		type: 'I',
+		orientation: 90,
+		x: 5,
+		y: 4
+	}, {
+		type: 'Z',
+		orientation: 90,
+		x: 11,
+		y: 4
+	}, {
+		type: 'J',
+		orientation: 180,
+		x: 9,
+		y: 5
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 10,
+		y: 6
+	}]
+}, {
+	/*
 	J  *  *  *  *  O  o [G] O  o  I
 	j  j  j  *  *  o  o  B  o  o  i
 	*  *  *  *  *  *  *  *  *  *  i
@@ -381,21 +587,6 @@ var LEVELS = [{
 		{x: 0, y: 7}
 	],
 	tetrominos: [{
-		type: 'B',
-		orientation: 0,
-		x: 0,
-		y: 0
-	}, {
-		type: 'B',
-		orientation: 0,
-		x: 1,
-		y: 0
-	}, {
-		type: 'B',
-		orientation: 0,
-		x: 2,
-		y: 0
-	}, {
 		type: 'I',
 		orientation: 90,
 		x: 3,
@@ -455,10 +646,81 @@ var LEVELS = [{
 		orientation: 0,
 		x: 9,
 		y: 6
-	}, {
-		type: 'B',
-		orientation: 0,
+	}]
+}, {
+	/*
+	*  *  *  *  *  *  *  *  *  I  J  *  *
+	*  *  *  J  j  *  *  *  *  i  j  j  j
+	*  *  *  j  B  B  *  *  *  i  *  t  *
+	P  B  *  j [G] s  s  *  *  i  t  t  t
+	*  B  *  J  s  s  B  *  *  *  *  *  *
+	*  B  B  j  j  j  *  *  *  *  *  *  *
+	*  T  t  t  *  *  *  *  *  O  o  O  o
+	*  *  t  *  *  *  *  *  *  o  o  o  o
+	*/
+	width: 13,
+	height: 8,
+	playerSpawn: {
 		x: 0,
-		y: 7
+		y: 3
+	},
+	goal: {
+		x: 4,
+		y: 3
+	},
+	staticBlocks: [
+		{x: 4, y: 2},
+		{x: 5, y: 2},
+		{x: 1, y: 3},
+		{x: 1, y: 4},
+		{x: 6, y: 4},
+		{x: 1, y: 5},
+		{x: 2, y: 5}
+	],
+	tetrominos: [{
+		type: 'I',
+		orientation: 0,
+		x: 9,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 10,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 180,
+		x: 3,
+		y: 1
+	}, {
+		type: 'T',
+		orientation: 180,
+		x: 10,
+		y: 2
+	}, {
+		type: 'S',
+		orientation: 0,
+		x: 4,
+		y: 3
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 3,
+		y: 4
+	}, {
+		type: 'T',
+		orientation: 0,
+		x: 1,
+		y: 6
+	}, {
+		type: 'O',
+		orientation: 0,
+		x: 9,
+		y: 6
+	}, {
+		type: 'O',
+		orientation: 0,
+		x: 11,
+		y: 6
 	}]
 }];
