@@ -9,12 +9,23 @@
  */
 function GridOccupant(x, y, grid) {
 	this._grid = grid;
-	this._moving = false;
+	
+	// Initialize private variables for animation.
+	this.moving = false;
+	this._motionTween = undefined;
+	this._moveDelay = 0;
+	
 	this.x = x;
 	this.y = y;
 	
 	grid.addOccupant(this);
 }
+
+// Initialize static constants.
+/** {Number} The duration of grid occupant movements in frames */
+GridOccupant.MOVE_DURATION = 5;
+/** {Number} The number of frames between movements */
+GridOccupant.MOVE_DELAY = 2;
 
 GridOccupant.prototype = {
 	/**
@@ -23,6 +34,9 @@ GridOccupant.prototype = {
 	 * @returns {Boolean} - Whether the occupant could be moved
 	 */
 	canMove: function (movement) {
+		if (this.moving) {
+			return false;
+		}
 		return this._grid.canMove(this, movement);
 	},
 	
@@ -32,18 +46,35 @@ GridOccupant.prototype = {
 	 * @returns {Boolean} - Whether the occupant could be moved
 	 */
 	tryMove: function (movement) {
-		if (this._moving) {
+		if (this.moving) {
 			return false;
 		}
 		if (this._grid.tryMove(this, movement)) {
-			this._moving = true;
-			// TODO: Replace this with the actual animation timer.
-			setTimeout((function () {
-				this._moving = false;
-			}).bind(this), 150);
+			this.moving = true;
+			this._motionTween = new Tween(this, movement, GridOccupant.MOVE_DURATION);
+			this._motionTween.onfinish = (function () {
+				this._motionTween = undefined;
+				this._moveDelay = GridOccupant.MOVE_DELAY;
+			}).bind(this);
 			return true;
 		} else {
 			return false;
+		}
+	},
+	
+	/**
+	 * Update the grid occupant.
+	 */
+	update: function (ctx) {
+		// Handle movement.
+		if (this.moving) {
+			if (this._motionTween) {
+				this._motionTween.update();
+			} else if (this._moveDelay > 0) {
+				this._moveDelay--;
+			} else {
+				this.moving = false;
+			}
 		}
 	},
 	

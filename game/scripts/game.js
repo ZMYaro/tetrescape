@@ -43,17 +43,20 @@ Game.prototype = {
 			movement = Vector2D.DOWN;
 		}
 		if (movement) {
-			if (this._player.tryMove(movement)) {
-				// Check whether a new row has been formed and eliminate it.
-				this._grid.clearRows();
-				// Check whether the player has reached the goal.
-				if (this._player.x === this._goal.x && this._player.y === this._goal.y) {
-					// End the game.
-					this._endCallback();
-					// End the loop.
-					return;
-				}
-			}
+			this._player.tryMove(movement);
+		}
+		
+		// Update grid elements.
+		this._grid.update();
+		
+		// Check whether a new row has been formed and eliminate it.
+		this._grid.clearRows();
+		// Check whether the player has reached the goal.
+		if (this._player.x === this._goal.x && this._player.y === this._goal.y) {
+			// End the game.
+			this._endCallback();
+			// End the loop.
+			return;
 		}
 		
 		// Draw grid elements.
