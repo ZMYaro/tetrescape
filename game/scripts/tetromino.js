@@ -123,7 +123,7 @@ Tetromino.BLOCKS = {
 		],
 		'90': [
 			[0, 1],
-			[1, 1]
+			[1, 1],
 			[1, 0]
 		],
 		color: new Color(240, 0, 0)
