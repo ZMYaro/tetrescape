@@ -131,7 +131,7 @@ Grid.prototype = {
 		}
 		for (var y = 0; y <= this.height; y++) {
 			ctx.moveTo(0, y * Grid.SQUARE_SIZE);
-			ctx.lineTo(this.height * Grid.SQUARE_SIZE, y * Grid.SQUARE_SIZE);
+			ctx.lineTo(this.width * Grid.SQUARE_SIZE, y * Grid.SQUARE_SIZE);
 		}
 		ctx.stroke();
 		ctx.closePath();
