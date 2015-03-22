@@ -102,13 +102,24 @@ Grid.prototype = {
 			
 			// Move to the new location.
 			this._occupants[occupant.x][occupant.y] = undefined;
-			occupant.x += movement.x;
-			occupant.y += movement.y;
-			this._occupants[occupant.x][occupant.y] = occupant;
+			this._occupants[occupant.x + movement.x][occupant.y + movement.y] = occupant;
 			
 			return true;
 		} else {
 			return false;
+		}
+	},
+	
+	/**
+	 * Update the grid's occupants.
+	 */
+	update: function () {
+		for (var x = 0; x < this.width; x++) {
+			for (var y = 0; y < this.height; y++) {
+				if (this._occupants[x][y]) {
+					this._occupants[x][y].update();
+				}
+			}
 		}
 	},
 	
@@ -158,7 +169,9 @@ Grid.prototype = {
 			counter = 0;
 			for (var y = 0; y < this.height; y++) {
 				// For each block found in the row, increment the counter.
-				if (this._occupants[x][y] instanceof Block) {
+				if (this._occupants[x][y] instanceof Block &&
+						!this._occupants[x][y].moving &&
+						!this._occupants[x][y].dying) {
 					counter++;
 				}
 			}
@@ -179,7 +192,9 @@ Grid.prototype = {
 			counter = 0;
 			for (var x = 0; x < this.width; x++) {
 				// For each block found in the row, increment the counter.
-				if (this._occupants[x][y] instanceof Block) {
+				if (this._occupants[x][y] instanceof Block &&
+						!this._occupants[x][y].moving &&
+						!this._occupants[x][y].dying) {
 					counter++;
 				}
 			}
@@ -193,6 +208,5 @@ Grid.prototype = {
 				}
 			}
 		}
-		
 	}
 };

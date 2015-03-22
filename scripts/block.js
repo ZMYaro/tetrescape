@@ -15,7 +15,14 @@ function Block(x, y, grid, color, tetromino) {
 	GridOccupant.call(this, x, y, grid);
 	
 	this.tetromino = tetromino;
+	
+	this.rotation = 0;
+	this.opacity = 1;
+	this.scale = 1;
+	
 	this._color = color || Block.DEFAULT_COLOR;
+	this.dying = false;
+	this._deathTween = undefined;
 }
 
 // Initialize static constants.
@@ -23,6 +30,8 @@ function Block(x, y, grid, color, tetromino) {
 Block.DEFAULT_COLOR = new Color(160, 160, 160); // Gray
 /** {Number} The width of block outlines */
 Block.LINE_WIDTH = 3;
+/** {Number} The duration of the block death animation in frames. */
+Block.DEATH_DURATION = 12;
 
 // Inherit from GridOccupant.
 Block.prototype = Object.create(GridOccupant.prototype);
@@ -34,6 +43,10 @@ Block.prototype = Object.create(GridOccupant.prototype);
  * @returns {Boolean} - Whether the block could be moved
  */
 Block.prototype.canMove = function (movement) {
+	// Do not move while dying.
+	if (this.dying) {
+		return false;
+	}
 	if (this.tetromino) {
 		return this.tetromino.canMove(movement);
 	} else {
@@ -43,11 +56,15 @@ Block.prototype.canMove = function (movement) {
 
 /**
  * Check whether the block can be moved to a new location, independent of its tetromino.
- * @override
  * @param {Vector2D} movement - The vector by which the block would be moved
  * @returns {Boolean} - Whether the block could be moved
  */
 Block.prototype.canMoveSingle = function (movement) {
+	// Do not move while dying.
+	if (this.dying) {
+		return false;
+	}
+	// Call the superclass implementation of canMove.
 	return GridOccupant.prototype.canMove.call(this, movement);
 };
 
@@ -58,6 +75,10 @@ Block.prototype.canMoveSingle = function (movement) {
  * @returns {Boolean} - Whether the block could be moved
  */
 Block.prototype.tryMove = function (movement) {
+	// Do not move while dying.
+	if (this.dying) {
+		return false;
+	}
 	if (this.tetromino) {
 		return this.tetromino.tryMove(movement);
 	} else {
@@ -71,7 +92,11 @@ Block.prototype.tryMove = function (movement) {
  * @return {Boolean} - Whether the block could be moved
  */
 Block.prototype.tryMoveSingle = function (movement) {
-	// Call the superclass implementation of the tryMove.
+	// Do not move while dying.
+	if (this.dying) {
+		return false;
+	}
+	// Call the superclass implementation of tryMove.
 	return GridOccupant.prototype.tryMove.call(this, movement);
 };
 
@@ -79,13 +104,37 @@ Block.prototype.tryMoveSingle = function (movement) {
  * Remove the block from the game.
  */
 Block.prototype.kill = function () {
+	// Do not kill a block that is already dying.
+	if (this.dying) {
+		return false;
+	}
 	// Remove the block from its tetromino if it has one.
 	if (this.tetromino) {
 		this.tetromino.removeBlock(this);
 	}
-	// TODO: Replace this with death animation.
-	// Remove the block from the grid.
-	this._grid.removeOccupant(this);
+	
+	// Start the death animation.
+	this.dying = true;
+	this._deathTween = new Tween(this, {opacity: -1, rotation: 0.15 * Math.PI, scale: 0.5}, Block.DEATH_DURATION)
+	this._deathTween.onfinish = (function () {
+		// Remove the block from the grid.
+		this._grid.removeOccupant(this);
+	}).bind(this);
+	console.log(this._deathTween.onfinish);
+};
+
+/**
+ * Update the block.
+ * @override
+ */
+Block.prototype.update = function () {
+	// If dying, update the death animation and do nothing else.
+	if (this.dying && this._deathTween) {
+		this._deathTween.update();
+	}
+	
+	// Call the superclass implementation of update.
+	GridOccupant.prototype.update.call(this);
 };
 
 /**
@@ -94,17 +143,26 @@ Block.prototype.kill = function () {
  * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
  */
 Block.prototype.draw = function (ctx) {
-	var x = this.x * Grid.SQUARE_SIZE + Block.LINE_WIDTH / 2,
-		y = this.y * Grid.SQUARE_SIZE + Block.LINE_WIDTH / 2,
-		size = Grid.SQUARE_SIZE - Block.LINE_WIDTH / 2 - Block.LINE_WIDTH / 2;
+	var x = this.x * Grid.SQUARE_SIZE + (Grid.SQUARE_SIZE / 2) + (Block.LINE_WIDTH / 2),
+		y = this.y * Grid.SQUARE_SIZE + (Grid.SQUARE_SIZE / 2) + (Block.LINE_WIDTH / 2),
+		size = Grid.SQUARE_SIZE - (Block.LINE_WIDTH / 2) - (Block.LINE_WIDTH / 2);
+	
+	ctx.save();
 	
 	ctx.lineWidth = Block.LINE_WIDTH;
 	ctx.fillStyle = this._color.hex;
 	ctx.strokeStyle = this._color.darken(0.8).hex;
+	ctx.globalAlpha = this.opacity;
+	
+	ctx.translate(x, y);
+	ctx.rotate(-this.rotation);
+	ctx.scale(this.scale, this.scale);
 	
 	ctx.beginPath();
-	ctx.rect(x, y, size, size);
+	ctx.rect(-0.5 * size, -0.5 * size, size, size);
 	ctx.fill();
 	ctx.stroke();
 	ctx.closePath();
+	
+	ctx.restore();
 };
