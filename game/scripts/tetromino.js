@@ -22,10 +22,6 @@ function Tetromino(blockArrangement, x, y, grid, color) {
 
 // Initialize static constants.
 Tetromino.BLOCKS = {
-	B: {
-		'0': [[1]],
-		color: new Color(160, 160, 160)
-	},
 	I: {
 		'0': [
 			[1],

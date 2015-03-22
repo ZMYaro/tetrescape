@@ -74,6 +74,10 @@ Game.prototype = {
 		this._player = new Player(level.playerSpawn.x, level.playerSpawn.y, this._grid);
 		// Create the goal tile.
 		this._goal = new Goal(level.goal.x, level.goal.y, this._grid);
+		// Create the static blocks.
+		level.staticBlocks.forEach(function (block) {
+			new StaticBlock(block.x, block.y, this._grid);
+		}, this);
 		// Create the tetrominos.
 		level.tetrominos.forEach(function (tetromino) {
 			new Tetromino(Tetromino.BLOCKS[tetromino.type][tetromino.orientation],
