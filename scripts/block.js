@@ -143,8 +143,8 @@ Block.prototype.update = function () {
  * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
  */
 Block.prototype.draw = function (ctx) {
-	var x = this.x * Grid.SQUARE_SIZE + (Grid.SQUARE_SIZE / 2) + (Block.LINE_WIDTH / 2),
-		y = this.y * Grid.SQUARE_SIZE + (Grid.SQUARE_SIZE / 2) + (Block.LINE_WIDTH / 2),
+	var x = this.x * Grid.SQUARE_SIZE + (Grid.SQUARE_SIZE / 2),
+		y = this.y * Grid.SQUARE_SIZE + (Grid.SQUARE_SIZE / 2),
 		size = Grid.SQUARE_SIZE - (Block.LINE_WIDTH / 2) - (Block.LINE_WIDTH / 2);
 	
 	ctx.save();
