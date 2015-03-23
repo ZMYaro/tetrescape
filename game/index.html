@@ -12,6 +12,9 @@
 		<script type="text/javascript" src="scripts/vector2d.js"></script>
 		<script type="text/javascript" src="scripts/tween.js"></script>
 		
+		<script type="text/javascript" src="scripts/view.js"></script>
+		<script type="text/javascript" src="scripts/menuview.js"></script>
+		
 		<script type="text/javascript" src="scripts/game.js"></script>
 		<script type="text/javascript" src="scripts/inputmanager.js"></script>
 		<script type="text/javascript" src="scripts/grid.js"></script>
@@ -23,10 +26,8 @@
 		<script type="text/javascript" src="scripts/tetromino.js"></script>
 		<script type="text/javascript" src="scripts/level.js"></script>
 		
-		<script type="text/javascript" src="scripts/menu.js"></script>
-		
 		<script type="text/javascript">
-			var menus,
+			var views,
 				game;
 			
 			window.onload = function () {
@@ -37,39 +38,40 @@
 					levelButton.className = "z1";
 					levelButton.dataset.level = i;
 					levelButton.onclick = function () {
-						this.menu.suspend();
-						menus.game.open();
+						this.view.openSubview(views.game);
 						startGame(this.dataset.level);
 					};
 					levelMenuElement.appendChild(levelButton);
 				}
 				
-				menus = {
-					level: new Menu(levelMenuElement),
-					game: new Menu(document.getElementById('canvas'))
+				views = {
+					levelSelect: new MenuView(levelMenuElement),
+					game: new View(document.getElementById('gameScreen'))
 				};
 				
-				menus.level.open();
+				views.levelSelect.open();
 			};
 			
 			function startGame(level) {
 				game = null;
-				game = new Game(menus.game.elem, LEVELS[level], endGame);
+				game = new Game(document.getElementById('canvas'), LEVELS[level], endGame);
 			}
 			
 			function endGame() {
 				game = undefined;
-				menus.game.close();
-				menus.level.resume();
+				views.game.close();
+				views.levelSelect.resume();
 			}
 		</script>
 	</head>
 	<body>
 		
-		<div class="menu z1" id="levelMenu">
+		<div class="menu" id="levelMenu">
 			<header class="appBar">Select level</header>
 		</div>
 		
-		<canvas class="menu z1" id="canvas" width="640" height="480"></canvas>
+		<div class="menu" id="gameScreen">
+			<canvas id="canvas" width="640" height="480"></canvas>
+		</div>
 	</body>
 </html>
