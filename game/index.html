@@ -41,7 +41,13 @@
 				game;
 			
 			window.onload = function () {
-				var levelMenuElement = document.getElementById('levelMenu');
+				// Enable the play button.
+				document.getElementById('playButton').onclick = function () {
+					this.view.openSubview(views.levelSelect);
+				};
+				
+				// Populate the level select screen.
+				var levelScreenElement = document.getElementById('levelScreen');
 				for (var i = 0; i < LEVELS.length; i++) {
 					var levelButton = document.createElement('button');
 					levelButton.innerHTML = (i + 1);
@@ -51,15 +57,18 @@
 						this.view.openSubview(views.game);
 						startGame(this.dataset.level);
 					};
-					levelMenuElement.appendChild(levelButton);
+					levelScreenElement.appendChild(levelButton);
 				}
 				
+				// Create views.
 				views = {
-					levelSelect: new MenuView(levelMenuElement),
+					title: new MenuView(document.getElementById('titleScreen')),
+					levelSelect: new MenuView(levelScreenElement),
 					game: new View(document.getElementById('gameScreen'))
 				};
 				
-				views.levelSelect.open();
+				// Open the title screen.
+				views.title.open();
 			};
 			
 			function startGame(level) {
@@ -75,12 +84,19 @@
 		</script>
 	</head>
 	<body>
+		<div class="menu" id="titleScreen">
+			<br />
+			<img src="images/logo.png" style="max-height: 50%;" />
+			<br />
+			<button class="z1" id="playButton">Play</button>
+		</div>
 		
-		<div class="menu" id="levelMenu">
-			<header class="appBar">Select level</header>
+		<div class="menu" id="levelScreen">
+			<header class="appBar z2">Select level</header>
 		</div>
 		
 		<div class="menu" id="gameScreen">
+			<header class="appBar z2"></header>
 			<canvas id="canvas" width="640" height="480"></canvas>
 		</div>
 	</body>
