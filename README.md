@@ -57,5 +57,5 @@ function sum(a, b) { ... }
 
 ### Dependencies
 
-* Clone [Erik Möller and Paul Irish's requestAnimationFrame polyfill](https://gist.github.com/paulirish/1579671) into `game/scripts`.
+* Clone [Erik Möller and Paul Irish's requestAnimationFrame polyfill](https://gist.github.com/paulirish/1579671) as `game/scripts/raf.js`.
 * Clone `material-elements.css`, `material-widgets.css`, and `material-depth.css` from [MaterialZ](https://github.com/zmyaro/materialz) into `game/styles`.
