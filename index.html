@@ -67,6 +67,16 @@
 					game: new View(document.getElementById('gameScreen'))
 				};
 				
+				// Enable all back buttons.
+				var backButtons = document.getElementsByClassName('backButton');
+				for (var i = 0; i < backButtons.length; i++) {
+					backButtons[i].onclick = function () {
+						this.view.goBack();
+					};
+				}
+				// Inform the game quit button of its view.
+				views.game.elem.getElementsByClassName('backButton')[0].view = views.game;
+				
 				// Open the title screen.
 				views.title.open();
 			};
@@ -86,17 +96,26 @@
 	<body>
 		<div class="menu" id="titleScreen">
 			<br />
-			<img src="images/logo.png" style="max-height: 50%;" />
+			<img src="images/logo.png" alt="TetrEscape" style="max-height: 50%;" />
 			<br />
 			<button class="z1" id="playButton">Play</button>
 		</div>
 		
 		<div class="menu" id="levelScreen">
-			<header class="appBar z2">Select level</header>
+			<header class="appBar toolbar z2">
+				<button class="backButton" title="Back">
+					<img src="images/back.png" alt="Back" />
+				</button>
+				Select level
+			</header>
 		</div>
 		
 		<div class="menu" id="gameScreen">
-			<header class="appBar z2"></header>
+			<header class="appBar toolbar z2">
+				<button class="backButton" title="Quit">
+					<img src="images/close.png" alt="Quit" />
+				</button>
+			</header>
 			<canvas id="canvas" width="640" height="480"></canvas>
 		</div>
 	</body>

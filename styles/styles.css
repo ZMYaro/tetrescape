@@ -22,7 +22,16 @@ input {
 	
 	background-color: #0277bd;
 }
-		
+	.appBar button > img {
+		width: 32px;
+		height: 32px;
+	}
+
+button.backButton {
+	margin-left: -8px;
+}
+	
+
 .menu {
 	position: fixed;
 	left: 0;
@@ -59,7 +68,7 @@ input {
 		        box-sizing: border-box;
 		padding: 0 72px;
 	}
-	.menu button {
+	.menu button.z1 {
 		min-width: 0;
 		margin: 8px;
 		padding: 16px 32px;
@@ -78,8 +87,8 @@ input {
 		     -o-transition-property: box-shadow, -o-transform, transform;
 		        transition-property: box-shadow, transform;
 	}
-		.menu button:hover,
-		.menu button:focus {
+		.menu button.z1:hover,
+		.menu button.z1:focus {
 			z-index: 2;
 			
 			-webkit-transform: scale(1.2);
@@ -88,7 +97,7 @@ input {
 			     -o-transform: scale(1.2);
 			        transform: scale(1.2);
 		}
-		.menu button:active {
+		.menu button.z1:active {
 			-webkit-transform: scale(1.3);
 			   -moz-transform: scale(1.3);
 			    -ms-transform: scale(1.3);
