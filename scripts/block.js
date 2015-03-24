@@ -120,7 +120,6 @@ Block.prototype.kill = function () {
 		// Remove the block from the grid.
 		this._grid.removeOccupant(this);
 	}).bind(this);
-	console.log(this._deathTween.onfinish);
 };
 
 /**
