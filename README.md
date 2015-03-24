@@ -59,3 +59,4 @@ function sum(a, b) { ... }
 
 * Clone [Erik Möller and Paul Irish's requestAnimationFrame polyfill](https://gist.github.com/paulirish/1579671) as `game/scripts/raf.js`.
 * Clone `material-elements.css`, `material-widgets.css`, and `material-depth.css` from [MaterialZ](https://github.com/zmyaro/materialz) into `game/styles`.
+* Download [Hammer.js](http://hammerjs.github.io) to `game/scripts/hammer.min.js`.
