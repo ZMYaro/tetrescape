@@ -15,7 +15,7 @@ input {
 }
 
 .appBar {
-	position: static;
+	position: relative;
 	margin: 0 0 16px;
 	
 	text-align: left;
@@ -110,4 +110,7 @@ button.backButton {
  }
  #playButton {
 	font-size: 120%;
+}
+#gameScreen .appBar {
+	margin-bottom: 0;
 }

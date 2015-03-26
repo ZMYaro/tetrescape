@@ -41,6 +41,7 @@
 		
 		<script type="text/javascript">
 			var views,
+				canvas,
 				game;
 			
 			window.onload = function () {
@@ -84,14 +85,26 @@
 				}
 				// Inform the game quit button of its view.
 				views.game.elem.getElementsByClassName('backButton')[0].view = views.game;
+				// Get the game view's app bar.
+				views.game.appBar = views.game.elem.getElementsByClassName('appBar')[0];
 				
 				// Open the title screen.
 				views.title.open();
+				
+				// Ensure the canvas always fits the view.
+				canvas = document.getElementById('canvas');
+				window.onresize = handleResize;
+				handleResize();
 			};
+			
+			function handleResize() {
+				canvas.width = window.innerWidth;
+				canvas.height = window.innerHeight - views.game.appBar.offsetHeight;
+			}
 			
 			function startGame(level) {
 				game = null;
-				game = new Game(document.getElementById('canvas'), LEVELS[level], endGame);
+				game = new Game(canvas, LEVELS[level], endGame);
 			}
 			
 			function endGame() {
@@ -119,7 +132,7 @@
 		</div>
 		
 		<div class="menu" id="gameScreen">
-			<header class="appBar toolbar z2">
+			<header class="appBar toolbar z1">
 				<button class="backButton" title="Quit">
 					<img src="images/close.png" alt="Quit" />
 				</button>
