@@ -19,7 +19,13 @@ function Game(canvas, level, endCallback) {
 	
 	this._boundUpdate = this._update.bind(this);
 	
-	this.startLevel(level);
+	this._levelData = level;
+	
+	// Load the level.
+	this.reload();
+	
+	// Start the main game loop.
+	this._update();
 }
 
 Game.prototype = {
@@ -66,31 +72,26 @@ Game.prototype = {
 	},
 	
 	/**
-	 * Initialize and start a level.
-	 * @param {Level} level - The level to initialize
+	 * Initialize and start the level.
 	 */
-	startLevel: function (level) {
-		// TODO: Replace this with proper level loading.
+	reload: function () {
 		// Create the grid.
-		this._grid = new Grid(level.width, level.height);
+		this._grid = new Grid(this._levelData.width, this._levelData.height);
 		// Create the player.
-		this._player = new Player(level.playerSpawn.x, level.playerSpawn.y, this._grid);
+		this._player = new Player(this._levelData.playerSpawn.x, this._levelData.playerSpawn.y, this._grid);
 		// Create the goal tile.
-		this._goal = new Goal(level.goal.x, level.goal.y, this._grid);
+		this._goal = new Goal(this._levelData.goal.x, this._levelData.goal.y, this._grid);
 		// Create the static blocks.
-		level.staticBlocks.forEach(function (block) {
+		this._levelData.staticBlocks.forEach(function (block) {
 			new StaticBlock(block.x, block.y, this._grid);
 		}, this);
 		// Create the tetrominos.
-		level.tetrominos.forEach(function (tetromino) {
+		this._levelData.tetrominos.forEach(function (tetromino) {
 			new Tetromino(Tetromino.BLOCKS[tetromino.type][tetromino.orientation],
 				tetromino.x,
 				tetromino.y,
 				this._grid,
 				Tetromino.BLOCKS[tetromino.type].color);
 		}, this);
-		
-		// Start the main game loop.
-		this._update();
 	}
 };
