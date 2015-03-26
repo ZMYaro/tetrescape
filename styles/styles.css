@@ -35,7 +35,7 @@ button.backButton {
 .menu {
 	position: fixed;
 	left: 0;
-	top: 90%;
+	top: 0;
 	width: 100%;
 	height: 100%;
 	
@@ -46,11 +46,17 @@ button.backButton {
 	
 	background-color: #ffffff;
 	
-	-webkit-transition-property: top, opacity, -webkit-box-shadow, box-shadow;
-	   -moz-transition-property: top, opacity, -moz-box-shadow, box-shadow;
-	    -ms-transition-property: top, opacity, box-shadow;
-	     -o-transition-property: top, opacity, box-shadow;
-	        transition-property: top, opacity, box-shadow;
+	-webkit-transform: translateY(90%);
+	   -moz-transform: translateY(90%);
+	    -ms-transform: translateY(90%);
+	     -o-transform: translateY(90%);
+	        transform: translateY(90%);
+	
+	-webkit-transition-property: opacity, -webkit-transform, transform, -webkit-box-shadow, box-shadow;
+	   -moz-transition-property: opacity, -moz-transform, transform, -moz-box-shadow, box-shadow;
+	    -ms-transition-property: opacity, -ms-transform, transform, box-shadow;
+	     -o-transition-property: opacity, -o-transform, transform, box-shadow;
+	        transition-property: opacity, transform, box-shadow;
 	-webkit-transition-duration: 0.2s;
 	   -moz-transition-duration: 0.2s;
 	    -ms-transition-duration: 0.2s;
@@ -58,7 +64,11 @@ button.backButton {
 	        transition-duration: 0.2s;
 }
 	.menu.active {
-		top: 0;
+		-webkit-transform: translateY(0%);
+		   -moz-transform: translateY(0%);
+		    -ms-transform: translateY(0%);
+		     -o-transform: translateY(0%);
+		        transform: translateY(0%);
 		opacity: 1;
 		pointer-events: auto;
 	}
