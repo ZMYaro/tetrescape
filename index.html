@@ -49,6 +49,11 @@
 					this.view.openSubview(views.levelSelect);
 				};
 				
+				// Enable the game reset button.
+				document.getElementById('retryButton').onclick = function () {
+					game.reload();
+				};
+				
 				// Populate the level select screen.
 				var levelScreenElement = document.getElementById('levelScreen');
 				for (var i = 0; i < LEVELS.length; i++) {
@@ -117,6 +122,9 @@
 			<header class="appBar toolbar z2">
 				<button class="backButton" title="Quit">
 					<img src="images/close.png" alt="Quit" />
+				</button>
+				<button id="retryButton" title="Retry" style="float: right; margin-right: -12px;">
+					<img src="images/replay.png" alt="Retry" />
 				</button>
 			</header>
 			<canvas id="canvas" width="640" height="480"></canvas>
