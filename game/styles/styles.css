@@ -107,7 +107,8 @@ button.backButton {
 			     -o-transform: scale(1.2);
 			        transform: scale(1.2);
 		}
-		.menu button.z1:active {
+		.menu button.z1:active,
+		.menu button.z1.active {
 			-webkit-transform: scale(1.3);
 			   -moz-transform: scale(1.3);
 			    -ms-transform: scale(1.3);
