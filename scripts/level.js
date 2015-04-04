@@ -723,4 +723,122 @@ var LEVELS = [{
 		x: 11,
 		y: 6
 	}]
+}, {
+	/*
+	J  j  s  s  *  *  *  ?  ?  Z  z  L  l
+	j  s  s  *  *  *  *  ?  ?  *  z  z  l
+	j  *  *  *  *  J  *  ?  ?  *  O  o  l
+	*  *  *  *  *  j  j  j  ?  *  o  o [G]
+	L  l  L  * [P] *  *  *  ?  *  *  O  o
+	I  l  l  *  *  *  *  *  ?  *  *  o  o
+	i  l  l  l  *  *  *  ?  *  *  *  *  *
+	i  ?  *  *  *  *  *  ?  I  *  O  o  j
+	i  z  *  *  *  *  *  ?  i  *  o  o  j
+	z  z  *  *  *  *  *  ?  i  ?  J  j  j
+	z  ?  *  *  *  *  *  ?  i  *  j  j  j
+	*/
+	width: 13,
+	height: 11,
+	playerSpawn: {x: 4, y: 4},
+	goal: {x: 12, y: 3},
+	staticBlocks: [
+		{x: 8, y: 1},
+		{x: 8, y: 2},
+		{x: 7, y: 3},
+		{x: 8, y: 3},
+		{x: 8, y: 4},
+		{x: 8, y: 5},
+		{x: 7, y: 10}
+	],
+	tetrominos: [{
+		type: 'J',
+		orientation: 180,
+		x: 0,
+		y: 0
+	}, {
+		type: 'S',
+		orientation: 0,
+		x: 1,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 180,
+		x: 7,
+		y: 0
+	}, {
+		type: 'Z',
+		orientation: 0,
+		x: 9,
+		y: 0
+	}, {
+		type: 'L',
+		orientation: 180,
+		x: 11,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 5,
+		y: 3
+	}, {
+		type: 'O',
+		orientation: 0,
+		x: 10,
+		y: 2
+	}, {
+		type: 'L',
+		orientation: 180,
+		x: 0,
+		y: 4
+	}, {
+		type: 'L',
+		orientation: 0,
+		x: 2,
+		y: 4
+	}, {
+		type: 'O',
+		orientation: 0,
+		x: 11,
+		y: 4
+	}, {
+		type: 'L',
+		orientation: 0,
+		x: 0,
+		y: 5
+	}, {
+		type: 'I',
+		orientation: 0,
+		x: 7,
+		y: 6
+	}, {
+		type: 'I',
+		orientation: 0,
+		x: 8,
+		y: 7
+	}, {
+		type: 'O',
+		orientation: 0,
+		x: 10,
+		y: 7
+	}, {
+		type: 'J',
+		orientation: 0,
+		x: 11,
+		y: 7
+	}, {
+		type: 'O',
+		orientation: 0,
+		x: 0,
+		y: 8
+	}, {
+		type: 'L',
+		orientation: 270,
+		x: 0,
+		y: 9
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 10,
+		y: 9
+	}]
 }];
