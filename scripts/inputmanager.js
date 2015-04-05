@@ -24,6 +24,27 @@ function InputManager() {
 	this._hammer.on('swipe', this._boundHandleSwipe);
 }
 
+// Initialize static constants.
+InputManager.DOWN_KEYS = [
+	40, // Down
+	79, // O
+	83 // S
+];
+InputManager.LEFT_KEYS = [
+	37, // Left
+	65 // A
+];
+InputManager.RIGHT_KEYS = [
+	39, // Right
+	68, // D
+	69 // E
+];
+InputManager.UP_KEYS = [
+	38, // Up
+	87, // W
+	188, // Comma
+];
+
 InputManager.prototype = {
 	// TODO: Support more input options.
 	get down() {
@@ -31,28 +52,48 @@ InputManager.prototype = {
 			this._lastSwipe.down = false;
 			return true;
 		}
-		return this._keyStates[40];
+		for (var i = 0; i < InputManager.DOWN_KEYS.length; i++) {
+			if (this._keyStates[InputManager.DOWN_KEYS[i]]) {
+				return true;
+			}
+		}
+		return false;
 	},
 	get left() {
 		if (this._lastSwipe.left) {
 			this._lastSwipe.left = false;
 			return true;
 		}
-		return this._keyStates[37];
+		for (var i = 0; i < InputManager.LEFT_KEYS.length; i++) {
+			if (this._keyStates[InputManager.LEFT_KEYS[i]]) {
+				return true;
+			}
+		}
+		return false;
 	},
 	get right() {
 		if (this._lastSwipe.right) {
 			this._lastSwipe.right = false;
 			return true;
 		}
-		return this._keyStates[39];
+		for (var i = 0; i < InputManager.RIGHT_KEYS.length; i++) {
+			if (this._keyStates[InputManager.RIGHT_KEYS[i]]) {
+				return true;
+			}
+		}
+		return false;
 	},
 	get up() {
 		if (this._lastSwipe.up) {
 			this._lastSwipe.up = false;
 			return true;
 		}
-		return this._keyStates[38];
+		for (var i = 0; i < InputManager.UP_KEYS.length; i++) {
+			if (this._keyStates[InputManager.UP_KEYS[i]]) {
+				return true;
+			}
+		}
+		return false;
 	},
 	
 	/**
