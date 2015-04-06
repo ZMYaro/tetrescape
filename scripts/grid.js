@@ -30,10 +30,10 @@ Grid.prototype = {
 	 * @returns {Boolean} - Whether the occupant could be added
 	 */
 	addOccupant: function (newOccupant) {
-		if (this._occupants[newOccupant.x][newOccupant.y]) {
+		if (this._occupants[newOccupant.gridX][newOccupant.gridY]) {
 			return false;
 		} else {
-			this._occupants[newOccupant.x][newOccupant.y] = newOccupant;
+			this._occupants[newOccupant.gridX][newOccupant.gridY] = newOccupant;
 			return true;
 		}
 	},
@@ -44,8 +44,8 @@ Grid.prototype = {
 	 * @returns {Boolean} - Whether the occupant was found and removed
 	 */
 	removeOccupant: function (occupant) {
-		if (this._occupants[occupant.x][occupant.y] === occupant) {
-			this._occupants[occupant.x][occupant.y] = undefined;
+		if (this._occupants[occupant.gridX][occupant.gridY] === occupant) {
+			this._occupants[occupant.gridX][occupant.gridY] = undefined;
 			return true;
 		}
 		return false;
@@ -59,7 +59,7 @@ Grid.prototype = {
 	 */
 	canMove: function (occupant, movement) {
 		// Calculate the potential new position of the occupant.
-		var newPos = new Vector2D(occupant.x + movement.x, occupant.y + movement.y);
+		var newPos = new Vector2D(occupant.gridX + movement.x, occupant.gridY + movement.y);
 		
 		// Prevent moving off the grid.
 		if (newPos.x < 0 ||
@@ -94,15 +94,15 @@ Grid.prototype = {
 	tryMove: function (occupant, movement) {
 		if (this.canMove(occupant, movement)) {
 			// If the destination space is occupied, attempt to push the opponent.
-			var newPos = new Vector2D(occupant.x + movement.x, occupant.y + movement.y),
+			var newPos = new Vector2D(occupant.gridX + movement.x, occupant.gridY + movement.y),
 				blocker = this._occupants[newPos.x][newPos.y];
 			if (blocker) {
 				blocker.tryMove(movement);
 			}
 			
 			// Move to the new location.
-			this._occupants[occupant.x][occupant.y] = undefined;
-			this._occupants[occupant.x + movement.x][occupant.y + movement.y] = occupant;
+			this._occupants[occupant.gridX][occupant.gridY] = undefined;
+			this._occupants[newPos.x][newPos.y] = occupant;
 			
 			return true;
 		} else {
