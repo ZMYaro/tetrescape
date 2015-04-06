@@ -44,6 +44,7 @@ InputManager.UP_KEYS = [
 	87, // W
 	188, // Comma
 ];
+InputManager.RETRY_KEY = 82;
 
 InputManager.prototype = {
 	// TODO: Support more input options.
@@ -94,6 +95,9 @@ InputManager.prototype = {
 			}
 		}
 		return false;
+	},
+	get retry() {
+		return this._keyStates[InputManager.RETRY_KEY];
 	},
 	
 	/**
