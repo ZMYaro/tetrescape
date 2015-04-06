@@ -34,6 +34,11 @@ Game.prototype = {
 	 * @private
 	 */
 	_update: function () {
+		// If the reset key is being pressed, reload the level.
+		if (this._im.retry) {
+			this.reload();
+		}
+			
 		// Clear the screen.
 		this._ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
 		
