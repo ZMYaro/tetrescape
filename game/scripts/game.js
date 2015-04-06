@@ -9,7 +9,21 @@ function Game(canvas, level, endCallback) {
 	// Initialize private variables.
 	this._canvas = canvas;
 	this._ctx = canvas.getContext('2d');
-	this._im = new InputManager();
+	this._im = new InputManager({
+		down: (function () {
+			this._player.tryMove(Vector2D.DOWN)
+		}).bind(this),
+		left: (function () {
+			this._player.tryMove(Vector2D.LEFT)
+		}).bind(this),
+		right: (function () {
+			this._player.tryMove(Vector2D.RIGHT)
+		}).bind(this),
+		up: (function () {
+			this._player.tryMove(Vector2D.UP)
+		}).bind(this),
+		retry: this.reload.bind(this)
+	});
 	this._endCallback = endCallback;
 	// Add placeholders for additional private variables.
 	this._grid = undefined;
@@ -41,21 +55,6 @@ Game.prototype = {
 			
 		// Clear the screen.
 		this._ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
-		
-		// Handle player movement.
-		var movement;
-		if (this._im.left && !this._im.right && !this._im.up && !this._im.down) {
-			movement = Vector2D.LEFT;
-		} else if (this._im.right && !this._im.left && !this._im.up && !this._im.down) {
-			movement = Vector2D.RIGHT;
-		} else if (this._im.up && !this._im.left && !this._im.right && !this._im.down) {
-			movement = Vector2D.UP;
-		} else if (this._im.down && !this._im.left && !this._im.right && !this._im.up) {
-			movement = Vector2D.DOWN;
-		}
-		if (movement) {
-			this._player.tryMove(movement);
-		}
 		
 		// Update grid elements.
 		this._grid.update();
