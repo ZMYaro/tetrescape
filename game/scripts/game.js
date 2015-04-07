@@ -30,6 +30,7 @@ function Game(canvas, level, endCallback) {
 	this._player = undefined;
 	this._goal = undefined;
 	this._currentLevel = undefined;
+	this._blockSize = 1;
 	
 	this._boundUpdate = this._update.bind(this);
 	
@@ -37,6 +38,9 @@ function Game(canvas, level, endCallback) {
 	
 	// Load the level.
 	this.reload();
+	
+	// Scale the game for the current canvas size.
+	this.rescale();
 	
 	// Start the main game loop.
 	this._update();
@@ -70,7 +74,7 @@ Game.prototype = {
 		}
 		
 		// Draw grid elements.
-		this._grid.draw(this._ctx);
+		this._grid.draw(this._ctx, this._blockSize);
 		
 		requestAnimationFrame(this._boundUpdate);
 	},
@@ -97,5 +101,19 @@ Game.prototype = {
 				this._grid,
 				Tetromino.BLOCKS[tetromino.type].color);
 		}, this);
+	},
+	
+	/**
+	 * Scale the level to fit within the canvas.
+	 */
+	rescale: function () {
+		var canvasRatio = this._canvas.width / this._canvas.height,
+			levelRatio = this._levelData.width / this._levelData.height;
+		
+		if (levelRatio < canvasRatio) {
+			this._blockSize = this._canvas.height / this._levelData.height;
+		} else {
+			this._blockSize = this._canvas.width / this._levelData.width;
+		}
 	}
 };

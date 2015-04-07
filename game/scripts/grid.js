@@ -127,22 +127,22 @@ Grid.prototype = {
 	 * Draw the grid and its occupants to the game canvas.
 	 * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
 	 */
-	draw: function (ctx) {
+	draw: function (ctx, blockSize) {
 		// Draw the grid background.
 		ctx.fillStyle = Grid.COLOR.hex;
-		ctx.fillRect(0, 0, this.width * Grid.SQUARE_SIZE, this.height * Grid.SQUARE_SIZE);
+		ctx.fillRect(0, 0, this.width * blockSize, this.height * blockSize);
 		
 		// Draw the grid.
 		ctx.lineWidth = 1;
 		ctx.strokeStyle = Grid.COLOR.darken(0.9).hex;
 		ctx.beginPath();
 		for (var x = 0; x <= this.width; x++) {
-			ctx.moveTo(x * Grid.SQUARE_SIZE, 0);
-			ctx.lineTo(x * Grid.SQUARE_SIZE, this.height * Grid.SQUARE_SIZE);
+			ctx.moveTo(x * blockSize, 0);
+			ctx.lineTo(x * blockSize, this.height * blockSize);
 		}
 		for (var y = 0; y <= this.height; y++) {
-			ctx.moveTo(0, y * Grid.SQUARE_SIZE);
-			ctx.lineTo(this.width * Grid.SQUARE_SIZE, y * Grid.SQUARE_SIZE);
+			ctx.moveTo(0, y * blockSize);
+			ctx.lineTo(this.width * blockSize, y * blockSize);
 		}
 		ctx.stroke();
 		ctx.closePath();
@@ -151,7 +151,7 @@ Grid.prototype = {
 		for (var x = 0; x < this.width; x++) {
 			for (var y = 0; y < this.height; y++) {
 				if (this._occupants[x][y]) {
-					this._occupants[x][y].draw(ctx);
+					this._occupants[x][y].draw(ctx, blockSize);
 				}
 			}
 		}

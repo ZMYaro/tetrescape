@@ -46,10 +46,10 @@ Goal.prototype.tryMove = function (movement) {
  * @override
  * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
  */
-Goal.prototype.draw = function (ctx) {
-	var x = this.x * Grid.SQUARE_SIZE + Block.LINE_WIDTH / 2,
-		y = this.y * Grid.SQUARE_SIZE + Block.LINE_WIDTH / 2,
-		size = Grid.SQUARE_SIZE - Block.LINE_WIDTH / 2 - Block.LINE_WIDTH / 2;
+Goal.prototype.draw = function (ctx, blockSize) {
+	var x = this.x * blockSize + Block.LINE_WIDTH / 2,
+		y = this.y * blockSize + Block.LINE_WIDTH / 2,
+		size = blockSize - Block.LINE_WIDTH / 2 - Block.LINE_WIDTH / 2;
 	
 	ctx.strokeStyle = Goal.LINE_COLOR.hex;
 	ctx.fillStyle = Goal.COLOR.hex;

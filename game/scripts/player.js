@@ -50,13 +50,13 @@ Player.prototype.tryMove = function (movement) {
  * @override
  * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
  */
-Player.prototype.draw = function (ctx) {
-	var circX = this.x * Grid.SQUARE_SIZE + (0.5 * Grid.SQUARE_SIZE),
-		circY = this.y * Grid.SQUARE_SIZE + (0.5 * Grid.SQUARE_SIZE);
+Player.prototype.draw = function (ctx, blockSize) {
+	var circX = this.x * blockSize + (0.5 * blockSize),
+		circY = this.y * blockSize + (0.5 * blockSize);
 	
 	ctx.fillStyle = 'green';
 	ctx.beginPath();
-	ctx.arc(circX, circY, 0.4 * Grid.SQUARE_SIZE, 0, 2 * Math.PI);
+	ctx.arc(circX, circY, 0.4 * blockSize, 0, 2 * Math.PI);
 	ctx.closePath();
 	ctx.fill();
 }
