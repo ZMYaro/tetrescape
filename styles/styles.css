@@ -16,7 +16,7 @@ input {
 
 .appBar {
 	position: relative;
-	margin: 0 0 16px;
+	margin: 0;
 	
 	text-align: left;
 	
@@ -32,7 +32,7 @@ button.backButton {
 }
 	
 
-.menu {
+.view {
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -63,7 +63,7 @@ button.backButton {
 	     -o-transition-duration: 0.2s;
 	        transition-duration: 0.2s;
 }
-	.menu.active {
+	.view.active {
 		-webkit-transform: translateY(0%);
 		   -moz-transform: translateY(0%);
 		    -ms-transform: translateY(0%);
@@ -72,15 +72,24 @@ button.backButton {
 		opacity: 1;
 		pointer-events: auto;
 	}
-	.menu p {
+	.view p {
 		-webkit-box-sizing: border-box;
 		   -moz-box-sizing: border-box;
 		        box-sizing: border-box;
 		padding: 0 72px;
 	}
-	.menu button.z1 {
+.menu {
+	height: 90%;
+	height: calc(100% - 88px);
+	margin: 0;
+	padding: 16px;
+	white-space: nowrap;
+	overflow: auto;
+	text-align: center;
+}
+	.menu button {
 		min-width: 0;
-		margin: 8px;
+		margin: 16px 8px;
 		padding: 16px 32px;
 		
 		position: relative;
@@ -97,9 +106,9 @@ button.backButton {
 		     -o-transition-property: box-shadow, -o-transform, transform;
 		        transition-property: box-shadow, transform;
 	}
-		.menu button.z1:hover,
-		.menu button.z1:focus {
-			z-index: 2;
+		.menu button:hover,
+		.menu button:focus {
+			z-index: 1;
 			
 			-webkit-transform: scale(1.2);
 			   -moz-transform: scale(1.2);
@@ -107,21 +116,30 @@ button.backButton {
 			     -o-transform: scale(1.2);
 			        transform: scale(1.2);
 		}
-		.menu button.z1:active,
-		.menu button.z1.active {
+		.menu button:active,
+		.menu button.active {
+			z-index: 2;
 			-webkit-transform: scale(1.3);
 			   -moz-transform: scale(1.3);
 			    -ms-transform: scale(1.3);
 			     -o-transform: scale(1.3);
 			        transform: scale(1.3);
 		}
+@media (orientation: portrait) {
+	.menu {
+		white-space: normal;
+	}
+		.menu button {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+}
  
+ /* Title screen styles */
  #titleScreen {
 	background-color: #0277bd;
  }
  #playButton {
 	font-size: 120%;
-}
-#gameScreen .appBar {
-	margin-bottom: 0;
 }

@@ -9,7 +9,7 @@ function MenuView(elem, parent) {
 	// Call the superclass constructor.
 	View.call(this, elem, parent);
 	
-	this.inputs = Array.prototype.slice.call(elem.querySelectorAll('button,input'));
+	this.inputs = Array.prototype.slice.call(elem.getElementsByClassName('menu')[0].querySelectorAll('button,input'));
 	this.activeInputIndex = 0;
 	
 	// Give each input a reference to its containing view.
@@ -59,19 +59,25 @@ MenuView.prototype._handleKeyDown = function (e) {
 	// Call the superclass implementation of handleKeyDown.
 	View.prototype._handleKeyDown.call(this, e);
 	
-	if (MenuView.RIGHT_KEYS.indexOf(e.keyCode) !== -1) {
+	if (MenuView.RIGHT_KEYS.indexOf(e.keyCode) !== -1 && landscape) {
 		e.preventDefault();
-		this._moveDown();
-	} else if (MenuView.LEFT_KEYS.indexOf(e.keyCode) !== -1) {
+		this._moveNext();
+	} else if (MenuView.LEFT_KEYS.indexOf(e.keyCode) !== -1 && landscape) {
 		e.preventDefault();
-		this._moveUp();
+		this._movePrev();
+	} else if (MenuView.DOWN_KEYS.indexOf(e.keyCode) !== -1 && !landscape) {
+		e.preventDefault();
+		this._moveNext();
+	} else if (MenuView.UP_KEYS.indexOf(e.keyCode) !== -1 && !landscape) {
+		e.preventDefault();
+		this._movePrev();
 	}
 };
 
 /**
  * Focus the next input down, wrapping at the bottom.
  */
-MenuView.prototype._moveDown = function () {
+MenuView.prototype._moveNext = function () {
 	if (this.inputs.length === 0) {
 		// If this menu has no inputs, just ensure nothing else has focus.
 		document.activeElement.focus();
@@ -98,7 +104,7 @@ MenuView.prototype._moveDown = function () {
 /**
  * Focus the next input up, wrapping at the top.
  */
-MenuView.prototype._moveUp = function () {
+MenuView.prototype._movePrev = function () {
 	if (this.inputs.length === 0) {
 		// If this menu has no inputs, just ensure nothing else has focus.
 		document.activeElement.focus();
@@ -133,5 +139,5 @@ MenuView.prototype.open = function (parent) {
 	
 	// Focus the last focused input.
 	this.activeInputIndex--;
-	this._moveDown();
+	this._moveNext();
 };
