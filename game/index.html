@@ -48,7 +48,8 @@
 		<script type="text/javascript">
 			var views,
 				canvas,
-				game;
+				game,
+				landscape = true;
 			
 			window.onload = function () {
 				// Enable the play button.
@@ -62,7 +63,8 @@
 				};
 				
 				// Populate the level select screen.
-				var levelScreenElement = document.getElementById('levelScreen');
+				var levelScreenElement = document.getElementById('levelScreen'),
+					levelScreenMenu = levelScreenElement.getElementsByClassName('menu')[0];
 				for (var i = 0; i < LEVELS.length; i++) {
 					var levelButton = document.createElement('button');
 					levelButton.innerHTML = (i + 1);
@@ -72,7 +74,7 @@
 						this.view.openSubview(views.game);
 						startGame(this.dataset.level);
 					};
-					levelScreenElement.appendChild(levelButton);
+					levelScreenMenu.appendChild(levelButton);
 				}
 				
 				// Create views.
@@ -106,6 +108,7 @@
 			function handleResize() {
 				canvas.width = window.innerWidth;
 				canvas.height = window.innerHeight - views.game.appBar.offsetHeight;
+				landscape = window.innerHeight < window.innerWidth;
 			}
 			
 			function startGame(level) {
@@ -121,23 +124,26 @@
 		</script>
 	</head>
 	<body>
-		<div class="menu" id="titleScreen">
+		<div class="view" id="titleScreen">
 			<br />
 			<img src="images/logo.png" alt="TetrEscape" style="max-height: 50%;" />
 			<br />
-			<button class="z1" id="playButton">Play</button>
+			<div class="menu">
+				<button class="z1" id="playButton">Play</button>
+			</div>
 		</div>
 		
-		<div class="menu" id="levelScreen">
+		<div class="view" id="levelScreen">
 			<header class="appBar toolbar z2">
 				<button class="backButton" title="Back (Esc)">
 					<img src="images/back.png" alt="Back" />
 				</button>
 				Select level
 			</header>
+			<div class="menu"></div>
 		</div>
 		
-		<div class="menu" id="gameScreen">
+		<div class="view" id="gameScreen">
 			<header class="appBar toolbar z1">
 				<button class="backButton" title="Quit (Esc)">
 					<img src="images/close.png" alt="Quit" />
