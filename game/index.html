@@ -67,7 +67,7 @@
 					levelScreenMenu = levelScreenElement.getElementsByClassName('menu')[0];
 				for (var i = 0; i < LEVELS.length; i++) {
 					var levelButton = document.createElement('button');
-					levelButton.innerHTML = (i + 1);
+					levelButton.innerHTML = 'Level ' + (i + 1);
 					levelButton.className = "z1";
 					levelButton.dataset.level = i;
 					levelButton.onclick = function () {

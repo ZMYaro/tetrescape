@@ -151,3 +151,8 @@ button.backButton {
 	margin: 48px 32px;
 	font-size: 150%;
 }
+@media (orientation: portrait) {
+	#levelScreen .menu button {
+		margin: 48px auto;
+	}
+}
