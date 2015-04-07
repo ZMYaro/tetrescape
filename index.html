@@ -48,8 +48,7 @@
 		<script type="text/javascript">
 			var views,
 				canvas,
-				game,
-				landscape = true;
+				game;
 			
 			window.onload = function () {
 				// Enable the play button.
@@ -108,7 +107,9 @@
 			function handleResize() {
 				canvas.width = window.innerWidth;
 				canvas.height = window.innerHeight - views.game.appBar.offsetHeight;
-				landscape = window.innerHeight < window.innerWidth;
+				if (game) {
+					game.rescale();
+				}
 			}
 			
 			function startGame(level) {

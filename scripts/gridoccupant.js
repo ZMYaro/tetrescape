@@ -74,7 +74,7 @@ GridOccupant.prototype = {
 	 * @abstract
 	 * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
 	 */
-	draw: function (ctx) {
+	draw: function (ctx, blockSize) {
 		throw new Error('GridOccupant.draw must be implemented by a subclass.');
 	}
 };

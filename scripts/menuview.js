@@ -59,16 +59,17 @@ MenuView.prototype._handleKeyDown = function (e) {
 	// Call the superclass implementation of handleKeyDown.
 	View.prototype._handleKeyDown.call(this, e);
 	
-	if (MenuView.RIGHT_KEYS.indexOf(e.keyCode) !== -1 && landscape) {
+	// Move horizontally in landscape and vertically in portrait.
+	if (MenuView.RIGHT_KEYS.indexOf(e.keyCode) !== -1 && window.innerWidth > window.innerHeight) {
 		e.preventDefault();
 		this._moveNext();
-	} else if (MenuView.LEFT_KEYS.indexOf(e.keyCode) !== -1 && landscape) {
+	} else if (MenuView.LEFT_KEYS.indexOf(e.keyCode) !== -1 && window.innerWidth > window.innerHeight) {
 		e.preventDefault();
 		this._movePrev();
-	} else if (MenuView.DOWN_KEYS.indexOf(e.keyCode) !== -1 && !landscape) {
+	} else if (MenuView.DOWN_KEYS.indexOf(e.keyCode) !== -1 && window.innerHeight > window.innerWidth) {
 		e.preventDefault();
 		this._moveNext();
-	} else if (MenuView.UP_KEYS.indexOf(e.keyCode) !== -1 && !landscape) {
+	} else if (MenuView.UP_KEYS.indexOf(e.keyCode) !== -1 && window.innerHeight > window.innerWidth) {
 		e.preventDefault();
 		this._movePrev();
 	}
