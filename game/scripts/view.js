@@ -12,6 +12,18 @@ function View(elem, parent) {
 	
 	// Initialize public variables.
 	this.elem = elem;
+	
+	// Give the back button (if any) a reference to its containing view.
+	var backButton = elem.getElementsByClassName('backButton')[0];
+	if (backButton) {
+		backButton.view = this;
+		backButton.onfocus = function () {
+			this.view.activeInputIndex = -1;
+		};
+		backButton.onclick = function () {
+			this.view.goBack();
+		};
+	}
 }
 
 // Initialize static constants.
