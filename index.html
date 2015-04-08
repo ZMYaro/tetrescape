@@ -83,15 +83,6 @@
 					game: new View(document.getElementById('gameScreen'))
 				};
 				
-				// Enable all back buttons.
-				var backButtons = document.getElementsByClassName('backButton');
-				for (var i = 0; i < backButtons.length; i++) {
-					backButtons[i].onclick = function () {
-						this.view.goBack();
-					};
-				}
-				// Inform the game quit button of its view.
-				views.game.elem.getElementsByClassName('backButton')[0].view = views.game;
 				// Get the game view's app bar.
 				views.game.appBar = views.game.elem.getElementsByClassName('appBar')[0];
 				
