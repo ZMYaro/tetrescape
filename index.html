@@ -56,6 +56,11 @@
 					this.view.openSubview(views.levelSelect);
 				};
 				
+				// Enable the instructions button.
+				document.getElementById('instructionsButton').onclick = function () {
+					this.view.openSubview(views.instructions);
+				};
+				
 				// Enable the game reset button.
 				document.getElementById('retryButton').onclick = function () {
 					game.reload();
@@ -79,6 +84,7 @@
 				// Create views.
 				views = {
 					title: new MenuView(document.getElementById('titleScreen')),
+					instructions: new View(document.getElementById('instructionsScreen')),
 					levelSelect: new MenuView(levelScreenElement),
 					game: new View(document.getElementById('gameScreen'))
 				};
@@ -122,7 +128,19 @@
 			<br />
 			<div class="menu">
 				<button class="z1" id="playButton">Play</button>
+				<button class="z1" id="instructionsButton">Instructions</button>
 			</div>
+		</div>
+		
+		<div class="view" id="instructionsScreen">
+			<header class="appBar toolbar z2">
+				<button class="backButton" title="Back (Esc)">
+					<img src="images/back.png" alt="Back" />
+				</button>
+				Instructions
+			</header>
+			<img src="images/instructions.png" alt="Use the arrow keys or touch swipes to move" style="max-width: 90%; display: block; margin: auto;" />
+			<p>Move around using directional keys or touch swipes, slide blocks around, and try to reach the exit!</p>
 		</div>
 		
 		<div class="view" id="levelScreen">

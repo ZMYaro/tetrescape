@@ -4,7 +4,8 @@ body {
 	padding: 0;
 	overflow: hidden;
 	
-	background-color: #e5e5e5;
+	background-color: #03a9f4;
+	color: white;
 }
 
 input {
@@ -86,6 +87,9 @@ button.backButton {
 	.view {
 		padding-top: 56px;
 	}
+		.view p {
+			padding: 0 32px;
+		}
 }
 
 .menu {
@@ -106,6 +110,8 @@ button.backButton {
 		padding: 16px 32px;
 		
 		position: relative;
+		
+		color: black;
 		
 		-webkit-transform: scale(1);
 		   -moz-transform: scale(1);
@@ -153,7 +159,8 @@ button.backButton {
  #titleScreen {
 	background-color: #0277bd;
  }
- #playButton {
+ #titleScreen .menu button {
+	width: 160px;
 	font-size: 120%;
 }
 
