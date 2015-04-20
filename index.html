@@ -75,8 +75,11 @@
 				var levelScreenElement = document.getElementById('levelScreen'),
 					levelScreenMenu = levelScreenElement.getElementsByClassName('menu')[0];
 				for (var i = 0; i < LEVELS.length; i++) {
-					var levelButton = document.createElement('button');
-					levelButton.innerHTML = 'Level ' + (i + 1) + '<br /><br /><big>&#x2606;&#x2606;&#x2606;</big>';
+					var levelButton = document.createElement('button'),
+						savedScore = localStorage[GAME_PREFIX + LEVEL_PREFIX + i + MOVES_SUFFIX];
+					levelButton.innerHTML = '<div class=\"title\">Level ' + (i + 1) + '</div>' +
+						'<div class=\"score\">' + (savedScore ? 'Best score: ' + savedScore : 'Not attempted') + '</div>' +
+						'<div class=\"stars\">&#x2606;&#x2606;&#x2606;</div>';
 					levelButton.className = "z1";
 					levelButton.dataset.level = i;
 					levelButton.onclick = function () {
