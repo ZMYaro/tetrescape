@@ -15,7 +15,7 @@ function StaticBlock(x, y, grid) {
 
 // Initialize static constants.
 /** {Color} The block color */
-StaticBlock.COLOR = new Color(128, 128, 128); // Gray
+StaticBlock.COLOR = new Color(117, 117, 117); // Gray
 
 // Inherit from Block.
 StaticBlock.prototype = Object.create(Block.prototype);

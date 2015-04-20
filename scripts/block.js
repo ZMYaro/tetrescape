@@ -27,7 +27,7 @@ function Block(x, y, grid, color, tetromino) {
 
 // Initialize static constants.
 /** {Color} The default block color */
-Block.DEFAULT_COLOR = new Color(160, 160, 160); // Gray
+Block.DEFAULT_COLOR = new Color(117, 117, 117); // Gray
 /** {Number} The width of block outlines */
 Block.LINE_WIDTH = 3;
 /** {Number} The duration of the block death animation in frames. */
