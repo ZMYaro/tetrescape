@@ -472,9 +472,9 @@ var LEVELS = [{
 	o  o [P] *  B  B  *  *  o  o
 	*/
 	starScores: [
-		10,
-		10,
-		10
+		28,
+		26,
+		23
 	],
 	width: 10,
 	height: 10,
