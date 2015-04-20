@@ -148,6 +148,9 @@
 				game = undefined;
 				views.game.close();
 				views.levelSelect.resume();
+				// Focus the button for the last-played level.
+				document.activeElement.blur();
+				levelButton.focus();
 			}
 		</script>
 	</head>
