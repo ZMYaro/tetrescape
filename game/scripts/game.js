@@ -11,15 +11,19 @@ function Game(canvas, level, endCallback) {
 	this._ctx = canvas.getContext('2d');
 	this._im = new InputManager({
 		down: (function () {
+			this._moves++;
 			this._player.tryMove(Vector2D.DOWN)
 		}).bind(this),
 		left: (function () {
+			this._moves++;
 			this._player.tryMove(Vector2D.LEFT)
 		}).bind(this),
 		right: (function () {
+			this._moves++;
 			this._player.tryMove(Vector2D.RIGHT)
 		}).bind(this),
 		up: (function () {
+			this._moves++;
 			this._player.tryMove(Vector2D.UP)
 		}).bind(this),
 		retry: this.reload.bind(this)
@@ -31,6 +35,7 @@ function Game(canvas, level, endCallback) {
 	this._goal = undefined;
 	this._currentLevel = undefined;
 	this._blockSize = 1;
+	this._moves = 0;
 	
 	this._boundUpdate = this._update.bind(this);
 	
@@ -68,7 +73,7 @@ Game.prototype = {
 		// Check whether the player has reached the goal.
 		if (this._player.x === this._goal.x && this._player.y === this._goal.y) {
 			// End the game.
-			this._endCallback();
+			this._endCallback(this._moves);
 			// End the loop.
 			return;
 		}
@@ -101,6 +106,9 @@ Game.prototype = {
 				this._grid,
 				Tetromino.BLOCKS[tetromino.type].color);
 		}, this);
+		
+		// Reset the move counter.
+		this._moves = 0;
 	},
 	
 	/**
