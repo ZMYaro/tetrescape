@@ -67,6 +67,11 @@
 					this.view.openSubview(views.instructions);
 				};
 				
+				// Enable the about button.
+				document.getElementById('aboutButton').onclick = function () {
+					this.view.openSubview(views.about);
+				};
+				
 				// Enable the game reset button.
 				document.getElementById('retryButton').onclick = function () {
 					game.reload();
@@ -101,6 +106,7 @@
 				views = {
 					title: new MenuView(document.getElementById('titleScreen')),
 					instructions: new View(document.getElementById('instructionsScreen')),
+					about: new View(document.getElementById('aboutScreen')),
 					levelSelect: new MenuView(levelScreenElement),
 					game: new View(document.getElementById('gameScreen'))
 				};
@@ -162,6 +168,7 @@
 			<div class="menu">
 				<button class="z1" id="playButton">Play</button>
 				<button class="z1" id="instructionsButton">Instructions</button>
+				<button class="z1" id="aboutButton">About</button>
 			</div>
 		</div>
 		
@@ -174,6 +181,21 @@
 			</header>
 			<img src="images/instructions.png" alt="Use the arrow keys or touch swipes to move" style="max-width: 90%; display: block; margin: auto;" />
 			<p>Move around using directional keys or touch swipes, slide blocks around, and try to reach the exit!</p>
+		</div>
+		
+		<div class="view" id="aboutScreen">
+			<header class="appBar toolbar z2">
+				<button class="backButton" title="Back (Esc)">
+					<img src="images/back.png" alt="Back" />
+				</button>
+				About TetrEscape
+			</header>
+			<br /><br />
+			<h1>TetrEscape</h1>
+			<br />
+			<p>TetrEscape was created, designed, and developed by <a href="http://zmyaro.com" target="_blank">Zachary Yaro</a>.</p>
+			<br />
+			<p>TetrEscape uses the <a href="https://github.com/zmyaro/materialz" target="_blank">MaterialZ</a> style library, <a href="http://hammerjs.github.io" target="_blank">Hammer.js</a> touch gesture library, <a href="https://gist.github.com/paulirish/1579671" target="_blank">Erik Möller and Paul Irish's requestAnimationFrame polyfill</a>, and sounds from <a href="http://freesound.org" target="_blank">Freesound.org</a>.</p>
 		</div>
 		
 		<div class="view" id="levelScreen">

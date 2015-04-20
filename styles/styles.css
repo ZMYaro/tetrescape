@@ -8,6 +8,10 @@ body {
 	color: white;
 }
 
+a {
+	color: white;
+}
+
 input {
 	background-color: #050505;
 	color: #f000b0;
