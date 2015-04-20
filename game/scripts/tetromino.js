@@ -14,7 +14,13 @@ function Tetromino(blockArrangement, x, y, grid, color) {
 	for (var r = 0; r < blockArrangement.length; r++) {
 		for (var c = 0; c < blockArrangement[r].length; c++) { // Heh, C++
 			if (blockArrangement[r][c]) {
-				this._blocks.push(new Block(x + c, y + r, grid, color, this));
+				var neighbors = {
+					left: (c > 0 && blockArrangement[r][c - 1]),
+					top: (r > 0 && blockArrangement[r - 1][c]),
+					right: (c < blockArrangement[r].length - 1 && blockArrangement[r][c + 1]),
+					bottom: (r < blockArrangement.length - 1 && blockArrangement[r + 1][c])
+				};
+				this._blocks.push(new Block(x + c, y + r, grid, color, this, neighbors));
 			}
 		}
 	}

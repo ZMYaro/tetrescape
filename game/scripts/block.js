@@ -9,8 +9,9 @@
  * @param {Grid} grid - The grid to which the block is to be added
  * @param {Color} color - The color of the block
  * @param {Tetromino} [tetromino] - The tetromino the block belongs to, if any
+ * @param {Object<String,Boolean>} [neighbors] - The block's neighbors in a tetromino
  */
-function Block(x, y, grid, color, tetromino) {
+function Block(x, y, grid, color, tetromino, neighbors) {
 	// Call the superclass constructor.
 	GridOccupant.call(this, x, y, grid);
 	
@@ -21,6 +22,7 @@ function Block(x, y, grid, color, tetromino) {
 	this.scale = 1;
 	
 	this._color = color || Block.DEFAULT_COLOR;
+	this._neighbors = neighbors || {left: false, top: false, right: false, bottom: false};
 	this.dying = false;
 	this._deathTween = undefined;
 }
@@ -157,11 +159,26 @@ Block.prototype.draw = function (ctx, blockSize) {
 	ctx.rotate(-this.rotation);
 	ctx.scale(this.scale, this.scale);
 	
+	// Draw the block.
 	ctx.beginPath();
 	ctx.rect(-0.5 * size, -0.5 * size, size, size);
 	ctx.fill();
-	ctx.stroke();
+	//ctx.stroke();
 	ctx.closePath();
+	
+	// Connect the block to other blocks in its tetromino, if any.
+	if (this._neighbors.left) {
+		ctx.fillRect(-0.5 * size - Block.LINE_WIDTH, -0.5 * size, Block.LINE_WIDTH, size);
+	}
+	if (this._neighbors.top) {
+		ctx.fillRect(-0.5 * size, -0.5 * size - Block.LINE_WIDTH, size, Block.LINE_WIDTH);
+	}
+	if (this._neighbors.right) {
+		ctx.fillRect(0.5 * size, -0.5 * size, Block.LINE_WIDTH, size);
+	}
+	if (this._neighbors.bottom) {
+		ctx.fillRect(-0.5 * size, 0.5 * size, size, Block.LINE_WIDTH);
+	}
 	
 	ctx.restore();
 };
