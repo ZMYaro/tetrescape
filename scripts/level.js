@@ -12,6 +12,11 @@ var LEVELS = [{
 	i  *  P  *  *  i
 	*  I  i  i  i  *
 	*/
+	starScores: [
+		8,
+		6,
+		4
+	],
 	width: 6,
 	height: 6,
 	playerSpawn: {
@@ -52,6 +57,11 @@ var LEVELS = [{
 	O  o  *  O  o
 	o  o  P  o  o
 	*/
+	starScores: [
+		9,
+		7,
+		5
+	],
 	width: 5,
 	height: 5,
 	playerSpawn: {
@@ -87,6 +97,11 @@ var LEVELS = [{
 	O  o  *  O  o  *
 	o  o  P  o  o  *
 	*/
+	starScores: [
+		9,
+		6,
+		5
+	],
 	width: 6,
 	height: 5,
 	playerSpawn: {
@@ -125,6 +140,11 @@ var LEVELS = [{
 	O  o  O  o  *  O  o  O  o
 	o  o  o  o  P  o  o  o  o
 	*/
+	starScores: [
+		13,
+		12,
+		10
+	],
 	width: 9,
 	height: 8,
 	playerSpawn: {
@@ -189,6 +209,11 @@ var LEVELS = [{
 	O  o  *  L  *  *
 	o  o  P  l  l  l
 	*/
+	starScores: [
+		8,
+		7,
+		6
+	],
 	width: 6,
 	height: 6,
 	playerSpawn: {
@@ -242,6 +267,11 @@ var LEVELS = [{
 	O  o  *  I  i  i  i
 	o  o  P  I  i  i  i
 	*/
+	starScores: [
+		13,
+		10,
+		8
+	],
 	width: 7,
 	height: 7,
 	playerSpawn: {
@@ -312,6 +342,11 @@ var LEVELS = [{
 	z  z  I  i  i  i  z  z  *
 	z  I  i  i  i  P  z  B  *
 	*/
+	starScores: [
+		19,
+		17,
+		15
+	],
 	width: 9,
 	height: 14,
 	playerSpawn: {x: 5, y: 13},
@@ -434,6 +469,11 @@ var LEVELS = [{
 	*  *  i  i  *  *  *  *  *  j  J  z [G]
 	*  *  i  i  *  *  *  *  *  j  j  j  j
 	*/
+	starScores: [
+		56,
+		50,
+		42
+	],
 	width: 13,
 	height: 8,
 	playerSpawn: {x: 10, y: 4},
@@ -509,6 +549,11 @@ var LEVELS = [{
 	i  *  *  *  *  *  *  *  *  o  o
 	i  *  *  P  *  *  *  *  *  *  B
 	*/
+	starScores: [
+		50,
+		48,
+		37
+	],
 	width: 11,
 	height: 8,
 	playerSpawn: {
@@ -570,6 +615,11 @@ var LEVELS = [{
 	i  *  *  *  *  *  *  *  *  O  o  i
 	B  *  *  P  *  *  *  *  *  o  o  i
 	*/
+	starScores: [
+		70,
+		64,
+		62
+	],
 	width: 12,
 	height: 8,
 	playerSpawn: {
@@ -658,6 +708,11 @@ var LEVELS = [{
 	*  T  t  t  *  *  *  *  *  O  o  O  o
 	*  *  t  *  *  *  *  *  *  o  o  o  o
 	*/
+	starScores: [
+		77,
+		74,
+		71
+	],
 	width: 13,
 	height: 8,
 	playerSpawn: {
@@ -737,6 +792,11 @@ var LEVELS = [{
 	z  z  *  *  *  *  *  ?  i  ?  J  j  j
 	z  ?  *  *  *  *  *  ?  i  *  j  j  j
 	*/
+	starScores: [
+		80,
+		74,
+		67
+	],
 	width: 13,
 	height: 11,
 	playerSpawn: {x: 4, y: 4},

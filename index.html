@@ -80,8 +80,14 @@
 						savedScore = localStorage[GAME_PREFIX + LEVEL_PREFIX + i + MOVES_SUFFIX];
 					levelButton.id = LEVEL_PREFIX + i + BUTTON_SUFFIX;
 					levelButton.innerHTML = '<div class=\"title\">Level ' + (i + 1) + '</div>' +
-						'<div class=\"score\">' + (savedScore ? 'Least moves: ' + savedScore : 'Not attempted') + '</div>' +
-						'<div class=\"stars\">&#x2606;&#x2606;&#x2606;</div>';
+						'<div class=\"score\">' +
+							(savedScore ? 'Least moves: ' + savedScore : 'Not attempted') +
+						'</div>' +
+						'<div class=\"stars\">' +
+							((savedScore && savedScore <= LEVELS[i].starScores[0]) ? '&#x2605;' : '&#x2606;') +
+							((savedScore && savedScore <= LEVELS[i].starScores[1]) ? '&#x2605;' : '&#x2606;') +
+							((savedScore && savedScore <= LEVELS[i].starScores[2]) ? '&#x2605;' : '&#x2606;') +
+						'</div>';
 					levelButton.className = "z1";
 					levelButton.dataset.level = i;
 					levelButton.onclick = function () {
@@ -125,11 +131,19 @@
 			}
 			
 			function endGame(score) {
+				var levelButton = document.getElementById(LEVEL_PREFIX + currentLevel + BUTTON_SUFFIX),
+					savedScore = localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MOVES_SUFFIX];
+				
 				// Save the new score and update the UI if it is lower than the saved score.
-				var savedScore = localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MOVES_SUFFIX];
 				if (score && (!savedScore || score < savedScore)) {
 					localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MOVES_SUFFIX] = score;
-					document.getElementById(LEVEL_PREFIX + currentLevel + BUTTON_SUFFIX).getElementsByClassName('score')[0].innerHTML = 'Least moves: ' + score;
+					
+					levelButton.getElementsByClassName('score')[0].innerHTML =
+						'Least moves: ' + score;
+					levelButton.getElementsByClassName('stars')[0].innerHTML = 
+						((score <= LEVELS[currentLevel].starScores[0]) ? '&#x2605;' : '&#x2606;') +
+						((score <= LEVELS[currentLevel].starScores[1]) ? '&#x2605;' : '&#x2606;') +
+						((score <= LEVELS[currentLevel].starScores[2]) ? '&#x2605;' : '&#x2606;');
 				}
 				game = undefined;
 				views.game.close();
