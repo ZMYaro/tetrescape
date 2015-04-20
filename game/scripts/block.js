@@ -99,7 +99,12 @@ Block.prototype.tryMoveSingle = function (movement) {
 		return false;
 	}
 	// Call the superclass implementation of tryMove.
-	return GridOccupant.prototype.tryMove.call(this, movement);
+	if (GridOccupant.prototype.tryMove.call(this, movement)) {
+		document.getElementById('blockSlideSound').play();
+		return true;
+	} else {
+		return false;
+	}
 };
 
 /**

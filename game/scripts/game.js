@@ -72,6 +72,8 @@ Game.prototype = {
 		this._grid.clearRows();
 		// Check whether the player has reached the goal.
 		if (this._player.x === this._goal.x && this._player.y === this._goal.y) {
+			// Play a victory sound.
+			document.getElementById('winSound').play();
 			// End the game.
 			this._endCallback(this._moves);
 			// End the loop.
