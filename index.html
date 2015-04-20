@@ -49,6 +49,7 @@
 			var GAME_PREFIX = 'tetrescape-',
 				LEVEL_PREFIX = 'lvl-',
 				MOVES_SUFFIX = '-moves';
+				BUTTON_SUFFIX = '-btn';
 			
 			var views,
 				canvas,
@@ -77,8 +78,9 @@
 				for (var i = 0; i < LEVELS.length; i++) {
 					var levelButton = document.createElement('button'),
 						savedScore = localStorage[GAME_PREFIX + LEVEL_PREFIX + i + MOVES_SUFFIX];
+					levelButton.id = LEVEL_PREFIX + i + BUTTON_SUFFIX;
 					levelButton.innerHTML = '<div class=\"title\">Level ' + (i + 1) + '</div>' +
-						'<div class=\"score\">' + (savedScore ? 'Best score: ' + savedScore : 'Not attempted') + '</div>' +
+						'<div class=\"score\">' + (savedScore ? 'Least moves: ' + savedScore : 'Not attempted') + '</div>' +
 						'<div class=\"stars\">&#x2606;&#x2606;&#x2606;</div>';
 					levelButton.className = "z1";
 					levelButton.dataset.level = i;
@@ -123,10 +125,11 @@
 			}
 			
 			function endGame(score) {
-				// Save the new score if it is lower than the saved score.
+				// Save the new score and update the UI if it is lower than the saved score.
 				var savedScore = localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MOVES_SUFFIX];
 				if (score && (!savedScore || score < savedScore)) {
 					localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MOVES_SUFFIX] = score;
+					document.getElementById(LEVEL_PREFIX + currentLevel + BUTTON_SUFFIX).getElementsByClassName('score')[0].innerHTML = 'Least moves: ' + score;
 				}
 				game = undefined;
 				views.game.close();
