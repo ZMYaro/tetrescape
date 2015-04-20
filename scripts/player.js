@@ -42,7 +42,12 @@ Player.prototype.tryMove = function (movement) {
 			break;
 	}
 	// Call the superclass implementation of the function.
-	return GridOccupant.prototype.tryMove.call(this, movement);
+	if (GridOccupant.prototype.tryMove.call(this, movement)) {
+		return true;
+	} else {
+		document.getElementById('blockTapSound').play();
+		return false;
+	}
 };
 
 /**
