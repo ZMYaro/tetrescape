@@ -460,6 +460,81 @@ var LEVELS = [{
 	}]
 }, {
 	/*
+	*  *  *  *  *  *  *  *  *  *
+	* [G] *  *  *  *  *  *  *  *
+	*  *  B  B  B  B  O  o  *  *
+	*  *  B  B  B  B  o  o  *  *
+	B  B  *  *  *  *  *  *  B  B
+	B  B  *  *  *  *  *  *  B  B
+	*  *  O  o  O  o  O  o  *  *
+	*  *  o  o  o  o  o  o  *  *
+	O  o  *  *  B  B  *  *  O  o
+	o  o [P] *  B  B  *  *  o  o
+	*/
+	starScores: [
+		10,
+		10,
+		10
+	],
+	width: 10,
+	height: 10,
+	playerSpawn: {x: 2, y: 9},
+	goal: {x: 1, y: 1},
+	staticBlocks: [
+		{x: 2, y: 2},
+		{x: 3, y: 2},
+		{x: 4, y: 2},
+		{x: 5, y: 2},
+		{x: 2, y: 3},
+		{x: 3, y: 3},
+		{x: 4, y: 3},
+		{x: 5, y: 3},
+		{x: 0, y: 4},
+		{x: 1, y: 4},
+		{x: 8, y: 4},
+		{x: 9, y: 4},
+		{x: 0, y: 5},
+		{x: 1, y: 5},
+		{x: 8, y: 5},
+		{x: 9, y: 5},
+		{x: 4, y: 8},
+		{x: 5, y: 8},
+		{x: 4, y: 9},
+		{x: 5, y: 9}
+	],
+	tetrominos: [{
+		type: 'O',
+		orientation: 0,
+		x: 6,
+		y: 2
+	}, {
+		type: 'O',
+		orientation: 0,
+		x: 2,
+		y: 6
+	}, {
+		type: 'O',
+		orientation: 0,
+		x: 4,
+		y: 6
+	}, {
+		type: 'O',
+		orientation: 0,
+		x: 6,
+		y: 6
+	}, {
+		type: 'O',
+		orientation: 0,
+		x: 0,
+		y: 8
+	}, {
+		type: 'O',
+		orientation: 0,
+		x: 8,
+		y: 8
+	}]
+}, {
+	/*
 	*  *  B  j  *  *  *  *  *  I  I  *  *
 	*  *  B  j  *  *  *  *  *  i  i  *  *
 	*  *  j  j  *  *  *  *  *  i  i  *  z
