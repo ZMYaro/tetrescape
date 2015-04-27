@@ -8,7 +8,11 @@ function InputManager(callbacks) {
 	
 	// Set up Hammer for swipe events.
 	this._hammer = new Hammer(document.getElementById('canvas'));
-	this._hammer.get('swipe').set({direction: Hammer.DIRECTION_ALL});
+	this._hammer.get('swipe').set({
+		direction: Hammer.DIRECTION_ALL,
+		threshold: 3,
+		velocity: 0.05
+	});
 	
 	// Create bound event handling functions.
 	this._boundHandleKeyDown = this._handleKeyDown.bind(this);
