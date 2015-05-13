@@ -12,11 +12,13 @@ var LEVELS = [{
 	i  *  P  *  *  i
 	*  I  i  i  i  *
 	*/
-	starScores: [
-		8,
-		6,
-		4
-	],
+	starScores: {
+		moves: [
+			8,
+			6,
+			4
+		]
+	},
 	width: 6,
 	height: 6,
 	playerSpawn: {
@@ -57,11 +59,13 @@ var LEVELS = [{
 	O  o  *  O  o
 	o  o  P  o  o
 	*/
-	starScores: [
-		9,
-		7,
-		5
-	],
+	starScores: {
+		moves: [
+			9,
+			7,
+			5
+		]
+	},
 	width: 5,
 	height: 5,
 	playerSpawn: {
@@ -97,11 +101,13 @@ var LEVELS = [{
 	O  o  *  O  o  *
 	o  o  P  o  o  *
 	*/
-	starScores: [
-		9,
-		6,
-		5
-	],
+	starScores: {
+		moves: [
+			9,
+			6,
+			5
+		]
+	},
 	width: 6,
 	height: 5,
 	playerSpawn: {
@@ -140,11 +146,13 @@ var LEVELS = [{
 	O  o  O  o  *  O  o  O  o
 	o  o  o  o  P  o  o  o  o
 	*/
-	starScores: [
-		13,
-		12,
-		10
-	],
+	starScores: {
+		moves: [
+			13,
+			12,
+			10
+		]
+	},
 	width: 9,
 	height: 8,
 	playerSpawn: {
@@ -209,11 +217,13 @@ var LEVELS = [{
 	O  o  *  L  *  *
 	o  o  P  l  l  l
 	*/
-	starScores: [
-		8,
-		7,
-		6
-	],
+	starScores: {
+		moves: [
+			8,
+			7,
+			6
+		]
+	},
 	width: 6,
 	height: 6,
 	playerSpawn: {
@@ -267,11 +277,13 @@ var LEVELS = [{
 	O  o  *  I  i  i  i
 	o  o  P  I  i  i  i
 	*/
-	starScores: [
-		13,
-		10,
-		8
-	],
+	starScores: {
+		moves: [
+			13,
+			10,
+			8
+		]
+	},
 	width: 7,
 	height: 7,
 	playerSpawn: {
@@ -342,11 +354,13 @@ var LEVELS = [{
 	z  z  I  i  i  i  z  z  *
 	z  I  i  i  i  P  z  B  *
 	*/
-	starScores: [
-		19,
-		17,
-		15
-	],
+	starScores: {
+		moves: [
+			19,
+			17,
+			15
+		]
+	},
 	width: 9,
 	height: 14,
 	playerSpawn: {x: 5, y: 13},
@@ -471,11 +485,13 @@ var LEVELS = [{
 	O  o  *  *  B  B  *  *  O  o
 	o  o [P] *  B  B  *  *  o  o
 	*/
-	starScores: [
-		28,
-		26,
-		23
-	],
+	starScores: {
+		moves: [
+			28,
+			26,
+			23
+		]
+	},
 	width: 10,
 	height: 10,
 	playerSpawn: {x: 2, y: 9},
@@ -546,11 +562,13 @@ var LEVELS = [{
 	 *  i  *  *  B  *  *  *  B  *  B [G]
 	 *  *  *  *  B  *  B  *  B  *  B  *
 	*/
-	starScores: [
-		85,
-		71,
-		59
-	],
+	starScores: {
+		moves: [
+			85,
+			71,
+			59
+		]
+	},
 	width: 12,
 	height: 10,
 	playerSpawn: {x: 0, y: 4},
@@ -616,11 +634,13 @@ var LEVELS = [{
 	*  *  i  i  *  *  *  *  *  j  J  z [G]
 	*  *  i  i  *  *  *  *  *  j  j  j  j
 	*/
-	starScores: [
-		56,
-		50,
-		42
-	],
+	starScores: {
+		moves: [
+			56,
+			50,
+			42
+		]
+	},
 	width: 13,
 	height: 8,
 	playerSpawn: {x: 10, y: 4},
@@ -696,11 +716,13 @@ var LEVELS = [{
 	i  *  *  *  *  *  *  *  *  o  o
 	i  *  *  P  *  *  *  *  *  *  B
 	*/
-	starScores: [
-		50,
-		48,
-		37
-	],
+	starScores: {
+		moves: [
+			50,
+			48,
+			37
+		]
+	},
 	width: 11,
 	height: 8,
 	playerSpawn: {
@@ -762,11 +784,13 @@ var LEVELS = [{
 	i  *  *  *  *  *  *  *  *  O  o  i
 	B  *  *  P  *  *  *  *  *  o  o  i
 	*/
-	starScores: [
-		70,
-		64,
-		62
-	],
+	starScores: {
+		moves: [
+			70,
+			64,
+			62
+		]
+	},
 	width: 12,
 	height: 8,
 	playerSpawn: {
@@ -855,11 +879,13 @@ var LEVELS = [{
 	*  T  t  t  *  *  *  *  *  O  o  O  o
 	*  *  t  *  *  *  *  *  *  o  o  o  o
 	*/
-	starScores: [
-		77,
-		74,
-		71
-	],
+	starScores: {
+		moves: [
+			77,
+			74,
+			71
+		]
+	},
 	width: 13,
 	height: 8,
 	playerSpawn: {
@@ -939,11 +965,13 @@ var LEVELS = [{
 	z  z  *  *  *  *  *  ?  i  ?  J  j  j
 	z  ?  *  *  *  *  *  ?  i  *  j  j  j
 	*/
-	starScores: [
-		80,
-		74,
-		67
-	],
+	starScores: {
+		moves: [
+			80,
+			74,
+			67
+		]
+	},
 	width: 13,
 	height: 11,
 	playerSpawn: {x: 4, y: 4},

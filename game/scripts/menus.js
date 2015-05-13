@@ -2,17 +2,23 @@
 
 var GAME_PREFIX = 'tetrescape-',
 	LEVEL_PREFIX = 'lvl-',
-	MOVES_SUFFIX = '-moves',
+	MODES = {
+		MOVES: 'moves',
+		BLOCKS: 'blocks'
+	},
 	BUTTON_SUFFIX = '-btn';
 
 var views,
 	canvas,
 	game,
+	currentMode,
 	currentLevel;
 
 window.onload = function () {
 	// Enable the play button.
 	document.getElementById('playButton').onclick = function () {
+		currentMode = MODES.MOVES;
+		populateLevelSelect();
 		this.view.openSubview(views.levelSelect);
 	};
 	
@@ -35,6 +41,7 @@ window.onload = function () {
 	document.getElementById('resultsBackButton').onclick = function () {
 		this.view.close();
 		views.game.close();
+		
 		views.levelSelect.resume();
 		// Focus the button for the last-played level.
 		document.activeElement.blur();
@@ -42,36 +49,14 @@ window.onload = function () {
 	};
 	
 	// Populate the level select screen.
-	var levelScreenElement = document.getElementById('levelScreen'),
-		levelScreenMenu = levelScreenElement.getElementsByClassName('menu')[0];
-	for (var i = 0; i < LEVELS.length; i++) {
-		var levelButton = document.createElement('button'),
-			savedScore = localStorage[GAME_PREFIX + LEVEL_PREFIX + i + MOVES_SUFFIX];
-		levelButton.id = LEVEL_PREFIX + i + BUTTON_SUFFIX;
-		levelButton.innerHTML = '<div class=\"title\">Level ' + (i + 1) + '</div>' +
-			'<div class=\"score\">' +
-				(savedScore ? 'Least moves: ' + savedScore : 'Not attempted') +
-			'</div>' +
-			'<div class=\"stars\">' +
-				((savedScore && savedScore <= LEVELS[i].starScores[0]) ? '&#x2605;' : '&#x2606;') +
-				((savedScore && savedScore <= LEVELS[i].starScores[1]) ? '&#x2605;' : '&#x2606;') +
-				((savedScore && savedScore <= LEVELS[i].starScores[2]) ? '&#x2605;' : '&#x2606;') +
-			'</div>';
-		levelButton.className = "z1";
-		levelButton.dataset.level = i;
-		levelButton.onclick = function () {
-			this.view.openSubview(views.game);
-			startGame(this.dataset.level);
-		};
-		levelScreenMenu.appendChild(levelButton);
-	}
+	
 	
 	// Create views.
 	views = {
 		title: new MenuView(document.getElementById('titleScreen')),
 		instructions: new View(document.getElementById('instructionsScreen')),
 		about: new View(document.getElementById('aboutScreen')),
-		levelSelect: new MenuView(levelScreenElement),
+		levelSelect: new MenuView(document.getElementById('levelScreen')),
 		game: new View(document.getElementById('gameScreen')),
 		results: new MenuView(document.getElementById('resultsScreen'))
 	};
@@ -96,6 +81,51 @@ function handleResize() {
 	}
 }
 
+function populateLevelSelect() {
+	var levelScreenMenu = views.levelSelect.elem.getElementsByClassName('menu')[0];
+	
+	// Clear the menu.
+	levelScreenMenu.innerHTML = '';
+	views.levelSelect.inputs = [];
+	
+	LEVELS.forEach(function (level, i) {
+		var levelButton = document.createElement('button'),
+			savedScore = localStorage[GAME_PREFIX + LEVEL_PREFIX + i + '-' + currentMode];
+		levelButton.id = LEVEL_PREFIX + i + BUTTON_SUFFIX;
+		
+		var buttonHTML = '<div class=\"title\">Level ' + (i + 1) + '</div>' +
+			'<div class=\"score\">';
+		if (savedScore) {
+			if (currentMode === MODES.BLOCKS) {
+				buttonHTML += 'Most blocks cleared: ' + savedScore;
+			} else if (currentMode === MODES.MOVES) {
+				buttonHTML += 'Least moves: ' + savedScore;
+			}
+		} else {
+			buttonHTML += 'Not attempted';
+		}
+		buttonHTML += '</div>' +
+			'<div class=\"stars\">';
+		level.starScores[currentMode].forEach(function (starScore) {
+			buttonHTML += ((savedScore && savedScore <= starScore) ? '&#x2605;' : '&#x2606;');
+		});
+		buttonHTML += '</div>';
+		levelButton.innerHTML = buttonHTML;
+		
+		levelButton.className = "z1";
+		levelButton.dataset.level = i;
+		levelButton.view = views.levelSelect;
+		levelButton.onclick = function () {
+			this.view.openSubview(views.game);
+			startGame(this.dataset.level);
+		};
+		
+		// Add the new button to the menu.
+		levelScreenMenu.appendChild(levelButton);
+		views.levelSelect.inputs.push(levelButton);
+	});
+}
+
 function startGame(level) {
 	currentLevel = level;
 	game = new Game(canvas, LEVELS[level], endGame);
@@ -103,27 +133,24 @@ function startGame(level) {
 
 function endGame(score) {
 	var levelButton = document.getElementById(LEVEL_PREFIX + currentLevel + BUTTON_SUFFIX),
-		savedScore = localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MOVES_SUFFIX];
+		savedScore = localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + '-' + currentMode];
 	
 	// Save the new score and update the UI if it is lower than the saved score.
 	if (score && (!savedScore || score < savedScore)) {
-		localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MOVES_SUFFIX] = score;
-		
-		levelButton.getElementsByClassName('score')[0].innerHTML =
-			'Least moves: ' + score;
-		levelButton.getElementsByClassName('stars')[0].innerHTML = 
-			((score <= LEVELS[currentLevel].starScores[0]) ? '&#x2605;' : '&#x2606;') +
-			((score <= LEVELS[currentLevel].starScores[1]) ? '&#x2605;' : '&#x2606;') +
-			((score <= LEVELS[currentLevel].starScores[2]) ? '&#x2605;' : '&#x2606;');
+		localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + '-' + currentMode] = score;
+		populateLevelSelect();
 	}
 	game = undefined;
 	
 	// Open the results screen.
-	document.getElementById('resultsScore').innerHTML =
-		'Moves: ' + score;
+	if (currentMode === MODES.MOVES) {
+		document.getElementById('resultsScore').innerHTML = 'Moves: ' + score;
+	} else if (currentMode === MODES.BLOCKS) {
+		document.getElementById('resultsScore').innerHTML = 'Blocks cleared: ' + score;
+	}
 	// Set the number of stars awarded.
 	var resultsStars = views.results.elem.getElementsByClassName('star');
-	LEVELS[currentLevel].starScores.forEach(function (starScore, i) {
+	LEVELS[currentLevel].starScores[currentMode].forEach(function (starScore, i) {
 		resultsStars[i].classList.remove('active');
 		if (score <= starScore) {
 			setTimeout(function () {
