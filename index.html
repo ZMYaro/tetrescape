@@ -85,6 +85,19 @@
 			<p>TetrEscape uses the <a href="https://github.com/zmyaro/materialz" target="_blank">MaterialZ</a> style library, <a href="http://hammerjs.github.io" target="_blank">Hammer.js</a> touch gesture library, <a href="https://gist.github.com/paulirish/1579671" target="_blank">Erik Möller and Paul Irish's requestAnimationFrame polyfill</a>, and sounds from <a href="http://freesound.org" target="_blank">Freesound.org</a>.</p>
 		</div>
 		
+		<div class="view" id="modeScreen">
+			<header class="appBar toolbar z2">
+				<button class="backButton" title="Back (Esc)">
+					<img src="images/back.png" alt="Back" />
+				</button>
+			Select mode
+			</header>
+			<div class="menu">
+				<button class="z1" id="movesModeButton">Least moves</button>
+				<button class="z1" id="blocksModeButton">Most blocks cleared</button>
+			</div>
+		</div>
+		
 		<div class="view" id="levelScreen">
 			<header class="appBar toolbar z2">
 				<button class="backButton" title="Back (Esc)">
