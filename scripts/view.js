@@ -17,9 +17,6 @@ function View(elem, parent) {
 	var backButton = elem.getElementsByClassName('backButton')[0];
 	if (backButton) {
 		backButton.view = this;
-		backButton.onfocus = function () {
-			this.view.activeInputIndex = -1;
-		};
 		backButton.onclick = function () {
 			this.view.goBack();
 		};
