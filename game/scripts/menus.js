@@ -161,6 +161,7 @@ function endGame(score) {
 	game = undefined;
 	
 	// Open the results screen.
+	document.getElementById('resultsTitle').innerHTML = 'Level ' + currentLevel + ' complete!';
 	if (currentMode === MODES.MOVES) {
 		document.getElementById('resultsScore').innerHTML = 'Moves: ' + score;
 	} else if (currentMode === MODES.BLOCKS) {
