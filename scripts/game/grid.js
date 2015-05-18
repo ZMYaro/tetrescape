@@ -159,6 +159,7 @@ Grid.prototype = {
 	
 	/**
 	 * Check for and clear any complete rows.
+	 * @returns {Number} The number of blocks cleared
 	 */
 	clearRows: function () {
 		var counter;
@@ -183,6 +184,7 @@ Grid.prototype = {
 						this._occupants[x][y].kill();
 					}
 				}
+				return this.height;
 			}
 		}
 		
@@ -206,7 +208,10 @@ Grid.prototype = {
 						this._occupants[x][y].kill();
 					}
 				}
+				return this.width;
 			}
 		}
+		
+		return 0;
 	}
 };
