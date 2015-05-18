@@ -267,3 +267,15 @@ button.backButton {
 	#resultsScreen .star.active::before {
 		content: '\2605';
 	}
+
+#gameScreen .backButton {
+	float: left;
+}
+#retryButton {
+	float: right;
+	margin-right: -12px;
+}
+#gameScore {
+	float: right;
+	margin-right: 8px;
+}
