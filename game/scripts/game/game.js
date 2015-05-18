@@ -5,7 +5,7 @@
  * @class
  * @param {HTMLCanvasElement} canvas - The canvas on whch the game will appear
  */
-function Game(canvas, level, endCallback) {
+function Game(canvas, levelData, endCallback) {
 	// Initialize private variables.
 	this._canvas = canvas;
 	this._ctx = canvas.getContext('2d');
@@ -35,11 +35,13 @@ function Game(canvas, level, endCallback) {
 	this._goal = undefined;
 	this._currentLevel = undefined;
 	this._blockSize = 1;
+	
+	this._blocksCleared = 0;
 	this._moves = 0;
 	
 	this._boundUpdate = this._update.bind(this);
 	
-	this._levelData = level;
+	this._levelData = levelData;
 	
 	// Load the level.
 	this.reload();
@@ -69,13 +71,18 @@ Game.prototype = {
 		this._grid.update();
 		
 		// Check whether a new row has been formed and eliminate it.
-		this._grid.clearRows();
+		this._blocksCleared += this._grid.clearRows();
+		
 		// Check whether the player has reached the goal.
 		if (this._player.x === this._goal.x && this._player.y === this._goal.y) {
 			// Play a victory sound.
 			document.getElementById('winSound').play();
 			// End the game.
-			this._endCallback(this._moves);
+			if (currentMode === MODES.MOVES) {
+				this._endCallback(this._moves);
+			} else if (currentMode === MODES.BLOCKS) {
+				this._endCallback(this._blocksCleared);
+			}
 			// End the loop.
 			return;
 		}
@@ -108,6 +115,9 @@ Game.prototype = {
 				this._grid,
 				Tetromino.BLOCKS[tetromino.type].color);
 		}, this);
+		
+		// Reset the block counter.
+		this._blocksCleared = 0;
 		
 		// Reset the move counter.
 		this._moves = 0;
