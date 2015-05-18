@@ -17,9 +17,7 @@ var views,
 window.onload = function () {
 	// Enable the play button.
 	document.getElementById('playButton').onclick = function () {
-		currentMode = MODES.MOVES;
-		populateLevelSelect();
-		this.view.openSubview(views.levelSelect);
+		this.view.openSubview(views.modeSelect);
 	};
 	
 	// Enable the instructions button.
@@ -30,6 +28,16 @@ window.onload = function () {
 	// Enable the about button.
 	document.getElementById('aboutButton').onclick = function () {
 		this.view.openSubview(views.about);
+	};
+	
+	// Enable the mode selection buttons.
+	document.getElementById('movesModeButton').dataset.mode = MODES.MOVES;
+	document.getElementById('blocksModeButton').dataset.mode = MODES.BLOCKS;
+	document.getElementById('movesModeButton').onclick =
+			document.getElementById('blocksModeButton').onclick = function () {
+		currentMode = this.dataset.mode;
+		populateLevelSelect();
+		this.view.openSubview(views.levelSelect);
 	};
 	
 	// Enable the game reset button.
@@ -56,6 +64,7 @@ window.onload = function () {
 		title: new MenuView(document.getElementById('titleScreen')),
 		instructions: new View(document.getElementById('instructionsScreen')),
 		about: new View(document.getElementById('aboutScreen')),
+		modeSelect: new MenuView(document.getElementById('modeScreen')),
 		levelSelect: new MenuView(document.getElementById('levelScreen')),
 		game: new View(document.getElementById('gameScreen')),
 		results: new MenuView(document.getElementById('resultsScreen'))
@@ -96,10 +105,10 @@ function populateLevelSelect() {
 		var buttonHTML = '<div class=\"title\">Level ' + (i + 1) + '</div>' +
 			'<div class=\"score\">';
 		if (savedScore) {
-			if (currentMode === MODES.BLOCKS) {
-				buttonHTML += 'Most blocks cleared: ' + savedScore;
-			} else if (currentMode === MODES.MOVES) {
+			if (currentMode === MODES.MOVES) {
 				buttonHTML += 'Least moves: ' + savedScore;
+			} else if (currentMode === MODES.BLOCKS) {
+				buttonHTML += 'Most blocks cleared: ' + savedScore;
 			}
 		} else {
 			buttonHTML += 'Not attempted';
@@ -107,7 +116,13 @@ function populateLevelSelect() {
 		buttonHTML += '</div>' +
 			'<div class=\"stars\">';
 		level.starScores[currentMode].forEach(function (starScore) {
-			buttonHTML += ((savedScore && savedScore <= starScore) ? '&#x2605;' : '&#x2606;');
+			if ((typeof savedScore !== 'undefined') && (
+					(currentMode === MODES.MOVES && savedScore <= starScore) ||
+					(currentMode === MODES.BLOCKS && savedScore >= starScore))) {
+				buttonHTML += '&#x2605;';
+			} else {
+				buttonHTML += '&#x2606;';
+			}
 		});
 		buttonHTML += '</div>';
 		levelButton.innerHTML = buttonHTML;
@@ -136,7 +151,10 @@ function endGame(score) {
 		savedScore = localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + '-' + currentMode];
 	
 	// Save the new score and update the UI if it is lower than the saved score.
-	if (score && (!savedScore || score < savedScore)) {
+	if (typeof score !== 'undefined' &&
+			((typeof savedScore === 'undefined') || (
+				(currentMode === MODES.MOVES && score < savedScore) ||
+				(currentMode === MODES.BLOCKS && score > savedScore)))) {
 		localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + '-' + currentMode] = score;
 		populateLevelSelect();
 	}
@@ -152,7 +170,8 @@ function endGame(score) {
 	var resultsStars = views.results.elem.getElementsByClassName('star');
 	LEVELS[currentLevel].starScores[currentMode].forEach(function (starScore, i) {
 		resultsStars[i].classList.remove('active');
-		if (score <= starScore) {
+		if ((currentMode === MODES.MOVES && score <= starScore) ||
+				(currentMode == MODES.BLOCKS && score >= starScore)) {
 			setTimeout(function () {
 				resultsStars[i].classList.add('active');
 			}, 150 * (i + 1));
