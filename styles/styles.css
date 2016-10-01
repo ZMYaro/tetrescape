@@ -163,7 +163,9 @@ button.backButton {
 	background-color: #0277bd;
  }
  #titleScreen .menu button {
-	width: 160px;
+	width: 184px;
+	padding-left: 16px;
+	padding-right: 16px;
 	font-size: 120%;
 }
 
