@@ -55,8 +55,8 @@ The controls are simple enough to be displayed on the screen at start.  The firs
 function sum(a, b) { ... }
 ```
 
-### Dependencies
+### Libraries
 
-* Clone [Erik Möller and Paul Irish's requestAnimationFrame polyfill](https://gist.github.com/paulirish/1579671) as `game/scripts/libs/raf.js`.
-* Clone `material-elements.css`, `material-widgets.css`, and `material-depth.css` from [MaterialZ](https://github.com/zmyaro/materialz) into `game/styles` and `material-touch.js` into `game/scripts/libs`.
-* Download [Hammer.js](http://hammerjs.github.io) to `game/scripts/libs/hammer.min.js`.
+* [Erik Möller and Paul Irish's requestAnimationFrame polyfill](https://gist.github.com/paulirish/1579671)
+* [MaterialZ](https://github.com/zmyaro/materialz)
+* [Hammer.js](http://hammerjs.github.io)

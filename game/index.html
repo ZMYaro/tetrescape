@@ -14,17 +14,17 @@
 		<link rel="apple-touch-icon-precomposed" sizes="128x128" href="images/logo_128.png" />
 		
 		<!-- Style sheets -->
-		<link rel="stylesheet" type="text/css" href="styles/material-elements.css" />
-		<link rel="stylesheet" type="text/css" href="styles/material-widgets.css" />
-		<link rel="stylesheet" type="text/css" href="styles/material-depth.css" />
+		<link rel="stylesheet" type="text/css" href="styles/lib/material-elements.css" />
+		<link rel="stylesheet" type="text/css" href="styles/lib/material-widgets.css" />
+		<link rel="stylesheet" type="text/css" href="styles/lib/material-depth.css" />
 		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
 		<link rel="stylesheet" type="text/css" href="styles/animations.css" />
 		
 		<!-- External libraries and polyfills -->
-		<script type="text/javascript" src="scripts/libs/raf.js"></script>
-		<script type="text/javascript" src="scripts/libs/hammer.min.js"></script>
-		<script type="text/javascript" src="scripts/libs/material-touch.js"></script>
-		<script type="text/javascript" src="scripts/libs/vector2d.js"></script>
+		<script type="text/javascript" src="scripts/lib/raf.js"></script>
+		<script type="text/javascript" src="scripts/lib/hammer.min.js"></script>
+		<script type="text/javascript" src="scripts/lib/material-touch.js"></script>
+		<script type="text/javascript" src="scripts/lib/vector2d.js"></script>
 		
 		<!-- Helper classes -->
 		<script type="text/javascript" src="scripts/color.js"></script>
@@ -60,7 +60,7 @@
 		</div>
 		
 		<div class="view" id="instructionsScreen">
-			<header class="appBar toolbar z2">
+			<header role="toolbar" class="appBar z2">
 				<button class="backButton" title="Back (Esc)">
 					<img src="images/back.png" alt="Back" />
 				</button>
@@ -71,7 +71,7 @@
 		</div>
 		
 		<div class="view" id="aboutScreen">
-			<header class="appBar toolbar z2">
+			<header role="toolbar" class="appBar z2">
 				<button class="backButton" title="Back (Esc)">
 					<img src="images/back.png" alt="Back" />
 				</button>
@@ -86,7 +86,7 @@
 		</div>
 		
 		<div class="view" id="modeScreen">
-			<header class="appBar toolbar z2">
+			<header role="toolbar" class="appBar z2">
 				<button class="backButton" title="Back (Esc)">
 					<img src="images/back.png" alt="Back" />
 				</button>
@@ -99,7 +99,7 @@
 		</div>
 		
 		<div class="view" id="levelScreen">
-			<header class="appBar toolbar z2">
+			<header role="toolbar" class="appBar z2">
 				<button class="backButton" title="Back (Esc)">
 					<img src="images/back.png" alt="Back" />
 				</button>
@@ -109,7 +109,7 @@
 		</div>
 		
 		<div class="view" id="gameScreen">
-			<header class="appBar toolbar z1">
+			<header role="toolbar" class="appBar z1">
 				<button class="backButton" title="Quit (Esc)">
 					<img src="images/close.png" alt="Quit" />
 				</button>
