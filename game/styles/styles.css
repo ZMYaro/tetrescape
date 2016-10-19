@@ -26,13 +26,9 @@ h2 {
 	
 	background-color: #0277bd;
 }
-	.appBar button > img {
-		width: 32px;
-		height: 32px;
-	}
 
 button.backButton {
-	margin-left: -12px;
+	margin-left: -6px;
 }
 	
 
@@ -275,7 +271,7 @@ button.backButton {
 }
 #retryButton {
 	float: right;
-	margin-right: -12px;
+	margin-right: -6px;
 }
 #gameScore {
 	float: right;
