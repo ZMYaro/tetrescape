@@ -132,7 +132,7 @@ function populateLevelSelect() {
 		levelButton.view = views.levelSelect;
 		levelButton.onclick = function () {
 			this.view.openSubview(views.game);
-			startGame(this.dataset.level);
+			startGame(parseInt(this.dataset.level));
 		};
 		
 		// Add the new button to the menu.
@@ -161,7 +161,7 @@ function endGame(score) {
 	game = undefined;
 	
 	// Open the results screen.
-	document.getElementById('resultsTitle').innerHTML = 'Level ' + currentLevel + ' complete!';
+	document.getElementById('resultsTitle').innerHTML = 'Level ' + (currentLevel + 1) + ' complete!';
 	if (currentMode === MODES.MOVES) {
 		document.getElementById('resultsScore').innerHTML = 'Moves: ' + score;
 	} else if (currentMode === MODES.BLOCKS) {
