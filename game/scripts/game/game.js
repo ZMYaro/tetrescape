@@ -55,6 +55,26 @@ function Game(canvas, levelData, endCallback) {
 
 Game.prototype = {
 	/**
+	 * End the game.
+	 * @private
+	 */
+	_endGame: function () {
+		// Play a victory sound.
+		document.getElementById('winSound').play();
+		
+		// Remove event listeners.
+		this._im.disable();
+		delete this._im;
+		
+		// End the game.
+		if (currentMode === MODES.MOVES) {
+			this._endCallback(this._moves);
+		} else if (currentMode === MODES.BLOCKS) {
+			this._endCallback(this._blocksCleared);
+		}
+	},
+	
+	/**
 	 * The main game loop
 	 * @private
 	 */
@@ -75,14 +95,7 @@ Game.prototype = {
 		
 		// Check whether the player has reached the goal.
 		if (this._player.x === this._goal.x && this._player.y === this._goal.y) {
-			// Play a victory sound.
-			document.getElementById('winSound').play();
-			// End the game.
-			if (currentMode === MODES.MOVES) {
-				this._endCallback(this._moves);
-			} else if (currentMode === MODES.BLOCKS) {
-				this._endCallback(this._blocksCleared);
-			}
+			this._endGame();
 			// End the loop.
 			return;
 		}
