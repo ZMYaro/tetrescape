@@ -26,6 +26,11 @@ h2 {
 	
 	background-color: #0277bd;
 }
+	.appBar svg {
+		width: 24px;
+		height: 24px;
+		fill: #ffffff;
+	}
 
 button.backButton {
 	margin-left: -6px;
@@ -200,7 +205,8 @@ button.backButton {
 	margin: -16px 0;
 	padding: 8px 6px;
 }
-	.scoreDisplay img {
+	.scoreDisplay img,
+	.scoreDisplay [role="img"] {
 		margin: -4px 0;
 	}
 
