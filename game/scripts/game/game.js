@@ -113,11 +113,8 @@ Game.prototype = {
 	 * Update the score display on the app bar.
 	 */
 	_updateScore: function () {
-		if (currentMode === MODES.MOVES) {
-			document.getElementById('gameScore').innerHTML = this._moves + ' move' + (this._moves === 1 ? '' : 's');
-		} else if (currentMode === MODES.BLOCKS) {
-			document.getElementById('gameScore').innerHTML = this._blocksCleared + ' block' + (this._blocksCleared === 1 ? '' : 's') + ' cleared';
-		}
+		document.getElementById('movesDisplay').innerHTML = this._moves;
+		document.getElementById('blocksDisplay').innerHTML = this._blocksCleared;
 	},
 	
 	/**

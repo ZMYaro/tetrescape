@@ -194,6 +194,16 @@ button.backButton {
 	}		
 }
 
+/* Game screen styles */
+.scoreDisplay {
+	display: inline-block;
+	margin: -16px 0;
+	padding: 8px 6px;
+}
+	.scoreDisplay img {
+		margin: -4px 0;
+	}
+
 /* Results screen styles */
 #resultsScreen,
 #resultsScreen .appBar {
@@ -266,11 +276,7 @@ button.backButton {
 		content: '\2605';
 	}
 
-#gameScreen .backButton {
-	float: left;
-}
 #retryButton {
-	float: right;
 	margin-right: -6px;
 }
 #gameScore {

@@ -113,10 +113,21 @@
 				<button class="backButton" title="Quit (Esc)">
 					<img src="images/icons/close.svg" alt="Quit" />
 				</button>
-				<button id="retryButton" title="Retry (R)">
-					<img src="images/icons/restart.svg" alt="Retry" />
-				</button>
-				<span id="gameScore"></span>
+				<span style="float: right;">
+					<span class="scoreDisplay" title="Moves">
+						<img src="images/icons/moves.svg" alt="Moves" />
+						<span id="movesDisplay"></span>
+					</span>
+					|
+					<span class="scoreDisplay"title="Blocks cleared">
+						<img src="images/icons/blocks.svg" alt="Blocks cleared" />
+						<span id="blocksDisplay"></span>
+					</span>
+					|
+					<button id="retryButton" title="Retry (R)">
+						<img src="images/icons/restart.svg" alt="Retry" />
+					</button>
+				</span>
 			</header>
 			<canvas id="canvas" width="640" height="480"></canvas>
 		</div>
