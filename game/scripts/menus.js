@@ -1,7 +1,7 @@
 'use strict';
 
 var GAME_PREFIX = 'tetrescape-',
-	LEVEL_PREFIX = 'lvl-',
+	LEVEL_PREFIX = 'lvl',
 	MODES = {
 		MOVES: 'moves',
 		BLOCKS: 'blocks'
@@ -99,34 +99,47 @@ function populateLevelSelect() {
 	
 	LEVELS.forEach(function (level, i) {
 		var levelButton = document.createElement('button'),
-			savedScore = localStorage[GAME_PREFIX + LEVEL_PREFIX + i + '-' + currentMode];
+			moves = localStorage[GAME_PREFIX + LEVEL_PREFIX + i + MODES.MOVES],
+			blocks = localStorage[GAME_PREFIX + LEVEL_PREFIX + i + MODES.BLOCKS],
+			moveStars = (moves <= level.starScores.moves[2] ? 3 :
+				moves <= level.starScores.moves[1] ? 2 :
+					moves <= level.starScores.moves[0] ? 1 : 0),
+			blockStars = (blocks >= level.starScores.blocks[2] ? 3 :
+				blocks >= level.starScores.blocks[1] ? 2 :
+					blocks >= level.starScores.blocks[0] ? 1 : 0);
 		levelButton.id = LEVEL_PREFIX + i + BUTTON_SUFFIX;
 		
-		var buttonHTML = '<div class=\"title\">Level ' + (i + 1) + '</div>' +
-			'<div class=\"score\">';
-		if (savedScore) {
-			if (currentMode === MODES.MOVES) {
-				buttonHTML += 'Least moves: ' + savedScore;
-			} else if (currentMode === MODES.BLOCKS) {
-				buttonHTML += 'Most blocks cleared: ' + savedScore;
-			}
-		} else {
-			buttonHTML += 'Not attempted';
-		}
-		buttonHTML += '</div>' +
+		var buttonHTML =
+			'<div class=\"title\">Level</div>' +
+			'<div class=\"number\">' + (i + 1) + '</div>' +
 			'<div class=\"stars\">';
-		level.starScores[currentMode].forEach(function (starScore) {
-			if ((typeof savedScore !== 'undefined') && (
-					(currentMode === MODES.MOVES && savedScore <= starScore) ||
-					(currentMode === MODES.BLOCKS && savedScore >= starScore))) {
-				buttonHTML += '&#x2605;';
-			} else {
-				buttonHTML += '&#x2606;';
-			}
-		});
+		if (typeof(moves) === 'undefined' && typeof(blocks) === 'undefined') {
+			buttonHTML += 'Not attempted';
+		} else {
+			buttonHTML +=
+				'<span title="Fewest moves">' +
+					'<svg role="img" aria-label="Fewest moves">' +
+						'<use xlink:href="images/icons/moves.svg#icon" href="images/icons/moves.svg#icon"></use>' +
+					'</svg>' +
+					moves +
+					'<svg role="img" aria-label="' + moveStars + ' stars.">' +
+						'<use xlink:href="images/icons/' + moveStars + 'star.svg#icon" href="images/icons/' + moveStars + 'star.svg#icon"></use>' +
+					'</svg>' +
+				'</span>' +
+				'&nbsp;&nbsp;&middot;&nbsp;&nbsp;' +
+				'<span title="Most blocks cleared">' +
+					'<svg role="img" aria-label="Most blocks cleared">' +
+						'<use xlink:href="images/icons/blocks.svg#icon" href="images/icons/blocks.svg#icon"></use>' +
+					'</svg>' +
+					blocks +
+					'<svg role="img" aria-label="' + blockStars + ' stars.">' +
+						'<use xlink:href="images/icons/' + blockStars + 'star.svg#icon" href="images/icons/' + blockStars + 'star.svg#icon"></use>' +
+					'</svg>' +
+				'</span>';
+		}
 		buttonHTML += '</div>';
-		levelButton.innerHTML = buttonHTML;
 		
+		levelButton.innerHTML = buttonHTML;
 		levelButton.className = "z1";
 		levelButton.dataset.level = i;
 		levelButton.view = views.levelSelect;
@@ -146,33 +159,35 @@ function startGame(level) {
 	game = new Game(canvas, LEVELS[level], endGame);
 }
 
-function endGame(score) {
+function endGame(moves, blocks) {
 	var levelButton = document.getElementById(LEVEL_PREFIX + currentLevel + BUTTON_SUFFIX),
-		savedScore = localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + '-' + currentMode];
+		savedMoves = localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.MOVES],
+		savedBlocks = localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.BLOCKS];
 	
 	// Save the new score and update the UI if it is lower than the saved score.
-	if (typeof score !== 'undefined' &&
-			((typeof savedScore === 'undefined') || (
-				(currentMode === MODES.MOVES && score < savedScore) ||
-				(currentMode === MODES.BLOCKS && score > savedScore)))) {
-		localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + '-' + currentMode] = score;
-		populateLevelSelect();
+	if (typeof(savedMoves) === 'undefined' || moves < savedMoves) {
+		localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.MOVES] = moves;
 	}
+	if (typeof(savedBlocks) === 'undefined' || blocks > savedBlocks) {
+		localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.BLOCKS] = blocks;
+	}
+	populateLevelSelect();
 	game = undefined;
 	
 	// Open the results screen.
 	document.getElementById('resultsTitle').innerHTML = 'Level ' + (currentLevel + 1) + ' complete!';
+	
 	if (currentMode === MODES.MOVES) {
-		document.getElementById('resultsScore').innerHTML = 'Moves: ' + score;
+		document.getElementById('resultsScore').innerHTML = 'Moves: ' + moves;
 	} else if (currentMode === MODES.BLOCKS) {
-		document.getElementById('resultsScore').innerHTML = 'Blocks cleared: ' + score;
+		document.getElementById('resultsScore').innerHTML = 'Blocks cleared: ' + blocks;
 	}
 	// Set the number of stars awarded.
 	var resultsStars = views.results.elem.getElementsByClassName('star');
 	LEVELS[currentLevel].starScores[currentMode].forEach(function (starScore, i) {
 		resultsStars[i].classList.remove('active');
-		if ((currentMode === MODES.MOVES && score <= starScore) ||
-				(currentMode == MODES.BLOCKS && score >= starScore)) {
+		if ((currentMode === MODES.MOVES && moves <= starScore) ||
+				(currentMode == MODES.BLOCKS && moves >= starScore)) {
 			setTimeout(function () {
 				resultsStars[i].classList.add('active');
 			}, 150 * (i + 1));
