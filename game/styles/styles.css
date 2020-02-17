@@ -17,6 +17,9 @@ h2 {
 	font-weight: normal;
 	margin-top: 0;
 }
+h2 {
+	margin-bottom: 0;
+}
 
 .appBar {
 	position: absolute;
@@ -188,15 +191,15 @@ button.backButton {
 	#levelScreen .menu button .score {
 		font-size: 100%;
 	}
-	#levelScreen .menu button .stars {
-		font-size: 125%;
+.stars {
+	font-size: 125%;
+}
+	.stars svg {
+		width: 24px;
+		height: 24px;
+		margin: -5px 0;
+		fill: #000000;
 	}
-		#levelScreen .menu button .stars svg {
-			width: 24px;
-			height: 24px;
-			margin: -5px 0;
-			fill: #000000;
-		}
 	
 @media (orientation: portrait) {
 	#levelScreen .menu button {
