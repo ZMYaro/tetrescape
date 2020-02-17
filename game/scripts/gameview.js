@@ -40,10 +40,14 @@ GameView.prototype._handleResize = function () {
 
 /**
  * Start the actual game to a particular level.
+ * @param {Number} level
  */
 GameView.prototype.startGame = function (level) {
 	window.currentLevel = level; // TODO: Make this non-global.
 	this._game = new Game(this._canvas, LEVELS[level], endGame);
+	
+	// Show the control hint on the first level.
+	this.elem.querySelector('#controlHint').style.display = (level === 0) ? 'block' : 'none';
 };
 
 /**

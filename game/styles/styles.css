@@ -235,6 +235,33 @@ button.backButton {
 	.scoreDisplay [role="img"] {
 		margin: -4px 0;
 	}
+#controlHint {
+	position: fixed;
+	right: 10%;
+	top: 50%;
+	width: 30%;
+	
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	animation-name: controlHintLoop;
+}
+@keyframes controlHintLoop {
+	0% {
+		opacity: 0;
+		transform: transateY(50%);
+	}
+	30% {
+		opacity: 1;
+	}
+	80% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		transform: translateY(-75%);
+	}
+}
+
 
 /* Results screen styles */
 #resultsScreen,
