@@ -66,9 +66,9 @@ function getStarRating(level, type, score) {
 			score <= starScore2 ? 2 :
 				score <= starScore1 ? 1 : 0);
 	} else if (type === MODES.BLOCKS) {
-		return (score <= starScore3 ? 3 :
-			score <= starScore2 ? 2 :
-				score <= starScore1 ? 1 : 0);
+		return (score >= starScore3 ? 3 :
+			score >= starScore2 ? 2 :
+				score >= starScore1 ? 1 : 0);
 	}
 }
 
@@ -143,6 +143,9 @@ function endGame(moves, blocks) {
 		moveStarDifference = moveStars - savedMoveStars,
 		blockStarDifference = blockStars - savedBlockStars;
 	
+	console.log('Moves: ' + moves + ' | Blocks: ' + blocks);
+	console.log('Move\u2605: ' + moveStars + ' | Block\u2605: ' + blockStars);
+	
 	// Save the new score and update the UI if it is lower than the saved score.
 	if (typeof(savedMoves) === 'undefined' || moves < savedMoves) {
 		localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.MOVES] = moves;
@@ -160,11 +163,13 @@ function endGame(moves, blocks) {
 	// Feature the star count that is the greatest, or had the greatest
 	// improvement if star count is equal.  If all else is equal,
 	// feature the move star count.
-	var featuredMode = MODES.MOVES;
+	var featuredMode = MODES.MOVES,
+		featuredModeStars = moveStars;
 	if (blockStars > moveStars ||
 			(blockStars === moveStars &&
 				blockStarDifference > moveStarDifference)) {
 		featuredMode = MODES.BLOCKS;
+		featuredModeStars = blockStars;
 	}
 	
 	if (featuredMode === MODES.MOVES) {
@@ -173,20 +178,23 @@ function endGame(moves, blocks) {
 		document.getElementById('resultsScore').innerHTML = 'Blocks cleared: ' + blocks;
 	}
 	// Set up the big stars.
-	var resultsStars = views.results.elem.getElementsByClassName('star');
-	LEVELS[currentLevel].starScores[featuredMode].forEach(function (starScore, i) {
-		resultsStars[i].classList.remove('active');
-		if ((featuredMode === MODES.MOVES && moves <= starScore) ||
-				(featuredMode == MODES.BLOCKS && moves >= starScore)) {
+	var resultsStars = Array.from(views.results.elem.getElementsByClassName('star'));
+	resultsStars.forEach(function (resultsStar, i) {
+		resultsStar.classList.remove('active');
+		if (i < featuredModeStars) {
 			setTimeout(function () {
-				resultsStars[i].classList.add('active');
+				resultsStar.classList.add('active');
 			}, 150 * (i + 1));
 		}
 	});
 	
 	// Show full star and score display.
 	views.results.elem.querySelector('.stars').innerHTML =
-		getStarDisplaysHTML(moves, moveStars, blocks, blockStars);
+		getStarDisplaysHTML(
+			Math.min(moves, savedMoves),
+			Math.max(moveStars, savedMoveStars),
+			Math.max(blocks, savedBlocks),
+			Math.max(blockStars, savedBlockStars));
 	
 	views.game.openSubview(views.results);
 }
