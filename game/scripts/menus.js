@@ -6,7 +6,8 @@ var GAME_PREFIX = 'tetrescape-',
 		MOVES: 'moves',
 		BLOCKS: 'blocks'
 	},
-	BUTTON_SUFFIX = '-btn';
+	BUTTON_SUFFIX = '-btn',
+	MAX_MOVES = 999;
 
 var views,
 	currentLevel;
@@ -136,8 +137,8 @@ function endGame(moves, blocks) {
 	var levelButton = document.getElementById(LEVEL_PREFIX + currentLevel + BUTTON_SUFFIX),
 		moveStars = getStarRating(currentLevel, MODES.MOVES, moves),
 		blockStars = getStarRating(currentLevel, MODES.BLOCKS, blocks),
-		savedMoves = localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.MOVES],
-		savedBlocks = localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.BLOCKS],
+		savedMoves = localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.MOVES] || MAX_MOVES,
+		savedBlocks = localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.BLOCKS] || -1,
 		savedMoveStars = getStarRating(currentLevel, MODES.MOVES, savedMoves),
 		savedBlockStars = getStarRating(currentLevel, MODES.BLOCKS, savedBlocks),
 		moveStarDifference = moveStars - savedMoveStars,
@@ -147,10 +148,10 @@ function endGame(moves, blocks) {
 	console.log('Move\u2605: ' + moveStars + ' | Block\u2605: ' + blockStars);
 	
 	// Save the new score and update the UI if it is lower than the saved score.
-	if (typeof(savedMoves) === 'undefined' || moves < savedMoves) {
+	if (moves < savedMoves) {
 		localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.MOVES] = moves;
 	}
-	if (typeof(savedBlocks) === 'undefined' || blocks > savedBlocks) {
+	if (blocks > savedBlocks) {
 		localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.BLOCKS] = blocks;
 	}
 	
