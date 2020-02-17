@@ -9,13 +9,22 @@ var GAME_PREFIX = 'tetrescape-',
 	BUTTON_SUFFIX = '-btn';
 
 var views,
-	currentMode,
 	currentLevel;
 
 window.onload = function () {
+	// Create views.
+	views = {
+		title: new MenuView(document.getElementById('titleScreen')),
+		instructions: new View(document.getElementById('instructionsScreen')),
+		about: new View(document.getElementById('aboutScreen')),
+		levelSelect: new MenuView(document.getElementById('levelScreen')),
+		game: new GameView(document.getElementById('gameScreen')),
+		results: new MenuView(document.getElementById('resultsScreen'))
+	};
+	
 	// Enable the play button.
 	document.getElementById('playButton').onclick = function () {
-		this.view.openSubview(views.modeSelect);
+		this.view.openSubview(views.levelSelect);
 	};
 	
 	// Enable the instructions button.
@@ -26,16 +35,6 @@ window.onload = function () {
 	// Enable the about button.
 	document.getElementById('aboutButton').onclick = function () {
 		this.view.openSubview(views.about);
-	};
-	
-	// Enable the mode selection buttons.
-	document.getElementById('movesModeButton').dataset.mode = MODES.MOVES;
-	document.getElementById('blocksModeButton').dataset.mode = MODES.BLOCKS;
-	document.getElementById('movesModeButton').onclick =
-			document.getElementById('blocksModeButton').onclick = function () {
-		currentMode = this.dataset.mode;
-		populateLevelSelect();
-		this.view.openSubview(views.levelSelect);
 	};
 	
 	// Enable the results screen buttons.
@@ -50,18 +49,7 @@ window.onload = function () {
 	};
 	
 	// Populate the level select screen.
-	
-	
-	// Create views.
-	views = {
-		title: new MenuView(document.getElementById('titleScreen')),
-		instructions: new View(document.getElementById('instructionsScreen')),
-		about: new View(document.getElementById('aboutScreen')),
-		modeSelect: new MenuView(document.getElementById('modeScreen')),
-		levelSelect: new MenuView(document.getElementById('levelScreen')),
-		game: new GameView(document.getElementById('gameScreen')),
-		results: new MenuView(document.getElementById('resultsScreen'))
-	};
+	populateLevelSelect();
 	
 	// Open the title screen.
 	views.title.open();
