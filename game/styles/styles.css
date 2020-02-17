@@ -210,7 +210,15 @@ button.backButton {
 	#levelScreen .menu button {
 		width: 192px;
 		height: 192px;
-	}		
+		padding: 16px 12px;
+	}
+		#levelScreen .menu button .title {
+			margin-top: 0.25em;
+			margin-bottom: -0.25em;
+		}
+		#levelScreen .menu button .number {
+			margin-bottom: 0;
+		}
 }
 
 /* Game screen styles */
