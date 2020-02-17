@@ -53,6 +53,7 @@ GameView.prototype.startGame = function (level) {
 GameView.prototype.close = function () {
 	// End the game.
 	if (this._game) {
+		this._game.destroy();
 		delete this._game;
 	}
 	
