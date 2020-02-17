@@ -9,8 +9,6 @@ var GAME_PREFIX = 'tetrescape-',
 	BUTTON_SUFFIX = '-btn';
 
 var views,
-	canvas,
-	game,
 	currentMode,
 	currentLevel;
 
@@ -40,11 +38,6 @@ window.onload = function () {
 		this.view.openSubview(views.levelSelect);
 	};
 	
-	// Enable the game reset button.
-	document.getElementById('retryButton').onclick = function () {
-		game.reload();
-	};
-	
 	// Enable the results screen buttons.
 	document.getElementById('resultsBackButton').onclick = function () {
 		this.view.close();
@@ -66,29 +59,14 @@ window.onload = function () {
 		about: new View(document.getElementById('aboutScreen')),
 		modeSelect: new MenuView(document.getElementById('modeScreen')),
 		levelSelect: new MenuView(document.getElementById('levelScreen')),
-		game: new View(document.getElementById('gameScreen')),
+		game: new GameView(document.getElementById('gameScreen')),
 		results: new MenuView(document.getElementById('resultsScreen'))
 	};
 	
-	// Get the game view's app bar.
-	views.game.appBar = views.game.elem.getElementsByClassName('appBar')[0];
-	
 	// Open the title screen.
 	views.title.open();
-	
-	// Ensure the canvas always fits the view.
-	canvas = document.getElementById('canvas');
-	window.onresize = handleResize;
-	handleResize();
 };
 
-function handleResize() {
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight - views.game.appBar.offsetHeight;
-	if (game) {
-		game.rescale();
-	}
-}
 
 function populateLevelSelect() {
 	var levelScreenMenu = views.levelSelect.elem.getElementsByClassName('menu')[0];
@@ -145,18 +123,13 @@ function populateLevelSelect() {
 		levelButton.view = views.levelSelect;
 		levelButton.onclick = function () {
 			this.view.openSubview(views.game);
-			startGame(parseInt(this.dataset.level));
+			views.game.startGame(parseInt(this.dataset.level));
 		};
 		
 		// Add the new button to the menu.
 		levelScreenMenu.appendChild(levelButton);
 		views.levelSelect.inputs.push(levelButton);
 	});
-}
-
-function startGame(level) {
-	currentLevel = level;
-	game = new Game(canvas, LEVELS[level], endGame);
 }
 
 function endGame(moves, blocks) {
@@ -172,7 +145,6 @@ function endGame(moves, blocks) {
 		localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.BLOCKS] = blocks;
 	}
 	populateLevelSelect();
-	game = undefined;
 	
 	// Open the results screen.
 	document.getElementById('resultsTitle').innerHTML = 'Level ' + (currentLevel + 1) + ' complete!';
