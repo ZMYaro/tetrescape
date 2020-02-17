@@ -161,16 +161,20 @@ button.backButton {
 			margin-right: auto;
 		}
 }
- 
- /* Title screen styles */
- #titleScreen {
+
+/* Title screen styles */
+#titleScreen {
 	background-color: #0277bd;
- }
- #titleScreen .menu button {
+}
+#titleScreen .menu button {
 	width: 184px;
 	padding-left: 16px;
 	padding-right: 16px;
 	font-size: 120%;
+}
+#title {
+	max-width: 100%;
+	max-height: 50%;
 }
 
 /* Level select screen styles */
