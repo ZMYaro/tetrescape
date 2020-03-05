@@ -75,14 +75,7 @@ Game.prototype = {
 		
 		// Check whether the player has reached the goal.
 		if (this._player.x === this._goal.x && this._player.y === this._goal.y) {
-			// Play a victory sound.
-			document.getElementById('winSound').play();
-			// End the game.
-			if (currentMode === MODES.MOVES) {
-				this._endCallback(this._moves);
-			} else if (currentMode === MODES.BLOCKS) {
-				this._endCallback(this._blocksCleared);
-			}
+			this._winGame();
 			// End the loop.
 			return;
 		}
@@ -100,11 +93,32 @@ Game.prototype = {
 	 * Update the score display on the app bar.
 	 */
 	_updateScore: function () {
-		if (currentMode === MODES.MOVES) {
-			document.getElementById('gameScore').innerHTML = this._moves + ' move' + (this._moves === 1 ? '' : 's');
-		} else if (currentMode === MODES.BLOCKS) {
-			document.getElementById('gameScore').innerHTML = this._blocksCleared + ' block' + (this._blocksCleared === 1 ? '' : 's') + ' cleared';
-		}
+		document.getElementById('movesDisplay').innerHTML = this._moves;
+		document.getElementById('blocksDisplay').innerHTML = this._blocksCleared;
+	},
+	
+	/**
+	 * End the game.
+	 * @private
+	 */
+	_winGame: function () {
+		// Play a victory sound.
+		document.getElementById('winSound').play();
+		
+		// Remove event listeners.
+		this._im.disable();
+		
+		// Go to the end screen.
+		this._endCallback(this._moves, this._blocksCleared);
+	},
+	
+	/**
+	 * Close and clean up the game.
+	 */
+	destroy: function () {
+		// Remove event listeners.
+		this._im.disable();
+		delete this._im;
 	},
 	
 	/**

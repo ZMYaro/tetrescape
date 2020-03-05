@@ -19,8 +19,7 @@ function InputManager(callbacks) {
 	this._boundHandleSwipe = this._handleSwipe.bind(this);
 	
 	// Set event listeners.
-	window.addEventListener('keydown', this._boundHandleKeyDown, false);
-	this._hammer.on('swipe', this._boundHandleSwipe);
+	this.enable();
 }
 
 // Initialize static constants.
@@ -43,7 +42,7 @@ InputManager.UP_KEYS = [
 	87, // W
 	188, // Comma
 ];
-InputManager.RETRY_KEY = 82;
+InputManager.RETRY_KEY = 82; // R
 
 InputManager.prototype = {
 	/**
@@ -85,6 +84,22 @@ InputManager.prototype = {
 				this._callbacks.up();
 				break;
 		}
+	},
+	
+	/**
+	 * Disable event listeners.
+	 */
+	disable: function () {
+		window.removeEventListener('keydown', this._boundHandleKeyDown, false);
+		this._hammer.off('swipe', this._boundHandleSwipe);
+	},
+	
+	/**
+	 * Enable event listeners.
+	 */
+	enable: function () {
+		window.addEventListener('keydown', this._boundHandleKeyDown, false);
+		this._hammer.on('swipe', this._boundHandleSwipe);
 	}
 };
 

@@ -1,23 +1,31 @@
 'use strict';
 
 var GAME_PREFIX = 'tetrescape-',
-	LEVEL_PREFIX = 'lvl-',
+	LEVEL_PREFIX = 'lvl',
 	MODES = {
 		MOVES: 'moves',
 		BLOCKS: 'blocks'
 	},
-	BUTTON_SUFFIX = '-btn';
+	BUTTON_SUFFIX = '-btn',
+	MAX_MOVES = 999;
 
 var views,
-	canvas,
-	game,
-	currentMode,
 	currentLevel;
 
 window.onload = function () {
+	// Create views.
+	views = {
+		title: new MenuView(document.getElementById('titleScreen')),
+		instructions: new View(document.getElementById('instructionsScreen')),
+		about: new View(document.getElementById('aboutScreen')),
+		levelSelect: new MenuView(document.getElementById('levelScreen')),
+		game: new GameView(document.getElementById('gameScreen')),
+		results: new MenuView(document.getElementById('resultsScreen'))
+	};
+	
 	// Enable the play button.
 	document.getElementById('playButton').onclick = function () {
-		this.view.openSubview(views.modeSelect);
+		this.view.openSubview(views.levelSelect);
 	};
 	
 	// Enable the instructions button.
@@ -28,21 +36,6 @@ window.onload = function () {
 	// Enable the about button.
 	document.getElementById('aboutButton').onclick = function () {
 		this.view.openSubview(views.about);
-	};
-	
-	// Enable the mode selection buttons.
-	document.getElementById('movesModeButton').dataset.mode = MODES.MOVES;
-	document.getElementById('blocksModeButton').dataset.mode = MODES.BLOCKS;
-	document.getElementById('movesModeButton').onclick =
-			document.getElementById('blocksModeButton').onclick = function () {
-		currentMode = this.dataset.mode;
-		populateLevelSelect();
-		this.view.openSubview(views.levelSelect);
-	};
-	
-	// Enable the game reset button.
-	document.getElementById('retryButton').onclick = function () {
-		game.reload();
 	};
 	
 	// Enable the results screen buttons.
@@ -57,37 +50,46 @@ window.onload = function () {
 	};
 	
 	// Populate the level select screen.
-	
-	
-	// Create views.
-	views = {
-		title: new MenuView(document.getElementById('titleScreen')),
-		instructions: new View(document.getElementById('instructionsScreen')),
-		about: new View(document.getElementById('aboutScreen')),
-		modeSelect: new MenuView(document.getElementById('modeScreen')),
-		levelSelect: new MenuView(document.getElementById('levelScreen')),
-		game: new View(document.getElementById('gameScreen')),
-		results: new MenuView(document.getElementById('resultsScreen'))
-	};
-	
-	// Get the game view's app bar.
-	views.game.appBar = views.game.elem.getElementsByClassName('appBar')[0];
+	populateLevelSelect();
 	
 	// Open the title screen.
 	views.title.open();
-	
-	// Ensure the canvas always fits the view.
-	canvas = document.getElementById('canvas');
-	window.onresize = handleResize;
-	handleResize();
 };
 
-function handleResize() {
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight - views.game.appBar.offsetHeight;
-	if (game) {
-		game.rescale();
+function getStarRating(level, type, score) {
+	var level = LEVELS[level],
+		starScore1 = level.starScores[type][0],
+		starScore2 = level.starScores[type][1],
+		starScore3 = level.starScores[type][2];
+	
+	if (type === MODES.MOVES) {
+		return (score <= starScore3 ? 3 :
+			score <= starScore2 ? 2 :
+				score <= starScore1 ? 1 : 0);
+	} else if (type === MODES.BLOCKS) {
+		return (score >= starScore3 ? 3 :
+			score >= starScore2 ? 2 :
+				score >= starScore1 ? 1 : 0);
 	}
+}
+
+function getStarDisplayHTML(mode, score, stars) {
+	var modeLabel = (mode === MODES.MOVES ? 'Fewest moves' : 'Most blocks cleared');
+	return '<span title="Fewest moves">' +
+		'<svg role="img" aria-label="' + modeLabel + '">' +
+			'<use xlink:href="images/icons/' + mode + '.svg#icon" href="images/icons/' + mode + '.svg#icon"></use>' +
+		'</svg>' +
+		score +
+		'<svg role="img" aria-label="' + stars + ' stars.">' +
+			'<use xlink:href="images/icons/' + stars + 'star.svg#icon" href="images/icons/' + stars + 'star.svg#icon"></use>' +
+		'</svg>' +
+	'</span>';
+}
+
+function getStarDisplaysHTML(moves, moveStars, blocks, blockStars) {
+	return getStarDisplayHTML(MODES.MOVES, moves, moveStars) +
+		'&nbsp;&nbsp;&middot;&nbsp;&nbsp;' +
+		getStarDisplayHTML(MODES.BLOCKS, blocks, blockStars);
 }
 
 function populateLevelSelect() {
@@ -99,40 +101,30 @@ function populateLevelSelect() {
 	
 	LEVELS.forEach(function (level, i) {
 		var levelButton = document.createElement('button'),
-			savedScore = localStorage[GAME_PREFIX + LEVEL_PREFIX + i + '-' + currentMode];
+			moves = localStorage[GAME_PREFIX + LEVEL_PREFIX + i + MODES.MOVES],
+			blocks = localStorage[GAME_PREFIX + LEVEL_PREFIX + i + MODES.BLOCKS],
+			moveStars = getStarRating(i, MODES.MOVES, moves),
+			blockStars = getStarRating(i, MODES.BLOCKS, blocks);
 		levelButton.id = LEVEL_PREFIX + i + BUTTON_SUFFIX;
 		
-		var buttonHTML = '<div class=\"title\">Level ' + (i + 1) + '</div>' +
-			'<div class=\"score\">';
-		if (savedScore) {
-			if (currentMode === MODES.MOVES) {
-				buttonHTML += 'Least moves: ' + savedScore;
-			} else if (currentMode === MODES.BLOCKS) {
-				buttonHTML += 'Most blocks cleared: ' + savedScore;
-			}
-		} else {
-			buttonHTML += 'Not attempted';
-		}
-		buttonHTML += '</div>' +
+		var buttonHTML =
+			'<div class=\"title\">Level</div>' +
+			'<div class=\"number\">' + (i + 1) + '</div>' +
 			'<div class=\"stars\">';
-		level.starScores[currentMode].forEach(function (starScore) {
-			if ((typeof savedScore !== 'undefined') && (
-					(currentMode === MODES.MOVES && savedScore <= starScore) ||
-					(currentMode === MODES.BLOCKS && savedScore >= starScore))) {
-				buttonHTML += '&#x2605;';
-			} else {
-				buttonHTML += '&#x2606;';
-			}
-		});
+		if (typeof(moves) === 'undefined' && typeof(blocks) === 'undefined') {
+			buttonHTML += 'Not attempted';
+		} else {
+			buttonHTML += getStarDisplaysHTML(moves, moveStars, blocks, blockStars);
+		}
 		buttonHTML += '</div>';
-		levelButton.innerHTML = buttonHTML;
 		
+		levelButton.innerHTML = buttonHTML;
 		levelButton.className = "z1";
 		levelButton.dataset.level = i;
 		levelButton.view = views.levelSelect;
 		levelButton.onclick = function () {
 			this.view.openSubview(views.game);
-			startGame(this.dataset.level);
+			views.game.startGame(parseInt(this.dataset.level));
 		};
 		
 		// Add the new button to the menu.
@@ -141,42 +133,69 @@ function populateLevelSelect() {
 	});
 }
 
-function startGame(level) {
-	currentLevel = level;
-	game = new Game(canvas, LEVELS[level], endGame);
-}
-
-function endGame(score) {
+function endGame(moves, blocks) {
 	var levelButton = document.getElementById(LEVEL_PREFIX + currentLevel + BUTTON_SUFFIX),
-		savedScore = localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + '-' + currentMode];
+		moveStars = getStarRating(currentLevel, MODES.MOVES, moves),
+		blockStars = getStarRating(currentLevel, MODES.BLOCKS, blocks),
+		savedMoves = localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.MOVES] || MAX_MOVES,
+		savedBlocks = localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.BLOCKS] || -1,
+		savedMoveStars = getStarRating(currentLevel, MODES.MOVES, savedMoves),
+		savedBlockStars = getStarRating(currentLevel, MODES.BLOCKS, savedBlocks),
+		moveStarDifference = moveStars - savedMoveStars,
+		blockStarDifference = blockStars - savedBlockStars;
+	
+	console.log('Moves: ' + moves + ' | Blocks: ' + blocks);
+	console.log('Move\u2605: ' + moveStars + ' | Block\u2605: ' + blockStars);
 	
 	// Save the new score and update the UI if it is lower than the saved score.
-	if (typeof score !== 'undefined' &&
-			((typeof savedScore === 'undefined') || (
-				(currentMode === MODES.MOVES && score < savedScore) ||
-				(currentMode === MODES.BLOCKS && score > savedScore)))) {
-		localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + '-' + currentMode] = score;
-		populateLevelSelect();
+	if (moves < savedMoves) {
+		localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.MOVES] = moves;
 	}
-	game = undefined;
+	if (blocks > savedBlocks) {
+		localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.BLOCKS] = blocks;
+	}
+	
+	// Update the level select screen with the new values.
+	populateLevelSelect();
 	
 	// Open the results screen.
-	document.getElementById('resultsTitle').innerHTML = 'Level ' + currentLevel + ' complete!';
-	if (currentMode === MODES.MOVES) {
-		document.getElementById('resultsScore').innerHTML = 'Moves: ' + score;
-	} else if (currentMode === MODES.BLOCKS) {
-		document.getElementById('resultsScore').innerHTML = 'Blocks cleared: ' + score;
+	document.getElementById('resultsTitle').innerHTML = 'Level ' + (currentLevel + 1) + ' complete!';
+	
+	// Feature the star count that is the greatest, or had the greatest
+	// improvement if star count is equal.  If all else is equal,
+	// feature the move star count.
+	var featuredMode = MODES.MOVES,
+		featuredModeStars = moveStars;
+	if (blockStars > moveStars ||
+			(blockStars === moveStars &&
+				blockStarDifference > moveStarDifference)) {
+		featuredMode = MODES.BLOCKS;
+		featuredModeStars = blockStars;
 	}
-	// Set the number of stars awarded.
-	var resultsStars = views.results.elem.getElementsByClassName('star');
-	LEVELS[currentLevel].starScores[currentMode].forEach(function (starScore, i) {
-		resultsStars[i].classList.remove('active');
-		if ((currentMode === MODES.MOVES && score <= starScore) ||
-				(currentMode == MODES.BLOCKS && score >= starScore)) {
+	
+	if (featuredMode === MODES.MOVES) {
+		document.getElementById('resultsScore').innerHTML = 'Moves: ' + moves;
+	} else if (featuredMode === MODES.BLOCKS) {
+		document.getElementById('resultsScore').innerHTML = 'Blocks cleared: ' + blocks;
+	}
+	// Set up the big stars.
+	var resultsStars = Array.from(views.results.elem.getElementsByClassName('star'));
+	resultsStars.forEach(function (resultsStar, i) {
+		resultsStar.classList.remove('active');
+		if (i < featuredModeStars) {
 			setTimeout(function () {
-				resultsStars[i].classList.add('active');
+				resultsStar.classList.add('active');
 			}, 150 * (i + 1));
 		}
 	});
+	
+	// Show full star and score display.
+	views.results.elem.querySelector('.stars').innerHTML =
+		getStarDisplaysHTML(
+			Math.min(moves, savedMoves),
+			Math.max(moveStars, savedMoveStars),
+			Math.max(blocks, savedBlocks),
+			Math.max(blockStars, savedBlockStars));
+	
 	views.game.openSubview(views.results);
 }
