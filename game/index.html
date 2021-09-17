@@ -15,7 +15,7 @@
 		
 		<!-- Style sheets -->
 		<link rel="stylesheet" type="text/css" href="styles/lib/material-elements.css" />
-		<link rel="stylesheet" type="text/css" href="styles/lib/material-widgets.css" />
+		<!--<link rel="stylesheet" type="text/css" href="styles/lib/material-widgets.css" />-->
 		<link rel="stylesheet" type="text/css" href="styles/lib/material-depth.css" />
 		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
 		<link rel="stylesheet" type="text/css" href="styles/animations.css" />
@@ -61,12 +61,8 @@
 		</div>
 		
 		<div class="view" id="instructionsScreen">
-			<header role="toolbar" class="appBar z2">
-				<button class="backButton" title="Back (Esc)">
-					<svg role="img" aria-label="Back">
-						<use xlink:href="images/icons/back.svg#icon" href="images/icons/back.svg#icon"></use>
-					</svg>
-				</button>
+			<header role="toolbar" class="top-bar z2">
+				<button class="back-button" aria-label="Back" title="Back (Esc)"></button>
 				Instructions
 			</header>
 			<br />
@@ -86,12 +82,8 @@
 		</div>
 		
 		<div class="view" id="aboutScreen">
-			<header role="toolbar" class="appBar z2">
-				<button class="backButton" title="Back (Esc)">
-					<svg role="img" aria-label="Back">
-						<use xlink:href="images/icons/back.svg#icon" href="images/icons/back.svg#icon"></use>
-					</svg>
-				</button>
+			<header role="toolbar" class="top-bar z2">
+				<button class="back-button" aria-label="Back" title="Back (Esc)"></button>
 				About TetrEscape
 			</header>
 			<br /><br /><br />
@@ -103,20 +95,16 @@
 		</div>
 		
 		<div class="view" id="levelScreen">
-			<header role="toolbar" class="appBar z2">
-				<button class="backButton" title="Back (Esc)">
-					<svg role="img" aria-label="Back">
-						<use xlink:href="images/icons/back.svg#icon" href="images/icons/back.svg#icon"></use>
-					</svg>
-				</button>
+			<header role="toolbar" class="top-bar z2">
+				<button class="back-button" aria-label="Back" title="Back (Esc)"></button>
 				Select level
 			</header>
 			<div class="menu"></div>
 		</div>
 		
 		<div class="view" id="gameScreen">
-			<header role="toolbar" class="appBar z1">
-				<button class="backButton" title="Quit (Esc)">
+			<header role="toolbar" class="top-bar z1">
+				<button class="back-button" aria-label="Quit" title="Quit (Esc)">
 					<svg role="img" aria-label="Quit">
 						<use xlink:href="images/icons/close.svg#icon" href="images/icons/close.svg#icon"></use>
 					</svg>
@@ -136,11 +124,7 @@
 						<span id="blocksDisplay"></span>
 					</span>
 					|
-					<button id="retryButton" title="Retry (R)">
-						<svg role="img" aria-label="Retry">
-							<use xlink:href="images/icons/restart.svg#icon" href="images/icons/restart.svg#icon"></use>
-						</svg>
-					</button>
+					<button id="restart-button" aria-label="Retry" title="Retry (R)"></button>
 				</span>
 			</header>
 			<canvas id="canvas" width="640" height="480"></canvas>

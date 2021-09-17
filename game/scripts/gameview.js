@@ -10,10 +10,10 @@ function GameView(elem, parent) {
 	View.call(this, elem, parent);
 	
 	// Get the view's app bar.
-	this.appBar = this.elem.querySelector('.appBar');
+	this.topBar = this.elem.querySelector('.top-bar');
 	
 	// Enable the game reset button.
-	this.appBar.querySelector('#retryButton').onclick = (function () {
+	this.topBar.querySelector('#restart-button').onclick = (function () {
 		this._game.reload();
 	}).bind(this);
 	
@@ -32,7 +32,7 @@ GameView.prototype = Object.create(View.prototype);
  */
 GameView.prototype._handleResize = function () {
 	this._canvas.width = window.innerWidth;
-	this._canvas.height = window.innerHeight - this.appBar.offsetHeight;
+	this._canvas.height = window.innerHeight - this.topBar.offsetHeight;
 	if (this._game) {
 		this._game.rescale();
 	}

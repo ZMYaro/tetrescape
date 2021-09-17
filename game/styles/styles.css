@@ -21,24 +21,62 @@ h2 {
 	margin-bottom: 0;
 }
 
-.appBar {
+.top-bar {
 	position: absolute;
+	box-sizing: border-box;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 3rem;
+	padding: 0.75rem;
 	margin: 0;
 	
+	font-size: 1.25rem;
 	text-align: left;
 	
-	background-color: #0277bd;
+	background-color: #525250;
 }
-	.appBar svg {
+	.top-bar button {
+		width: 3rem;
+		height: 3rem;
+		margin: -0.75rem 0.25rem;
+		vertical-align: top;
+		
+		box-shadow:
+			 3px 0 1px -1px rgba(255, 255, 255, 0.2),
+			-3px 0 1px -1px rgba(0, 0, 0, 0.2);
+		
+		border-radius: 0;
+		background-size: 9rem 3rem;
+	}
+		.top-bar button:hover,
+		.top-bar button:focus {
+			background-position-x: -3rem;
+			filter: brightness(1.05);
+		}
+		.top-bar button:active,
+		.top-bar button.active {
+			background-position-x: -6rem;
+			box-shadow:
+				 3px 0 1px -1px rgba(255, 255, 255, 0.2),
+				-3px 0 1px -1px rgba(0, 0, 0, 0.2),
+				inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+		}
+	.top-bar svg {
 		width: 24px;
 		height: 24px;
 		fill: #ffffff;
 	}
 
-button.backButton {
-	margin-left: -6px;
+button.back-button {
+	background-image: url('../images/buttons/back.jpg');
+	margin-left: -0.75rem;
 }
-	
+button#restart-button {
+	background-image: url('../images/buttons/restart.jpg');
+	margin-right: -0.75rem;
+}
+
 
 .view {
 	position: fixed;
@@ -335,9 +373,6 @@ button.backButton {
 		content: '\2605';
 	}
 
-#retryButton {
-	margin-right: -6px;
-}
 #gameScore {
 	float: right;
 	margin-right: 8px;

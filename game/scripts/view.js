@@ -14,7 +14,7 @@ function View(elem, parent) {
 	this.elem = elem;
 	
 	// Give the back button (if any) a reference to its containing view.
-	var backButton = elem.getElementsByClassName('backButton')[0];
+	var backButton = elem.getElementsByClassName('back-button')[0];
 	if (backButton) {
 		backButton.view = this;
 		backButton.onclick = function () {
