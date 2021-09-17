@@ -72,6 +72,9 @@ button.back-button {
 	background-image: url('../images/buttons/back.jpg');
 	margin-left: -0.75rem;
 }
+	button.back-button.close-button {
+		background-image: url('../images/buttons/close.jpg');
+	}
 button#restart-button {
 	background-image: url('../images/buttons/restart.jpg');
 	margin-right: -0.75rem;
