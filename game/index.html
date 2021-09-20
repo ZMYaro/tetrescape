@@ -105,22 +105,14 @@
 		<div class="view" id="gameScreen">
 			<header role="toolbar" class="top-bar z1">
 				<button class="back-button close-button" aria-label="Quit" title="Quit (Esc)"></button>
-				<span style="float: right;">
-					<span class="scoreDisplay" title="Moves">
-						<svg role="img" aria-label="Moves">
-							<use xlink:href="images/icons/moves.svg#icon" href="images/icons/moves.svg#icon"></use>
-						</svg>
-						<span id="movesDisplay"></span>
-					</span>
-					|
-					<span class="scoreDisplay"title="Blocks cleared">
-						<svg role="img" aria-label="Blocks cleared">
-							<use xlink:href="images/icons/blocks.svg#icon" href="images/icons/blocks.svg#icon"></use>
-						</svg>
-						<span id="blocksDisplay"></span>
-					</span>
-					|
-					<button id="restart-button" aria-label="Retry" title="Retry (R)"></button>
+				<button id="restart-button" aria-label="Retry" title="Retry (R)"></button>
+				<span class="score-display" title="Moves">
+					<img alt="Moves" src="images/icons/moves.png" class="icon" />
+					<span id="movesDisplay"></span>
+				</span><!--
+				--><span class="score-display"title="Blocks cleared">
+					<img alt="Blocks cleared" src="images/icons/blocks.png" class="icon" />
+					<span id="blocksDisplay"></span>
 				</span>
 			</header>
 			<canvas id="canvas" width="640" height="480"></canvas>

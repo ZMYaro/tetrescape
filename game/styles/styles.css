@@ -22,8 +22,9 @@ h2 {
 }
 
 .icon {
-	width: 24px;
-	height: 24px;
+	width: 1.5rem;
+	height: 1.5rem;
+	margin: -4px 0;
 }
 
 .top-bar {
@@ -67,11 +68,6 @@ h2 {
 				-3px 0 1px -1px rgba(0, 0, 0, 0.2),
 				inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
 		}
-	.top-bar svg {
-		width: 24px;
-		height: 24px;
-		fill: #ffffff;
-	}
 
 button.back-button {
 	background-image: url('../images/buttons/back.jpg');
@@ -244,9 +240,6 @@ button#restart-button {
 .stars {
 	font-size: 125%;
 }
-	.stars .icon {
-		margin: -4px 0;
-	}
 	
 @media (orientation: portrait) {
 	#levelScreen .menu button {
@@ -269,15 +262,23 @@ button#restart-button {
 }
 
 /* Game screen styles */
-.scoreDisplay {
-	display: inline-block;
-	margin: -16px 0;
-	padding: 8px 6px;
+#gameScreen .top-bar {
+	text-align: center;
 }
-	.scoreDisplay img,
-	.scoreDisplay [role="img"] {
-		margin: -4px 0;
+	#gameScreen .top-bar .back-button {
+		float: left;
 	}
+	#gameScreen .top-bar #restart-button {
+		float: right;
+	}
+.score-display {
+	display: inline-block;
+	text-align: left;
+	min-width: 4rem;
+	margin: -1rem 0;
+	padding: 0.5rem 0.125rem; /* 8px 2px default */
+	padding-left: 0.25rem; /* 4px default; shift right so it looks less unbalanced */
+}
 #controlHint {
 	position: fixed;
 	right: 10%;
