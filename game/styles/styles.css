@@ -21,6 +21,11 @@ h2 {
 	margin-bottom: 0;
 }
 
+.icon {
+	width: 24px;
+	height: 24px;
+}
+
 .top-bar {
 	position: absolute;
 	box-sizing: border-box;
@@ -239,11 +244,8 @@ button#restart-button {
 .stars {
 	font-size: 125%;
 }
-	.stars svg {
-		width: 24px;
-		height: 24px;
-		margin: -5px 0;
-		fill: #000000;
+	.stars .icon {
+		margin: -4px 0;
 	}
 	
 @media (orientation: portrait) {
@@ -305,10 +307,11 @@ button#restart-button {
 
 
 /* Results screen styles */
-#resultsScreen,
-#resultsScreen .appBar {
-	background-color: #fafafa;
-	color: black;
+#resultsScreen {
+	background-color: #4b4a4e;
+	background-image: url('../images/stone_bg.jpg');
+	background-size: cover;
+	color: white;
 }
 
 .view#resultsScreen {

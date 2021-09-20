@@ -76,13 +76,9 @@ function getStarRating(level, type, score) {
 function getStarDisplayHTML(mode, score, stars) {
 	var modeLabel = (mode === MODES.MOVES ? 'Fewest moves' : 'Most blocks cleared');
 	return '<span title="Fewest moves">' +
-		'<svg role="img" aria-label="' + modeLabel + '">' +
-			'<use xlink:href="images/icons/' + mode + '.svg#icon" href="images/icons/' + mode + '.svg#icon"></use>' +
-		'</svg>' +
+		'<img alt="' + modeLabel + '" src="images/icons/' + mode + '.png" class="icon" />' +
 		score +
-		'<svg role="img" aria-label="' + stars + ' stars.">' +
-			'<use xlink:href="images/icons/' + stars + 'star.svg#icon" href="images/icons/' + stars + 'star.svg#icon"></use>' +
-		'</svg>' +
+		'<img alt="' + stars + ' stars." src="images/icons/' + stars + 'star.png" class="icon" />' +
 	'</span>';
 }
 
