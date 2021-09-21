@@ -39,7 +39,7 @@ window.onload = function () {
 	};
 	
 	// Enable the results screen buttons.
-	document.getElementById('resultsBackButton').onclick = function () {
+	document.getElementById('results-back-button').onclick = function () {
 		this.view.close();
 		views.game.close();
 		
