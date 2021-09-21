@@ -35,6 +35,7 @@ button {
 	outline: 0 none;
 	background-color: #4b4a4e;
 	color: inherit;
+	cursor: pointer;
 }
 
 .icon {
@@ -250,8 +251,9 @@ button {
 
 /* Level select screen styles */
 #levelScreen .menu button {
-	width: 256px;
-	height: 256px;
+	width: 12rem; /* 192px default */
+	height: 12rem;
+	padding: 1rem 0.75rem; /* 16px 12px default */
 	margin: 48px 32px;
 	font-size: 100%;
 	
@@ -259,12 +261,11 @@ button {
 	background-size: contain;
 }
 	#levelScreen .menu button .title {
-		font-size: 200%;
-		margin-top: 0.5em;
+		font-size: 175%;
+		margin-bottom: -0.25rem;
 	}
 	#levelScreen .menu button .number {
-		font-size: 500%;
-		margin-bottom: 0.25em;
+		font-size: 450%;
 	}
 	#levelScreen .menu button .score {
 		font-size: 100%;
@@ -278,18 +279,21 @@ button {
 		margin: 48px auto;
 	}
 }
-@media (max-width: 500px), (max-height: 500px) {
+@media (min-width: 500px) and (min-height: 500px) {
 	#levelScreen .menu button {
-		width: 192px;
-		height: 192px;
-		padding: 16px 12px;
+		width: 16rem; /* 256px default */
+		height: 16rem;
 	}
 		#levelScreen .menu button .title {
-			margin-top: 0.25em;
-			margin-bottom: -0.25em;
+			font-size: 200%;
+			margin-bottom: 0;
 		}
 		#levelScreen .menu button .number {
-			margin-bottom: 0;
+			font-size: 500%;
+		}
+		#levelScreen .menu button .stars {
+			margin-top: 0.5rem;
+			margin-bottom: 0.25rem;
 		}
 }
 
