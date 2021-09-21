@@ -355,25 +355,12 @@ button {
 }
 
 .view#resultsScreen {
-	-webkit-border-radius: 100%;
-	   -moz-border-radius: 100%;
-	        border-radius: 100%;
-	-webkit-transform: scale(0);
-	   -moz-transform: scale(0);
-	    -ms-transform: scale(0);
-	     -o-transform: scale(0);
-	        transform: scale(0);
+	border-radius: 100%;
+	transform: scale(0);
 }
 	.view#resultsScreen.active {
-		-webkit-border-radius: 0;
-		   -moz-border-radius: 0;
-		        border-radius: 0;
-		
-		-webkit-transform: scale(1);
-		   -moz-transform: scale(1);
-		    -ms-transform: scale(1);
-		     -o-transform: scale(1);
-		        transform: scale(1);
+		border-radius: 0;
+		transform: scale(1);
 	}
 
 #resultsScreen .star {
@@ -381,43 +368,36 @@ button {
 	width: 64px;
 	height: 64px;
 	
-	-webkit-border-radius: 50%;
-	   -moz-border-radius: 50%;
-	        border-radius: 50%;
-	
-	-webkit-transform: scale(1);
-	   -moz-transform: scale(1);
-	    -ms-transform: scale(1);
-	     -o-transform: scale(1);
-	        transform: scale(1);
+	border-radius: 50%;
+	transform: scale(1);
 }
 	#resultsScreen .star::before {
 		content: '\2606';
 		display: block;
 		
-		font-size: 64px;
 		position: relative;
 		top: -13px;
+		font-size: 64px;
+		color: #e5e1d3;
 		
-		text-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+		text-shadow:
+			-1.5px -1.5px 1.5px rgba(0, 0, 0, 0.7),
+			1.5px 1.5px 1.5px rgba(255, 255, 255, 0.25);
 	}
-#resultsScreen .star.active {
-	-webkit-transform: scale(1.2);
-	   -moz-transform: scale(1.2);
-	    -ms-transform: scale(1.2);
-	     -o-transform: scale(1.2);
-	        transform: scale(1.2);
-	
-	-webkit-animation-name: starRipple;
-	   -moz-animation-name: starRipple;
-	        animation-name: starRipple;
-	-webkit-animation-duration: 0.25s;
-	   -moz-animation-duration: 0.25s;
-	        animation-duration: 0.25s;
-}
-	#resultsScreen .star.active::before {
-		content: '\2605';
+	#resultsScreen .star.active {
+		transform: scale(1.2);
+		
+		animation-name: star-ripple;
+		animation-duration: 0.25s;
+		animation-timing-function: limit;
 	}
+		#resultsScreen .star.active::before {
+			content: '\2605';
+			color: #c7c7d9;
+			text-shadow:
+				-1.5px -1.5px 1.5px rgba(0, 0, 0, 0.55),
+				1.5px 1.5px 1.5px rgba(255, 255, 255, 0.25);
+		}
 
 #gameScore {
 	float: right;

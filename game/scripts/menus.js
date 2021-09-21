@@ -181,7 +181,7 @@ function endGame(moves, blocks) {
 		if (i < featuredModeStars) {
 			setTimeout(function () {
 				resultsStar.classList.add('active');
-			}, 150 * (i + 1));
+			}, 100 * (i + 1));
 		}
 	});
 	
