@@ -355,7 +355,7 @@ button {
 	padding: 0.5rem 0.125rem; /* 8px 2px default */
 	padding-left: 0.25rem; /* 4px default; shift right so it looks less unbalanced */
 }
-#controlHint {
+#control-hint {
 	position: fixed;
 	right: 10%;
 	top: 50%;
@@ -363,23 +363,7 @@ button {
 	
 	animation-duration: 1s;
 	animation-iteration-count: infinite;
-	animation-name: controlHintLoop;
-}
-@keyframes controlHintLoop {
-	0% {
-		opacity: 0;
-		transform: transateY(50%);
-	}
-	30% {
-		opacity: 1;
-	}
-	80% {
-		opacity: 1;
-	}
-	100% {
-		opacity: 0;
-		transform: translateY(-75%);
-	}
+	animation-name: control-hint-loop;
 }
 
 

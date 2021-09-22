@@ -47,7 +47,7 @@ GameView.prototype.startGame = function (level) {
 	this._game = new Game(this._canvas, LEVELS[level], endGame);
 	
 	// Show the control hint on the first level.
-	this.elem.querySelector('#controlHint').style.display = (level === 0) ? 'block' : 'none';
+	this.elem.querySelector('#control-hint').style.display = (level === 0) ? 'block' : 'none';
 };
 
 /**
