@@ -89,14 +89,15 @@ function getStarDisplaysHTML(moves, moveStars, blocks, blockStars) {
 }
 
 function populateLevelSelect() {
-	var levelScreenMenu = views.levelSelect.elem.getElementsByClassName('menu')[0];
+	var levelScreenList = views.levelSelect.elem.querySelector('.menu ul');
 	
 	// Clear the menu.
-	levelScreenMenu.innerHTML = '';
+	levelScreenList.innerHTML = '';
 	views.levelSelect.inputs = [];
 	
 	LEVELS.forEach(function (level, i) {
-		var levelButton = document.createElement('button'),
+		var levelListItem = document.createElement('li'),
+			levelButton = document.createElement('button'),
 			moves = localStorage[GAME_PREFIX + LEVEL_PREFIX + i + MODES.MOVES],
 			blocks = localStorage[GAME_PREFIX + LEVEL_PREFIX + i + MODES.BLOCKS],
 			moveStars = getStarRating(i, MODES.MOVES, moves),
@@ -124,7 +125,8 @@ function populateLevelSelect() {
 		};
 		
 		// Add the new button to the menu.
-		levelScreenMenu.appendChild(levelButton);
+		levelListItem.appendChild(levelButton);
+		levelScreenList.appendChild(levelListItem);
 		views.levelSelect.inputs.push(levelButton);
 	});
 }
