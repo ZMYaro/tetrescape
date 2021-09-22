@@ -335,6 +335,9 @@ button {
 }
 
 /* Game screen styles */
+#gameScreen {
+	background: #101010;
+}
 #gameScreen .top-bar {
 	text-align: center;
 }
@@ -448,14 +451,14 @@ button {
 		8px 12px 6px rgba(0, 0, 0, 0.15),
 		1px 11px 4px rgba(0, 0, 0, 0.25);
 }
-	#aboutScreen img {
-		max-width: 90%;
-	}
-	#aboutScreen h2 {
-		font-size: 125%;
-	}
-	#aboutScreen ul {
-		list-style-type: none;
-		padding: 0;
-		margin: 0.5em;
-	}
+#aboutScreen img {
+	max-width: 90%;
+}
+#aboutScreen h2 {
+	font-size: 125%;
+}
+#aboutScreen ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0.5em;
+}
