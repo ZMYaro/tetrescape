@@ -45,7 +45,7 @@ Player.prototype.tryMove = function (movement) {
 	if (GridOccupant.prototype.tryMove.call(this, movement)) {
 		return true;
 	} else {
-		document.getElementById('blockTapSound').play();
+		document.getElementById('cannot-move-sound').play();
 		return false;
 	}
 };

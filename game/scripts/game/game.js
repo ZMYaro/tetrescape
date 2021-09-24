@@ -103,7 +103,7 @@ Game.prototype = {
 	 */
 	_winGame: function () {
 		// Play a victory sound.
-		document.getElementById('winSound').play();
+		document.getElementById('win-sound').play();
 		
 		// Remove event listeners.
 		this._im.disable();

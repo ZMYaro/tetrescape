@@ -457,3 +457,9 @@ button {
 	padding: 0;
 	margin: 0.5em;
 }
+	#aboutScreen ul li .icon {
+		width: 0.9em;
+		height: 0.9em;
+		margin: -0.15em 0;
+		fill: currentcolor;
+	}
