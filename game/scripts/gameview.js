@@ -21,6 +21,9 @@ function GameView(elem, parent) {
 	this._canvas = this.elem.querySelector('#canvas');
 	window.onresize = this._handleResize.bind(this);
 	this._handleResize();
+	
+	// Create the game instance.
+	this._game = new Game(this._canvas, endGame);
 }
 
 // Inherit from View.
@@ -44,7 +47,8 @@ GameView.prototype._handleResize = function () {
  */
 GameView.prototype.startGame = function (level) {
 	window.currentLevel = level; // TODO: Make this non-global.
-	this._game = new Game(this._canvas, LEVELS[level], endGame);
+	this._game.loadLevel(LEVELS[level]);
+	this._game.start();
 	
 	// Show the control hint on the first level.
 	this.elem.querySelector('#control-hint').style.display = (level === 0) ? 'block' : 'none';
@@ -56,10 +60,7 @@ GameView.prototype.startGame = function (level) {
  */
 GameView.prototype.close = function () {
 	// End the game.
-	if (this._game) {
-		this._game.destroy();
-		delete this._game;
-	}
+	this._game.deactivate();
 	
 	// Call the superclass implementation of close.
 	View.prototype.close.call(this);

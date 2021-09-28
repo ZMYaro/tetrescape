@@ -3,31 +3,13 @@
 /**
  * Initialize a new Game.
  * @class
- * @param {HTMLCanvasElement} canvas - The canvas on whch the game will appear
+ * @param {HTMLCanvasElement} canvas - The canvas on which the game will appear
  */
-function Game(canvas, levelData, endCallback) {
+function Game(canvas, endCallback) {
 	// Initialize private variables.
+	this._active = false;
 	this._canvas = canvas;
 	this._ctx = canvas.getContext('2d');
-	this._im = new GameInputManager({
-		down: (function () {
-			this._moves++;
-			this._player.tryMove(Vector2D.DOWN)
-		}).bind(this),
-		left: (function () {
-			this._moves++;
-			this._player.tryMove(Vector2D.LEFT)
-		}).bind(this),
-		right: (function () {
-			this._moves++;
-			this._player.tryMove(Vector2D.RIGHT)
-		}).bind(this),
-		up: (function () {
-			this._moves++;
-			this._player.tryMove(Vector2D.UP)
-		}).bind(this),
-		retry: this.reload.bind(this)
-	});
 	this._endCallback = endCallback;
 	// Add placeholders for additional private variables.
 	this._grid = undefined;
@@ -41,29 +23,42 @@ function Game(canvas, levelData, endCallback) {
 	
 	this._boundUpdate = this._update.bind(this);
 	
-	this._levelData = levelData;
+	this._levelData = LEVELS[0];
 	
-	// Load the level.
-	this.reload();
+	// Set up event listeners.
+	im.addEventListener('left', (function () {
+		this._moves++;
+		this._player.tryMove(Vector2D.LEFT);
+	}).bind(this));
+	im.addEventListener('right', (function () {
+		if (!this._active) { return; }
+		this._moves++;
+		this._player.tryMove(Vector2D.RIGHT);
+	}).bind(this));
+	im.addEventListener('up', (function () {
+		if (!this._active) { return; }
+		this._moves++;
+		this._player.tryMove(Vector2D.UP);
+	}).bind(this));
+	im.addEventListener('down', (function () {
+		if (!this._active) { return; }
+		this._moves++;
+		this._player.tryMove(Vector2D.DOWN);
+	}).bind(this));
+	im.addEventListener('restart', this.reload.bind(this));
 	
 	// Scale the game for the current canvas size.
 	this.rescale();
-	
-	// Start the main game loop.
-	this._update();
 }
 
 Game.prototype = {
 	/**
-	 * The main game loop
 	 * @private
+	 * The main game loop
 	 */
 	_update: function () {
-		// If the reset key is being pressed, reload the level.
-		if (this._im.retry) {
-			this.reload();
-		}
-			
+		if (!this._active) { return; }
+		
 		// Clear the screen.
 		this._ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
 		
@@ -90,6 +85,7 @@ Game.prototype = {
 	},
 	
 	/**
+	 * @private
 	 * Update the score display on the app bar.
 	 */
 	_updateScore: function () {
@@ -98,31 +94,40 @@ Game.prototype = {
 	},
 	
 	/**
-	 * End the game.
 	 * @private
+	 * End the game.
 	 */
 	_winGame: function () {
 		// Play a victory sound.
 		document.getElementById('win-sound').play();
 		
-		// Remove event listeners.
-		this._im.disable();
-		
 		// Go to the end screen.
+		this.deactivate();
 		this._endCallback(this._moves, this._blocksCleared);
 	},
 	
 	/**
-	 * Close and clean up the game.
+	 * Set the level and initialize it.
+	 * @param {Object} leveldata
 	 */
-	destroy: function () {
-		// Remove event listeners.
-		this._im.disable();
-		delete this._im;
+	loadLevel: function (levelData) {
+		this._levelData = levelData;
+		this.reload();
+		// Update the canvas size for the new level.
+		this.rescale();
 	},
 	
 	/**
-	 * Initialize and start the level.
+	 * Start the game.
+	 */
+	start: function () {
+		this._active = true;
+		// Start the update loop.
+		this._update();
+	},
+	
+	/**
+	 * Initialize and start the current level.
 	 */
 	reload: function () {
 		// Create the grid.
@@ -163,5 +168,12 @@ Game.prototype = {
 		} else {
 			this._blockSize = this._canvas.width / this._levelData.width;
 		}
+	},
+	
+	/**
+	 * Close and clean up the game.
+	 */
+	deactivate: function () {
+		this._active = false;
 	}
 };
