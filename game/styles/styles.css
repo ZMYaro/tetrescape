@@ -251,6 +251,7 @@ button {
 	height: auto;
 	padding: 0;
 	margin-bottom: 1em;
+	overflow: visible;
 }
 #titleScreen .menu button {
 	width: 184px;
