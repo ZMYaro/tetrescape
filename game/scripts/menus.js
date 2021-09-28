@@ -9,10 +9,14 @@ var GAME_PREFIX = 'tetrescape-',
 	BUTTON_SUFFIX = '-btn',
 	MAX_MOVES = 999;
 
-var views,
+var im, // Input manager
+	views,
 	currentLevel;
 
 window.onload = function () {
+	// Initialize input manager.
+	im = new InputManager();
+	
 	// Create views.
 	views = {
 		title: new MenuView(document.getElementById('titleScreen')),

@@ -8,7 +8,7 @@
 function View(elem, parent) {
 	// Initialize private variables.
 	this._parent = parent;
-	this._boundHandleKeyDown = this._handleKeyDown.bind(this);
+	this._active = false;
 	
 	// Initialize public variables.
 	this.elem = elem;
@@ -21,6 +21,9 @@ function View(elem, parent) {
 			this.view.goBack();
 		};
 	}
+	
+	// Set up back event listener.
+	im.addEventListener('back', this._handleBackInput.bind(this));
 }
 
 // Initialize static constants.
@@ -32,16 +35,15 @@ View.BACK_KEYS = [
 
 View.prototype = {
 	/**
-	 * Handle key presses.
-	 * @param {KeyboardEvent} e
+	 * @private
+	 * Handle a back input.
 	 */
-	_handleKeyDown: function (e) {
-		if (View.BACK_KEYS.indexOf(e.keyCode) !== -1) {
-			e.preventDefault();
-			// Do not allow the top-level view to be closed.
-			if (this._parent) {
-				this.goBack();
-			}
+	_handleBackInput: function () {
+		if (!this._active) { return; }
+		
+		// Do not allow the top-level view to be closed.
+		if (this._parent) {
+			this.goBack();
 		}
 	},
 	
@@ -67,14 +69,14 @@ View.prototype = {
 	 * Reenable a suspended view and its event listeners.
 	 */
 	resume: function () {
-		window.addEventListener('keydown', this._boundHandleKeyDown, false);
+		this._active = true;
 	},
 	
 	/**
 	 * Suspend a view and its event listeners.
 	 */
 	suspend: function () {
-		window.removeEventListener('keydown', this._boundHandleKeyDown, false);
+		this._active = false;
 	},
 	
 	/**

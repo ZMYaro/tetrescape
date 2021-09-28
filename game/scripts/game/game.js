@@ -9,7 +9,7 @@ function Game(canvas, levelData, endCallback) {
 	// Initialize private variables.
 	this._canvas = canvas;
 	this._ctx = canvas.getContext('2d');
-	this._im = new InputManager({
+	this._im = new GameInputManager({
 		down: (function () {
 			this._moves++;
 			this._player.tryMove(Vector2D.DOWN)
