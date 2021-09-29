@@ -45,7 +45,6 @@ function Game(canvas, endCallback) {
 		this._moves++;
 		this._player.tryMove(Vector2D.DOWN);
 	}).bind(this));
-	im.addEventListener('restart', this.reload.bind(this));
 	
 	// Scale the game for the current canvas size.
 	this.rescale();

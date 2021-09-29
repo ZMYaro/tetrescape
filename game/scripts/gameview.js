@@ -12,11 +12,6 @@ function GameView(elem, parent) {
 	// Get the view's app bar.
 	this.topBar = this.elem.querySelector('.top-bar');
 	
-	// Enable the game reset button.
-	this.topBar.querySelector('#restart-button').onclick = (function () {
-		this._game.reload();
-	}).bind(this);
-	
 	// Ensure the canvas always fits the view.
 	this._canvas = this.elem.querySelector('#canvas');
 	window.onresize = this._handleResize.bind(this);
@@ -24,10 +19,25 @@ function GameView(elem, parent) {
 	
 	// Create the game instance.
 	this._game = new Game(this._canvas, endGame);
+	
+	// Enable the game restart button.
+	this.restartButton = this.topBar.querySelector('#restart-button');
+	this.restartButton.addEventListener('click', this._game.reload.bind(this._game));
+	im.addEventListener('restart', this._handleRestartInput.bind(this));
+	
 }
 
 // Inherit from View.
 GameView.prototype = Object.create(View.prototype);
+
+/**
+ * @private
+ * Handle restart game input.
+ */
+GameView.prototype._handleRestartInput = function () {
+	if (!this._active) { return; }
+	Utils.animateButtonPress(this.restartButton);
+};
 
 /**
  * @private
