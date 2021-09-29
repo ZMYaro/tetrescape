@@ -122,6 +122,10 @@ InputManager.prototype._dispatchEvent = function (command) {
  * @param {KeyboardEvent} ev
  */
 InputManager.prototype._handleKeyDown = function (ev) {
+	if (ev.ctrlKey || ev.altKey || ev.metaKey) {
+		// Do not block browser keyboard shortcuts.
+		return;
+	}
 	Object.keys(this.KEYS).forEach(function (command) {
 		if (this.KEYS[command].includes(ev.keyCode)) {
 			ev.preventDefault();
