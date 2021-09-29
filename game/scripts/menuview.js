@@ -25,6 +25,7 @@ function MenuView(elem, parent) {
 	im.addEventListener('right', this._handleRightInput.bind(this));
 	im.addEventListener('up', this._handleUpInput.bind(this));
 	im.addEventListener('down', this._handleDownInput.bind(this));
+	im.addEventListener('select', this._handleSelectInput.bind(this));
 }
 
 // Inherit from View.
@@ -76,6 +77,24 @@ MenuView.prototype._handleDownInput = function () {
 	if (window.innerHeight > window.innerWidth) {
 		this._moveNext();
 	}
+};
+
+/**
+ * @private
+ * Handle a selection input.
+ */
+MenuView.prototype._handleSelectInput = function () {
+	if (!this._active) { return; }
+	
+	if (document.activeElement !== this.inputs[this.activeInputIndex]) {
+		// If the active input is not focused, focus it.
+		this.inputs[this.activeInputIndex].focus();
+		return;
+	}
+	
+	// Select the active button.
+	this._active = false;
+	Utils.animateButtonPress(this.inputs[this.activeInputIndex]);
 };
 
 /**
