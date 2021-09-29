@@ -464,3 +464,10 @@ button {
 		margin: -0.15em 0;
 		fill: currentcolor;
 	}
+	#aboutScreen ul li a {
+		text-decoration: none;
+	}
+		#aboutScreen ul li a:hover,
+		#aboutScreen ul li a:focus {
+			text-decoration: underline;
+		}
