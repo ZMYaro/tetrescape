@@ -15,7 +15,7 @@ var im, // Input manager
 
 window.onload = function () {
 	// Initialize input manager.
-	im = new InputManager();
+	im = new InputManager(document.getElementById('canvas'));
 	
 	// Create views.
 	views = {

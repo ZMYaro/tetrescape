@@ -2,8 +2,9 @@
 
 /**
  * Initialize a new InputManager.
+ * @param {HTMLElement} [swipeSurface] - The surface to detect directional swipes on, if any
  */
-function InputManager() {
+function InputManager(swipeSurface) {
 	this._handlers = {
 		left: [],
 		right: [],
@@ -25,7 +26,16 @@ function InputManager() {
 	});
 	window.addEventListener('gc.button.press', this._handleButtonPress.bind(this));
 	
-	// TODO: Add swipe event listener (for game canvas).
+	// Set up Hammer for swipe events.
+	if (swipeSurface) {
+		this._hammer = new Hammer(swipeSurface);
+		this._hammer.get('swipe').set({
+			direction: Hammer.DIRECTION_ALL,
+			threshold: 3,
+			velocity: 0.05
+		});
+		this._hammer.on('swipe', this._handleSwipe.bind(this));
+	}
 }
 
 /** @constant {Object<String, Array<Number>>} The key codes that map to each command */
@@ -145,4 +155,26 @@ InputManager.prototype._handleButtonPress = function (ev) {
 			this._dispatchEvent(command);
 		}
 	}, this);
+};
+
+/**
+ * @private
+ * Handle a swipe gesture.
+ * @param {Object} ev - The Hammer.js touch event
+ */
+InputManager.prototype._handleSwipe = function (ev) {
+	switch (ev.direction) {
+		case Hammer.DIRECTION_LEFT:
+			this._dispatchEvent('left');
+			break;
+		case Hammer.DIRECTION_RIGHT:
+			this._dispatchEvent('right');
+			break;
+		case Hammer.DIRECTION_UP:
+			this._dispatchEvent('up');
+			break;
+		case Hammer.DIRECTION_DOWN:
+			this._dispatchEvent('down');
+			break;
+	}
 };
