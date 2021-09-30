@@ -152,13 +152,12 @@ MenuView.prototype._movePrev = function () {
 };
 
 /**
- * Open the menu and enable its event listeners.
  * @override
- * @param {View} [parent] - The menu from which this menu was opened.
+ * Reenable a suspended view and its event listeners.
  */
-MenuView.prototype.open = function (parent) {
-	// Call the superclass implementation of open.
-	View.prototype.open.call(this, parent);
+MenuView.prototype.resume = function () {
+	// Call the superclass implementation of resume.
+	View.prototype.resume.call(this);
 	
 	// Focus the last focused input.
 	this.activeInputIndex--;
