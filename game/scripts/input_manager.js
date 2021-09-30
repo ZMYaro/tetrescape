@@ -190,7 +190,10 @@ InputManager.prototype._handleKeyDown = function (ev) {
  * @param {Event} ev
  */
 InputManager.prototype._handleButtonPress = function (ev) {
-	this._setCurrentInputMethod('gamepad');
+	var gamepadId = navigator.getGamepads()[ev.detail.controllerIndex].id,
+		gamepadType = (gamepadId.toLowerCase().includes('xbox') ? 'xbox' : 'gamepad');
+	this._setCurrentInputMethod(gamepadType);
+	
 	Object.keys(this.GAMEPAD_BUTTONS).forEach(function (command) {
 		if (this.GAMEPAD_BUTTONS[command].includes(ev.detail.name)) {
 			this._dispatchEvent(command);
