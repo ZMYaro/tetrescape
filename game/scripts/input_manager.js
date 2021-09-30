@@ -16,6 +16,9 @@ function InputManager(swipeSurface) {
 		restart: []
 	};
 	
+	this._currentInputMethod = '';
+	this._setCurrentInputMethod(this._assumeInputMethod());
+	
 	// Set up key event listener.
 	window.addEventListener('keydown', this._handleKeyDown.bind(this));
 	
@@ -26,7 +29,8 @@ function InputManager(swipeSurface) {
 	});
 	window.addEventListener('gc.button.press', this._handleButtonPress.bind(this));
 	
-	// Set up Hammer for swipe events.
+	// Set up pointer and Hammer.js swipe events.
+	window.addEventListener('pointerdown', this._handlePointerDown.bind(this));
 	if (swipeSurface) {
 		this._hammer = new Hammer(swipeSurface);
 		this._hammer.get('swipe').set({
@@ -34,7 +38,7 @@ function InputManager(swipeSurface) {
 			threshold: 3,
 			velocity: 0.05
 		});
-		this._hammer.on('swipe', this._handleSwipe.bind(this));
+		this._hammer.on('swipe', this._handlePointerSwipe.bind(this));
 	}
 }
 
@@ -128,10 +132,46 @@ InputManager.prototype._dispatchEvent = function (command) {
 
 /**
  * @private
+ * Assume preferred input method based on the user agent string and connected gamepads.
+ * @returns “gamepad”, “keyboard”, “touch”, “xbox”, or empty string
+ */
+InputManager.prototype._assumeInputMethod = function () {
+	if (navigator.userAgent.toLowerCase().includes('xbox')) {
+		return 'xbox';
+	} else if (Utils.getActiveGamepadCount() > 0) {
+		return 'gamepad';
+	} else if (navigator.userAgent.toLowerCase().includes('mobile')) {
+		return 'touch';
+	}
+	return '';
+};
+
+/**
+ * @private
+ * Set the current assumed preferred input method on the body.
+ * @param {String} inputMethodName - “gamepad”, “keyboard”, “touch”, “xbox”
+ */
+InputManager.prototype._setCurrentInputMethod = function (inputMethodName) {
+	if (this._currentInputMethod === inputMethodName) {
+		return;
+	}
+	document.body.classList.remove('prefer-input-gamepad');
+	document.body.classList.remove('prefer-input-keyboard');
+	document.body.classList.remove('prefer-input-touch');
+	document.body.classList.remove('prefer-input-xbox');
+	if (inputMethodName) {
+		document.body.classList.add('prefer-input-' + inputMethodName);
+	}
+	this._currentInputMethod = inputMethodName;
+}
+
+/**
+ * @private
  * Handle key presses.
  * @param {KeyboardEvent} ev
  */
 InputManager.prototype._handleKeyDown = function (ev) {
+	this._setCurrentInputMethod('keyboard');
 	if (ev.ctrlKey || ev.altKey || ev.metaKey) {
 		// Do not block browser keyboard shortcuts.
 		return;
@@ -150,6 +190,7 @@ InputManager.prototype._handleKeyDown = function (ev) {
  * @param {Event} ev
  */
 InputManager.prototype._handleButtonPress = function (ev) {
+	this._setCurrentInputMethod('gamepad');
 	Object.keys(this.GAMEPAD_BUTTONS).forEach(function (command) {
 		if (this.GAMEPAD_BUTTONS[command].includes(ev.detail.name)) {
 			this._dispatchEvent(command);
@@ -159,10 +200,21 @@ InputManager.prototype._handleButtonPress = function (ev) {
 
 /**
  * @private
+ * Handle a pointer touching the screen.
+ * @param {PointerEvent} ev
+ */
+InputManager.prototype._handlePointerDown = function (ev) {
+	if (ev.pointerType === 'touch' || ev.pointerType === 'pen') {
+		this._setCurrentInputMethod('touch');
+	}
+};
+
+/**
+ * @private
  * Handle a swipe gesture.
  * @param {Object} ev - The Hammer.js touch event
  */
-InputManager.prototype._handleSwipe = function (ev) {
+InputManager.prototype._handlePointerSwipe = function (ev) {
 	switch (ev.direction) {
 		case Hammer.DIRECTION_LEFT:
 			this._dispatchEvent('left');

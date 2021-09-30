@@ -15,5 +15,23 @@ var Utils = {
 				button.click();
 			}, PRESS_TIME);
 		});
+	},
+	
+	/**
+	 * Get the number of connected gamepads (beacuse navigator.getGamepads().length is always 4 in some browsers).
+	 * @returns {Number} - The number of non-null gamepads
+	 */
+	getActiveGamepadCount: function () {
+		if (!navigator.getGamepads || !navigator.getGamepads()) {
+			return 0;
+		}
+		var gamepadCount = 0,
+			gamepads = navigator.getGamepads();
+		for (var i = 0; i < gamepads.length; i++) {
+			if (gamepads[i]) {
+				gamepadCount++;
+			}
+		}
+		return gamepadCount;
 	}
 };
