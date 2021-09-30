@@ -27,6 +27,7 @@ function Game(canvas, endCallback) {
 	
 	// Set up event listeners.
 	im.addEventListener('left', (function () {
+		if (!this._active) { return; }
 		this._moves++;
 		this._player.tryMove(Vector2D.LEFT);
 	}).bind(this));
