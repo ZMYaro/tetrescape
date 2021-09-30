@@ -112,6 +112,15 @@ button {
 			background-image: url('../images/buttons/back.jpg');
 			margin-left: -0.75rem;
 		}
+			.prefer-input-keyboard .top-bar button.back-button {
+				background-image: url('../images/buttons/back_backspace.jpg');
+			}
+			.prefer-input-gamepad .top-bar button.back-button {
+				background-image: url('../images/buttons/back_face_bottom.jpg');
+			}
+			.prefer-input-xbox .top-bar button.back-button {
+				background-image: url('../images/buttons/back_a.jpg');
+			}
 			.top-bar button.back-button.close-button {
 				background-image: url('../images/buttons/close.jpg');
 			}
@@ -119,6 +128,15 @@ button {
 			background-image: url('../images/buttons/restart.jpg');
 			margin-right: -0.75rem;
 		}
+			.prefer-input-keyboard .top-bar button#restart-button {
+				background-image: url('../images/buttons/restart_r.jpg');
+			}
+			.prefer-input-gamepad .top-bar button#restart-button {
+				background-image: url('../images/buttons/restart_face_left.jpg');
+			}
+			.prefer-input-xbox .top-bar button#restart-button {
+				background-image: url('../images/buttons/restart_x.jpg');
+			}
 
 
 .view {
