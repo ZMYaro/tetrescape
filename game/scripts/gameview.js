@@ -25,10 +25,26 @@ function GameView(elem, parent) {
 	this.restartButton.addEventListener('click', this._game.reload.bind(this._game));
 	im.addEventListener('restart', this._handleRestartInput.bind(this));
 	
+	im.addEventListener('quit', this._handleQuitInput.bind(this));
+	
 }
 
 // Inherit from View.
 GameView.prototype = Object.create(View.prototype);
+
+/**
+ * @private
+ * Do not close on regular back input.
+ */
+GameView.prototype._handleBackInput = function () { return; },
+
+/**
+ * @private
+ * Close the view on a quit input.
+ */
+GameView.prototype._handleQuitInput = function () {
+	View.prototype._handleBackInput.call(this);
+},
 
 /**
  * @private
