@@ -124,6 +124,15 @@ button {
 			.top-bar button.back-button.close-button {
 				background-image: url('../images/buttons/close.jpg');
 			}
+				.prefer-input-keyboard .top-bar button.back-button.close-button {
+					background-image: url('../images/buttons/close_esc.jpg');
+				}
+				.prefer-input-gamepad .top-bar button.back-button.close-button {
+					background-image: url('../images/buttons/close_minus.jpg');
+				}
+				.prefer-input-xbox .top-bar button.back-button.close-button {
+					background-image: url('../images/buttons/close_view.jpg');
+				}
 		.top-bar button#restart-button {
 			background-image: url('../images/buttons/restart.jpg');
 			margin-right: -0.75rem;
