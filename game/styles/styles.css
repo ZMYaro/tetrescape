@@ -409,6 +409,11 @@ button {
 	animation-iteration-count: infinite;
 	animation-name: hint-loop-swipe;
 }
+	.prefer-input-keyboard #control-hint {
+		background-image: url('../images/arrow_up.png');
+		transform-origin: 50% 10%;
+		animation-name: hint-loop-press;
+	}
 
 
 /* Results screen styles */
