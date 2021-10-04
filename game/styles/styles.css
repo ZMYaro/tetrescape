@@ -414,6 +414,12 @@ button {
 		transform-origin: 50% 10%;
 		animation-name: hint-loop-press;
 	}
+	.prefer-input-gamepad #control-hint,
+	.prefer-input-xbox #control-hint {
+		background-image: url('../images/dpad_up.png');
+		transform-origin: 50% 10%;
+		animation-name: hint-loop-tilt;
+	}
 
 
 /* Results screen styles */
