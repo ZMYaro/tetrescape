@@ -399,10 +399,15 @@ button {
 	right: 10%;
 	top: 50%;
 	width: 30%;
+	height: 50%;
+	
+	background-image: url('../images/pointer_finger.png');
+	background-size: contain;
+	background-repeat: no-repeat;
 	
 	animation-duration: 1s;
 	animation-iteration-count: infinite;
-	animation-name: control-hint-loop;
+	animation-name: hint-loop-swipe;
 }
 
 
