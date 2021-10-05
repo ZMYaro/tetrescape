@@ -9,6 +9,19 @@
 		<meta name="mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="theme-color" content="#525250" />
+		<script type="text/javascript">
+			window.addEventListener('load', function () {
+				if (!navigator.serviceWorker) {
+					console.log('TetrEscape will not work offline in this browser because it does not support service workers.');
+					return;
+				}
+				navigator.serviceWorker.register('/service_worker.js').then(function (registration) {
+					console.log('Service worker registered with scope: ' + registration.scope);
+				}).catch(function (err) {
+					console.log('Service worker registration failed: ' + err);
+				});
+			});
+		</script>
 		
 		<!-- Icons -->
 		<link rel="shortcut icon" type="image/x-icon" href="images/logo/favicon.ico" />
@@ -43,17 +56,17 @@
 		<!-- Game classes -->
 		<script type="text/javascript" src="scripts/game/game.js"></script>
 		<script type="text/javascript" src="scripts/game/grid.js"></script>
-		<script type="text/javascript" src="scripts/game/gridoccupant.js"></script>
+		<script type="text/javascript" src="scripts/game/grid_occupant.js"></script>
 		<script type="text/javascript" src="scripts/game/player.js"></script>
 		<script type="text/javascript" src="scripts/game/goal.js"></script>
 		<script type="text/javascript" src="scripts/game/block.js"></script>
-		<script type="text/javascript" src="scripts/game/staticblock.js"></script>
+		<script type="text/javascript" src="scripts/game/static_block.js"></script>
 		<script type="text/javascript" src="scripts/game/tetromino.js"></script>
 		<script type="text/javascript" src="scripts/game/level.js"></script>
 	</head>
 	<body>
 		<div class="view" id="titleScreen">
-			<img src="images/logo/logo.png" alt="TetrEscape" id="title" />
+			<img src="images/logo/title.png" alt="TetrEscape" id="title" />
 			<div class="menu">
 				<button class="z1" id="playButton">Play</button>
 				<button class="z1" id="instructionsButton">Instructions</button>
@@ -68,12 +81,12 @@
 			</header>
 			<br />
 			<br />
-			<img src="images/instructions_controls.png" alt="Use the arrow keys or touch swipes to move." style="width: 480px; max-width: 90%; display: block; margin: auto;" />
+			<img src="images/instructions/controls.png" alt="Use the arrow keys or touch swipes to move." style="width: 480px; max-width: 90%; display: block; margin: auto;" />
 			<p>Move around using directional keys or touch swipes.</p>
 			<br />
 			<br />
 			<br />
-			<img src="images/instructions_blocks.png" alt="Fill a row with blocks." style="width: 480px; max-width: 90%; display: block; margin: auto;" />
+			<img src="images/instructions/blocks.png" alt="Fill a row with blocks." style="width: 480px; max-width: 90%; display: block; margin: auto;" />
 			<p>Fill a row with blocks to clear them.</p>
 			<br />
 			<br />
