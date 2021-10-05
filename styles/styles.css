@@ -4,13 +4,22 @@ body {
 	padding: 0;
 	overflow: hidden;
 	
-	background-color: #0277bd;
-	color: white;
+	background-color: #3b3a3d;
+	color: #fdfcfb;
+}
+
+body,
+button {
+	font-family: 'Roboto Slab', sans-serif;
 }
 
 a {
 	color: white;
 }
+	a:active,
+	a.active {
+		color: #f8f8f8;
+	}
 
 h1,
 h2 {
@@ -21,88 +30,160 @@ h2 {
 	margin-bottom: 0;
 }
 
-.appBar {
+button {
+	border: 0 none;
+	outline: 0 none;
+	background-color: #4b4a4e;
+	color: inherit;
+	cursor: pointer;
+}
+
+.icon {
+	width: 1.5rem;
+	height: 1.5rem;
+	margin: -4px 0;
+}
+
+/* Engraved text */
+.top-bar,
+.menu button,
+#resultsScreen {
+	text-shadow:
+		-1px -1px 1px rgba(0, 0, 0, 0.7),
+		1px 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+.top-bar {
 	position: absolute;
+	box-sizing: border-box;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 3rem;
+	padding: 0.75rem;
 	margin: 0;
 	
+	font-size: 1.25rem;
 	text-align: left;
 	
-	background-color: #0277bd;
-}
-	.appBar svg {
-		width: 24px;
-		height: 24px;
-		fill: #ffffff;
-	}
-
-button.backButton {
-	margin-left: -6px;
-}
+	background-color: #525250;
+	/* Polymer/MaterialZ Z1 */
+	box-shadow:
+		0 2px 5px 0 rgba(0, 0, 0, 0.26),
+		0 2px 10px 0 rgba(0, 0, 0, 0.16);
 	
+	z-index: 4;
+}
+	#levelScreen .top-bar,
+	#aboutScreen .top-bar {
+		/* Polymer/MaterialZ Z2 */
+		box-shadow:
+			0 8px 17px 0 rgba(0, 0, 0, 0.2),
+			0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	.top-bar button {
+		width: 3rem;
+		height: 3rem;
+		margin: -0.75rem 0.5rem;
+		vertical-align: top;
+		
+		border-radius: 0;
+		background-size: 9rem 3rem;
+		
+		box-shadow:
+			 5px 0 1px -1px rgba(255, 255, 255, 0.1),
+			-5px 0 1px -1px rgba(0, 0, 0, 0.1);
+	}
+		.top-bar button:hover,
+		.top-bar button:focus {
+			background-position-x: -3rem;
+			filter: brightness(1.05);
+		}
+		.top-bar button:active,
+		.top-bar button.active {
+			background-position-x: -6rem;
+			box-shadow:
+				 3px 0 1px -1px rgba(255, 255, 255, 0.2),
+				-3px 0 1px -1px rgba(0, 0, 0, 0.2),
+				inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+		}
+
+		.top-bar button.back-button {
+			background-image: url('../images/buttons/back.jpg');
+			margin-left: -0.75rem;
+		}
+			.prefer-input-keyboard .top-bar button.back-button {
+				background-image: url('../images/buttons/back_backspace.jpg');
+			}
+			.prefer-input-gamepad .top-bar button.back-button {
+				background-image: url('../images/buttons/back_face_bottom.jpg');
+			}
+			.prefer-input-xbox .top-bar button.back-button {
+				background-image: url('../images/buttons/back_a.jpg');
+			}
+			.top-bar button.back-button.close-button {
+				background-image: url('../images/buttons/close.jpg');
+			}
+				.prefer-input-keyboard .top-bar button.back-button.close-button {
+					background-image: url('../images/buttons/close_esc.jpg');
+				}
+				.prefer-input-gamepad .top-bar button.back-button.close-button {
+					background-image: url('../images/buttons/close_minus.jpg');
+				}
+				.prefer-input-xbox .top-bar button.back-button.close-button {
+					background-image: url('../images/buttons/close_view.jpg');
+				}
+		.top-bar button#restart-button {
+			background-image: url('../images/buttons/restart.jpg');
+			margin-right: -0.75rem;
+		}
+			.prefer-input-keyboard .top-bar button#restart-button {
+				background-image: url('../images/buttons/restart_r.jpg');
+			}
+			.prefer-input-gamepad .top-bar button#restart-button {
+				background-image: url('../images/buttons/restart_face_left.jpg');
+			}
+			.prefer-input-xbox .top-bar button#restart-button {
+				background-image: url('../images/buttons/restart_x.jpg');
+			}
+
 
 .view {
 	position: fixed;
-	-webkit-box-sizing: border-box;
-	   -moz-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	left: 0;
 	top: 0;
 	width: 100%;
 	height: 100%;
-	padding-top: 64px;
+	padding-top: 3rem;
 	
 	opacity: 0;
 	pointer-events: none;
 	
 	text-align: center;
 	
-	background-color: #03a9f4;
+	background-color: #3d3c3b;
+	background-image: url('../images/backgrounds/stone_dark_speckled.jpg');
+	background-size: cover;
+	color: white;
 	
-	-webkit-transform: translateY(90%);
-	   -moz-transform: translateY(90%);
-	    -ms-transform: translateY(90%);
-	     -o-transform: translateY(90%);
-	        transform: translateY(90%);
+	transform: translateY(90%);
 	
-	-webkit-transition-property: opacity, -webkit-transform, transform, -webkit-box-shadow, box-shadow;
-	   -moz-transition-property: opacity, -moz-transform, transform, -moz-box-shadow, box-shadow;
-	    -ms-transition-property: opacity, -ms-transform, transform, box-shadow;
-	     -o-transition-property: opacity, -o-transform, transform, box-shadow;
-	        transition-property: opacity, transform, box-shadow;
-	-webkit-transition-duration: 0.2s;
-	   -moz-transition-duration: 0.2s;
-	    -ms-transition-duration: 0.2s;
-	     -o-transition-duration: 0.2s;
-	        transition-duration: 0.2s;
+	transition-property: opacity, transform, box-shadow;
+	transition-duration: 0.2s;
 }
 	.view.active {
-		-webkit-transform: translateY(0%);
-		   -moz-transform: translateY(0%);
-		    -ms-transform: translateY(0%);
-		     -o-transform: translateY(0%);
-		        transform: translateY(0%);
+		transform: translateY(0%);
 		opacity: 1;
 		pointer-events: auto;
 	}
 	.view p {
-		-webkit-box-sizing: border-box;
-		   -moz-box-sizing: border-box;
-		        box-sizing: border-box;
+		box-sizing: border-box;
 		padding: 0 72px;
 	}
-@media (max-width: 600px) {
-	.view {
-		padding-top: 56px;
-	}
-		.view p {
-			padding: 0 32px;
-		}
-}
 
 .menu {
-	-webkit-box-sizing: border-box;
-	   -moz-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	width: 100%;
 	height: 100%;
 	margin: 0;
@@ -113,43 +194,45 @@ button.backButton {
 }
 	.menu button {
 		min-width: 0;
-		margin: 16px 8px;
-		padding: 16px 32px;
+		margin: 1em 0.5em;
+		padding: 1em 2em;
 		
 		position: relative;
 		
-		color: black;
+		box-shadow:
+			inset 0 1px 3px 0 rgba(0, 0, 0, 0.25),
+			inset 1px 1px 2px 0 rgba(0, 0, 0, 0.25),
+			0 0 0 0 rgba(0, 0, 0, 0.2),
+			0 0 0 0 rgba(0, 0, 0, 0.15);
 		
-		-webkit-transform: scale(1);
-		   -moz-transform: scale(1);
-		    -ms-transform: scale(1);
-		     -o-transform: scale(1);
-		        transform: scale(1);
+		transform: scale(1);
 		
-		-webkit-transition-property: -webkit-box-shadow, box-shadow, -webkit-transform, transform;
-		   -moz-transition-property: -moz-box-shadow, box-shadow, -moz-transform, transform;
-		    -ms-transition-property: box-shadow, -ms-transform, transform;
-		     -o-transition-property: box-shadow, -o-transform, transform;
-		        transition-property: box-shadow, transform;
+		transition-property: box-shadow, transform;
+		transition-duration: 0.1s;
+		transition-timing-function: linear;
 	}
 		.menu button:hover,
-		.menu button:focus {
+		.menu button:focus,
+		#results-back-button:not(:active):not(.active) {
 			z-index: 1;
-			
-			-webkit-transform: scale(1.2);
-			   -moz-transform: scale(1.2);
-			    -ms-transform: scale(1.2);
-			     -o-transform: scale(1.2);
-			        transform: scale(1.2);
+			box-shadow:
+				inset 0 1px 4px 0 rgba(0, 0, 0, 0.125),
+				inset 0 0 0 rgba(0, 0, 0, 0.125),
+				0 2px 5px 0 rgba(0, 0, 0, 0.26),
+				0 2px 10px 0 rgba(0, 0, 0, 0.16);
+			filter: brightness(1.05);
+			transform: scale(1.2);
 		}
 		.menu button:active,
 		.menu button.active {
 			z-index: 2;
-			-webkit-transform: scale(1.3);
-			   -moz-transform: scale(1.3);
-			    -ms-transform: scale(1.3);
-			     -o-transform: scale(1.3);
-			        transform: scale(1.3);
+			box-shadow:
+				inset 0 0 2px 0 rgba(0, 0, 0, 0.125),
+				inset 0 0 0 rgba(0, 0, 0, 0.125),
+				0 4px 10px 0 rgba(0, 0, 0, 0.23),
+				0 4px 15px 0 rgba(0, 0, 0, 0.175);
+			filter: brightness(1.07);
+			transform: scale(1.3);
 		}
 @media (orientation: portrait) {
 	.menu {
@@ -164,7 +247,18 @@ button.backButton {
 
 /* Title screen styles */
 #titleScreen {
-	background-color: #0277bd;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	padding: 0;
+}
+#titleScreen .menu {
+	width: auto;
+	height: auto;
+	padding: 0;
+	margin-bottom: 1em;
+	overflow: visible;
 }
 #titleScreen .menu button {
 	width: 184px;
@@ -174,23 +268,49 @@ button.backButton {
 }
 #title {
 	max-width: 100%;
-	max-height: 50%;
+	max-width: min(100%, 720px);
+	max-height: 70%;
 }
 
 /* Level select screen styles */
+#levelScreen .menu {
+	padding: 0;
+	/* Vertically center the level list. */
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+#levelScreen .menu ul {
+	list-style-type: none;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: auto;
+	padding: 1.5rem; /* 24px default */
+	width: auto;
+	height: 21rem; /* 336px default */
+	background-image: url('../images/backgrounds/level_select_horiz.jpg');
+	background-size: 15rem 21rem; /* 240px 336px default */
+	background-repeat: repeat;
+	box-shadow: 0 1px 8rem 2rem rgba(0, 0, 0, 0.9);
+}
 #levelScreen .menu button {
-	width: 256px;
-	height: 256px;
-	margin: 48px 32px;
+	width: 12rem; /* 192px default */
+	height: 12rem;
+	padding: 1rem 0.75rem; /* 16px 12px default */
+	margin: 1.5rem; /* 24px default */
 	font-size: 100%;
+	
+	background-image: url('../images/buttons/level.jpg');
+	background-size: contain;
 }
 	#levelScreen .menu button .title {
-		font-size: 200%;
-		margin-top: 0.5em;
+		font-size: 175%;
+		margin-bottom: -0.25rem;
 	}
 	#levelScreen .menu button .number {
-		font-size: 500%;
-		margin-bottom: 0.25em;
+		font-size: 450%;
 	}
 	#levelScreen .menu button .score {
 		font-size: 100%;
@@ -198,98 +318,118 @@ button.backButton {
 .stars {
 	font-size: 125%;
 }
-	.stars svg {
-		width: 24px;
-		height: 24px;
-		margin: -5px 0;
-		fill: #000000;
+
+@media (min-width: 500px) and (min-height: 500px) {
+	#levelScreen .menu ul {
+		padding: 2rem; /* 32px default */
+		height: 28rem; /* 448px default */
+		background-size: 20rem 28rem; /* 448px 320px default */
 	}
-	
-@media (orientation: portrait) {
 	#levelScreen .menu button {
-		margin: 48px auto;
-	}
-}
-@media (max-width: 500px), (max-height: 500px) {
-	#levelScreen .menu button {
-		width: 192px;
-		height: 192px;
-		padding: 16px 12px;
+		width: 16rem; /* 256px default */
+		height: 16rem;
+		margin: 2rem; /* 32px default */
 	}
 		#levelScreen .menu button .title {
-			margin-top: 0.25em;
-			margin-bottom: -0.25em;
-		}
-		#levelScreen .menu button .number {
+			font-size: 200%;
 			margin-bottom: 0;
 		}
+		#levelScreen .menu button .number {
+			font-size: 500%;
+		}
+		#levelScreen .menu button .stars {
+			margin-top: 0.5rem;
+			margin-bottom: 0.25rem;
+		}
+}
+@media (orientation: portrait) {
+	#levelScreen .menu {
+		display: block;
+	}
+	#levelScreen .menu ul {
+		flex-direction: column;
+		width: 21rem; /* 336px default */
+		height: auto;
+		background-image: url('../images/backgrounds/level_select_vert.jpg');
+		background-size: 21rem 15rem; /* 336px 240px default */
+	}
+	#levelScreen .menu button {
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+@media (min-width: 500px) and (min-height: 500px) and (orientation: portrait) {
+	#levelScreen .menu ul {
+		width: 28rem; /* 448px default */
+		background-size: 28rem 20rem; /* 448px 320px default */
+	}
 }
 
 /* Game screen styles */
-.scoreDisplay {
-	display: inline-block;
-	margin: -16px 0;
-	padding: 8px 6px;
+#gameScreen {
+	background: #101010;
 }
-	.scoreDisplay img,
-	.scoreDisplay [role="img"] {
-		margin: -4px 0;
+#gameScreen .top-bar {
+	text-align: center;
+}
+	#gameScreen .top-bar .back-button {
+		float: left;
 	}
-#controlHint {
+	#gameScreen .top-bar #restart-button {
+		float: right;
+	}
+.score-display {
+	display: inline-block;
+	text-align: left;
+	min-width: 4rem;
+	margin: -1rem 0;
+	padding: 0.5rem 0.125rem; /* 8px 2px default */
+	padding-left: 0.25rem; /* 4px default; shift right so it looks less unbalanced */
+}
+#control-hint {
 	position: fixed;
 	right: 10%;
 	top: 50%;
 	width: 30%;
+	height: 50%;
+	
+	background-image: url('../images/hints/pointer_finger.png');
+	background-size: contain;
+	background-repeat: no-repeat;
 	
 	animation-duration: 1s;
 	animation-iteration-count: infinite;
-	animation-name: controlHintLoop;
+	animation-name: hint-loop-swipe;
 }
-@keyframes controlHintLoop {
-	0% {
-		opacity: 0;
-		transform: transateY(50%);
+	.prefer-input-keyboard #control-hint {
+		background-image: url('../images/hints/arrow_up.png');
+		transform-origin: 50% 10%;
+		animation-name: hint-loop-press;
 	}
-	30% {
-		opacity: 1;
+	.prefer-input-gamepad #control-hint,
+	.prefer-input-xbox #control-hint {
+		background-image: url('../images/hints/dpad_up.png');
+		transform-origin: 50% 10%;
+		animation-name: hint-loop-tilt;
 	}
-	80% {
-		opacity: 1;
-	}
-	100% {
-		opacity: 0;
-		transform: translateY(-75%);
-	}
-}
 
 
 /* Results screen styles */
-#resultsScreen,
-#resultsScreen .appBar {
-	background-color: #fafafa;
-	color: black;
+#aboutScreen,
+#resultsScreen {
+	background-color: #4b4a4e;
+	background-image: url('../images/backgrounds/stone_light_smooth.jpg');
+	background-size: cover;
+	color: white;
 }
 
 .view#resultsScreen {
-	-webkit-border-radius: 100%;
-	   -moz-border-radius: 100%;
-	        border-radius: 100%;
-	-webkit-transform: scale(0);
-	   -moz-transform: scale(0);
-	    -ms-transform: scale(0);
-	     -o-transform: scale(0);
-	        transform: scale(0);
+	border-radius: 100%;
+	transform: scale(0);
 }
 	.view#resultsScreen.active {
-		-webkit-border-radius: 0;
-		   -moz-border-radius: 0;
-		        border-radius: 0;
-		
-		-webkit-transform: scale(1);
-		   -moz-transform: scale(1);
-		    -ms-transform: scale(1);
-		     -o-transform: scale(1);
-		        transform: scale(1);
+		border-radius: 0;
+		transform: scale(1);
 	}
 
 #resultsScreen .star {
@@ -297,48 +437,72 @@ button.backButton {
 	width: 64px;
 	height: 64px;
 	
-	-webkit-border-radius: 50%;
-	   -moz-border-radius: 50%;
-	        border-radius: 50%;
-	
-	-webkit-transform: scale(1);
-	   -moz-transform: scale(1);
-	    -ms-transform: scale(1);
-	     -o-transform: scale(1);
-	        transform: scale(1);
+	border-radius: 50%;
+	transform: scale(1);
 }
 	#resultsScreen .star::before {
 		content: '\2606';
 		display: block;
 		
-		font-size: 64px;
 		position: relative;
 		top: -13px;
+		font-size: 64px;
+		color: #e5e1d3;
 		
-		text-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+		text-shadow:
+			-1.5px -1.5px 1.5px rgba(0, 0, 0, 0.7),
+			1.5px 1.5px 1.5px rgba(255, 255, 255, 0.25);
 	}
-#resultsScreen .star.active {
-	-webkit-transform: scale(1.2);
-	   -moz-transform: scale(1.2);
-	    -ms-transform: scale(1.2);
-	     -o-transform: scale(1.2);
-	        transform: scale(1.2);
-	
-	-webkit-animation-name: starRipple;
-	   -moz-animation-name: starRipple;
-	        animation-name: starRipple;
-	-webkit-animation-duration: 0.25s;
-	   -moz-animation-duration: 0.25s;
-	        animation-duration: 0.25s;
-}
-	#resultsScreen .star.active::before {
-		content: '\2605';
+	#resultsScreen .star.active {
+		transform: scale(1.2);
+		
+		animation-name: star-ripple;
+		animation-duration: 0.25s;
+		animation-timing-function: limit;
 	}
+		#resultsScreen .star.active::before {
+			content: '\2605';
+			color: #c7c7d9;
+			text-shadow:
+				-1.5px -1.5px 1.5px rgba(0, 0, 0, 0.55),
+				1.5px 1.5px 1.5px rgba(255, 255, 255, 0.25);
+		}
 
-#retryButton {
-	margin-right: -6px;
-}
 #gameScore {
 	float: right;
 	margin-right: 8px;
 }
+
+/* About (credits) screen styles */
+#aboutScreen {
+	background-image: url('../images/backgrounds/stone_light_speckled.jpg');
+	
+	text-shadow:
+		-5px 12px 6px rgba(0, 0, 0, 0.15),
+		8px 12px 6px rgba(0, 0, 0, 0.15),
+		1px 11px 4px rgba(0, 0, 0, 0.25);
+}
+#aboutScreen img {
+	max-width: 90%;
+}
+#aboutScreen h2 {
+	font-size: 125%;
+}
+#aboutScreen ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0.5em;
+}
+	#aboutScreen ul li .icon {
+		width: 0.9em;
+		height: 0.9em;
+		margin: -0.15em 0;
+		fill: currentcolor;
+	}
+	#aboutScreen ul li a {
+		text-decoration: none;
+	}
+		#aboutScreen ul li a:hover,
+		#aboutScreen ul li a:focus {
+			text-decoration: underline;
+		}

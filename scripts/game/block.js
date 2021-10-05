@@ -100,7 +100,7 @@ Block.prototype.tryMoveSingle = function (movement) {
 	}
 	// Call the superclass implementation of tryMove.
 	if (GridOccupant.prototype.tryMove.call(this, movement)) {
-		document.getElementById('blockSlideSound').play();
+		document.getElementById('move-sound').play();
 		return true;
 	} else {
 		return false;

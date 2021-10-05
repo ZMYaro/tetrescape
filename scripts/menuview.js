@@ -19,60 +19,82 @@ function MenuView(elem, parent) {
 			this.view.activeInputIndex = this.view.inputs.indexOf(this);
 		};
 	}, this);
+	
+	// Set up input event listeners.
+	im.addEventListener('left', this._handleLeftInput.bind(this));
+	im.addEventListener('right', this._handleRightInput.bind(this));
+	im.addEventListener('up', this._handleUpInput.bind(this));
+	im.addEventListener('down', this._handleDownInput.bind(this));
+	im.addEventListener('select', this._handleSelectInput.bind(this));
 }
-
-// Initialize static constants.
-/** {Array<Number>} The codes for keys that move left */
-MenuView.LEFT_KEYS = [
-	37, // Left arrow
-	65 // A
-];
-/** {Array<Number>} The codes for keys that move right */
-MenuView.RIGHT_KEYS = [
-	39, // Right arrow
-	68, // D
-	69 // E
-];
-/** {Array<Number>} The codes for keys that move up */
-MenuView.UP_KEYS = [
-	38, // Up arrow
-	87, // W
-	188 // Comma
-];
-/** {Array<Number>} The codes for keys that move down */
-MenuView.DOWN_KEYS = [
-	40, // Down arrow
-	79, // O
-	83  // S
-];
-
 
 // Inherit from View.
 MenuView.prototype = Object.create(View.prototype);
 
 /**
- * Handle key presses.
- * @override
- * @param {KeyboardEvent} e
+ * @private
+ * Handle a left input.
  */
-MenuView.prototype._handleKeyDown = function (e) {
-	// Call the superclass implementation of handleKeyDown.
-	View.prototype._handleKeyDown.call(this, e);
-	
-	// Move horizontally in landscape and vertically in portrait.
-	if (MenuView.RIGHT_KEYS.indexOf(e.keyCode) !== -1 && window.innerWidth > window.innerHeight) {
-		e.preventDefault();
-		this._moveNext();
-	} else if (MenuView.LEFT_KEYS.indexOf(e.keyCode) !== -1 && window.innerWidth > window.innerHeight) {
-		e.preventDefault();
-		this._movePrev();
-	} else if (MenuView.DOWN_KEYS.indexOf(e.keyCode) !== -1 && window.innerHeight > window.innerWidth) {
-		e.preventDefault();
-		this._moveNext();
-	} else if (MenuView.UP_KEYS.indexOf(e.keyCode) !== -1 && window.innerHeight > window.innerWidth) {
-		e.preventDefault();
+MenuView.prototype._handleLeftInput = function () {
+	if (!this._active) { return; }
+	// Move horizontally in landscape.
+	if (window.innerWidth > window.innerHeight) {
 		this._movePrev();
 	}
+};
+
+/**
+ * @private
+ * Handle a right input.
+ */
+MenuView.prototype._handleRightInput = function () {
+	if (!this._active) { return; }
+	// Move horizontally in landscape.
+	if (window.innerWidth > window.innerHeight) {
+		this._moveNext();
+	}
+};
+
+/**
+ * @private
+ * Handle a up input.
+ */
+MenuView.prototype._handleUpInput = function () {
+	if (!this._active) { return; }
+	// Move vertically in portrait.
+	if (window.innerHeight > window.innerWidth) {
+		this._movePrev();
+	}
+};
+
+/**
+ * @private
+ * Handle a down input.
+ */
+MenuView.prototype._handleDownInput = function () {
+	if (!this._active) { return; }
+	// Move vertically in portrait.
+	if (window.innerHeight > window.innerWidth) {
+		this._moveNext();
+	}
+};
+
+/**
+ * @private
+ * Handle a selection input.
+ */
+MenuView.prototype._handleSelectInput = function () {
+	if (!this._active) { return; }
+	
+	if (document.activeElement !== this.inputs[this.activeInputIndex]) {
+		// If the active input is not focused, focus it.
+		this.inputs[this.activeInputIndex].focus();
+		return;
+	}
+	
+	// Select the active button.
+	this._active = false;
+	Utils.animateButtonPress(this.inputs[this.activeInputIndex]);
 };
 
 /**
@@ -130,13 +152,12 @@ MenuView.prototype._movePrev = function () {
 };
 
 /**
- * Open the menu and enable its event listeners.
  * @override
- * @param {View} [parent] - The menu from which this menu was opened.
+ * Reenable a suspended view and its event listeners.
  */
-MenuView.prototype.open = function (parent) {
-	// Call the superclass implementation of open.
-	View.prototype.open.call(this, parent);
+MenuView.prototype.resume = function () {
+	// Call the superclass implementation of resume.
+	View.prototype.resume.call(this);
 	
 	// Focus the last focused input.
 	this.activeInputIndex--;

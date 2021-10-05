@@ -10,17 +10,23 @@ function GameView(elem, parent) {
 	View.call(this, elem, parent);
 	
 	// Get the view's app bar.
-	this.appBar = this.elem.querySelector('.appBar');
-	
-	// Enable the game reset button.
-	this.appBar.querySelector('#retryButton').onclick = (function () {
-		this._game.reload();
-	}).bind(this);
+	this.topBar = this.elem.querySelector('.top-bar');
 	
 	// Ensure the canvas always fits the view.
 	this._canvas = this.elem.querySelector('#canvas');
 	window.onresize = this._handleResize.bind(this);
 	this._handleResize();
+	
+	// Create the game instance.
+	this._game = new Game(this._canvas, endGame);
+	
+	// Enable the game restart button.
+	this.restartButton = this.topBar.querySelector('#restart-button');
+	this.restartButton.addEventListener('click', this._game.reload.bind(this._game));
+	im.addEventListener('restart', this._handleRestartInput.bind(this));
+	
+	im.addEventListener('quit', this._handleQuitInput.bind(this));
+	
 }
 
 // Inherit from View.
@@ -28,11 +34,34 @@ GameView.prototype = Object.create(View.prototype);
 
 /**
  * @private
+ * Do not close on regular back input.
+ */
+GameView.prototype._handleBackInput = function () { return; },
+
+/**
+ * @private
+ * Close the view on a quit input.
+ */
+GameView.prototype._handleQuitInput = function () {
+	View.prototype._handleBackInput.call(this);
+},
+
+/**
+ * @private
+ * Handle restart game input.
+ */
+GameView.prototype._handleRestartInput = function () {
+	if (!this._active) { return; }
+	Utils.animateButtonPress(this.restartButton);
+};
+
+/**
+ * @private
  * Handle the window being resized.
  */
 GameView.prototype._handleResize = function () {
 	this._canvas.width = window.innerWidth;
-	this._canvas.height = window.innerHeight - this.appBar.offsetHeight;
+	this._canvas.height = window.innerHeight - this.topBar.offsetHeight;
 	if (this._game) {
 		this._game.rescale();
 	}
@@ -44,10 +73,11 @@ GameView.prototype._handleResize = function () {
  */
 GameView.prototype.startGame = function (level) {
 	window.currentLevel = level; // TODO: Make this non-global.
-	this._game = new Game(this._canvas, LEVELS[level], endGame);
+	this._game.loadLevel(LEVELS[level]);
+	this._game.start();
 	
 	// Show the control hint on the first level.
-	this.elem.querySelector('#controlHint').style.display = (level === 0) ? 'block' : 'none';
+	this.elem.querySelector('#control-hint').style.display = (level === 0) ? 'block' : 'none';
 };
 
 /**
@@ -56,10 +86,7 @@ GameView.prototype.startGame = function (level) {
  */
 GameView.prototype.close = function () {
 	// End the game.
-	if (this._game) {
-		this._game.destroy();
-		delete this._game;
-	}
+	this._game.deactivate();
 	
 	// Call the superclass implementation of close.
 	View.prototype.close.call(this);

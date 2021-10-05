@@ -38,7 +38,7 @@ Tetromino.BLOCKS = {
 		'90': [
 			[1, 1, 1, 1]
 		],
-		color: new Color(0, 188, 212)
+		color: new Color(0, 188, 212).darken(0.7)
 	},
 	J: {
 		'0': [
@@ -59,7 +59,7 @@ Tetromino.BLOCKS = {
 			[1, 1, 1],
 			[0, 0, 1]
 		],
-		color: new Color(32, 149, 243)
+		color: new Color(32, 149, 243).darken(0.7)
 	},
 	L: {
 		'0': [
@@ -80,14 +80,14 @@ Tetromino.BLOCKS = {
 			[0, 0, 1],
 			[1, 1, 1]
 		],
-		color: new Color(255, 152, 0)
+		color: new Color(255, 152, 0).darken(0.7)
 	},
 	O: {
 		'0': [
 			[1, 1],
 			[1, 1]
 		],
-		color: new Color(255, 234, 0)
+		color: new Color(255, 234, 0).darken(0.7)
 	},
 	S: {
 		'0': [
@@ -99,7 +99,7 @@ Tetromino.BLOCKS = {
 			[1, 1],
 			[0, 1]
 		],
-		color: new Color(76, 175, 79)
+		color: new Color(76, 175, 79).darken(0.7)
 	},
 	T: {
 		'0': [
@@ -120,7 +120,7 @@ Tetromino.BLOCKS = {
 			[1, 1],
 			[1, 0]
 		],
-		color: new Color(155, 39, 176)
+		color: new Color(155, 39, 176).darken(0.7)
 	},
 	Z: {
 		'0': [
@@ -132,7 +132,7 @@ Tetromino.BLOCKS = {
 			[1, 1],
 			[1, 0]
 		],
-		color: new Color(244, 67, 54)
+		color: new Color(244, 67, 54).darken(0.7)
 	}
 };
 

@@ -8,41 +8,37 @@
 function View(elem, parent) {
 	// Initialize private variables.
 	this._parent = parent;
-	this._boundHandleKeyDown = this._handleKeyDown.bind(this);
+	this._active = false;
 	
 	// Initialize public variables.
 	this.elem = elem;
 	
 	// Give the back button (if any) a reference to its containing view.
-	var backButton = elem.getElementsByClassName('backButton')[0];
-	if (backButton) {
-		backButton.view = this;
-		backButton.onclick = function () {
+	this.backButton = elem.getElementsByClassName('back-button')[0];
+	if (this.backButton) {
+		this.backButton.view = this;
+		this.backButton.onclick = function () {
 			this.view.goBack();
 		};
 	}
+	
+	// Set up back event listener.
+	im.addEventListener('back', this._handleBackInput.bind(this));
 }
-
-// Initialize static constants.
-/** {Array<Number>} The codes for keys that go back */
-View.BACK_KEYS = [
-	8, // Backspace
-	27 // Esc
-];
 
 View.prototype = {
 	/**
-	 * Handle key presses.
-	 * @param {KeyboardEvent} e
+	 * @private
+	 * Handle a back input.
 	 */
-	_handleKeyDown: function (e) {
-		if (View.BACK_KEYS.indexOf(e.keyCode) !== -1) {
-			e.preventDefault();
-			// Do not allow the top-level view to be closed.
-			if (this._parent) {
-				this.goBack();
-			}
+	_handleBackInput: function () {
+		if (!this._active) { return; }
+		
+		// Do not allow the top-level view to be closed.
+		if (!this._parent) {
+			return;
 		}
+		Utils.animateButtonPress(this.backButton);
 	},
 	
 	/**
@@ -67,14 +63,14 @@ View.prototype = {
 	 * Reenable a suspended view and its event listeners.
 	 */
 	resume: function () {
-		window.addEventListener('keydown', this._boundHandleKeyDown, false);
+		this._active = true;
 	},
 	
 	/**
 	 * Suspend a view and its event listeners.
 	 */
 	suspend: function () {
-		window.removeEventListener('keydown', this._boundHandleKeyDown, false);
+		this._active = false;
 	},
 	
 	/**

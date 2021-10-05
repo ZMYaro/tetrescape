@@ -9,10 +9,14 @@ var GAME_PREFIX = 'tetrescape-',
 	BUTTON_SUFFIX = '-btn',
 	MAX_MOVES = 999;
 
-var views,
+var im, // Input manager
+	views,
 	currentLevel;
 
 window.onload = function () {
+	// Initialize input manager.
+	im = new InputManager(document.getElementById('canvas'));
+	
 	// Create views.
 	views = {
 		title: new MenuView(document.getElementById('titleScreen')),
@@ -39,7 +43,7 @@ window.onload = function () {
 	};
 	
 	// Enable the results screen buttons.
-	document.getElementById('resultsBackButton').onclick = function () {
+	document.getElementById('results-back-button').onclick = function () {
 		this.view.close();
 		views.game.close();
 		
@@ -76,13 +80,9 @@ function getStarRating(level, type, score) {
 function getStarDisplayHTML(mode, score, stars) {
 	var modeLabel = (mode === MODES.MOVES ? 'Fewest moves' : 'Most blocks cleared');
 	return '<span title="Fewest moves">' +
-		'<svg role="img" aria-label="' + modeLabel + '">' +
-			'<use xlink:href="images/icons/' + mode + '.svg#icon" href="images/icons/' + mode + '.svg#icon"></use>' +
-		'</svg>' +
+		'<img alt="' + modeLabel + '" src="images/icons/' + mode + '.png" class="icon" />' +
 		score +
-		'<svg role="img" aria-label="' + stars + ' stars.">' +
-			'<use xlink:href="images/icons/' + stars + 'star.svg#icon" href="images/icons/' + stars + 'star.svg#icon"></use>' +
-		'</svg>' +
+		'<img alt="' + stars + ' stars." src="images/icons/' + stars + 'star.png" class="icon" />' +
 	'</span>';
 }
 
@@ -93,14 +93,15 @@ function getStarDisplaysHTML(moves, moveStars, blocks, blockStars) {
 }
 
 function populateLevelSelect() {
-	var levelScreenMenu = views.levelSelect.elem.getElementsByClassName('menu')[0];
+	var levelScreenList = views.levelSelect.elem.querySelector('.menu ul');
 	
 	// Clear the menu.
-	levelScreenMenu.innerHTML = '';
+	levelScreenList.innerHTML = '';
 	views.levelSelect.inputs = [];
 	
 	LEVELS.forEach(function (level, i) {
-		var levelButton = document.createElement('button'),
+		var levelListItem = document.createElement('li'),
+			levelButton = document.createElement('button'),
 			moves = localStorage[GAME_PREFIX + LEVEL_PREFIX + i + MODES.MOVES],
 			blocks = localStorage[GAME_PREFIX + LEVEL_PREFIX + i + MODES.BLOCKS],
 			moveStars = getStarRating(i, MODES.MOVES, moves),
@@ -128,7 +129,8 @@ function populateLevelSelect() {
 		};
 		
 		// Add the new button to the menu.
-		levelScreenMenu.appendChild(levelButton);
+		levelListItem.appendChild(levelButton);
+		levelScreenList.appendChild(levelListItem);
 		views.levelSelect.inputs.push(levelButton);
 	});
 }
@@ -185,7 +187,7 @@ function endGame(moves, blocks) {
 		if (i < featuredModeStars) {
 			setTimeout(function () {
 				resultsStar.classList.add('active');
-			}, 150 * (i + 1));
+			}, 100 * (i + 1));
 		}
 	});
 	
