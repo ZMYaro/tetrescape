@@ -165,7 +165,7 @@ button {
 	text-align: center;
 	
 	background-color: #3d3c3b;
-	background-image: url('../images/stone_bg_dark_speckled.jpg');
+	background-image: url('../images/backgrounds/stone_dark_speckled.jpg');
 	background-size: cover;
 	color: white;
 	
@@ -310,7 +310,7 @@ button {
 	padding: 32px;
 	width: auto;
 	height: 448px;
-	background-image: url('../images/level_select_bg_horiz.jpg');
+	background-image: url('../images/backgrounds/level_select_horiz.jpg');
 	background-size: 320px 448px;
 	background-repeat: repeat;
 	box-shadow: 0 1px 128px 32px rgba(0, 0, 0, 0.9);
@@ -347,7 +347,7 @@ button {
 		flex-direction: column;
 		width: 448px;
 		height: auto;
-		background-image: url('../images/level_select_bg_vert.jpg');
+		background-image: url('../images/backgrounds/level_select_vert.jpg');
 		background-size: 448px 320px;
 	}
 	#levelScreen .menu button {
@@ -426,7 +426,7 @@ button {
 #aboutScreen,
 #resultsScreen {
 	background-color: #4b4a4e;
-	background-image: url('../images/stone_bg_light_smooth.jpg');
+	background-image: url('../images/backgrounds/stone_light_smooth.jpg');
 	background-size: cover;
 	color: white;
 }
@@ -483,7 +483,7 @@ button {
 
 /* About (credits) screen styles */
 #aboutScreen {
-	background-image: url('../images/stone_bg_light_speckled.jpg');
+	background-image: url('../images/backgrounds/stone_light_speckled.jpg');
 	
 	text-shadow:
 		-5px 12px 6px rgba(0, 0, 0, 0.15),
