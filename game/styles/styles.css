@@ -401,7 +401,7 @@ button {
 	width: 30%;
 	height: 50%;
 	
-	background-image: url('../images/pointer_finger.png');
+	background-image: url('../images/hints/pointer_finger.png');
 	background-size: contain;
 	background-repeat: no-repeat;
 	
@@ -410,13 +410,13 @@ button {
 	animation-name: hint-loop-swipe;
 }
 	.prefer-input-keyboard #control-hint {
-		background-image: url('../images/arrow_up.png');
+		background-image: url('../images/hints/arrow_up.png');
 		transform-origin: 50% 10%;
 		animation-name: hint-loop-press;
 	}
 	.prefer-input-gamepad #control-hint,
 	.prefer-input-xbox #control-hint {
-		background-image: url('../images/dpad_up.png');
+		background-image: url('../images/hints/dpad_up.png');
 		transform-origin: 50% 10%;
 		animation-name: hint-loop-tilt;
 	}
