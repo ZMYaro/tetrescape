@@ -150,9 +150,7 @@ button {
 
 .view {
 	position: fixed;
-	-webkit-box-sizing: border-box;
-	   -moz-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	left: 0;
 	top: 0;
 	width: 100%;
@@ -169,36 +167,18 @@ button {
 	background-size: cover;
 	color: white;
 	
-	-webkit-transform: translateY(90%);
-	   -moz-transform: translateY(90%);
-	    -ms-transform: translateY(90%);
-	     -o-transform: translateY(90%);
-	        transform: translateY(90%);
+	transform: translateY(90%);
 	
-	-webkit-transition-property: opacity, -webkit-transform, transform, -webkit-box-shadow, box-shadow;
-	   -moz-transition-property: opacity, -moz-transform, transform, -moz-box-shadow, box-shadow;
-	    -ms-transition-property: opacity, -ms-transform, transform, box-shadow;
-	     -o-transition-property: opacity, -o-transform, transform, box-shadow;
-	        transition-property: opacity, transform, box-shadow;
-	-webkit-transition-duration: 0.2s;
-	   -moz-transition-duration: 0.2s;
-	    -ms-transition-duration: 0.2s;
-	     -o-transition-duration: 0.2s;
-	        transition-duration: 0.2s;
+	transition-property: opacity, transform, box-shadow;
+	transition-duration: 0.2s;
 }
 	.view.active {
-		-webkit-transform: translateY(0%);
-		   -moz-transform: translateY(0%);
-		    -ms-transform: translateY(0%);
-		     -o-transform: translateY(0%);
-		        transform: translateY(0%);
+		transform: translateY(0%);
 		opacity: 1;
 		pointer-events: auto;
 	}
 	.view p {
-		-webkit-box-sizing: border-box;
-		   -moz-box-sizing: border-box;
-		        box-sizing: border-box;
+		box-sizing: border-box;
 		padding: 0 72px;
 	}
 
