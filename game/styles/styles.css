@@ -157,7 +157,7 @@ button {
 	top: 0;
 	width: 100%;
 	height: 100%;
-	padding-top: 48px;
+	padding-top: 3rem;
 	
 	opacity: 0;
 	pointer-events: none;
@@ -307,19 +307,19 @@ button {
 	flex-direction: row;
 	align-items: center;
 	margin: auto;
-	padding: 32px;
+	padding: 1.5rem; /* 24px default */
 	width: auto;
-	height: 448px;
+	height: 21rem; /* 336px default */
 	background-image: url('../images/backgrounds/level_select_horiz.jpg');
-	background-size: 320px 448px;
+	background-size: 15rem 21rem; /* 240px 336px default */
 	background-repeat: repeat;
-	box-shadow: 0 1px 128px 32px rgba(0, 0, 0, 0.9);
+	box-shadow: 0 1px 8rem 2rem rgba(0, 0, 0, 0.9);
 }
 #levelScreen .menu button {
 	width: 12rem; /* 192px default */
 	height: 12rem;
 	padding: 1rem 0.75rem; /* 16px 12px default */
-	margin: 32px;
+	margin: 1.5rem; /* 24px default */
 	font-size: 100%;
 	
 	background-image: url('../images/buttons/level.jpg');
@@ -338,27 +338,17 @@ button {
 .stars {
 	font-size: 125%;
 }
-	
-@media (orientation: portrait) {
-	#levelScreen .menu {
-		display: block;
-	}
-	#levelScreen .menu ul {
-		flex-direction: column;
-		width: 448px;
-		height: auto;
-		background-image: url('../images/backgrounds/level_select_vert.jpg');
-		background-size: 448px 320px;
-	}
-	#levelScreen .menu button {
-		margin-left: auto;
-		margin-right: auto;
-	}
-}
+
 @media (min-width: 500px) and (min-height: 500px) {
+	#levelScreen .menu ul {
+		padding: 2rem; /* 32px default */
+		height: 28rem; /* 448px default */
+		background-size: 20rem 28rem; /* 448px 320px default */
+	}
 	#levelScreen .menu button {
 		width: 16rem; /* 256px default */
 		height: 16rem;
+		margin: 2rem; /* 32px default */
 	}
 		#levelScreen .menu button .title {
 			font-size: 200%;
@@ -371,6 +361,28 @@ button {
 			margin-top: 0.5rem;
 			margin-bottom: 0.25rem;
 		}
+}
+@media (orientation: portrait) {
+	#levelScreen .menu {
+		display: block;
+	}
+	#levelScreen .menu ul {
+		flex-direction: column;
+		width: 21rem; /* 336px default */
+		height: auto;
+		background-image: url('../images/backgrounds/level_select_vert.jpg');
+		background-size: 21rem 15rem; /* 336px 240px default */
+	}
+	#levelScreen .menu button {
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+@media (min-width: 500px) and (min-height: 500px) and (orientation: portrait) {
+	#levelScreen .menu ul {
+		width: 28rem; /* 448px default */
+		background-size: 28rem 20rem; /* 448px 320px default */
+	}
 }
 
 /* Game screen styles */
