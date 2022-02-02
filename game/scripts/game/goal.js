@@ -51,9 +51,5 @@ Goal.prototype.draw = function (ctx, blockSize) {
 		y = this.y * blockSize + Block.LINE_WIDTH / 2,
 		size = blockSize - Block.LINE_WIDTH / 2 - Block.LINE_WIDTH / 2;
 	
-	ctx.strokeStyle = Goal.LINE_COLOR.hex;
-	ctx.fillStyle = Goal.COLOR.hex;
-	ctx.fillRect(x, y, size, size);
-	ctx.strokeRect(x, y, size, size);
 	ctx.drawImage(this._img, x, y, size, size);
 }
