@@ -142,11 +142,12 @@ Game.prototype = {
 		}, this);
 		// Create the tetrominos.
 		this._levelData.tetrominos.forEach(function (tetromino) {
-			new Tetromino(Tetromino.BLOCKS[tetromino.type][tetromino.orientation],
+			new Tetromino(
+				tetromino.type,
+				tetromino.orientation,
 				tetromino.x,
 				tetromino.y,
-				this._grid,
-				Tetromino.BLOCKS[tetromino.type].color);
+				this._grid);
 		}, this);
 		
 		// Reset the block counter.
