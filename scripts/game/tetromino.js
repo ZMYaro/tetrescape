@@ -3,13 +3,14 @@
 /**
  * Initialize a new tetromino.
  * @class
- * @param {Array<Array<Boolean>>} blockArrangement - The arrangement of blocks in the tetromino
+ * @param {String} type - The letter of the tetromino type
+ * @param {Number|String} orientation - The orientation of the tetromino, in degrees
  * @param {Number} x - The the x-coordinate of the top-left corner of the tetromino
  * @param {Number} y - The the y-coordinate of the top-left corner of the tetromino
  * @param {Grid} grid - The grid to which the tetromino's blocks are to be added
- * @param {Color} color - The color of the tetromino
  */
-function Tetromino(blockArrangement, x, y, grid, color) {
+function Tetromino(type, orientation, x, y, grid) {
+	var blockArrangement = Tetromino.BLOCKS[type][orientation];
 	this._blocks = [];
 	for (var r = 0; r < blockArrangement.length; r++) {
 		for (var c = 0; c < blockArrangement[r].length; c++) { // Heh, C++
@@ -20,7 +21,7 @@ function Tetromino(blockArrangement, x, y, grid, color) {
 					right: (c < blockArrangement[r].length - 1 && blockArrangement[r][c + 1]),
 					bottom: (r < blockArrangement.length - 1 && blockArrangement[r + 1][c])
 				};
-				this._blocks.push(new Block(x + c, y + r, grid, color, this, neighbors));
+				this._blocks.push(new Block(x + c, y + r, grid, type, this, neighbors));
 			}
 		}
 	}

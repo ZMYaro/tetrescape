@@ -12,8 +12,8 @@ function Goal(x, y, grid) {
 	// Call the superclass constructor.
 	GridOccupant.call(this, x, y, grid);
 	
-	this._img = new Image();
-	this._img.src = 'images/exit.png';
+	this._image = new Image();
+	this._image.src = 'images/exit.png';
 }
 
 // Define static constants.
@@ -51,9 +51,5 @@ Goal.prototype.draw = function (ctx, blockSize) {
 		y = this.y * blockSize + Block.LINE_WIDTH / 2,
 		size = blockSize - Block.LINE_WIDTH / 2 - Block.LINE_WIDTH / 2;
 	
-	ctx.strokeStyle = Goal.LINE_COLOR.hex;
-	ctx.fillStyle = Goal.COLOR.hex;
-	ctx.fillRect(x, y, size, size);
-	ctx.strokeRect(x, y, size, size);
-	ctx.drawImage(this._img, x, y, size, size);
+	ctx.drawImage(this._image, x, y, size, size);
 }

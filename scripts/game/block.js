@@ -7,11 +7,11 @@
  * @param {Number} x - The x-coordinate of the block on the grid
  * @param {Number} y - The y-coordinate of the block on the grid
  * @param {Grid} grid - The grid to which the block is to be added
- * @param {Color} color - The color of the block
+ * @param {String} minoType - The letter of the block type 
  * @param {Tetromino} [tetromino] - The tetromino the block belongs to, if any
- * @param {Object<String,Boolean>} [neighbors] - The block's neighbors in a tetromino
+ * @param {Object<String,Boolean>} [hasNeighbors] - The block's neighbors in a tetromino
  */
-function Block(x, y, grid, color, tetromino, neighbors) {
+function Block(x, y, grid, minoType, tetromino, hasNeighbors) {
 	// Call the superclass constructor.
 	GridOccupant.call(this, x, y, grid);
 	
@@ -21,10 +21,22 @@ function Block(x, y, grid, color, tetromino, neighbors) {
 	this.opacity = 1;
 	this.scale = 1;
 	
-	this._color = color || Block.DEFAULT_COLOR;
-	this._neighbors = neighbors || {left: false, top: false, right: false, bottom: false};
 	this.dying = false;
 	this._deathTween = undefined;
+	
+	// Determine the block's image.
+	this._image = new Image();
+	hasNeighbors = hasNeighbors || {left: false, top: false, right: false, bottom: false};
+	var fileName = 'images/blocks/' + (minoType || 'static').toLowerCase() + '_block';
+	if (hasNeighbors.top || hasNeighbors.bottom || hasNeighbors.left || hasNeighbors.right) {
+		fileName += '_' +
+			(hasNeighbors.top ?    'n' : '') +
+			(hasNeighbors.bottom ? 's' : '') +
+			(hasNeighbors.right ?  'e' : '') +
+			(hasNeighbors.left ?   'w' : '');
+	}
+	fileName += '.png';
+	this._image.src = fileName;
 }
 
 // Initialize static constants.
@@ -122,7 +134,7 @@ Block.prototype.kill = function () {
 	
 	// Start the death animation.
 	this.dying = true;
-	this._deathTween = new Tween(this, {opacity: -1, rotation: 0.15 * Math.PI, scale: 0.5}, Block.DEATH_DURATION)
+	this._deathTween = new Tween(this, {opacity: -1, rotation: 0.08 * Math.PI, scale: 0.4}, Block.DEATH_DURATION)
 	this._deathTween.onfinish = (function () {
 		// Remove the block from the grid.
 		this._grid.removeOccupant(this);
@@ -151,13 +163,11 @@ Block.prototype.update = function () {
 Block.prototype.draw = function (ctx, blockSize) {
 	var x = this.x * blockSize + (blockSize / 2),
 		y = this.y * blockSize + (blockSize / 2),
-		size = blockSize - (Block.LINE_WIDTH / 2) - (Block.LINE_WIDTH / 2);
+		size = blockSize;// - (Block.LINE_WIDTH / 2) - (Block.LINE_WIDTH / 2);
 	
 	ctx.save();
 	
 	ctx.lineWidth = Block.LINE_WIDTH;
-	ctx.fillStyle = this._color.hex;
-	ctx.strokeStyle = this._color.darken(0.8).hex;
 	ctx.globalAlpha = this.opacity;
 	
 	ctx.translate(x, y);
@@ -165,25 +175,7 @@ Block.prototype.draw = function (ctx, blockSize) {
 	ctx.scale(this.scale, this.scale);
 	
 	// Draw the block.
-	ctx.beginPath();
-	ctx.rect(-0.5 * size, -0.5 * size, size, size);
-	ctx.fill();
-	//ctx.stroke();
-	ctx.closePath();
-	
-	// Connect the block to other blocks in its tetromino, if any.
-	if (this._neighbors.left) {
-		ctx.fillRect(-0.5 * size - Block.LINE_WIDTH, -0.5 * size, Block.LINE_WIDTH, size);
-	}
-	if (this._neighbors.top) {
-		ctx.fillRect(-0.5 * size, -0.5 * size - Block.LINE_WIDTH, size, Block.LINE_WIDTH);
-	}
-	if (this._neighbors.right) {
-		ctx.fillRect(0.5 * size, -0.5 * size, Block.LINE_WIDTH, size);
-	}
-	if (this._neighbors.bottom) {
-		ctx.fillRect(-0.5 * size, 0.5 * size, size, Block.LINE_WIDTH);
-	}
+	ctx.drawImage(this._image, -0.5 * size, -0.5 * size, size, size);
 	
 	ctx.restore();
 };

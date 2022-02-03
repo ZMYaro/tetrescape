@@ -10,7 +10,7 @@
  */
 function StaticBlock(x, y, grid) {
 	// Call the superclass constructor.
-	Block.call(this, x, y, grid, StaticBlock.COLOR);
+	Block.call(this, x, y, grid, 'static');
 }
 
 // Initialize static constants.

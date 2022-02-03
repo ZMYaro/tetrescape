@@ -59,7 +59,7 @@ Player.prototype.draw = function (ctx, blockSize) {
 	var circX = this.x * blockSize + (0.5 * blockSize),
 		circY = this.y * blockSize + (0.5 * blockSize);
 	
-	ctx.fillStyle = 'green';
+	ctx.fillStyle = '#b7b9c0';
 	ctx.beginPath();
 	ctx.arc(circX, circY, 0.4 * blockSize, 0, 2 * Math.PI);
 	ctx.closePath();
