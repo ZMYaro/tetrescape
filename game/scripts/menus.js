@@ -19,7 +19,7 @@ window.onload = function () {
 	
 	// Create views.
 	views = {
-		title: new MenuView(document.getElementById('titleScreen')),
+		title: new TitleView(document.getElementById('titleScreen')),
 		instructions: new View(document.getElementById('instructionsScreen')),
 		about: new View(document.getElementById('aboutScreen')),
 		levelSelect: new MenuView(document.getElementById('levelScreen')),

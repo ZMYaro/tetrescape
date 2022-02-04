@@ -271,6 +271,13 @@ button {
 	max-width: min(100%, 720px);
 	max-height: 70%;
 }
+#title-canvas {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	pointer-events: none;
+}
 
 /* Level select screen styles */
 #levelScreen .menu {
