@@ -21,7 +21,6 @@ function TitleView(elem, parent) {
 	this._lastFrameTime;
 	this._initParticles();
 	this._boundDraw = this._draw.bind(this);
-	requestAnimationFrame(this._boundDraw);
 }
 
 // Inherit from View.
@@ -63,5 +62,16 @@ TitleView.prototype._draw = function (timestamp) {
 		particle.draw(this._ctx, deltaTime);
 	}, this);
 	
-	requestAnimationFrame(this._boundDraw);
+	if (this._active) {
+		requestAnimationFrame(this._boundDraw);
+	}
 }
+
+
+/**
+ * Reenable the view and the embers.
+ */
+TitleView.prototype.resume = function () {
+	MenuView.prototype.resume.call(this);
+	requestAnimationFrame(this._boundDraw);
+};

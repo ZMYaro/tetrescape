@@ -64,6 +64,7 @@ View.prototype = {
 	 */
 	resume: function () {
 		this._active = true;
+		this.elem.classList.remove('suspended');
 	},
 	
 	/**
@@ -71,6 +72,7 @@ View.prototype = {
 	 */
 	suspend: function () {
 		this._active = false;
+		this.elem.classList.add('suspended');
 	},
 	
 	/**
@@ -82,6 +84,7 @@ View.prototype = {
 			this.onclose();
 		}
 		this.suspend();
+		this.elem.classList.remove('suspended');
 		this.elem.classList.remove('open');
 	},
 	

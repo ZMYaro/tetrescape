@@ -292,14 +292,14 @@ button {
 		left: 0;
 		animation-duration: 5s;
 	}
-		#titleScreen.open #title-glow1 {
+		#titleScreen.open:not(.suspended) #title-glow1 {
 			animation-name: title-glow1;
 		}
 	#title-glow2 {
 		right: 0;
 		animation-duration: 7s;
 	}
-		#titleScreen.open #title-glow2 {
+		#titleScreen.open:not(.suspended) #title-glow2 {
 			animation-name: title-glow2;
 		}
 
