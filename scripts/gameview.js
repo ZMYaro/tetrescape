@@ -13,7 +13,7 @@ function GameView(elem, parent) {
 	this.topBar = this.elem.querySelector('.top-bar');
 	
 	// Ensure the canvas always fits the view.
-	this._canvas = this.elem.querySelector('#canvas');
+	this._canvas = this.elem.querySelector('#game-canvas');
 	window.onresize = this._handleResize.bind(this);
 	this._handleResize();
 	

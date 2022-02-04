@@ -1,4 +1,4 @@
-var CACHE_NAME = 'cache-2021-10-04';
+var CACHE_NAME = 'cache-2022-02-04';
 
 self.addEventListener('install', function (ev) {
 	// Add files to cache.
@@ -48,6 +48,7 @@ self.addEventListener('install', function (ev) {
 				'/images/logo/256_maskable.png',
 				'/images/logo/favicon.ico',
 				'/images/logo/title.png',
+				'/images/ember.png',
 				'/images/exit.png', // TO BE REPLACED
 				'/images/inprod_logo.png',
 				'/scripts/game/block.js',
@@ -70,6 +71,8 @@ self.addEventListener('install', function (ev) {
 				'/scripts/input_manager.js',
 				'/scripts/menus.js',
 				'/scripts/menuview.js',
+				'/scripts/titleparticle.js',
+				'/scripts/titleview.js',
 				'/scripts/tween.js',
 				'/scripts/utils.js',
 				'/scripts/view.js',

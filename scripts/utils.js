@@ -33,5 +33,19 @@ var Utils = {
 			}
 		}
 		return gamepadCount;
+	},
+	
+	/**
+	 * Get a random integer.
+	 * @param {Number} min
+	 * @param {Number} [max]
+	 * @returns {Number} - A random integer in the range [0, min) or [min, max) depending on whether max is defined
+	 */
+	randInt: function (min, max) {
+		if (typeof(max) === 'undefined') {
+			return Math.floor(Math.random() * min);
+		} else {
+			return Math.floor(Math.random() * (max - min) + min);
+		}
 	}
 };

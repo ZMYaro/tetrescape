@@ -15,11 +15,11 @@ var im, // Input manager
 
 window.onload = function () {
 	// Initialize input manager.
-	im = new InputManager(document.getElementById('canvas'));
+	im = new InputManager(document.getElementById('game-canvas'));
 	
 	// Create views.
 	views = {
-		title: new MenuView(document.getElementById('titleScreen')),
+		title: new TitleView(document.getElementById('titleScreen')),
 		instructions: new View(document.getElementById('instructionsScreen')),
 		about: new View(document.getElementById('aboutScreen')),
 		levelSelect: new MenuView(document.getElementById('levelScreen')),

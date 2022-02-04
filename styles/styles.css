@@ -36,6 +36,7 @@ button {
 	background-color: #4b4a4e;
 	color: inherit;
 	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
 }
 
 .icon {
@@ -172,7 +173,7 @@ button {
 	transition-property: opacity, transform, box-shadow;
 	transition-duration: 0.2s;
 }
-	.view.active {
+	.view.open {
 		transform: translateY(0%);
 		opacity: 1;
 		pointer-events: auto;
@@ -257,7 +258,7 @@ button {
 	width: auto;
 	height: auto;
 	padding: 0;
-	margin-bottom: 1em;
+	margin-bottom: 2em;
 	overflow: visible;
 }
 #titleScreen .menu button {
@@ -271,6 +272,37 @@ button {
 	max-width: min(100%, 720px);
 	max-height: 70%;
 }
+#title-canvas {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	pointer-events: none;
+}
+#title-glow1,
+#title-glow2 {
+	position: absolute;
+	bottom: -31vw;
+	width: 40vw;
+	height: 30vw;
+	color: hsla(270, 100%, 70%, 0.5);
+	animation-iteration-count: infinite;
+	pointer-events: none;
+}
+	#title-glow1 {
+		left: 0;
+		animation-duration: 5s;
+	}
+		#titleScreen.open:not(.suspended) #title-glow1 {
+			animation-name: title-glow1;
+		}
+	#title-glow2 {
+		right: 0;
+		animation-duration: 7s;
+	}
+		#titleScreen.open:not(.suspended) #title-glow2 {
+			animation-name: title-glow2;
+		}
 
 /* Level select screen styles */
 #levelScreen .menu {
@@ -427,7 +459,7 @@ button {
 	border-radius: 100%;
 	transform: scale(0);
 }
-	.view#resultsScreen.active {
+	.view#resultsScreen.open {
 		border-radius: 0;
 		transform: scale(1);
 	}
