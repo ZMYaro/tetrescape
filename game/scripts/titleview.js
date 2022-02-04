@@ -7,7 +7,7 @@
  */
 function TitleView(elem, parent) {
 	// Call the superclass constructor.
-	View.call(this, elem, parent);
+	MenuView.call(this, elem, parent);
 	
 	
 	this._canvas = this.elem.querySelector('#title-canvas');
@@ -25,7 +25,7 @@ function TitleView(elem, parent) {
 }
 
 // Inherit from View.
-TitleView.prototype = Object.create(View.prototype);
+TitleView.prototype = Object.create(MenuView.prototype);
 
 // Initialize constants.
 TitleView.prototype.PARTICLE_COUNT = Math.floor(window.screen.availWidth * window.screen.availHeight / 50000);
