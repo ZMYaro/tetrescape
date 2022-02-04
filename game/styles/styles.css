@@ -285,7 +285,7 @@ button {
 	bottom: -31vw;
 	width: 40vw;
 	height: 30vw;
-	color: hsla(270deg, 100%, 70%, 0.5);
+	color: hsla(270, 100%, 70%, 0.5);
 	animation-iteration-count: infinite;
 	pointer-events: none;
 }
