@@ -36,6 +36,7 @@ button {
 	background-color: #4b4a4e;
 	color: inherit;
 	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
 }
 
 .icon {
