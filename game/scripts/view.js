@@ -56,7 +56,7 @@ View.prototype = {
 		}
 		
 		this.resume();
-		this.elem.classList.add('active');
+		this.elem.classList.add('open');
 	},
 	
 	/**
@@ -82,7 +82,7 @@ View.prototype = {
 			this.onclose();
 		}
 		this.suspend();
-		this.elem.classList.remove('active');
+		this.elem.classList.remove('open');
 	},
 	
 	/**
