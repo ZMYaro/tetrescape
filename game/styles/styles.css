@@ -257,7 +257,7 @@ button {
 	width: auto;
 	height: auto;
 	padding: 0;
-	margin-bottom: 1em;
+	margin-bottom: 2em;
 	overflow: visible;
 }
 #titleScreen .menu button {
@@ -278,6 +278,30 @@ button {
 	bottom: 0;
 	pointer-events: none;
 }
+#title-glow1,
+#title-glow2 {
+	position: absolute;
+	bottom: -31vw;
+	width: 40vw;
+	height: 30vw;
+	color: hsla(270deg, 100%, 70%, 0.5);
+	animation-iteration-count: infinite;
+	pointer-events: none;
+}
+	#title-glow1 {
+		left: 0;
+		animation-duration: 5s;
+	}
+		#titleScreen.active #title-glow1 {
+			animation-name: title-glow1;
+		}
+	#title-glow2 {
+		right: 0;
+		animation-duration: 7s;
+	}
+		#titleScreen.active #title-glow2 {
+			animation-name: title-glow2;
+		}
 
 /* Level select screen styles */
 #levelScreen .menu {
