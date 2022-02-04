@@ -15,7 +15,7 @@ var im, // Input manager
 
 window.onload = function () {
 	// Initialize input manager.
-	im = new InputManager(document.getElementById('canvas'));
+	im = new InputManager(document.getElementById('game-canvas'));
 	
 	// Create views.
 	views = {
