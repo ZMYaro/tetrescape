@@ -2,6 +2,7 @@ html,
 body {
 	margin: 0;
 	padding: 0;
+	border: 0;
 	overflow: hidden;
 	
 	background-color: #3b3a3d;
@@ -60,11 +61,11 @@ button {
 	left: 0;
 	right: 0;
 	top: 0;
-	height: 3rem;
-	padding: 0.75rem;
+	height: 3.5rem; /* 56px default */
 	margin: 0;
-	
+	padding: 1.1rem;
 	font-size: 1.25rem;
+	line-height: 100%;
 	text-align: left;
 	
 	background-color: #525250;
@@ -83,35 +84,35 @@ button {
 			0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	}
 	.top-bar button {
-		width: 3rem;
-		height: 3rem;
-		margin: -0.75rem 0.5rem;
+		width: 3.5rem;
+		height: 3.5rem;
+		margin: -1.1rem 0.5rem;
 		vertical-align: top;
 		
 		border-radius: 0;
-		background-size: 9rem 3rem;
+		background-size: 10.5rem 3.5rem;
 		
 		box-shadow:
 			 5px 0 1px -1px rgba(255, 255, 255, 0.1),
-			-5px 0 1px -1px rgba(0, 0, 0, 0.1);
+			-5px 0 1px -1px rgba(0, 0, 0, 0.2);
 	}
 		.top-bar button:hover,
 		.top-bar button:focus {
-			background-position-x: -3rem;
+			background-position-x: -3.5rem;
 			filter: brightness(1.05);
 		}
 		.top-bar button:active,
 		.top-bar button.active {
-			background-position-x: -6rem;
+			background-position-x: -7rem;
 			box-shadow:
-				 3px 0 1px -1px rgba(255, 255, 255, 0.2),
-				-3px 0 1px -1px rgba(0, 0, 0, 0.2),
+				 5px 0 1px -1px rgba(255, 255, 255, 0.2),
+				-5px 0 1px -1px rgba(0, 0, 0, 0.1),
 				inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
 		}
 
 		.top-bar button.back-button {
 			background-image: url('../images/buttons/back.jpg');
-			margin-left: -0.75rem;
+			margin-left: -1.1rem;
 		}
 			.prefer-input-keyboard .top-bar button.back-button {
 				background-image: url('../images/buttons/back_backspace.jpg');
@@ -136,7 +137,7 @@ button {
 				}
 		.top-bar button#restart-button {
 			background-image: url('../images/buttons/restart.jpg');
-			margin-right: -0.75rem;
+			margin-right: -1.1rem;
 		}
 			.prefer-input-keyboard .top-bar button#restart-button {
 				background-image: url('../images/buttons/restart_r.jpg');
@@ -148,7 +149,6 @@ button {
 				background-image: url('../images/buttons/restart_x.jpg');
 			}
 
-
 .view {
 	position: fixed;
 	box-sizing: border-box;
@@ -156,7 +156,7 @@ button {
 	top: 0;
 	width: 100%;
 	height: 100%;
-	padding-top: 3rem;
+	padding-top: 3.5rem;
 	
 	opacity: 0;
 	pointer-events: none;
@@ -182,6 +182,37 @@ button {
 		box-sizing: border-box;
 		padding: 0 72px;
 	}
+@media (min-width: 500px) and (min-height: 500px) {
+	.top-bar {
+		height: 4rem; /* 64px default */
+		padding: 1.25rem;
+		font-size: 1.4rem;
+	}
+		.top-bar button {
+			width: 4rem;
+			height: 4rem;
+			margin: -1.25rem 1rem;
+			background-size: 12rem 4rem;
+		}
+			.top-bar button:hover,
+			.top-bar button:focus {
+				background-position-x: -4rem;
+			}
+			.top-bar button:active,
+			.top-bar button.active {
+				background-position-x: -8rem;
+			}
+			
+			.top-bar button.back-button {
+				margin-left: -1.25rem;
+			}
+			.top-bar button#restart-button {
+				margin-right: -1.25rem;
+			}
+	.view {
+		padding-top: 4rem;
+	}
+}
 
 .menu {
 	box-sizing: border-box;
