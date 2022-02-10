@@ -18,6 +18,15 @@ var Utils = {
 	},
 	
 	/**
+	 * Convert degrees to radians.
+	 * @param {Number} deg - The measurement in degrees
+	 * @returns {Number} - The measurement in radians
+	 */
+	degToRad: function (deg) {
+		return (deg * (Math.PI / 180));
+	},
+	
+	/**
 	 * Get the number of connected gamepads (beacuse navigator.getGamepads().length is always 4 in some browsers).
 	 * @returns {Number} - The number of non-null gamepads
 	 */

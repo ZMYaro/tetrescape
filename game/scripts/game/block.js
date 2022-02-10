@@ -162,8 +162,7 @@ Block.prototype.update = function () {
  */
 Block.prototype.draw = function (ctx, blockSize) {
 	var x = this.x * blockSize + (blockSize / 2),
-		y = this.y * blockSize + (blockSize / 2),
-		size = blockSize;// - (Block.LINE_WIDTH / 2) - (Block.LINE_WIDTH / 2);
+		y = this.y * blockSize + (blockSize / 2);
 	
 	ctx.save();
 	
@@ -171,11 +170,11 @@ Block.prototype.draw = function (ctx, blockSize) {
 	ctx.globalAlpha = this.opacity;
 	
 	ctx.translate(x, y);
-	ctx.rotate(-this.rotation);
+	ctx.rotate(-Utils.degToRad(this.rotation));
 	ctx.scale(this.scale, this.scale);
 	
 	// Draw the block.
-	ctx.drawImage(this._image, -0.5 * size, -0.5 * size, size, size);
+	ctx.drawImage(this._image, -0.5 * blockSize, -0.5 * blockSize, blockSize, blockSize);
 	
 	ctx.restore();
 };
