@@ -431,6 +431,10 @@ button {
 /* Game screen styles */
 #gameScreen {
 	background: #101010;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 #gameScreen .top-bar {
 	text-align: center;
@@ -441,6 +445,9 @@ button {
 	#gameScreen .top-bar #restart-button {
 		float: right;
 	}
+#game-canvas {
+	flex: none;
+}
 .score-display {
 	display: inline-block;
 	text-align: left;
@@ -450,6 +457,7 @@ button {
 	padding-left: 0.25rem; /* 4px default; shift right so it looks less unbalanced */
 }
 #control-hint {
+	pointer-events: none;
 	position: fixed;
 	right: 10%;
 	top: 50%;

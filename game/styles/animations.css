@@ -36,7 +36,7 @@
 @keyframes hint-loop-swipe {
 	0% {
 		opacity: 0;
-		transform: transateY(50%);
+		transform: translateY(40%);
 	}
 	15% {
 		opacity: 1;
@@ -46,11 +46,11 @@
 	}
 	70% {
 		opacity: 0;
-		transform: translateY(-75%);
+		transform: translateY(-35%);
 	}
 	100% {
 		opacity: 0;
-		transform: translateY(50%);
+		transform: translateY(40%);
 	}
 }
 @keyframes hint-loop-press {
