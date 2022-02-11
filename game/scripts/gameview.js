@@ -60,11 +60,10 @@ GameView.prototype._handleRestartInput = function () {
  * Handle the window being resized.
  */
 GameView.prototype._handleResize = function () {
-	this._canvas.width = window.innerWidth;
-	this._canvas.height = window.innerHeight - this.topBar.offsetHeight;
-	if (this._game) {
-		this._game.rescale();
-	}
+	if (!this._active || !this._game) { return; }
+	
+	// If there is a game, let it resize itself to the new dimensions.
+	this._game.rescale();
 };
 
 /**
