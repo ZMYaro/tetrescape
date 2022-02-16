@@ -46,9 +46,6 @@ function Game(canvas, endCallback) {
 		this._moves++;
 		this._player.tryMove(Vector2D.DOWN);
 	}).bind(this));
-	
-	// Scale the game for the current canvas size.
-	this.rescale();
 }
 
 Game.prototype = {
@@ -159,16 +156,22 @@ Game.prototype = {
 	
 	/**
 	 * Scale the level to fit within the canvas.
+	 * @param {Number} availWidth - The available width within the window and UI
+	 * @param {Number} availHeight - The available height within the window and UI
 	 */
 	rescale: function () {
-		var canvasRatio = this._canvas.width / this._canvas.height,
+		var availWidth = window.innerWidth,
+			availHeight = window.innerHeight - views.game.topBar.offsetHeight,
+			availRatio = availWidth / availHeight,
 			levelRatio = this._levelData.width / this._levelData.height;
 		
-		if (levelRatio < canvasRatio) {
-			this._blockSize = this._canvas.height / this._levelData.height;
+		if (levelRatio < availRatio) {
+			this._blockSize = availHeight / this._levelData.height;
 		} else {
-			this._blockSize = this._canvas.width / this._levelData.width;
+			this._blockSize = availWidth / this._levelData.width;
 		}
+		this._canvas.width = this._levelData.width * this._blockSize;
+		this._canvas.height = this._levelData.height * this._blockSize;
 	},
 	
 	/**

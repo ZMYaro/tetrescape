@@ -12,8 +12,11 @@ function Player(x, y, grid) {
 	// Call the superclass constructor.
 	GridOccupant.call(this, x, y, grid);
 	
-	// Start facing down.
-	this._heading = 270;
+	this._image = new Image();
+	this._image.src = 'images/player.png';
+	
+	// Start facing up.
+	this._heading = 90;
 }
 
 // Inherit from GridOccupant.
@@ -56,12 +59,14 @@ Player.prototype.tryMove = function (movement) {
  * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
  */
 Player.prototype.draw = function (ctx, blockSize) {
-	var circX = this.x * blockSize + (0.5 * blockSize),
-		circY = this.y * blockSize + (0.5 * blockSize);
+	var x = this.x * blockSize + (blockSize / 2),
+		y = this.y * blockSize + (blockSize / 2);
 	
-	ctx.fillStyle = '#b7b9c0';
-	ctx.beginPath();
-	ctx.arc(circX, circY, 0.4 * blockSize, 0, 2 * Math.PI);
-	ctx.closePath();
-	ctx.fill();
+	ctx.save();
+	
+	ctx.translate(x, y);
+	ctx.rotate(-Utils.degToRad(this._heading - 90));
+	ctx.drawImage(this._image, -0.5 * blockSize, -0.5 * blockSize, blockSize, blockSize);
+	
+	ctx.restore();
 }

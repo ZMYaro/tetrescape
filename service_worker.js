@@ -43,10 +43,10 @@ self.addEventListener('install', function (ev) {
 				'/images/icons/moves.png',
 				'/images/instructions/blocks.png',
 				'/images/instructions/controls.png',
-				'/images/logo/128.png',
-				'/images/logo/256.png',
-				'/images/logo/256_maskable.png',
 				'/images/logo/favicon.ico',
+				'/images/logo/icon_128.png',
+				'/images/logo/icon_256.png',
+				'/images/logo/icon_256_maskable.png',
 				'/images/logo/title.png',
 				'/images/ember.png',
 				'/images/exit.png', // TO BE REPLACED
