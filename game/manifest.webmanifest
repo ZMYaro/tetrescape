@@ -10,17 +10,17 @@
 	
 	"icons": [
 		{
-			"src": "images/logo/128.png",
+			"src": "images/logo/icon_128.png",
 			"sizes": "128x128",
 			"type": "image/png",
 			"purpose": "any"
 		}, {
-			"src": "images/logo/256.png",
+			"src": "images/logo/icon_256.png",
 			"sizes": "256x256",
 			"type": "image/png",
 			"purpose": "any"
 		}, {
-			"src": "images/logo/256_maskable.png",
+			"src": "images/logo/icon_256_maskable.png",
 			"sizes": "256x256",
 			"type": "image/png",
 			"purpose": "maskable"
