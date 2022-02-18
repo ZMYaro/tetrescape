@@ -1,0 +1,23 @@
+{
+	"manifest_version": 2,
+	
+	"name": "TetrEscape",
+	"description": "Slide the tetrominos and escape the room!",
+	"version": "0.8.1",
+	
+	"icons": {
+		"128": "icon_128.png",
+		"48": "icon_48.png",
+		"32": "icon_32.png"
+	},
+	
+	"app": {
+		"urls": [
+			"*://tetrescape.inprod.co/"
+		],
+		"launch": {
+			"web_url": "https://tetrescape.inprod.co"
+		}
+	},
+	"offline_enabled": true
+}
