@@ -1033,6 +1033,69 @@ var LEVELS = [{
 	}]
 }, {
 	/*
+	 O  o [G] s  s  S  Z  z  *
+	 o  o  s  s  *  s  s  z  z
+	 *  *  *  *  *  *  s  *  *
+	 *  *  L  l  l  L  l  l  l
+	 *  *  l  *  *  l  l  l  l
+	 * [P] *  *  *  *  *  *  *
+	 *  *  *  *  *  *  *  *  *
+	 */
+	starScores: {
+		moves: [
+			30,
+			26,
+			24
+		],
+		blocks: [
+			16,
+			16,
+			16
+		]
+	},
+	width: 9,
+	height: 7,
+	playerSpawn: {x: 1, y: 5},
+	goal: {x: 2, y: 0},
+	staticBlocks: [],
+	tetrominos: [{
+		type: 'O',
+		orientation: 0,
+		x: 0,
+		y: 0
+	}, {
+		type: 'S',
+		orientation: 0,
+		x: 2,
+		y: 0
+	}, {
+		type: 'S',
+		orientation: 90,
+		x: 5,
+		y: 0
+	}, {
+		type: 'Z',
+		orientation: 0,
+		x: 6,
+		y: 0
+	}, {
+		type: 'L',
+		orientation: 90,
+		x: 2,
+		y: 3
+	}, {
+		type: 'L',
+		orientation: 90,
+		x: 5,
+		y: 3
+	}, {
+		type: 'L',
+		orientation: 270,
+		x: 6,
+		y: 3
+	}]
+}, {
+	/*
 	B  B  B  I  i  i  i [G] Z  z  L  l
 	I  i  i  i  *  I  i  i  i  z  z  l
 	*  O  o  O  o  *  *  *  *  *  *  l
