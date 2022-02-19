@@ -378,14 +378,14 @@ var LEVELS = [{
 	 */
 	starScores: {
 		moves: [
-			1,
-			1,
-			1
+			19,
+			16,
+			14
 		],
 		blocks: [
-			1,
-			1,
-			1
+			15,
+			15,
+			15
 		]
 	},
 	width: 9,
