@@ -805,6 +805,82 @@ var LEVELS = [{
 	}]
 }, {
 	/*
+	 O  o  J [G] *  *  T  *
+	 o  o  j  j  j  *  t  t
+	 *  *  *  L  l  L  t  *
+	 *  *  * [P] l  l  *  j
+	 *  *  *  *  l  l  l  j
+	 *  *  *  *  z  *  j  j
+	 *  *  *  z  z  *  *  *
+	 *  Z  z  z  *  J  j  j
+	 *  *  z  z  *  *  *  j
+	*/
+	name: 'O-4',
+	starScores: {
+		moves: [
+			75, // Clearing 1 extra column
+			25, // Pushing a block back unnecessarily
+			21
+		],
+		blocks: [
+			8, // Minimum moves
+			17, // 1 extra column
+			26 // 2 extra columns
+		]
+	},
+	width: 8,
+	height: 9,
+	playerSpawn: {x: 3, y: 3},
+	goal: {x: 3, y: 0},
+	staticBlocks: [],
+	tetrominos: [{
+		type: 'O',
+		orientation: 0,
+		x: 0,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 2,
+		y: 0
+	}, {
+		type: 'T',
+		orientation: 270,
+		x: 6,
+		y: 0
+	}, {
+		type: 'L',
+		orientation: 180,
+		x: 3,
+		y: 2
+	}, {
+		type: 'L',
+		orientation: 0,
+		x: 5,
+		y: 2
+	}, {
+		type: 'J',
+		orientation: 0,
+		x: 6,
+		y: 3
+	}, {
+		type: 'Z',
+		orientation: 90,
+		x: 3,
+		y: 5
+	}, {
+		type: 'Z',
+		orientation: 0,
+		x: 1,
+		y: 7
+	}, {
+		type: 'J',
+		orientation: 270,
+		x: 5,
+		y: 7
+	}]
+}, {
+	/*
 	 *  *  j  *  B  *  B  *  B  *  B  *
 	 *  *  j  *  B  *  B  *  B  *  *  *
 	 *  j  j  *  B  *  B  *  B  *  *  *
@@ -816,7 +892,7 @@ var LEVELS = [{
 	 *  i  *  *  B  *  *  *  B  *  B [G]
 	 *  *  *  *  B  *  B  *  B  *  B  *
 	*/
-	name: 'O-4',
+	name: 'O-5',
 	starScores: {
 		moves: [
 			85,
@@ -894,7 +970,7 @@ var LEVELS = [{
 	 *  *  i  i  *  *  *  *  *  j  J  z [G]
 	 *  *  i  i  *  *  *  *  *  j  j  j  j
 	*/
-	name: 'O-5',
+	name: 'O-6',
 	starScores: {
 		moves: [
 			56,
@@ -982,7 +1058,7 @@ var LEVELS = [{
 	 i  *  *  *  *  *  *  *  *  o  o
 	 i  *  *  P  *  *  *  *  *  *  B
 	*/
-	name: 'O-6',
+	name: 'O-7',
 	starScores: {
 		moves: [
 			50,
