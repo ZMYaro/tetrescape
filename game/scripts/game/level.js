@@ -1201,14 +1201,14 @@ var LEVELS = [{
 	name: 'Z-2',
 	starScores: {
 		moves: [
-			70,
-			64,
-			62
+			67, // Intended solution if you forgot to push the row of blocks aside
+			61, // Intended solution
+			57 // Alternate solution
 		],
 		blocks: [
-			0,
-			1,
-			36
+			24, // Alternate (3 vertical clear) solution
+			36, // Intended solution
+			40 // Alternate (3 vertical clear) solution + 2 additional vertical clears
 		]
 	},
 	width: 12,
