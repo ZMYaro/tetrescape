@@ -1050,17 +1050,19 @@ var LEVELS = [{
 	 O  o [G] s  s  S  Z  z  *
 	 o  o  s  s  *  s  s  z  z
 	 *  *  *  *  *  *  s  *  *
-	 *  *  L  l  l  L  l  l  l
-	 *  *  l  *  *  l  l  l  l
-	 * [P] *  *  *  *  *  *  *
+	 *  L  l  l  *  L  l  l  *
+	 *  l  *  *  *  l  *  *  l
+	 *  *  *  * [P] *  l  l  l
 	 *  *  *  *  *  *  *  *  *
 	*/
 	name: 'Z-1',
 	starScores: {
 		moves: [
-			30,
-			26,
-			24
+			//47, // Alternate solution if you push the left block first
+			43, // Alternate solution
+			//39, // Start going toward alternate solution, but push left block it so it splits anyway
+			35,
+			33
 		],
 		blocks: [
 			0,
@@ -1070,7 +1072,7 @@ var LEVELS = [{
 	},
 	width: 9,
 	height: 7,
-	playerSpawn: {x: 1, y: 5},
+	playerSpawn: {x: 4, y: 5},
 	goal: {x: 2, y: 0},
 	staticBlocks: [],
 	tetrominos: [{
@@ -1096,7 +1098,7 @@ var LEVELS = [{
 	}, {
 		type: 'L',
 		orientation: 90,
-		x: 2,
+		x: 1,
 		y: 3
 	}, {
 		type: 'L',
@@ -1107,7 +1109,7 @@ var LEVELS = [{
 		type: 'L',
 		orientation: 270,
 		x: 6,
-		y: 3
+		y: 4
 	}]
 }, {
 	/*
