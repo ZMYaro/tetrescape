@@ -448,6 +448,9 @@ button {
 #game-canvas {
 	flex: none;
 }
+#level-name-display {
+	float: left;
+}
 .score-display {
 	display: inline-block;
 	text-align: left;

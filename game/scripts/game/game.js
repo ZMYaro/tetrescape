@@ -86,8 +86,8 @@ Game.prototype = {
 	 * Update the score display on the app bar.
 	 */
 	_updateScore: function () {
-		document.getElementById('movesDisplay').innerHTML = this._moves;
-		document.getElementById('blocksDisplay').innerHTML = this._blocksCleared;
+		document.getElementById('moves-display').innerHTML = this._moves;
+		document.getElementById('blocks-display').innerHTML = this._blocksCleared;
 	},
 	
 	/**
@@ -127,6 +127,9 @@ Game.prototype = {
 	 * Initialize and start the current level.
 	 */
 	reload: function () {
+		// Display the level name.
+		document.getElementById('level-name-display').innerHTML = this._levelData.name;
+		
 		// Create the grid.
 		this._grid = new Grid(this._levelData.width, this._levelData.height);
 		// Create the player.
