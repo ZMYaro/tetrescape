@@ -5,13 +5,14 @@
 
 var LEVELS = [{
 	/*
-	*  I  i  i  i  *
-	I  *  * [G] *  I
-	i  *  *  *  *  i
-	i  *  *  *  *  i
-	i  *  P  *  *  i
-	*  I  i  i  i  *
+	 *  I  i  i  i  *
+	 I  *  * [G] *  I
+	 i  *  *  *  *  i
+	 i  *  *  *  *  i
+	 i  *  P  *  *  i
+	 *  I  i  i  i  *
 	*/
+	name: 'I-1',
 	starScores: {
 		moves: [
 			8,
@@ -58,12 +59,13 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	*  *  * [G] *
-	*  O  o  *  *
-	*  o  o  *  *
-	O  o  *  O  o
-	o  o  P  o  o
+	 *  *  * [G] *
+	 *  O  o  *  *
+	 *  o  o  *  *
+	 O  o  *  O  o
+	 o  o  P  o  o
 	*/
+	name: 'I-2',
 	starScores: {
 		moves: [
 			9,
@@ -105,12 +107,13 @@ var LEVELS = [{
 	}],
 }, {
 	/*
-	*  *  * [G] *  *
-	*  B  B  *  *  *
-	*  B  B  *  *  *
-	O  o  *  O  o  *
-	o  o  P  o  o  *
+	 *  *  * [G] *  *
+	 *  B  B  *  *  *
+	 *  B  B  *  *  *
+	 O  o  *  O  o  *
+	 o  o  P  o  o  *
 	*/
+	name: 'I-3',
 	starScores: {
 		moves: [
 			9,
@@ -152,15 +155,16 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	B  B  B  B  *  B  B [G] B
-	I  i  i  i     I  i  i  i
-	*  *  *  *  I  *  *  *  *
-	*  *  *  *  i  *  *  *  *
-	*  *  *  *  i  *  *  *  *
-	*  *  *  *  i  *  *  *  *
-	O  o  O  o  *  O  o  O  o
-	o  o  o  o  P  o  o  o  o
+	 B  B  B  B  *  B  B [G] B
+	 I  i  i  i     I  i  i  i
+	 *  *  *  *  I  *  *  *  *
+	 *  *  *  *  i  *  *  *  *
+	 *  *  *  *  i  *  *  *  *
+	 *  *  *  *  i  *  *  *  *
+	 O  o  O  o  *  O  o  O  o
+	 o  o  o  o  P  o  o  o  o
 	*/
+	name: 'I-4',
 	starScores: {
 		moves: [
 			13,
@@ -230,13 +234,14 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	J  j  B [G] B  B
-	j  B  *  J  j  j
-	j  *  t  *  B  j
-	*  t  t  t  *  *
-	O  o  *  L  *  *
-	o  o  P  l  l  l
+	 J  j  B [G] B  B
+	 j  B  *  J  j  j
+	 j  *  t  *  B  j
+	 *  t  t  t  *  *
+	 O  o  *  L  *  *
+	 o  o  P  l  l  l
 	*/
+	name: 'I-5',
 	starScores: {
 		moves: [
 			8,
@@ -294,14 +299,15 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	I  i  i  i [G] B  B
-	J  j  *  I  i  i  i
-	j  *  *  *  J  j  j
-	j  T  t  t  *  *  j
-	*  *  t  *  *  *  *
-	O  o  *  I  i  i  i
-	o  o  P  I  i  i  i
+	 I  i  i  i [G] B  B
+	 J  j  *  I  i  i  i
+	 j  *  *  *  J  j  j
+	 j  T  t  t  *  *  j
+	 *  *  t  *  *  *  *
+	 O  o  *  I  i  i  i
+	 o  o  P  I  i  i  i
 	*/
+	name: 'I-6',
 	starScores: {
 		moves: [
 			13,
@@ -375,7 +381,8 @@ var LEVELS = [{
 	 *  *  *  i  *  *  *  *  *
 	 *  T  t  t  *  *  *  *  *
 	[P] *  t  *  *  *  *  *  *
-	 */
+	*/
+	name: 'I-7',
 	starScores: {
 		moves: [
 			19,
@@ -421,21 +428,22 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	*  *  *  *  *  *  * [G] *
-	Z  z  *  *  *  *  J  j  j
-	I  z  z  *  *  J  j  j  j
-	i  O  o  *  S  Z  z  j  I
-	i  o  o  *  s  s  z  z  i
-	i  z  *  *  J  s  L  l  i
-	z  z  *  *  j  j  j  l  i
-	z  z  O  o  *  *  *  l  *
-	z  z  o  o  *  *  *  *  *
-	z  z  *  L  *  *  *  z  *
-	z  z  *  l  *  *  z  z  *
-	z  z  *  l  l  *  z  z  *
-	z  z  I  i  i  i  z  z  *
-	z  I  i  i  i  P  z  B  *
+	 *  *  *  *  *  *  * [G] *
+	 Z  z  *  *  *  *  J  j  j
+	 I  z  z  *  *  J  j  j  j
+	 i  O  o  *  S  Z  z  j  I
+	 i  o  o  *  s  s  z  z  i
+	 i  z  *  *  J  s  L  l  i
+	 z  z  *  *  j  j  j  l  i
+	 z  z  O  o  *  *  *  l  *
+	 z  z  o  o  *  *  *  *  *
+	 z  z  *  L  *  *  *  z  *
+	 z  z  *  l  *  *  z  z  *
+	 z  z  *  l  l  *  z  z  *
+	 z  z  I  i  i  i  z  z  *
+	 z  I  i  i  i  P  z  B  *
 	*/
+	name: 'I-8',
 	starScores: {
 		moves: [
 			19,
@@ -561,17 +569,18 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	*  *  *  *  *  *  *  *  *  *
-	* [G] *  *  *  *  *  *  *  *
-	*  *  B  B  B  B  O  o  *  *
-	*  *  B  B  B  B  o  o  *  *
-	B  B  *  *  *  *  *  *  B  B
-	B  B  *  *  *  *  *  *  B  B
-	*  *  O  o  O  o  O  o  *  *
-	*  *  o  o  o  o  o  o  *  *
-	O  o  *  *  B  B  *  *  O  o
-	o  o [P] *  B  B  *  *  o  o
+	 *  *  *  *  *  *  *  *  *  *
+	 * [G] *  *  *  *  *  *  *  *
+	 *  *  B  B  B  B  O  o  *  *
+	 *  *  B  B  B  B  o  o  *  *
+	 B  B  *  *  *  *  *  *  B  B
+	 B  B  *  *  *  *  *  *  B  B
+	 *  *  O  o  O  o  O  o  *  *
+	 *  *  o  o  o  o  o  o  *  *
+	 O  o  *  *  B  B  *  *  O  o
+	 o  o [P] *  B  B  *  *  o  o
 	*/
+	name: 'O-1',
 	starScores: {
 		moves: [
 			28,
@@ -650,7 +659,8 @@ var LEVELS = [{
 	 * [P] *  T  t  t  *  j  *  *
 	 *  *  *  *  t  *  *  *  *  *
 	 *  *  *  *  *  *  *  *  *  *
-	 */
+	*/
+	name: 'O-2',
 	starScores: {
 		moves: [
 			30,
@@ -723,7 +733,8 @@ var LEVELS = [{
 	 *  *  t  i  *  *  t  t
 	 L  l  l  i  *  *  l  t
 	 l  *  *  i  l  l  l  *
-	 */
+	*/
+	name: 'O-3',
 	starScores: {
 		moves: [
 			33,
@@ -805,6 +816,7 @@ var LEVELS = [{
 	 *  i  *  *  B  *  *  *  B  *  B [G]
 	 *  *  *  *  B  *  B  *  B  *  B  *
 	*/
+	name: 'O-4',
 	starScores: {
 		moves: [
 			85,
@@ -873,15 +885,16 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	*  *  B  j  *  *  *  *  *  I  I  *  *
-	*  *  B  j  *  *  *  *  *  i  i  *  *
-	*  *  j  j  *  *  *  *  *  i  i  *  z
-	L  l  *  *  *  *  *  *  *  i  i  z  z
-	*  l  I  I  *  I  i  i  i  * [P] z  z
-	*  l  i  i  *  *  *  *  *  J  j  z  z
-	*  *  i  i  *  *  *  *  *  j  J  z [G]
-	*  *  i  i  *  *  *  *  *  j  j  j  j
+	 *  *  B  j  *  *  *  *  *  I  I  *  *
+	 *  *  B  j  *  *  *  *  *  i  i  *  *
+	 *  *  j  j  *  *  *  *  *  i  i  *  z
+	 L  l  *  *  *  *  *  *  *  i  i  z  z
+	 *  l  I  I  *  I  i  i  i  * [P] z  z
+	 *  l  i  i  *  *  *  *  *  J  j  z  z
+	 *  *  i  i  *  *  *  *  *  j  J  z [G]
+	 *  *  i  i  *  *  *  *  *  j  j  j  j
 	*/
+	name: 'O-5',
 	starScores: {
 		moves: [
 			56,
@@ -960,15 +973,16 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	J  *  *  *  *  O  o [G] O  o  I
-	j  j  j  *  *  o  o  B  o  o  i
-	*  *  *  *  *  *  *  *  *  *  i
-	*  *  *  *  *  *  *  *  *  *  i
-	I  *  *  t  *  *  *  *  *  *  *
-	i  *  t  t  t  *  *  *  *  O  o
-	i  *  *  *  *  *  *  *  *  o  o
-	i  *  *  P  *  *  *  *  *  *  B
+	 J  *  *  *  *  O  o [G] O  o  I
+	 j  j  j  *  *  o  o  B  o  o  i
+	 *  *  *  *  *  *  *  *  *  *  i
+	 *  *  *  *  *  *  *  *  *  *  i
+	 I  *  *  t  *  *  *  *  *  *  *
+	 i  *  t  t  t  *  *  *  *  O  o
+	 i  *  *  *  *  *  *  *  *  o  o
+	 i  *  *  P  *  *  *  *  *  *  B
 	*/
+	name: 'O-6',
 	starScores: {
 		moves: [
 			50,
@@ -1040,7 +1054,8 @@ var LEVELS = [{
 	 *  *  l  *  *  l  l  l  l
 	 * [P] *  *  *  *  *  *  *
 	 *  *  *  *  *  *  *  *  *
-	 */
+	*/
+	name: 'Z-1',
 	starScores: {
 		moves: [
 			30,
@@ -1096,15 +1111,16 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	B  B  B  I  i  i  i [G] Z  z  L  l
-	I  i  i  i  *  I  i  i  i  z  z  l
-	*  O  o  O  o  *  *  *  *  *  *  l
-	I  o  o  o  o  *  *  *  *  *  *  *
-	i  O  o  *  T  t  t  *  *  *  *  I
-	i  o  o  *  *  t  *  *  *  *  *  i
-	i  *  *  *  *  *  *  *  *  O  o  i
-	B  *  *  P  *  *  *  *  *  o  o  i
+	 B  B  B  I  i  i  i [G] Z  z  L  l
+	 I  i  i  i  *  I  i  i  i  z  z  l
+	 *  O  o  O  o  *  *  *  *  *  *  l
+	 I  o  o  o  o  *  *  *  *  *  *  *
+	 i  O  o  *  T  t  t  *  *  *  *  I
+	 i  o  o  *  *  t  *  *  *  *  *  i
+	 i  *  *  *  *  *  *  *  *  O  o  i
+	 B  *  *  P  *  *  *  *  *  o  o  i
 	*/
+	name: 'Z-2',
 	starScores: {
 		moves: [
 			70,
@@ -1196,15 +1212,16 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	*  *  *  *  *  *  *  *  *  I  J  *  *
-	*  *  *  J  j  *  *  *  *  i  j  j  j
-	*  *  *  j  B  B  *  *  *  i  *  t  *
-	P  B  *  j [G] s  s  *  *  i  t  t  t
-	*  B  *  J  s  s  B  *  *  *  *  *  *
-	*  B  B  j  j  j  *  *  *  *  *  *  *
-	*  T  t  t  *  *  *  *  *  O  o  O  o
-	*  *  t  *  *  *  *  *  *  o  o  o  o
+	 *  *  *  *  *  *  *  *  *  I  J  *  *
+	 *  *  *  J  j  *  *  *  *  i  j  j  j
+	 *  *  *  j  B  B  *  *  *  i  *  t  *
+	[P] B  *  j [G] s  s  *  *  i  t  t  t
+	 *  B  *  J  s  s  B  *  *  *  *  *  *
+	 *  B  B  j  j  j  *  *  *  *  *  *  *
+	 *  T  t  t  *  *  *  *  *  O  o  O  o
+	 *  *  t  *  *  *  *  *  *  o  o  o  o
 	*/
+	name: 'Z-3',
 	starScores: {
 		moves: [
 			77,
@@ -1284,18 +1301,19 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	J  j  s  s  *  *  *  ?  ?  Z  z  L  l
-	j  s  s  *  *  *  *  ?  ?  *  z  z  l
-	j  *  *  *  *  J  *  ?  ?  *  O  o  l
-	*  *  *  *  *  j  j  j  ?  *  o  o [G]
-	L  l  L  * [P] *  *  *  ?  *  *  O  o
-	I  l  l  *  *  *  *  *  ?  *  *  o  o
-	i  l  l  l  *  *  *  ?  *  *  *  *  *
-	i  ?  *  *  *  *  *  ?  I  *  O  o  j
-	i  z  *  *  *  *  *  ?  i  *  o  o  j
-	z  z  *  *  *  *  *  ?  i  ?  J  j  j
-	z  ?  *  *  *  *  *  ?  i  *  j  j  j
+	 J  j  s  s  *  *  *  ?  ?  Z  z  L  l
+	 j  s  s  *  *  *  *  ?  ?  *  z  z  l
+	 j  *  *  *  *  J  *  ?  ?  *  O  o  l
+	 *  *  *  *  *  j  j  j  ?  *  o  o [G]
+	 L  l  L  * [P] *  *  *  ?  *  *  O  o
+	 I  l  l  *  *  *  *  *  ?  *  *  o  o
+	 i  l  l  l  *  *  *  ?  *  *  *  *  *
+	 i  ?  *  *  *  *  *  ?  I  *  O  o  j
+	 i  z  *  *  *  *  *  ?  i  *  o  o  j
+	 z  z  *  *  *  *  *  ?  i  ?  J  j  j
+	 z  ?  *  *  *  *  *  ?  i  *  j  j  j
 	*/
+	name: 'Z-4',
 	starScores: {
 		moves: [
 			113,

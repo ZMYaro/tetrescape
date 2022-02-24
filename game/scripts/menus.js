@@ -1,7 +1,7 @@
 'use strict';
 
 var GAME_PREFIX = 'tetrescape-',
-	LEVEL_PREFIX = 'lvl',
+	LEVEL_PREFIX = 'lvl-',
 	MODES = {
 		MOVES: 'moves',
 		BLOCKS: 'blocks'
@@ -11,7 +11,7 @@ var GAME_PREFIX = 'tetrescape-',
 
 var im, // Input manager
 	views,
-	currentLevel;
+	currentLevelIndex;
 
 window.onload = function () {
 	// Initialize input manager.
@@ -50,7 +50,7 @@ window.onload = function () {
 		views.levelSelect.resume();
 		// Focus the button for the last-played level.
 		document.activeElement.blur();
-		document.getElementById(LEVEL_PREFIX + currentLevel + BUTTON_SUFFIX).focus();
+		document.getElementById(getButtonID(LEVELS[currentLevelIndex].name)).focus();
 	};
 	
 	// Populate the level select screen.
@@ -60,8 +60,16 @@ window.onload = function () {
 	views.title.open();
 };
 
-function getStarRating(level, type, score) {
-	var level = LEVELS[level],
+function getButtonID(levelName) {
+	return LEVEL_PREFIX + levelName + BUTTON_SUFFIX;
+}
+
+function getLocalStorageID(levelName, mode) {
+	return GAME_PREFIX + LEVEL_PREFIX + levelName + '-' + mode;
+}
+
+function getStarRating(levelIndex, type, score) {
+	var level = LEVELS[levelIndex],
 		starScore1 = level.starScores[type][0],
 		starScore2 = level.starScores[type][1],
 		starScore3 = level.starScores[type][2];
@@ -102,15 +110,15 @@ function populateLevelSelect() {
 	LEVELS.forEach(function (level, i) {
 		var levelListItem = document.createElement('li'),
 			levelButton = document.createElement('button'),
-			moves = localStorage[GAME_PREFIX + LEVEL_PREFIX + i + MODES.MOVES],
-			blocks = localStorage[GAME_PREFIX + LEVEL_PREFIX + i + MODES.BLOCKS],
+			moves = localStorage[getLocalStorageID(level.name, MODES.MOVES)],
+			blocks = localStorage[getLocalStorageID(level.name, MODES.BLOCKS)],
 			moveStars = getStarRating(i, MODES.MOVES, moves),
 			blockStars = getStarRating(i, MODES.BLOCKS, blocks);
-		levelButton.id = LEVEL_PREFIX + i + BUTTON_SUFFIX;
+		levelButton.id = getButtonID(level.name);
 		
 		var buttonHTML =
 			'<div class=\"title\">Level</div>' +
-			'<div class=\"number\">' + (i + 1) + '</div>' +
+			'<div class=\"number\">' + level.name + '</div>' +
 			'<div class=\"stars\">';
 		if (typeof(moves) === 'undefined' && typeof(blocks) === 'undefined') {
 			buttonHTML += 'Not attempted';
@@ -121,11 +129,12 @@ function populateLevelSelect() {
 		
 		levelButton.innerHTML = buttonHTML;
 		levelButton.className = "z1";
-		levelButton.dataset.level = i;
+		levelButton.dataset.levelIndex = i;
+		levelButton.dataset.levelName = level.name;
 		levelButton.view = views.levelSelect;
 		levelButton.onclick = function () {
 			this.view.openSubview(views.game);
-			views.game.startGame(parseInt(this.dataset.level));
+			views.game.startGame(parseInt(this.dataset.levelIndex));
 		};
 		
 		// Add the new button to the menu.
@@ -136,13 +145,14 @@ function populateLevelSelect() {
 }
 
 function endGame(moves, blocks) {
-	var levelButton = document.getElementById(LEVEL_PREFIX + currentLevel + BUTTON_SUFFIX),
-		moveStars = getStarRating(currentLevel, MODES.MOVES, moves),
-		blockStars = getStarRating(currentLevel, MODES.BLOCKS, blocks),
-		savedMoves = localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.MOVES] || MAX_MOVES,
-		savedBlocks = localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.BLOCKS] || -1,
-		savedMoveStars = getStarRating(currentLevel, MODES.MOVES, savedMoves),
-		savedBlockStars = getStarRating(currentLevel, MODES.BLOCKS, savedBlocks),
+	var currentLevel = LEVELS[currentLevelIndex],
+		levelButton = document.getElementById(getButtonID(currentLevel.name)),
+		moveStars = getStarRating(currentLevelIndex, MODES.MOVES, moves),
+		blockStars = getStarRating(currentLevelIndex, MODES.BLOCKS, blocks),
+		savedMoves = parseInt(localStorage[getLocalStorageID(currentLevel.name, MODES.MOVES)]) || MAX_MOVES,
+		savedBlocks = parseInt(localStorage[getLocalStorageID(currentLevel.name, MODES.BLOCKS)]) || -1,
+		savedMoveStars = getStarRating(currentLevelIndex, MODES.MOVES, savedMoves),
+		savedBlockStars = getStarRating(currentLevelIndex, MODES.BLOCKS, savedBlocks),
 		moveStarDifference = moveStars - savedMoveStars,
 		blockStarDifference = blockStars - savedBlockStars;
 	
@@ -151,17 +161,17 @@ function endGame(moves, blocks) {
 	
 	// Save the new score and update the UI if it is lower than the saved score.
 	if (moves < savedMoves) {
-		localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.MOVES] = moves;
+		localStorage[getLocalStorageID(currentLevel.name, MODES.MOVES)] = moves;
 	}
 	if (blocks > savedBlocks) {
-		localStorage[GAME_PREFIX + LEVEL_PREFIX + currentLevel + MODES.BLOCKS] = blocks;
+		localStorage[getLocalStorageID(currentLevel.name, MODES.BLOCKS)] = blocks;
 	}
 	
 	// Update the level select screen with the new values.
 	populateLevelSelect();
 	
 	// Open the results screen.
-	document.getElementById('resultsTitle').innerHTML = 'Level ' + (currentLevel + 1) + ' complete!';
+	document.getElementById('resultsTitle').innerHTML = 'Level ' + currentLevel.name + ' complete!';
 	
 	// Feature the star count that is the greatest, or had the greatest
 	// improvement if star count is equal.  If all else is equal,

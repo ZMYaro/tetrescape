@@ -68,15 +68,15 @@ GameView.prototype._handleResize = function () {
 
 /**
  * Start the actual game to a particular level.
- * @param {Number} level
+ * @param {Number} levelIndex - The index of the level in the list of levels
  */
-GameView.prototype.startGame = function (level) {
-	window.currentLevel = level; // TODO: Make this non-global.
-	this._game.loadLevel(LEVELS[level]);
+GameView.prototype.startGame = function (levelIndex) {
+	window.currentLevelIndex = levelIndex; // TODO: Make this non-global.
+	this._game.loadLevel(LEVELS[levelIndex]);
 	this._game.start();
 	
 	// Show the control hint on the first level.
-	this.elem.querySelector('#control-hint').style.display = (level === 0) ? 'block' : 'none';
+	this.elem.querySelector('#control-hint').style.display = (levelIndex === 0) ? 'block' : 'none';
 };
 
 /**
