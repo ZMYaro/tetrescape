@@ -39,6 +39,10 @@ button {
 	cursor: pointer;
 	-webkit-tap-highlight-color: transparent;
 }
+	button * {
+		/* Ensure the button is always the target of any pointer event on it. */
+		pointer-events: none;
+	}
 
 .icon {
 	width: 1.5rem;
