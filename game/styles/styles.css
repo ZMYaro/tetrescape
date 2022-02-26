@@ -186,6 +186,9 @@ button {
 		opacity: 1;
 		pointer-events: auto;
 	}
+	.view.open.suspended {
+		pointer-events: none;
+	}
 	.view p {
 		box-sizing: border-box;
 	}
