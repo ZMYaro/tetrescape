@@ -471,23 +471,22 @@ button {
 	width: 30%;
 	height: 50%;
 	
-	background-image: url('../images/hints/pointer_finger.png');
+	background-image: url('../images/hints/arrow_up.png');
 	background-size: contain;
 	background-repeat: no-repeat;
+	transform-origin: 50% 10%;
 	
 	animation-duration: 1s;
 	animation-iteration-count: infinite;
-	animation-name: hint-loop-swipe;
+	animation-name: hint-loop-press;
 }
-	.prefer-input-keyboard #control-hint {
-		background-image: url('../images/hints/arrow_up.png');
-		transform-origin: 50% 10%;
-		animation-name: hint-loop-press;
+	.prefer-input-touch #control-hint {
+		background-image: url('../images/hints/pointer_finger.png');
+		animation-name: hint-loop-swipe;
 	}
 	.prefer-input-gamepad #control-hint,
 	.prefer-input-xbox #control-hint {
 		background-image: url('../images/hints/dpad_up.png');
-		transform-origin: 50% 10%;
 		animation-name: hint-loop-tilt;
 	}
 
@@ -551,14 +550,38 @@ button {
 	margin-right: 8px;
 }
 
-/* About (credits) screen styles */
+/* Instructions screen styles */
+#instructionsScreen,
 #aboutScreen {
-	background-image: url('../images/backgrounds/stone_light_speckled.jpg');
-	
 	text-shadow:
 		-5px 12px 6px rgba(0, 0, 0, 0.15),
 		8px 12px 6px rgba(0, 0, 0, 0.15),
 		1px 11px 4px rgba(0, 0, 0, 0.25);
+}
+#instructionsScreen .menu img {
+	display: block;
+	margin: 0 auto;
+	max-width: 90%;
+}
+.instructions-touch,
+.instructions-arrow-keys,
+.instructions-d-pad {
+	width: 186px;
+}
+	.prefer-input-touch    #instructionsScreen .instructions-arrow-keys,
+	.prefer-input-touch    #instructionsScreen .instructions-d-pad,
+	.prefer-input-keyboard #instructionsScreen .instructions-touch,
+	.prefer-input-keyboard #instructionsScreen .instructions-d-pad,
+	.prefer-input-gamepad  #instructionsScreen .instructions-touch,
+	.prefer-input-gamepad  #instructionsScreen .instructions-arrow-keys,
+	.prefer-input-xbox     #instructionsScreen .instructions-touch,
+	.prefer-input-xbox     #instructionsScreen .instructions-arrow-keys {
+		display: none;
+	}
+
+/* About (credits) screen styles */
+#aboutScreen {
+	background-image: url('../images/backgrounds/stone_light_speckled.jpg');
 }
 #aboutScreen img {
 	max-width: 90%;
