@@ -209,6 +209,8 @@ InputManager.prototype._handleButtonPress = function (ev) {
 InputManager.prototype._handlePointerDown = function (ev) {
 	if (ev.pointerType === 'touch' || ev.pointerType === 'pen') {
 		this._setCurrentInputMethod('touch');
+	} else if (ev.pointerType === 'mouse') {
+		this._setCurrentInputMethod('keyboard');
 	}
 };
 
