@@ -566,7 +566,7 @@ button {
 .instructions-touch,
 .instructions-arrow-keys,
 .instructions-d-pad {
-	width: 186px;
+	width: 188px;
 }
 	.prefer-input-touch    #instructionsScreen .instructions-arrow-keys,
 	.prefer-input-touch    #instructionsScreen .instructions-d-pad,
