@@ -50,6 +50,10 @@ button {
 	margin: -4px 0;
 }
 
+.wrap-point {
+	display: inline-block;
+}
+
 /* Engraved text */
 .top-bar,
 .menu button,
@@ -184,7 +188,6 @@ button {
 	}
 	.view p {
 		box-sizing: border-box;
-		padding: 0 72px;
 	}
 @media (min-width: 500px) and (min-height: 500px) {
 	.top-bar {
@@ -563,19 +566,19 @@ button {
 	margin: 0 auto;
 	max-width: 90%;
 }
-.instructions-touch,
-.instructions-arrow-keys,
-.instructions-d-pad {
+img.instructions-touch,
+img.instructions-keyboard,
+img.instructions-gamepad {
 	width: 188px;
 }
-	.prefer-input-touch    #instructionsScreen .instructions-arrow-keys,
-	.prefer-input-touch    #instructionsScreen .instructions-d-pad,
+	.prefer-input-touch    #instructionsScreen .instructions-keyboard,
+	.prefer-input-touch    #instructionsScreen .instructions-gamepad,
 	.prefer-input-keyboard #instructionsScreen .instructions-touch,
-	.prefer-input-keyboard #instructionsScreen .instructions-d-pad,
+	.prefer-input-keyboard #instructionsScreen .instructions-gamepad,
 	.prefer-input-gamepad  #instructionsScreen .instructions-touch,
-	.prefer-input-gamepad  #instructionsScreen .instructions-arrow-keys,
+	.prefer-input-gamepad  #instructionsScreen .instructions-keyboard,
 	.prefer-input-xbox     #instructionsScreen .instructions-touch,
-	.prefer-input-xbox     #instructionsScreen .instructions-arrow-keys {
+	.prefer-input-xbox     #instructionsScreen .instructions-keyboard {
 		display: none;
 	}
 .instructions-blocks {
