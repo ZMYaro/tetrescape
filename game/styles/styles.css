@@ -578,6 +578,9 @@ button {
 	.prefer-input-xbox     #instructionsScreen .instructions-arrow-keys {
 		display: none;
 	}
+.instructions-blocks {
+	width: 312px;
+}
 
 /* About (credits) screen styles */
 #aboutScreen {
