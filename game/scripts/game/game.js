@@ -105,7 +105,7 @@ Game.prototype = {
 	
 	/**
 	 * Set the level and initialize it.
-	 * @param {Object} leveldata
+	 * @param {Object} levelData
 	 */
 	loadLevel: function (levelData) {
 		this._levelData = levelData;
@@ -163,8 +163,8 @@ Game.prototype = {
 	 * @param {Number} availHeight - The available height within the window and UI
 	 */
 	rescale: function () {
-		var availWidth = window.innerWidth,
-			availHeight = window.innerHeight - views.game.topBar.offsetHeight,
+		var availWidth = views.game.elem.offsetWidth,
+			availHeight = views.game.elem.offsetHeight - views.game.topBar.offsetHeight,
 			availRatio = availWidth / availHeight,
 			levelRatio = this._levelData.width / this._levelData.height;
 		
