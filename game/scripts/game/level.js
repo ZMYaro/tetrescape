@@ -1435,7 +1435,7 @@ var LEVELS = [{
 		moves: [
 			77,
 			74,
-			71
+			70
 		],
 		blocks: [
 			0,
