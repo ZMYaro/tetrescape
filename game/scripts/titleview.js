@@ -48,9 +48,6 @@ TitleView.prototype._initParticles = function () {
 TitleView.prototype._handleResize = function () {
 	this._canvas.width = window.innerWidth;
 	this._canvas.height = window.innerHeight  / 2;
-	if (this._game) {
-		this._game.rescale();
-	}
 };
 
 TitleView.prototype._draw = function (timestamp) {
