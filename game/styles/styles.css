@@ -182,6 +182,9 @@ button {
 	transition-property: opacity, transform, box-shadow;
 	transition-duration: 0.2s;
 }
+	.has-ads .view {
+		height: calc(100% - 3rem);
+	}
 	.view.open {
 		transform: translateY(0%);
 		opacity: 1;
@@ -223,6 +226,9 @@ button {
 	.view {
 		padding-top: 4rem;
 	}
+		.has-ads .view {
+			height: calc(100% - 3.5rem)
+		}
 }
 
 .menu {
@@ -617,3 +623,22 @@ img.instructions-gamepad {
 		#aboutScreen ul li a:focus {
 			text-decoration: underline;
 		}
+
+/* Ad stuff */
+#ad-container {
+	position: fixed;
+	left: 0;
+	width: 100%;
+	bottom: 0;
+	height: 3rem;
+	z-index: 10;
+	
+	background-color: black;
+	color: white;
+	text-align: center;
+}
+@media (min-width: 500px) and (min-height: 500px) {
+	#ad-container {
+		height: 3.5rem;
+	}
+}
