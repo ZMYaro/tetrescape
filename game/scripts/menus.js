@@ -121,7 +121,7 @@ function populateLevelSelect() {
 			'<div class=\"number\">' + level.name + '</div>' +
 			'<div class=\"stars\">';
 		if (typeof(moves) === 'undefined' && typeof(blocks) === 'undefined') {
-			buttonHTML += 'Not attempted';
+			buttonHTML += 'Not completed';
 		} else {
 			buttonHTML += getStarDisplaysHTML(moves, moveStars, blocks, blockStars);
 		}
