@@ -1036,11 +1036,11 @@ var LEVELS = [{
 	starScores: {
 		moves: [
 			56,
-			50,
-			42
+			50, // Push the I piece with the L inefficiently
+			42 // Push the lined-up I piece with the L
 		],
 		blocks: [
-			0,
+			1,
 			1,
 			40
 		]
