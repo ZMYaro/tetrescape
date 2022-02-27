@@ -955,12 +955,14 @@ var LEVELS = [{
 	name: 'O-5',
 	starScores: {
 		moves: [
-			85,
-			71,
-			59
+			//73, // Pushing the T with the J and nothing else
+			69, // Pushing the T and the J and the T piece with the J piece
+			//61, // Pushing the T with the J and the pieces with the I inefficiently
+			55, // Pushing the T with the J and the pieces with the I efficiently
+			49 // Pushing blocks with blocks as much as possible
 		],
 		blocks: [
-			0,
+			1,
 			1,
 			40
 		]
