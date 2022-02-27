@@ -1,4 +1,4 @@
-var CACHE_NAME = 'cache-2022-02-04';
+var CACHE_NAME = 'cache-2022-02-27';
 
 self.addEventListener('install', function (ev) {
 	// Add files to cache.
@@ -96,16 +96,20 @@ self.addEventListener('install', function (ev) {
 				'/images/icons/blocks.png',
 				'/images/icons/cc_zero.svg',
 				'/images/icons/moves.png',
+				'/images/instructions/arrow_keys.png',
 				'/images/instructions/blocks.png',
-				'/images/instructions/controls.png',
+				'/images/instructions/d-pad.png',
+				'/images/instructions/moves_blocks_stars.png',
+				'/images/instructions/touch.png',
 				'/images/logo/favicon.ico',
 				'/images/logo/icon_128.png',
 				'/images/logo/icon_256.png',
 				'/images/logo/icon_256_maskable.png',
 				'/images/logo/title.png',
 				'/images/ember.png',
-				'/images/exit.png', // TO BE REPLACED
+				'/images/exit.png', // TO BE REPLACED WITH ANIMATION
 				'/images/inprod_logo.png',
+				'/images/player.png', // TO BE REPLACED WITH ANIMATION
 				'/scripts/game/block.js',
 				'/scripts/game/game.js',
 				'/scripts/game/goal.js',
