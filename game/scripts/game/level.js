@@ -375,6 +375,66 @@ var LEVELS = [{
 	}]
 }, {
 	/*
+	 *  z  *  B  B [G]
+	 z  z  *  *  B  B
+	 z  *  *  *  *  *
+	 B  B  B  *  B  B
+	 *  *  *  *  *  *
+	 L  *  *  z  *  j
+	 l  *  z  z  *  j
+	 l  l  z [P] j  j
+	*/
+	name: 'I-7',
+	starScores: {
+		moves: [
+			13, // Satisfyingly pushing the last block against the top wall
+			11,
+			9
+		],
+		blocks: [
+			1,
+			12,
+			18 // Extra row
+		]
+	},
+	width: 6,
+	height: 8,
+	playerSpawn: {x: 3, y: 7},
+	goal: {x: 5, y: 0},
+	staticBlocks: [
+		{x: 3, y: 0},
+		{x: 4, y: 0},
+		{x: 4, y: 1},
+		{x: 5, y: 1},
+		{x: 0, y: 3},
+		{x: 1, y: 3},
+		{x: 2, y: 3},
+		{x: 4, y: 3},
+		{x: 5, y: 3}
+	],
+	tetrominos: [{
+		type: 'Z',
+		orientation: 90,
+		x: 0,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 0,
+		x: 0,
+		y: 5
+	}, {
+		type: 'Z',
+		orientation: 90,
+		x: 2,
+		y: 5
+	}, {
+		type: 'L',
+		orientation: 0,
+		x: 4,
+		y: 5
+	}]
+}, {
+	/*
 	 *  *  l  I  L  l  l [G] l
 	 l  l  l  i  l  *  l  l  l
 	 *  *  *  i  *  *  *  *  *
@@ -382,7 +442,7 @@ var LEVELS = [{
 	 *  T  t  t  *  *  *  *  *
 	[P] *  t  *  *  *  *  *  *
 	*/
-	name: 'I-7',
+	name: 'I-8',
 	starScores: {
 		moves: [
 			19,
@@ -443,7 +503,7 @@ var LEVELS = [{
 	 z  z  I  i  i  i  z  z  *
 	 z  I  i  i  i  P  z  B  *
 	*/
-	name: 'I-8',
+	name: 'I-9',
 	starScores: {
 		moves: [
 			19,
