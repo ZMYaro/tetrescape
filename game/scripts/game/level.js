@@ -1525,14 +1525,14 @@ var LEVELS = [{
 	name: 'Z-5',
 	starScores: {
 		moves: [
-			113,
-			80,
-			67
+			75,
+			70, // Fairly inefficient
+			65
 		],
 		blocks: [
-			26,
-			44,
-			59
+			33, // Expected solution
+			44, // Extra column
+			55, // 2 extra columns
 		]
 	},
 	width: 13,
