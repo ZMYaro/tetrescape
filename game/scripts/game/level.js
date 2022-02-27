@@ -513,7 +513,7 @@ var LEVELS = [{
 		blocks: [
 			54,
 			72,
-			82
+			81
 		]
 	},
 	width: 9,
@@ -798,13 +798,13 @@ var LEVELS = [{
 	starScores: {
 		moves: [
 			33,
-			30,
-			28
+			32, // With extra column
+			18 // Fastest solution with top mino
 		],
 		blocks: [
-			17,
-			18,
-			27
+			1,
+			18, // Minimum
+			27 // Extra column
 		]
 	},
 	width: 8,
