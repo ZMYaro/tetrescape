@@ -1141,7 +1141,7 @@ var LEVELS = [{
 			33
 		],
 		blocks: [
-			0,
+			1,
 			1,
 			16
 		]
@@ -1189,6 +1189,81 @@ var LEVELS = [{
 	}]
 }, {
 	/*
+	 *  Z  z [G] *  s  s  s  s
+	 *  *  z  z  s  s  s  s  *
+	 *  *  J  j  *  s  s  *  *
+	 T  *  j  *  s  s  *  t  *
+	 t  t  j  *  *  *  t  t  *
+	 t  * [P] L  l  l  J  t  *
+	 *  *  *  l  *  *  j  j  j
+	*/
+	name: 'Z-2',
+	starScores: {
+		moves: [
+			//38, // Intended solution if you use the L block for 3 instead
+			32, // Intended solution, but if you forgot to push the T block in
+			26, // Intended solution
+			18 // Alternate (3-column) solution
+		],
+		blocks: [
+			21, // Alternate (3-column) solution
+			23, // Intended solution
+			30 // Extra column
+		]
+	},
+	width: 9,
+	height: 7,
+	playerSpawn: {x: 2, y: 5},
+	goal: {x: 3, y: 0},
+	staticBlocks: [],
+	tetrominos: [{
+		type: 'Z',
+		orientation: 0,
+		x: 1,
+		y: 0
+	}, {
+		type: 'S',
+		orientation: 0,
+		x: 4,
+		y: 0
+	}, {
+		type: 'S',
+		orientation: 0,
+		x: 6,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 180,
+		x: 2,
+		y: 2
+	}, {
+		type: 'S',
+		orientation: 0,
+		x: 4,
+		y: 2
+	}, {
+		type: 'T',
+		orientation: 270,
+		x: 0,
+		y: 3
+	}, {
+		type: 'T',
+		orientation: 90,
+		x: 6,
+		y: 3
+	}, {
+		type: 'L',
+		orientation: 90,
+		x: 3,
+		y: 5
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 6,
+		y: 5
+	}]
+}, {
+	/*
 	 B  B  B  I  i  i  i [G] Z  z  L  l
 	 I  i  i  i  *  I  i  i  i  z  z  l
 	 *  O  o  O  o  *  *  *  *  *  *  l
@@ -1198,7 +1273,7 @@ var LEVELS = [{
 	 i  *  *  *  *  *  *  *  *  O  o  i
 	 B  *  *  P  *  *  *  *  *  o  o  i
 	*/
-	name: 'Z-2',
+	name: 'Z-3',
 	starScores: {
 		moves: [
 			67, // Intended solution if you forgot to push the row of blocks aside
@@ -1213,14 +1288,8 @@ var LEVELS = [{
 	},
 	width: 12,
 	height: 8,
-	playerSpawn: {
-		x: 3,
-		y: 7
-	},
-	goal: {
-		x: 7,
-		y: 0
-	},
+	playerSpawn: {x: 3, y: 7},
+	goal: {x: 7, y: 0},
 	staticBlocks: [
 		{x: 0, y: 0},
 		{x: 1, y: 0},
@@ -1299,7 +1368,7 @@ var LEVELS = [{
 	 *  T  t  t  *  *  *  *  *  O  o  O  o
 	 *  *  t  *  *  *  *  *  *  o  o  o  o
 	*/
-	name: 'Z-3',
+	name: 'Z-4',
 	starScores: {
 		moves: [
 			77,
@@ -1391,7 +1460,7 @@ var LEVELS = [{
 	 z  z  *  *  *  *  *  ?  i  ?  J  j  j
 	 z  ?  *  *  *  *  *  ?  i  *  j  j  j
 	*/
-	name: 'Z-4',
+	name: 'Z-5',
 	starScores: {
 		moves: [
 			113,
