@@ -1123,12 +1123,12 @@ var LEVELS = [{
 	name: 'O-7',
 	starScores: {
 		moves: [
-			50,
 			48,
-			37
+			39, // Push O piece in
+			37 // Do not push O piece in
 		],
 		blocks: [
-			0,
+			1,
 			1,
 			19
 		]
