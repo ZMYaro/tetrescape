@@ -478,14 +478,14 @@
 	}
 },
 "animations": {
-	"e_crash": ["e_crash01","e_crash02","e_crash03","e_crash04","e_crash05","e_crash06","e_crash07","e_crash08","e_crash09","e_crash10","e_crash11"],
-	"e_push": ["e_push01","e_push02","e_push03","e_push04","e_push05"],
-	"n_crash": ["n_crash01","n_crash02","n_crash03","n_crash04","n_crash05","n_crash06","n_crash07","n_crash08","n_crash09","n_crash10","n_crash11"],
-	"n_push": ["n_push01","n_push02","n_push03","n_push04","n_push05"],
-	"s_crash": ["s_crash01","s_crash02","s_crash03","s_crash04","s_crash05","s_crash06","s_crash07","s_crash08","s_crash09","s_crash10","s_crash11"],
-	"s_push": ["s_push01","s_push02","s_push03","s_push04","s_push07"],
-	"w_crash": ["w_crash01","w_crash02","w_crash03","w_crash04","w_crash05","w_crash06","w_crash07","w_crash08","w_crash09","w_crash10","w_crash11"],
-	"w_push": ["w_push01","w_push02","w_push03","w_push04","w_push06"]
+	"e_crash": ["e_crash01","e_crash02","e_crash03","e_crash04","e_crash05","e_crash06","e_crash07","e_crash08","e_crash09","e_crash10","e_crash11","e_idle"],
+	"e_push": ["e_push01","e_push02","e_push03","e_push04","e_push05","e_idle"],
+	"n_crash": ["n_crash01","n_crash02","n_crash03","n_crash04","n_crash05","n_crash06","n_crash07","n_crash08","n_crash09","n_crash10","n_crash11","n_idle"],
+	"n_push": ["n_push01","n_push02","n_push03","n_push04","n_push05","n_idle"],
+	"s_crash": ["s_crash01","s_crash02","s_crash03","s_crash04","s_crash05","s_crash06","s_crash07","s_crash08","s_crash09","s_crash10","s_crash11","s_idle"],
+	"s_push": ["s_push01","s_push02","s_push03","s_push04","s_push07","s_idle"],
+	"w_crash": ["w_crash01","w_crash02","w_crash03","w_crash04","w_crash05","w_crash06","w_crash07","w_crash08","w_crash09","w_crash10","w_crash11","w_idle"],
+	"w_push": ["w_push01","w_push02","w_push03","w_push04","w_push06","w_idle"]
 },
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",

@@ -45,6 +45,37 @@ var Utils = {
 	},
 	
 	/**
+	 * Load a sprite sheet's JSON data.
+	 * @param {String} path - The path from the root to the sprite sheet, minus file extension
+	 * @returns {Promise<Object>} - Resolves when the data has loaded, or rejects if it fails to load or parse
+	 */
+	loadSpriteSheetData: function (path) {
+		return fetch(path + '.json')
+			.then(function (res) {
+				if (res.ok) {
+					return res.json();
+				}
+				throw new Error(res.status + ' - ' + res.statusText);
+			});
+	},
+	
+	/**
+	 * Load a sprite sheet's image file.
+	 * @param {String} path - The path from the root to the sprite sheet, minus file extension
+	 * @returns {Promise<Image|Event>} - Resolves when the image has loaded, or rejects if it fails to
+	 */
+	loadSpriteSheetImage: function (path) {
+		return new Promise(function (resolve, reject) {
+			var image = new Image();
+			image.onload = function () {
+				resolve(image);
+			}
+			image.onerror = reject;
+			image.src = path + '.png';
+		});
+	},
+	
+	/**
 	 * Get a random integer.
 	 * @param {Number} min
 	 * @param {Number} [max]

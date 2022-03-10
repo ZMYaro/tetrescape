@@ -4,6 +4,7 @@
  * Initialize a new Game.
  * @class
  * @param {HTMLCanvasElement} canvas - The canvas on which the game will appear
+ * @param {function} endCallback - The function to call when the player wins
  */
 function Game(canvas, endCallback) {
 	// Initialize private variables.
@@ -46,6 +47,12 @@ function Game(canvas, endCallback) {
 		this._moves++;
 		this._player.tryMove(Vector2D.DOWN);
 	}).bind(this));
+	
+	// Load sprites.
+	this.loadPromise = Promise.all([
+		Player.loadAssets(),
+		Goal.loadAssets()
+	]);
 }
 
 Game.prototype = {
@@ -61,6 +68,7 @@ Game.prototype = {
 		
 		// Update grid elements.
 		this._grid.update();
+		this._goal.update();
 		
 		// Check whether a new row has been formed and eliminate it.
 		this._blocksCleared += this._grid.clearRows();

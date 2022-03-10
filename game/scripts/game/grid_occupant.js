@@ -18,6 +18,9 @@ function GridOccupant(x, y, grid) {
 	this.x = x;
 	this.y = y;
 	
+	// Assume no animation by default.
+	this._currentFrame = -1;
+	
 	grid.addOccupant(this);
 }
 
@@ -66,6 +69,13 @@ GridOccupant.prototype = {
 		// Handle movement.
 		if (this._motionTween) {
 			this._motionTween.update();
+		}
+		if (this._currentFrame !== -1) {
+			if (this._currentFrame < this._currentAnim.length - 1) {
+				this._currentFrame++;
+			} else if (this._loopAnim) {
+				this._currentFrame = 0;
+			}
 		}
 	},
 	

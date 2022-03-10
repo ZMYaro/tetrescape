@@ -12,12 +12,37 @@ function Player(x, y, grid) {
 	// Call the superclass constructor.
 	GridOccupant.call(this, x, y, grid);
 	
-	this._image = new Image();
-	this._image.src = 'images/player.png';
+	this._image = Player.SPRITE_SHEET_IMAGE;
+	this._spriteData = Player.SPRITE_SHEET_DATA;
 	
 	// Start facing up.
 	this._heading = 90;
+	
+	this._currentAnim = this._spriteData.animations.n_push;
+	this._currentFrame = 0;
+	this._animPlaying = false;
 }
+
+// Initialize static constants.
+/** {String} The path from the root to the sprite sheet image file */
+Player.SPRITE_SHEET_PATH = 'images/game/player';
+/** {Image} The player sprite sheet image */
+Player.SPRITE_SHEET_IMAGE;
+/** {Object} The player sprite sheet data */
+Player.SPRITE_SHEET_DATA;
+
+/**
+ * @static
+ * Load the player sprite sheet.
+ * @returns {Promise} - Resolves when loaded
+ */
+Player.loadAssets = function () {
+	var imageLoadPromise = Utils.loadSpriteSheetImage(Player.SPRITE_SHEET_PATH)
+			.then(function (image) { Player.SPRITE_SHEET_IMAGE = image; }),
+		dataLoadPromise = Utils.loadSpriteSheetData(Player.SPRITE_SHEET_PATH)
+			.then(function (data) { Player.SPRITE_SHEET_DATA = data; });
+	return Promise.all([imageLoadPromise, dataLoadPromise]);
+};
 
 // Inherit from GridOccupant.
 Player.prototype = Object.create(GridOccupant.prototype);
@@ -32,23 +57,26 @@ Player.prototype.tryMove = function (movement) {
 	// Face in the direction of the movement.
 	switch (movement) {
 		case Vector2D.RIGHT:
-			this._heading = 0;
+			this._heading = 'e';
 			break;
 		case Vector2D.UP:
-			this._heading = 90;
+			this._heading = 'n';
 			break;
 		case Vector2D.LEFT:
-			this._heading = 180;
+			this._heading = 'w';
 			break;
 		case Vector2D.DOWN:
-			this._heading = 270;
+			this._heading = 's';
 			break;
 	}
-	// Call the superclass implementation of the function.
+	this._currentFrame = 0;
+	// Call the superclass implementation of the function to determine what happened and how to handle it.
 	if (GridOccupant.prototype.tryMove.call(this, movement)) {
+		this._currentAnim = this._spriteData.animations[this._heading + '_push'];
 		return true;
 	} else {
 		document.getElementById('cannot-move-sound').play();
+		this._currentAnim = this._spriteData.animations[this._heading + '_crash'];
 		return false;
 	}
 };
@@ -59,14 +87,15 @@ Player.prototype.tryMove = function (movement) {
  * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
  */
 Player.prototype.draw = function (ctx, blockSize) {
-	var x = this.x * blockSize + (blockSize / 2),
-		y = this.y * blockSize + (blockSize / 2);
+	var x = this.x * blockSize,
+		y = this.y * blockSize,
+		frameName = this._currentAnim[this._currentFrame],
+		frameData = this._spriteData.frames[frameName].frame;
 	
-	ctx.save();
-	
-	ctx.translate(x, y);
-	ctx.rotate(-Utils.degToRad(this._heading - 90));
-	ctx.drawImage(this._image, -0.5 * blockSize, -0.5 * blockSize, blockSize, blockSize);
-	
-	ctx.restore();
-}
+	ctx.drawImage(
+		this._image,
+		frameData.x, frameData.y,
+		frameData.w, frameData.h,
+		x, y,
+		blockSize, blockSize);
+};
