@@ -45,8 +45,8 @@ Block.prototype = Object.create(GridOccupant.prototype);
 // Define constants.
 /** {Color} The default block color */
 //Block.DEFAULT_COLOR = new Color(117, 117, 117);
-/** {Number} The duration of the block death animation in frames. */
-Block.prototype.DEATH_DURATION = 12;
+/** {Number} The duration of the block death animation in milliseconds */
+Block.prototype.DEATH_DURATION = 200;
 
 /**
  * Check whether the block's tetromino can be moved to a new location.
@@ -142,15 +142,16 @@ Block.prototype.kill = function () {
 /**
  * Update the block.
  * @override
+ * @param {Number} deltaTime - The time since the last frame in milliseconds
  */
-Block.prototype.update = function () {
+Block.prototype.update = function (deltaTime) {
 	// If dying, update the death animation and do nothing else.
 	if (this.dying && this._deathTween) {
-		this._deathTween.update();
+		this._deathTween.update(deltaTime);
 	}
 	
 	// Call the superclass implementation of update.
-	GridOccupant.prototype.update.call(this);
+	GridOccupant.prototype.update.call(this, deltaTime);
 };
 
 /**

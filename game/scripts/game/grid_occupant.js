@@ -31,8 +31,8 @@ function GridOccupant(x, y, grid) {
 }
 
 // Initialize static constants.
-/** {Number} The duration of grid occupant movements in frames */
-GridOccupant.MOVE_DURATION = 5;
+/** {Number} The duration of grid occupant movements in milliseconds */
+GridOccupant.prototype.MOVE_DURATION = 5000 / 60;
 
 /**
  * @static
@@ -49,71 +49,70 @@ GridOccupant.loadAssets = function (subclass) {
 	return Promise.all([imageLoadPromise, dataLoadPromise]);
 };
 
-GridOccupant.prototype = {
-	/**
-	 * Check whether the grid occupant can be moved to a location.
-	 * @param {Vector2D} movement - The vector by which the occupant would be moved
-	 * @returns {Boolean} - Whether the occupant could be moved
-	 */
-	canMove: function (movement) {
-		return this._grid.canMove(this, movement);
-	},
-	
-	/**
-	 * Move the grid occupant to a new location, if possible.
-	 * @param {Vector2D} movement - The vector by which to move the occupant
-	 * @returns {Boolean} - Whether the occupant could be moved
-	 */
-	tryMove: function (movement) {
-		if (this._grid.tryMove(this, movement)) {
-			this.x = this.gridX;
-			this.y = this.gridY;
-			this.gridX += movement.x;
-			this.gridY += movement.y;
-			this._motionTween = new Tween(this, movement, GridOccupant.MOVE_DURATION);
-			this._motionTween.onfinish = (function () {
-				this._motionTween = undefined;
-			}).bind(this);
-			return true;
-		} else {
-			return false;
-		}
-	},
-	
-	/**
-	 * Update the grid occupant.
-	 */
-	update: function (ctx) {
-		// Handle movement.
-		if (this._motionTween) {
-			this._motionTween.update();
-		}
-		if (this._currentFrame !== -1) {
-			if (this._currentFrame < this._currentAnim.length - 1) {
-				this._currentFrame++;
-			} else if (this._loopAnim) {
-				this._currentFrame = 0;
-			}
-		}
-	},
-	
-	/**
-	 * Draw the grid occupant to the canvas.
-	 * @abstract
-	 * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
-	 * @param {Number} blockSize - The pixel size of one grid square at the current scale
-	 */
-	draw: function (ctx, blockSize) {
-		var x = this.x * blockSize,
-			y = this.y * blockSize,
-			frameName = this._currentAnim[this._currentFrame],
-			frameData = this.SPRITE_SHEET_DATA.frames[frameName].frame;
-		
-		ctx.drawImage(
-			this.SPRITE_SHEET_IMAGE,
-			frameData.x, frameData.y,
-			frameData.w, frameData.h,
-			x, y,
-			blockSize, blockSize);
+/**
+ * Check whether the grid occupant can be moved to a location.
+ * @param {Vector2D} movement - The vector by which the occupant would be moved
+ * @returns {Boolean} - Whether the occupant could be moved
+ */
+GridOccupant.prototype.canMove = function (movement) {
+	return this._grid.canMove(this, movement);
+};
+
+/**
+ * Move the grid occupant to a new location, if possible.
+ * @param {Vector2D} movement - The vector by which to move the occupant
+ * @returns {Boolean} - Whether the occupant could be moved
+ */
+GridOccupant.prototype.tryMove = function (movement) {
+	if (this._grid.tryMove(this, movement)) {
+		this.x = this.gridX;
+		this.y = this.gridY;
+		this.gridX += movement.x;
+		this.gridY += movement.y;
+		this._motionTween = new Tween(this, movement, this.MOVE_DURATION);
+		this._motionTween.onfinish = (function () {
+			this._motionTween = undefined;
+		}).bind(this);
+		return true;
+	} else {
+		return false;
 	}
+};
+
+/**
+ * Update the grid occupant.
+ * @param {Number} deltaTime - The time since the last frame in milliseconds
+ */
+GridOccupant.prototype.update = function (deltaTime) {
+	// Update motion tween animations.
+	if (this._motionTween) {
+		this._motionTween.update(deltaTime);
+	}
+	
+	// Update sprite animations.
+	if (Math.floor(this._currentFrame) < this._currentAnim.length - 1) {
+		this._currentFrame++;
+	} else if (this._loopAnim) {
+		this._currentFrame = 0;
+	}
+};
+
+/**
+ * Draw the grid occupant to the canvas.
+ * @abstract
+ * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
+ * @param {Number} blockSize - The pixel size of one grid square at the current scale
+ */
+GridOccupant.prototype.draw = function (ctx, blockSize) {
+	var x = this.x * blockSize,
+		y = this.y * blockSize,
+		frameName = this._currentAnim[this._currentFrame],
+		frameData = this.SPRITE_SHEET_DATA.frames[frameName].frame;
+	
+	ctx.drawImage(
+		this.SPRITE_SHEET_IMAGE,
+		frameData.x, frameData.y,
+		frameData.w, frameData.h,
+		x, y,
+		blockSize, blockSize);
 };

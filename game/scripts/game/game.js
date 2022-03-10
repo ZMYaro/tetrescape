@@ -22,6 +22,7 @@ function Game(canvas, endCallback) {
 	this._blocksCleared = 0;
 	this._moves = 0;
 	
+	this._lastFrameTime;
 	this._boundUpdate = this._update.bind(this);
 	
 	this._levelData = LEVELS[0];
@@ -62,16 +63,18 @@ Game.prototype = {
 	/**
 	 * @private
 	 * The main game loop
+	 * @param {Number} timestamp
 	 */
-	_update: function () {
+	_update: function (timestamp) {
 		if (!this._active) { return; }
+		var deltaTime = (timestamp - this._lastFrameTime) || 0;
+		this._lastFrameTime = timestamp;
 		
 		// Clear the screen.
 		this._ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
 		
 		// Update grid elements.
-		this._grid.update();
-		this._goal.update();
+		this._grid.update(deltaTime);
 		
 		// Check whether a new row has been formed and eliminate it.
 		this._blocksCleared += this._grid.clearRows();
@@ -131,7 +134,7 @@ Game.prototype = {
 	start: function () {
 		this._active = true;
 		// Start the update loop.
-		this._update();
+		requestAnimationFrame(this._boundUpdate);
 	},
 	
 	/**

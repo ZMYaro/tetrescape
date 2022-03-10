@@ -112,12 +112,13 @@ Grid.prototype = {
 	
 	/**
 	 * Update the grid's occupants.
+	 * @param {Number} deltaTime - The time since the last frame in milliseconds
 	 */
-	update: function () {
+	update: function (deltaTime) {
 		for (var x = 0; x < this.width; x++) {
 			for (var y = 0; y < this.height; y++) {
 				if (this._occupants[x][y]) {
-					this._occupants[x][y].update();
+					this._occupants[x][y].update(deltaTime);
 				}
 			}
 		}

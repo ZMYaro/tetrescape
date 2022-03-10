@@ -4,7 +4,7 @@
  * Initialize a new tetromino.
  * @class
  * @param {String} type - The letter of the tetromino type
- * @param {Number|String} orientation - The orientation of the tetromino, in degrees
+ * @param {Number|String} orientation - The orientation of the tetromino in degrees
  * @param {Number} x - The the x-coordinate of the top-left corner of the tetromino
  * @param {Number} y - The the y-coordinate of the top-left corner of the tetromino
  * @param {Grid} grid - The grid to which the tetromino's blocks are to be added
