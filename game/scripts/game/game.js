@@ -26,6 +26,9 @@ function Game(canvas, endCallback) {
 	
 	this._levelData = LEVELS[0];
 	
+	// Prevent sprites being blurred into each other by the browser.
+	this._ctx.imageSmoothingEnabled = false;
+	
 	// Set up event listeners.
 	im.addEventListener('left', (function () {
 		if (!this._active) { return; }
