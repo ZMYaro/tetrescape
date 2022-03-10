@@ -18,14 +18,14 @@ function GridOccupant(x, y, grid) {
 	this.x = x;
 	this.y = y;
 	
-	/** {Number} The current frame in the current animation */
+	/** {Number} The current frame in the current animation (**may be fractional!**) */
 	this._currentFrame = 0;
 	/** {Array<String>} The list of frame IDs for the current animation */
 	this._currentAnim = [];
 	/** {Boolean} Whether to loop the current animation */
 	this._loopAnim = false;
 	/** {Number} The sprite animation frame rate in frames per millisecond */
-	this._frameRate = 1000 / 30; // In frames per millisecond
+	this._frameRate = 30 / 1000; // In frames per millisecond
 	
 	grid.addOccupant(this);
 }
@@ -91,7 +91,8 @@ GridOccupant.prototype.update = function (deltaTime) {
 	
 	// Update sprite animations.
 	if (Math.floor(this._currentFrame) < this._currentAnim.length - 1) {
-		this._currentFrame++;
+		this._currentFrame += deltaTime * this._frameRate;
+		this._currentFrame = Math.min(this._currentFrame, this._currentAnim.length - 1);
 	} else if (this._loopAnim) {
 		this._currentFrame = 0;
 	}
@@ -106,7 +107,7 @@ GridOccupant.prototype.update = function (deltaTime) {
 GridOccupant.prototype.draw = function (ctx, blockSize) {
 	var x = this.x * blockSize,
 		y = this.y * blockSize,
-		frameName = this._currentAnim[this._currentFrame],
+		frameName = this._currentAnim[Math.floor(this._currentFrame)],
 		frameData = this.SPRITE_SHEET_DATA.frames[frameName].frame;
 	
 	ctx.drawImage(
