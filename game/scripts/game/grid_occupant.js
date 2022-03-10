@@ -18,8 +18,14 @@ function GridOccupant(x, y, grid) {
 	this.x = x;
 	this.y = y;
 	
-	// Assume no animation by default.
-	this._currentFrame = -1;
+	/** {Number} The current frame in the current animation */
+	this._currentFrame = 0;
+	/** {Array<String>} The list of frame IDs for the current animation */
+	this._currentAnim = [];
+	/** {Boolean} Whether to loop the current animation */
+	this._loopAnim = false;
+	/** {Number} The sprite animation frame rate in frames per millisecond */
+	this._frameRate = 1000 / 30; // In frames per millisecond
 	
 	grid.addOccupant(this);
 }
@@ -27,8 +33,21 @@ function GridOccupant(x, y, grid) {
 // Initialize static constants.
 /** {Number} The duration of grid occupant movements in frames */
 GridOccupant.MOVE_DURATION = 5;
-/** {Number} The number of frames between movements */
-GridOccupant.MOVE_DELAY = 2;
+
+/**
+ * @static
+ * Load a GridOccupant subclass's sprite sheet image and data.
+ * Assumes SubClass.prototype.SPRITE_SHEET_PATH is already defined.
+ * @param {Function} subclass - The GridOccupant subclass
+ * @returns {Promise} - Resolves when the image and data have loaded
+ */
+GridOccupant.loadAssets = function (subclass) {
+	var imageLoadPromise = Utils.loadSpriteSheetImage(subclass.prototype.SPRITE_SHEET_PATH)
+			.then(function (image) { subclass.prototype.SPRITE_SHEET_IMAGE = image; }),
+		dataLoadPromise = Utils.loadSpriteSheetData(subclass.prototype.SPRITE_SHEET_PATH)
+			.then(function (data) { subclass.prototype.SPRITE_SHEET_DATA = data; });
+	return Promise.all([imageLoadPromise, dataLoadPromise]);
+};
 
 GridOccupant.prototype = {
 	/**
@@ -54,7 +73,6 @@ GridOccupant.prototype = {
 			this._motionTween = new Tween(this, movement, GridOccupant.MOVE_DURATION);
 			this._motionTween.onfinish = (function () {
 				this._motionTween = undefined;
-				//this._moveDelay = GridOccupant.MOVE_DELAY;
 			}).bind(this);
 			return true;
 		} else {
@@ -83,8 +101,19 @@ GridOccupant.prototype = {
 	 * Draw the grid occupant to the canvas.
 	 * @abstract
 	 * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
+	 * @param {Number} blockSize - The pixel size of one grid square at the current scale
 	 */
 	draw: function (ctx, blockSize) {
-		throw new Error('GridOccupant.draw must be implemented by a subclass.');
+		var x = this.x * blockSize,
+			y = this.y * blockSize,
+			frameName = this._currentAnim[this._currentFrame],
+			frameData = this.SPRITE_SHEET_DATA.frames[frameName].frame;
+		
+		ctx.drawImage(
+			this.SPRITE_SHEET_IMAGE,
+			frameData.x, frameData.y,
+			frameData.w, frameData.h,
+			x, y,
+			blockSize, blockSize);
 	}
 };

@@ -39,16 +39,14 @@ function Block(x, y, grid, minoType, tetromino, hasNeighbors) {
 	this._image.src = fileName;
 }
 
-// Initialize static constants.
-/** {Color} The default block color */
-Block.DEFAULT_COLOR = new Color(117, 117, 117); // Gray
-/** {Number} The width of block outlines */
-Block.LINE_WIDTH = 3;
-/** {Number} The duration of the block death animation in frames. */
-Block.DEATH_DURATION = 12;
-
 // Inherit from GridOccupant.
 Block.prototype = Object.create(GridOccupant.prototype);
+
+// Define constants.
+/** {Color} The default block color */
+//Block.DEFAULT_COLOR = new Color(117, 117, 117);
+/** {Number} The duration of the block death animation in frames. */
+Block.prototype.DEATH_DURATION = 12;
 
 /**
  * Check whether the block's tetromino can be moved to a new location.
@@ -134,7 +132,7 @@ Block.prototype.kill = function () {
 	
 	// Start the death animation.
 	this.dying = true;
-	this._deathTween = new Tween(this, {opacity: -1, rotation: 0.08 * Math.PI, scale: 0.4}, Block.DEATH_DURATION)
+	this._deathTween = new Tween(this, {opacity: -1, rotation: 0.08 * Math.PI, scale: 0.4}, this.DEATH_DURATION)
 	this._deathTween.onfinish = (function () {
 		// Remove the block from the grid.
 		this._grid.removeOccupant(this);
@@ -166,7 +164,6 @@ Block.prototype.draw = function (ctx, blockSize) {
 	
 	ctx.save();
 	
-	ctx.lineWidth = Block.LINE_WIDTH;
 	ctx.globalAlpha = this.opacity;
 	
 	ctx.translate(x, y);
