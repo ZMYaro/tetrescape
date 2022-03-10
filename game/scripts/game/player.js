@@ -14,6 +14,7 @@ function Player(x, y, grid) {
 	
 	// Start facing up.
 	this._currentAnim = this.SPRITE_SHEET_DATA.animations.n_push;
+	this._currentFrame = this._currentAnim.length - 1;
 }
 
 // Inherit from GridOccupant.
