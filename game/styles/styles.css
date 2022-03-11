@@ -448,6 +448,28 @@ button {
 			-1px -1px 1px rgba(0, 0, 0, 0.5),
 			1px 1px 1px rgba(255, 255, 255, 0.25);
 	}
+	/* Color-coded level groups */
+	#levelScreen .menu button[data-level-name|="I"] {
+		background-color: #00bcd4;
+	}
+	#levelScreen .menu button[data-level-name|="J"] {
+		background-color: #2095f3;
+	}
+	#levelScreen .menu button[data-level-name|="L"] {
+		background-color: #ff9800;
+	}
+	#levelScreen .menu button[data-level-name|="O"] {
+		background-color: #e5d200;
+	}
+	#levelScreen .menu button[data-level-name|="S"] {
+		background-color: #4caf4f;
+	}
+	#levelScreen .menu button[data-level-name|="T"] {
+		background-color: #9739a3;
+	}
+	#levelScreen .menu button[data-level-name|="Z"] {
+		background-color: #f44336;
+	}
 .stars {
 	font-size: 125%;
 }
