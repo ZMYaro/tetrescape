@@ -107,6 +107,10 @@ function populateLevelSelect() {
 	levelScreenList.innerHTML = '';
 	views.levelSelect.inputs = [];
 	
+	var levelButtonClickHandler = function () {
+		this.view.openSubview(views.game);
+		views.game.startGame(parseInt(this.dataset.levelIndex));
+	};
 	LEVELS.forEach(function (level, i) {
 		var levelListItem = document.createElement('li'),
 			levelButton = document.createElement('button'),
@@ -132,10 +136,8 @@ function populateLevelSelect() {
 		levelButton.dataset.levelIndex = i;
 		levelButton.dataset.levelName = level.name;
 		levelButton.view = views.levelSelect;
-		levelButton.onclick = function () {
-			this.view.openSubview(views.game);
-			views.game.startGame(parseInt(this.dataset.levelIndex));
-		};
+		levelButton.addEventListener('focus', MenuView.setActiveInputToFocused);
+		levelButton.addEventListener('click', levelButtonClickHandler);
 		
 		// Add the new button to the menu.
 		levelListItem.appendChild(levelButton);

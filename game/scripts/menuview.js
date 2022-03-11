@@ -16,9 +16,7 @@ function MenuView(elem, parent) {
 	// Give each input a reference to its containing view.
 	this.inputs.forEach(function (input) {
 		input.view = this;
-		input.onfocus = function () {
-			this.view.activeInputIndex = this.view.inputs.indexOf(this);
-		};
+		input.addEventListener('focus', MenuView.setActiveInputToFocused);
 	}, this);
 	
 	// Set up input event listeners.
@@ -31,6 +29,16 @@ function MenuView(elem, parent) {
 
 // Inherit from View.
 MenuView.prototype = Object.create(View.prototype);
+
+/**
+ * @static
+ * Set the active input index to a focused button.
+ */
+MenuView.setActiveInputToFocused = function () {
+	this.view.activeInputIndex = this.view.inputs.indexOf(this);
+	console.log(this);
+};
+
 
 /**
  * @private
