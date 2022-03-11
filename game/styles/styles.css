@@ -315,11 +315,14 @@ button {
 	overflow: visible;
 }
 #titleScreen .menu button {
-	width: 184px;
-	padding-left: 16px;
-	padding-right: 16px;
-	font-size: 120%;
+	font-size: 110%;
+	padding: 0.75em 0;
+	width: 8em;
 }
+	#titleScreen .menu button#playButton {
+		font-size: 150%;
+		width: 7em;
+	}
 #title {
 	max-width: 100%;
 	max-width: min(100%, 720px);
