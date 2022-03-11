@@ -16,6 +16,7 @@ self.addEventListener('install', function (ev) {
 				'/images/backgrounds/stone_dark_speckled.jpg',
 				'/images/backgrounds/stone_light_smooth.jpg',
 				'/images/backgrounds/stone_light_speckled.jpg',
+				'/images/backgrounds/top_bar.jpg',
 				'/images/blocks/i_block_e.png',
 				'/images/blocks/i_block_ew.png',
 				'/images/blocks/i_block_n.png',

@@ -77,6 +77,9 @@ button {
 	text-align: left;
 	
 	background-color: #525250;
+	background-image: url('../images/backgrounds/top_bar.jpg');
+	background-size: 3.5rem 3.5rem; /* Same as height */
+	background-repeat: repeat-x;
 	/* Polymer/MaterialZ Z1 */
 	box-shadow:
 		0 2px 5px 0 rgba(0, 0, 0, 0.26),
@@ -115,7 +118,7 @@ button {
 			box-shadow:
 				 5px 0 1px -1px rgba(255, 255, 255, 0.2),
 				-5px 0 1px -1px rgba(0, 0, 0, 0.1),
-				inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+				inset 0 1px 3px 0 rgba(0, 0, 0, 0.35);
 		}
 
 		.top-bar button.back-button {
@@ -200,6 +203,7 @@ button {
 		height: 4rem; /* 64px default */
 		padding: 1.25rem;
 		font-size: 1.4rem;
+		background-size: 4rem;
 	}
 		.top-bar button {
 			width: 4rem;
