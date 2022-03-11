@@ -9,7 +9,8 @@ function MenuView(elem, parent) {
 	// Call the superclass constructor.
 	View.call(this, elem, parent);
 	
-	this.inputs = Array.prototype.slice.call(elem.getElementsByClassName('menu')[0].querySelectorAll('button,input'));
+	this.inputs = Array.prototype.slice.call(
+		elem.querySelectorAll('.menu button, .menu input'));
 	this.activeInputIndex = 0;
 	
 	// Give each input a reference to its containing view.
