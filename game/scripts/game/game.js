@@ -51,6 +51,10 @@ function Game(canvas, endCallback) {
 	]);
 }
 
+// Define constants.
+/** {Number} The maximum number of moves to allow in the move counter */
+Game.prototype.MAX_MOVES = 9999;
+
 /**
  * @private
  * The main game loop
@@ -97,7 +101,7 @@ Game.prototype._tryPlayerMove = function (direction) {
 	var successfullyMoved = this._player.tryMove(direction);
 	if (successfullyMoved) {
 		// If the player moved, increment the move counter, capped at 9999.
-		this._moves = Math.min(this._moves + 1, 9999);
+		this._moves = Math.min(this._moves + 1, this.MAX_MOVES);
 	}
 };
 
