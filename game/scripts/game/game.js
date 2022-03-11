@@ -32,24 +32,16 @@ function Game(canvas, endCallback) {
 	
 	// Set up event listeners.
 	im.addEventListener('left', (function () {
-		if (!this._active) { return; }
-		this._moves++;
-		this._player.tryMove(Vector2D.LEFT);
+		this._tryPlayerMove(Vector2D.LEFT);
 	}).bind(this));
 	im.addEventListener('right', (function () {
-		if (!this._active) { return; }
-		this._moves++;
-		this._player.tryMove(Vector2D.RIGHT);
+		this._tryPlayerMove(Vector2D.RIGHT);
 	}).bind(this));
 	im.addEventListener('up', (function () {
-		if (!this._active) { return; }
-		this._moves++;
-		this._player.tryMove(Vector2D.UP);
+		this._tryPlayerMove(Vector2D.UP);
 	}).bind(this));
 	im.addEventListener('down', (function () {
-		if (!this._active) { return; }
-		this._moves++;
-		this._player.tryMove(Vector2D.DOWN);
+		this._tryPlayerMove(Vector2D.DOWN);
 	}).bind(this));
 	
 	// Load sprites.
@@ -93,6 +85,17 @@ Game.prototype = {
 		this._updateScore();
 		
 		requestAnimationFrame(this._boundUpdate);
+	},
+	
+	/**
+	 * @private
+	 * Try moving the player and update the move count if able.
+	 * @param {Vector2D} direction - Unit vector in the direction the player should move
+	 */
+	_tryPlayerMove: function (direction) {
+		if (!this._active) { return; }
+		this._moves++;
+		this._player.tryMove(direction);
 	},
 	
 	/**
