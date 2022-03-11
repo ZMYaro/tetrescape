@@ -87,6 +87,10 @@ self.addEventListener('install', function (ev) {
 				'/images/buttons/restart_face_left.jpg',
 				'/images/buttons/restart_r.jpg',
 				'/images/buttons/restart_x.jpg',
+				'/images/game/exit.json',
+				'/images/game/exit.png',
+				'/images/game/player.json',
+				'/images/game/player.png',
 				'/images/hints/arrow_up.png',
 				'/images/hints/dpad_up.png',
 				'/images/hints/pointer_finger.png',
@@ -108,9 +112,7 @@ self.addEventListener('install', function (ev) {
 				'/images/logo/icon_256_maskable.png',
 				'/images/logo/title.png',
 				'/images/ember.png',
-				'/images/exit.png', // TO BE REPLACED WITH ANIMATION
 				'/images/inprod_logo.png',
-				'/images/player.png', // TO BE REPLACED WITH ANIMATION
 				'/scripts/game/block.js',
 				'/scripts/game/game.js',
 				'/scripts/game/goal.js',
