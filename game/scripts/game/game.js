@@ -199,6 +199,9 @@ Game.prototype.rescale = function () {
 	}
 	this._canvas.width = this._levelData.width * this._blockSize;
 	this._canvas.height = this._levelData.height * this._blockSize;
+	
+	// Re-disable image smoothing after resize.
+	this._ctx.imageSmoothingEnabled = false;
 };
 
 /**
