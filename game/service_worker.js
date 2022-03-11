@@ -1,4 +1,4 @@
-var CACHE_NAME = 'cache-2022-02-27';
+var CACHE_NAME = 'cache-2022-03-11';
 
 self.addEventListener('install', function (ev) {
 	// Add files to cache.
@@ -81,7 +81,7 @@ self.addEventListener('install', function (ev) {
 				'/images/buttons/close_esc.jpg',
 				'/images/buttons/close_minus.jpg',
 				'/images/buttons/close_view.jpg',
-				'/images/buttons/level.jpg',
+				'/images/buttons/level.png',
 				'/images/buttons/restart.jpg',
 				'/images/buttons/restart_face_left.jpg',
 				'/images/buttons/restart_r.jpg',

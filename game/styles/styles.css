@@ -408,7 +408,8 @@ button {
 	margin: 1.5rem; /* 24px default */
 	font-size: 100%;
 	
-	background-image: url('../images/buttons/level.jpg');
+	background-color: #797880;
+	background-image: url('../images/buttons/level.png');
 	background-size: contain;
 	
 	box-shadow:
