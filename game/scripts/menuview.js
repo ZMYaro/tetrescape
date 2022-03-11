@@ -36,7 +36,6 @@ MenuView.prototype = Object.create(View.prototype);
  */
 MenuView.setActiveInputToFocused = function () {
 	this.view.activeInputIndex = this.view.inputs.indexOf(this);
-	console.log(this);
 };
 
 
