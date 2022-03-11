@@ -94,8 +94,12 @@ Game.prototype = {
 	 */
 	_tryPlayerMove: function (direction) {
 		if (!this._active) { return; }
-		this._moves++;
-		this._player.tryMove(direction);
+		// Try to move.
+		var successfullyMoved = this._player.tryMove(direction);
+		if (successfullyMoved) {
+			// If the player moved, increment the move counter, capped at 9999.
+			this._moves = Math.min(this._moves + 1, 9999);
+		}
 	},
 	
 	/**
