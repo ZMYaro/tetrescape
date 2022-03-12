@@ -51,6 +51,7 @@ self.addEventListener('install', function (ev) {
 				'/images/instructions/arrow_keys.png',
 				'/images/instructions/blocks.png',
 				'/images/instructions/d-pad.png',
+				'/images/instructions/goal.png',
 				'/images/instructions/moves_blocks_stars.png',
 				'/images/instructions/touch.png',
 				'/images/logo/favicon.ico',
