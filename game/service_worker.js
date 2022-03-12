@@ -102,7 +102,10 @@ self.addEventListener('activate', function (ev) {
 		caches.keys().then(function (cacheNames) {
 			var cacheDeletionPromises = cacheNames.map(function (cacheName) {
 				if (cacheName !== CACHE_NAME) {
-					return caches.delete(cacheName);
+					return caches.delete(cacheName)
+						.then(function () {
+							console.log('Deleted old cache \u201c' + cacheName + '\u201d');
+						});
 				}
 			});
 			return Promise.all(cacheDeletionPromises);
