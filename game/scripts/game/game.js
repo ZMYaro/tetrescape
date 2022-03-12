@@ -184,10 +184,8 @@ Game.prototype.reload = function () {
 			this._grid);
 	}, this);
 	
-	// Reset the block counter.
+	// Reset counters.
 	this._blocksCleared = 0;
-	
-	// Reset the move counter.
 	this._moves = 0;
 };
 
