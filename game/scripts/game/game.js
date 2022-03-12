@@ -74,18 +74,18 @@ Game.prototype._update = function (timestamp) {
 	// Check whether a new row has been formed and eliminate it.
 	this._blocksCleared += this._grid.clearRows();
 	
+	// Draw grid elements.
+	this._grid.draw(this._ctx, this._blockSize);
+	
+	// Update the score display.
+	this._updateScore();
+	
 	// Check whether the player has reached the goal.
 	if (this._player.x === this._goal.x && this._player.y === this._goal.y) {
 		this._winGame();
 		// End the loop.
 		return;
 	}
-	
-	// Draw grid elements.
-	this._grid.draw(this._ctx, this._blockSize);
-	
-	// Update the score display.
-	this._updateScore();
 	
 	requestAnimationFrame(this._boundUpdate);
 };
