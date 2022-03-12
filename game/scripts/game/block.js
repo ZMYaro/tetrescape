@@ -21,6 +21,8 @@ function Block(x, y, grid, minoType, tetromino, hasNeighbors) {
 	this.opacity = 1;
 	this.scale = 1;
 	
+	this.moveSound = document.getElementById('move-sound');
+	
 	this.dying = false;
 	this._deathTween = undefined;
 	
@@ -115,7 +117,8 @@ Block.prototype.tryMoveSingle = function (movement) {
 	}
 	// Call the superclass implementation of tryMove.
 	if (GridOccupant.prototype.tryMove.call(this, movement)) {
-		document.getElementById('move-sound').play();
+		this.moveSound.currentTime = 0;
+		this.moveSound.play();
 		return true;
 	} else {
 		return false;
