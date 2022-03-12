@@ -77,15 +77,22 @@ Game.prototype._update = function (timestamp) {
 	// Draw grid elements.
 	this._grid.draw(this._ctx, this._blockSize);
 	
+	// Check whether the player has reached the goal.
+	if (this._player.gridX === this._goal.gridX && this._player.gridY === this._goal.gridY) {
+		// If the player is moving to the goal tile, it needs to be updated
+		// and drawn manually since both are occupying the same grid space.
+		this._player.update(deltaTime);
+		this._player.draw(this._ctx, this._blockSize);
+		
+		if (this._player.x === this._goal.x && this._player.y === this._goal.y) {
+			// If the player sprite has finished entering the goal, win and break the loop.
+			this._winGame();
+			return;
+		}
+	}
+	
 	// Update the score display.
 	this._updateScore();
-	
-	// Check whether the player has reached the goal.
-	if (this._player.x === this._goal.x && this._player.y === this._goal.y) {
-		this._winGame();
-		// End the loop.
-		return;
-	}
 	
 	requestAnimationFrame(this._boundUpdate);
 };

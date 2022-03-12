@@ -101,8 +101,14 @@ Grid.prototype = {
 			}
 			
 			// Move to the new location.
+			// If the player is moving to the goal, remove the player from the grid
+			// and let Game draw it separately so the goal does not get overwirtten.
+			var playerMovingToGoal = (occupant instanceof Player) &&
+					(this._occupants[newPos.x][newPos.y] instanceof Goal);
 			this._occupants[occupant.gridX][occupant.gridY] = undefined;
-			this._occupants[newPos.x][newPos.y] = occupant;
+			if (!playerMovingToGoal) {
+				this._occupants[newPos.x][newPos.y] = occupant;
+			}
 			
 			return true;
 		} else {
