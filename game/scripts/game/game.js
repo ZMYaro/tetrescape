@@ -46,6 +46,7 @@ function Game(canvas, endCallback) {
 	
 	// Load sprites.
 	this.loadPromise = Promise.all([
+		GridOccupant.loadAssets(Block),
 		GridOccupant.loadAssets(Player),
 		GridOccupant.loadAssets(Goal)
 	]);

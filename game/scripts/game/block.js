@@ -27,16 +27,15 @@ function Block(x, y, grid, minoType, tetromino, hasNeighbors) {
 	// Determine the block's image.
 	this._image = new Image();
 	hasNeighbors = hasNeighbors || {left: false, top: false, right: false, bottom: false};
-	var fileName = 'images/blocks/' + (minoType || 'static').toLowerCase() + '_block';
+	var spriteName = (minoType || 'static').toLowerCase() + '_block';
 	if (hasNeighbors.top || hasNeighbors.bottom || hasNeighbors.left || hasNeighbors.right) {
-		fileName += '_' +
+		spriteName += '_' +
 			(hasNeighbors.top ?    'n' : '') +
 			(hasNeighbors.bottom ? 's' : '') +
 			(hasNeighbors.right ?  'e' : '') +
 			(hasNeighbors.left ?   'w' : '');
 	}
-	fileName += '.png';
-	this._image.src = fileName;
+	this._currentAnim = [spriteName];
 }
 
 // Inherit from GridOccupant.
@@ -45,6 +44,12 @@ Block.prototype = Object.create(GridOccupant.prototype);
 // Define constants.
 /** {Color} The default block color */
 //Block.DEFAULT_COLOR = new Color(117, 117, 117);
+/** {String} The path from the root to the sprite sheet JSON and image files */
+Block.prototype.SPRITE_SHEET_PATH = 'images/game/blocks';
+/** {Image} The goal sprite sheet image */
+Block.prototype.SPRITE_SHEET_IMAGE;
+/** {Object} The goal sprite sheet data */
+Block.prototype.SPRITE_SHEET_DATA;
 /** {Number} The duration of the block death animation in milliseconds */
 Block.prototype.DEATH_DURATION = 200;
 
@@ -160,6 +165,11 @@ Block.prototype.update = function (deltaTime) {
  * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
  */
 Block.prototype.draw = function (ctx, blockSize) {
+	if (!this.dying) {
+		GridOccupant.prototype.draw.call(this, ctx, blockSize);
+		return;
+	}
+	
 	var x = this.x * blockSize + (blockSize / 2),
 		y = this.y * blockSize + (blockSize / 2);
 	
@@ -170,9 +180,8 @@ Block.prototype.draw = function (ctx, blockSize) {
 	ctx.translate(x, y);
 	ctx.rotate(-Utils.degToRad(this.rotation));
 	ctx.scale(this.scale, this.scale);
-	
-	// Draw the block.
-	ctx.drawImage(this._image, -0.5 * blockSize, -0.5 * blockSize, blockSize, blockSize);
+	ctx.translate(-x, -y);
+	GridOccupant.prototype.draw.call(this, ctx, blockSize);
 	
 	ctx.restore();
 };

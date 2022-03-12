@@ -87,6 +87,8 @@ self.addEventListener('install', function (ev) {
 				'/images/buttons/restart_face_left.jpg',
 				'/images/buttons/restart_r.jpg',
 				'/images/buttons/restart_x.jpg',
+				'/images/game/blocks.json',
+				'/images/game/blocks.png',
 				'/images/game/exit.json',
 				'/images/game/exit.png',
 				'/images/game/player.json',
