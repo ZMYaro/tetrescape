@@ -54,6 +54,8 @@ function Game(canvas, endCallback) {
 // Define constants.
 /** {Number} The maximum number of moves to allow in the move counter */
 Game.prototype.MAX_MOVES = 9999;
+/** {Number} How far from the goal the player should be to trigger the win animation in grid units */
+Game.prototype.WIN_DIST_FROM_GOAL = 0.2;
 
 /**
  * @private
@@ -84,8 +86,9 @@ Game.prototype._update = function (timestamp) {
 		this._player.update(deltaTime);
 		this._player.draw(this._ctx, this._blockSize);
 		
-		if (this._player.x === this._goal.x && this._player.y === this._goal.y) {
-			// If the player sprite has finished entering the goal, win and break the loop.
+		if (Math.abs(this._player.x - this._goal.x) < this.WIN_DIST_FROM_GOAL &&
+				Math.abs(this._player.y - this._goal.y) < this.WIN_DIST_FROM_GOAL) {
+			// If the player has entered the goal enough, win and break the loop.
 			this._winGame();
 			return;
 		}
