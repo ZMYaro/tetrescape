@@ -349,7 +349,7 @@ select {
 	padding: 0.75em 0;
 	width: 8em;
 }
-	#titleScreen .menu button#playButton {
+	#titleScreen .menu button#play-button {
 		font-size: 150%;
 		width: 7em;
 	}

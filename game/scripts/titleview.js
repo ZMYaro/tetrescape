@@ -13,6 +13,20 @@ function TitleView(elem, parent) {
 	this._canvas = this.elem.querySelector('#title-canvas');
 	this._ctx = this._canvas.getContext('2d');
 	
+	// Enable buttons.
+	this.elem.querySelector('#play-button').addEventListener('click', function () {
+		this.view.openSubview(views.levelSelect);
+	});
+	this.elem.querySelector('#instructions-button').addEventListener('click', function () {
+		this.view.openSubview(views.instructions);
+	});
+	this.elem.querySelector('#options-button').addEventListener('click', function () {
+		this.view.openSubview(views.options);
+	});
+	this.elem.querySelector('#about-button').addEventListener('click', function () {
+		this.view.openSubview(views.about);
+	});
+	
 	// Ensure the ember canvas always fits the view.
 	window.onresize = this._handleResize.bind(this);
 	this._handleResize();

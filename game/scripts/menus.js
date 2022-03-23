@@ -28,25 +28,6 @@ window.onload = function () {
 		results: new MenuView(document.getElementById('resultsScreen'))
 	};
 	
-	// Enable the play button.
-	document.getElementById('playButton').onclick = function () {
-		this.view.openSubview(views.levelSelect);
-	};
-	
-	// Enable the instructions button.
-	document.getElementById('instructionsButton').onclick = function () {
-		this.view.openSubview(views.instructions);
-	};
-	
-	document.getElementById('options-button').addEventListener('click', function () {
-		this.view.openSubview(views.options);
-	});
-	
-	// Enable the about button.
-	document.getElementById('aboutButton').onclick = function () {
-		this.view.openSubview(views.about);
-	};
-	
 	// Enable the results screen buttons.
 	document.getElementById('results-back-button').onclick = function () {
 		this.view.close();
