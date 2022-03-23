@@ -9,8 +9,12 @@ function OptionsView(elem, parent) {
 	// Call the superclass constructor.
 	MenuView.call(this, elem, parent);
 	
-	this.elem.querySelector('#controls-select')
-		.addEventListener('input', this._handleControlsSelect);
+	// Enable inputs.
+	var gamepadControlsSelect = this.elem.querySelector('#gamepad-controls-select');
+	gamepadControlsSelect.value = im.gamepadControls;
+	document.body.classList.add('gamepad-controls-' + im.gamepadControls);
+	gamepadControlsSelect.addEventListener('input', this._handleControlsSelect);
+	
 	this.elem.querySelector('#reset-button')
 		.addEventListener('click', this._handleResetButton);
 }
@@ -19,14 +23,21 @@ function OptionsView(elem, parent) {
 OptionsView.prototype = Object.create(MenuView.prototype);
 
 /**
- * 
+ * Handle the gamepad controls selection being changed.
+ * @param {Event} ev
  */
 OptionsView.prototype._handleControlsSelect = function (ev) {
-	alert('Not yet implemented!');
+	document.body.classList.remove('gamepad-controls-microsoft');
+	document.body.classList.remove('gamepad-controls-nintendo');
+	document.body.classList.add('gamepad-controls-' + ev.target.value);
+	
+	im.gamepadControls = ev.target.value;
+	
+	localStorage[GAME_PREFIX + 'gamepad-controls'] = ev.target.value;
 };
 
 /**
- * 
+ * Handle the reset button being clicked.
  */
 OptionsView.prototype._handleResetButton = function () {
 	var confirmed = confirm('Are you sure you want to reset your scores?  This cannot be undone!');

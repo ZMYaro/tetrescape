@@ -129,9 +129,15 @@ select {
 			.prefer-input-gamepad .top-bar button.back-button {
 				background-image: url('../images/buttons/back_face_bottom.jpg');
 			}
+				.prefer-input-gamepad.gamepad-controls-microsoft .top-bar button.back-button {
+					background-image: url('../images/buttons/back_face_right.jpg');
+				}
 			.prefer-input-xbox .top-bar button.back-button {
 				background-image: url('../images/buttons/back_a.jpg');
 			}
+				.prefer-input-xbox.gamepad-controls-microsoft .top-bar button.back-button {
+					background-image: url('../images/buttons/back_b.jpg');
+				}
 			.top-bar button.back-button.close-button {
 				background-image: url('../images/buttons/close.jpg');
 			}
