@@ -53,6 +53,7 @@
 		<script type="text/javascript" src="scripts/menuview.js"></script>
 		<script type="text/javascript" src="scripts/gameview.js"></script>
 		<script type="text/javascript" src="scripts/titleview.js"></script>
+		<script type="text/javascript" src="scripts/optionsview.js"></script>
 		<script type="text/javascript" src="scripts/menus.js"></script>
 		
 		<!-- Game classes -->
@@ -72,6 +73,7 @@
 			<div class="menu">
 				<button class="z1" id="playButton">Play</button>
 				<button class="z1" id="instructionsButton">How to play</button>
+				<button class="z1" id="options-button">Options</button>
 				<button class="z1" id="aboutButton">About</button>
 			</div>
 			<div id="title-glow1"></div>
@@ -118,6 +120,24 @@
 					Earn stars for getting there in the fewest moves or
 					<span class="wrap-point">clearing the most blocks.</span>
 				</p>
+			</section>
+		</div>
+		
+		<div class="view" id="options-screen">
+			<header role="toolbar" class="top-bar z2">
+				<button class="back-button" aria-label="Back" title="Back (Esc)"></button><!--
+				-->Options
+			</header>
+			<section class="menu">
+				<label style="display: inline-block;">
+					Selection controls
+					<br />
+					<select id="controls-select">
+						<option value="microsoft">Microsoft</option>
+						<option value="nintendo">Nintendo</option>
+					</select>
+				</label>
+				<button id="reset-button">Reset all scores</button>
 			</section>
 		</div>
 		

@@ -10,7 +10,7 @@ function MenuView(elem, parent) {
 	View.call(this, elem, parent);
 	
 	this.inputs = Array.prototype.slice.call(
-		elem.querySelectorAll('.menu button, .menu input'));
+		elem.querySelectorAll('.menu button, .menu input, .menu select'));
 	this.activeInputIndex = 0;
 	
 	// Give each input a reference to its containing view.

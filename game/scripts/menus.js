@@ -21,6 +21,7 @@ window.onload = function () {
 	views = {
 		title: new TitleView(document.getElementById('titleScreen')),
 		instructions: new View(document.getElementById('instructionsScreen')),
+		options: new OptionsView(document.getElementById('options-screen')),
 		about: new View(document.getElementById('aboutScreen')),
 		levelSelect: new MenuView(document.getElementById('levelScreen')),
 		game: new GameView(document.getElementById('gameScreen')),
@@ -36,6 +37,10 @@ window.onload = function () {
 	document.getElementById('instructionsButton').onclick = function () {
 		this.view.openSubview(views.instructions);
 	};
+	
+	document.getElementById('options-button').addEventListener('click', function () {
+		this.view.openSubview(views.options);
+	});
 	
 	// Enable the about button.
 	document.getElementById('aboutButton').onclick = function () {
