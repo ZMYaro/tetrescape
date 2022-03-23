@@ -7,10 +7,6 @@ body {
 	
 	background-color: #3b3a3d;
 	color: #fdfcfb;
-}
-
-body,
-button {
 	font-family: 'Roboto Slab', sans-serif;
 }
 
@@ -31,11 +27,13 @@ h2 {
 	margin-bottom: 0;
 }
 
-button {
+button,
+select {
 	border: 0 none;
 	outline: 0 none;
 	background-color: #4b4a4e;
 	color: inherit;
+	font-family: inherit;
 	cursor: pointer;
 	user-select: none;
 	-webkit-tap-highlight-color: transparent;
@@ -244,7 +242,8 @@ button {
 	overflow: auto;
 	text-align: center;
 }
-	.menu button {
+	.menu button,
+	.menu select {
 		min-width: 0;
 		font-size: 110%;
 		margin: 1em 0.5em;
@@ -274,7 +273,9 @@ button {
 		transition-timing-function: linear;
 	}
 		.menu button:hover,
-		.menu button:focus {
+		.menu select:hover,
+		.menu button:focus,
+		.menu select:focus {
 			z-index: 1;
 			color: #bebece;
 			text-shadow:
@@ -292,11 +293,14 @@ button {
 			filter: brightness(1.05);
 			transform: scale(1.2);
 		}
-		.menu button:hover {
+		.menu button:hover,
+		.menu select:hover {
 			z-index: 2;
 		}
 		.menu button:active,
-		.menu button.active {
+		.menu select:active,
+		.menu button.active,
+		.menu select.active {
 			z-index: 3;
 			color: #c4c4d6;
 			text-shadow:
@@ -318,7 +322,8 @@ button {
 	.menu {
 		white-space: normal;
 	}
-		.menu button {
+		.menu button,
+		.menu select {
 			display: block;
 			margin-left: auto;
 			margin-right: auto;
