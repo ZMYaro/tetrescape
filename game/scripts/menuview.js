@@ -45,9 +45,12 @@ MenuView.setActiveInputToFocused = function () {
  */
 MenuView.prototype._handleLeftInput = function () {
 	if (!this._active) { return; }
-	// Move horizontally in landscape.
 	if (window.innerWidth > window.innerHeight) {
-		this._movePrev();
+		// Move horizontally in landscape.
+		this._moveFocusPrev();
+	} else {
+		// Change options in portrait.
+		this._selectPrevOption();
 	}
 };
 
@@ -57,9 +60,12 @@ MenuView.prototype._handleLeftInput = function () {
  */
 MenuView.prototype._handleRightInput = function () {
 	if (!this._active) { return; }
-	// Move horizontally in landscape.
 	if (window.innerWidth > window.innerHeight) {
-		this._moveNext();
+		// Move horizontally in landscape.
+		this._moveFocusNext();
+	} else {
+		// Change options in portrait.
+		this._selectNextOption();
 	}
 };
 
@@ -69,9 +75,12 @@ MenuView.prototype._handleRightInput = function () {
  */
 MenuView.prototype._handleUpInput = function () {
 	if (!this._active) { return; }
-	// Move vertically in portrait.
 	if (window.innerHeight > window.innerWidth) {
-		this._movePrev();
+		// Move vertically in portrait.
+		this._moveFocusPrev();
+	} else {
+		// Change options in landscape.
+		this._selectPrevOption();
 	}
 };
 
@@ -81,9 +90,12 @@ MenuView.prototype._handleUpInput = function () {
  */
 MenuView.prototype._handleDownInput = function () {
 	if (!this._active) { return; }
-	// Move vertically in portrait.
 	if (window.innerHeight > window.innerWidth) {
-		this._moveNext();
+		// Move vertically in portrait.
+		this._moveFocusNext();
+	} else {
+		// Change options in landscape.
+		this._selectNextOption();
 	}
 };
 
@@ -93,12 +105,7 @@ MenuView.prototype._handleDownInput = function () {
  */
 MenuView.prototype._handleSelectInput = function () {
 	if (!this._active) { return; }
-	
-	if (document.activeElement !== this.inputs[this.activeInputIndex]) {
-		// If the active input is not focused, focus it.
-		this.inputs[this.activeInputIndex].focus();
-		return;
-	}
+	if (this._wasActiveInputInactive()) { return; }
 	
 	// Select the active button.
 	if (this.inputs[this.activeInputIndex].tagName.toLowerCase() === 'button') {
@@ -108,9 +115,25 @@ MenuView.prototype._handleSelectInput = function () {
 };
 
 /**
+ * @private
+ * If the active input is not focused, focus it.
+ * @returns {Boolean} Whether the active input was inactive before the function was run
+ */
+MenuView.prototype._wasActiveInputInactive = function () {
+	if (document.activeElement !== this.inputs[this.activeInputIndex]) {
+		if (this.inputs[this.activeInputIndex]) {
+			this.inputs[this.activeInputIndex].focus();
+		}
+		return true;
+	}
+	return false;
+}
+
+/**
+ * @private
  * Focus the next input down, wrapping at the bottom.
  */
-MenuView.prototype._moveNext = function () {
+MenuView.prototype._moveFocusNext = function () {
 	if (this.inputs.length === 0) {
 		// If this menu has no inputs, just ensure nothing else has focus.
 		document.activeElement.focus();
@@ -135,9 +158,10 @@ MenuView.prototype._moveNext = function () {
 };
 
 /**
+ * @private
  * Focus the next input up, wrapping at the top.
  */
-MenuView.prototype._movePrev = function () {
+MenuView.prototype._moveFocusPrev = function () {
 	if (this.inputs.length === 0) {
 		// If this menu has no inputs, just ensure nothing else has focus.
 		document.activeElement.focus();
@@ -162,6 +186,70 @@ MenuView.prototype._movePrev = function () {
 };
 
 /**
+ * @private
+ * Advance the active element to the previous option if it is a <select>.
+ */
+MenuView.prototype._selectPrevOption = function () {
+	if (this._wasActiveInputInactive()) { return; }
+	
+	var activeInput = this.inputs[this.activeInputIndex];
+	
+	if (activeInput.tagName.toLowerCase() !== 'select' || activeInput.options.length === 0) {
+		// Skip inputs with no options.
+		return;
+	}
+	
+	var newIndex = activeInput.selectedIndex;
+	do {
+		newIndex--;
+		
+		// Wrap.
+		if (newIndex < 0) {
+			newIndex = activeInput.options.length - 1;
+		}
+		
+		// Keep going until a non-disabled option is found.
+	} while (activeInput.options[newIndex].disabled);
+	
+	activeInput.selectedIndex = newIndex;
+	
+	// Trigger a change event.
+	activeInput.dispatchEvent(new Event('change'));
+};
+
+/**
+ * @private
+ * Advance the active element to the next option if it is a <select>.
+ */
+MenuView.prototype._selectNextOption = function () {
+	if (this._wasActiveInputInactive()) { return; }
+	
+	var activeInput = this.inputs[this.activeInputIndex];
+	
+	if (activeInput.tagName.toLowerCase() !== 'select' || activeInput.options.length === 0) {
+		// Skip inputs with no options.
+		return;
+	}
+	
+	var newIndex = activeInput.selectedIndex;
+	do {
+		newIndex++;
+		
+		// Wrap.
+		if (newIndex >= activeInput.options.length) {
+			newIndex = 0;
+		}
+		
+		// Keep going until a non-disabled option is found.
+	} while (activeInput.options[newIndex].disabled);
+	
+	activeInput.selectedIndex = newIndex;
+	
+	// Trigger a change event.
+	activeInput.dispatchEvent(new Event('change'));
+};
+
+/**
  * @override
  * Reenable a suspended view and its event listeners.
  */
@@ -171,5 +259,5 @@ MenuView.prototype.resume = function () {
 	
 	// Focus the last focused input.
 	this.activeInputIndex--;
-	this._moveNext();
+	this._moveFocusNext();
 };

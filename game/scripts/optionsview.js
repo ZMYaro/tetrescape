@@ -13,7 +13,7 @@ function OptionsView(elem, parent) {
 	var gamepadControlsSelect = this.elem.querySelector('#gamepad-controls-select');
 	gamepadControlsSelect.value = im.gamepadControls;
 	document.body.classList.add('gamepad-controls-' + im.gamepadControls);
-	gamepadControlsSelect.addEventListener('input', this._handleControlsSelect.bind(this));
+	gamepadControlsSelect.addEventListener('change', this._handleControlsSelect.bind(this));
 	
 	this.elem.querySelector('#reset-button')
 		.addEventListener('click', this._handleResetButton.bind(this));
