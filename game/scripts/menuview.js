@@ -101,8 +101,10 @@ MenuView.prototype._handleSelectInput = function () {
 	}
 	
 	// Select the active button.
-	this._active = false;
-	Utils.animateButtonPress(this.inputs[this.activeInputIndex]);
+	if (this.inputs[this.activeInputIndex].tagName.toLowerCase() === 'button') {
+		this._active = false;
+		Utils.animateButtonPress(this.inputs[this.activeInputIndex]);
+	}
 };
 
 /**

@@ -13,10 +13,10 @@ function OptionsView(elem, parent) {
 	var gamepadControlsSelect = this.elem.querySelector('#gamepad-controls-select');
 	gamepadControlsSelect.value = im.gamepadControls;
 	document.body.classList.add('gamepad-controls-' + im.gamepadControls);
-	gamepadControlsSelect.addEventListener('input', this._handleControlsSelect);
+	gamepadControlsSelect.addEventListener('input', this._handleControlsSelect.bind(this));
 	
 	this.elem.querySelector('#reset-button')
-		.addEventListener('click', this._handleResetButton);
+		.addEventListener('click', this._handleResetButton.bind(this));
 }
 
 // Inherit from View.
@@ -54,4 +54,7 @@ OptionsView.prototype._handleResetButton = function () {
 	populateLevelSelect();
 	
 	alert('Scores reset!');
+	
+	// Keep the options view active since this button is not for navigation.
+	this._active = true;
 };
