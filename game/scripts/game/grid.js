@@ -84,10 +84,6 @@ Grid.prototype = {
 			// If there is no blocker, no problem.
 			return true;
 		}
-		if (blocker instanceof Player) {
-			// If checking movement has recursed back to the player, block movement.
-			return false;
-		}
 		if (occupant instanceof Player && blocker instanceof Goal) {
 			// If this is the player moving onto the goal, do not block.
 			return true;
