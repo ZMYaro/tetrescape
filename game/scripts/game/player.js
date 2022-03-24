@@ -30,7 +30,6 @@ Player.prototype.SPRITE_SHEET_DATA;
 
 /**
  * Move the player to a new location, if possible, and face in the direction of the movement.
- * @override
  * @param {Vector2D} movement - The vector by which to move the player
  * @returns {Boolean} - Whether the player could be moved
  */
@@ -52,8 +51,9 @@ Player.prototype.tryMove = function (movement) {
 			break;
 	}
 	this._currentFrame = 0;
-	// Call the superclass implementation of the function to determine what happened and how to handle it.
-	if (GridOccupant.prototype.tryMove.call(this, movement)) {
+	
+	// Attempt to move on the grad and handle the result.
+	if (this._grid.tryMove(this, movement)) {
 		this._currentAnim = this.SPRITE_SHEET_DATA.animations[heading + '_push'];
 		return true;
 	} else {

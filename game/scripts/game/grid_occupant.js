@@ -52,31 +52,26 @@ GridOccupant.loadAssets = function (subclass) {
 /**
  * Check whether the grid occupant can be moved to a location.
  * @param {Vector2D} movement - The vector by which the occupant would be moved
+ * @param {Array<Tetromino>} checkedOccupants - The already checked grid occupants for this move attempt
  * @returns {Boolean} - Whether the occupant could be moved
  */
-GridOccupant.prototype.canMove = function (movement) {
-	return this._grid.canMove(this, movement);
+GridOccupant.prototype.canMove = function (movement, checkedOccupants) {
+	return this._grid.canMove(this, movement, checkedOccupants);
 };
 
 /**
- * Move the grid occupant to a new location, if possible.
+ * Move the grid occupant to a new location.
  * @param {Vector2D} movement - The vector by which to move the occupant
- * @returns {Boolean} - Whether the occupant could be moved
  */
-GridOccupant.prototype.tryMove = function (movement) {
-	if (this._grid.tryMove(this, movement)) {
-		this.x = this.gridX;
-		this.y = this.gridY;
-		this.gridX += movement.x;
-		this.gridY += movement.y;
-		this._motionTween = new Tween(this, movement, this.MOVE_DURATION);
-		this._motionTween.onfinish = (function () {
-			this._motionTween = undefined;
-		}).bind(this);
-		return true;
-	} else {
-		return false;
-	}
+GridOccupant.prototype.move = function (movement) {
+	this.x = this.gridX;
+	this.y = this.gridY;
+	this.gridX += movement.x;
+	this.gridY += movement.y;
+	this._motionTween = new Tween(this, movement, this.MOVE_DURATION);
+	this._motionTween.onfinish = (function () {
+		this._motionTween = undefined;
+	}).bind(this);
 };
 
 /**

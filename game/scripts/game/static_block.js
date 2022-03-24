@@ -17,19 +17,10 @@ function StaticBlock(x, y, grid) {
 StaticBlock.prototype = Object.create(Block.prototype);
 
 /**
- * Inform that the block cannot be moved.
  * @override
+ * Inform that the block cannot be moved.
  * @returns {Boolean} - That the block cannot be moved
  */
-StaticBlock.prototype.canMoveSingle = function (movement) {
-	return false;
-};
-
-/**
- * Do not allow the block to be moved.
- * @override
- * @returns {Boolean} - That the block could not be moved
- */
-StaticBlock.prototype.tryMoveSingle = function (movement) {
+StaticBlock.prototype.canMoveSingle = function (movement, checkedOccupants) {
 	return false;
 };

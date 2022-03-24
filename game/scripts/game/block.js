@@ -56,73 +56,48 @@ Block.prototype.SPRITE_SHEET_DATA;
 Block.prototype.DEATH_DURATION = 200;
 
 /**
- * Check whether the block's tetromino can be moved to a new location.
  * @override
+ * Check whether the block's tetromino can be moved to a new location.
  * @param {Vector2D} movement - The vector by which the block would be moved
+ * @param {Array<Tetromino>} checkedOccupants - The already checked grid occupants for this move attempt
  * @returns {Boolean} - Whether the block could be moved
  */
-Block.prototype.canMove = function (movement) {
+Block.prototype.canMove = function (movement, checkedOccupants) {
 	// Do not move while dying.
 	if (this.dying) {
 		return false;
 	}
 	if (this.tetromino) {
-		return this.tetromino.canMove(movement);
+		return this.tetromino.canMove(movement, checkedOccupants);
 	} else {
-		return this.canMoveSingle(movement);
+		return this.canMoveSingle(movement, checkedOccupants);
 	}
 };
 
 /**
  * Check whether the block can be moved to a new location, independent of its tetromino.
  * @param {Vector2D} movement - The vector by which the block would be moved
+ * @param {Array<Tetromino>} checkedOccupants - The already checked grid occupants for this move attempt
  * @returns {Boolean} - Whether the block could be moved
  */
-Block.prototype.canMoveSingle = function (movement) {
+Block.prototype.canMoveSingle = function (movement, checkedOccupants) {
 	// Do not move while dying.
 	if (this.dying) {
 		return false;
 	}
 	// Call the superclass implementation of canMove.
-	return GridOccupant.prototype.canMove.call(this, movement);
+	return GridOccupant.prototype.canMove.call(this, movement, checkedOccupants);
 };
 
 /**
- * Move the block's tetromino to a new location, if possible.
- * @override
- * @param {Vector2D} movement - The vector by which to move the block
- * @returns {Boolean} - Whether the block could be moved
- */
-Block.prototype.tryMove = function (movement) {
-	// Do not move while dying.
-	if (this.dying) {
-		return false;
-	}
-	if (this.tetromino) {
-		return this.tetromino.tryMove(movement);
-	} else {
-		return this.tryMoveSingle(movement);
-	}
-};
-
-/**
- * Move the block to a new location, if possible, independent of its tetromino.
+ * Move the block to a new location.
  * @param {Vector2D} movement - The vector by which to move the block
  * @return {Boolean} - Whether the block could be moved
  */
-Block.prototype.tryMoveSingle = function (movement) {
-	// Do not move while dying.
-	if (this.dying) {
-		return false;
-	}
-	// Call the superclass implementation of tryMove.
-	if (GridOccupant.prototype.tryMove.call(this, movement)) {
-		this.moveSound.currentTime = 0;
-		this.moveSound.play();
-		return true;
-	} else {
-		return false;
-	}
+Block.prototype.move = function (movement) {
+	GridOccupant.prototype.move.call(this, movement);
+	this.moveSound.currentTime = 0;
+	this.moveSound.play();
 };
 
 /**
@@ -148,8 +123,8 @@ Block.prototype.kill = function () {
 };
 
 /**
- * Update the block.
  * @override
+ * Update the block.
  * @param {Number} deltaTime - The time since the last frame in milliseconds
  */
 Block.prototype.update = function (deltaTime) {
@@ -163,8 +138,8 @@ Block.prototype.update = function (deltaTime) {
 };
 
 /**
- * Draw the block to the canvas.
  * @override
+ * Draw the block to the canvas.
  * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
  */
 Block.prototype.draw = function (ctx, blockSize) {

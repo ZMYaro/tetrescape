@@ -55,17 +55,24 @@ Grid.prototype = {
 	 * Check whether a grid occupant can be moved to a new location.
 	 * @param {GridOccupant} occupant - The occupant to move
 	 * @param {Vector2D} movement - The vector by which the occupant would be moved
+	 * @param {Array<Tetromino>} checkedOccupants - The already checked grid occupants for this move attempt
 	 * @returns {Boolean} - Whether the occupant could be moved
 	 */
-	canMove: function (occupant, movement) {
+	canMove: function (occupant, movement, checkedOccupants) {
+		if (checkedOccupants.includes(occupant)) {
+			// If checking movement has recursed back to this occupant, move on.
+			return true;
+		}
+		checkedOccupants.push(occupant);
+		
 		// Calculate the potential new position of the occupant.
 		var newPos = new Vector2D(occupant.gridX + movement.x, occupant.gridY + movement.y);
 		
-		// Prevent moving off the grid.
 		if (newPos.x < 0 ||
 				newPos.x > this.width - 1 ||
 				newPos.y < 0 ||
 				newPos.y > this.height - 1) {
+			// Prevent moving off the grid.
 			return false;
 		}
 		
@@ -73,47 +80,69 @@ Grid.prototype = {
 		// this occupant's group, attempt to push the blocking occupant unless it is the
 		// goal tile blocking the player.
 		var blocker = this._occupants[newPos.x][newPos.y];
-		if (blocker && !(blocker.tetromino && blocker.tetromino === occupant.tetromino) &&
-				!(occupant instanceof Player && blocker instanceof Goal)) {
-			if (blocker.canMove(movement)) {
-				return true;
-			} else {
-				return false;
-			}
+		if (!blocker) {
+			// If there is no blocker, no problem.
+			return true;
 		}
-		return true;
+		if (blocker instanceof Player) {
+			// If checking movement has recursed back to the player, block movement.
+			return false;
+		}
+		if (occupant instanceof Player && blocker instanceof Goal) {
+			// If this is the player moving onto the goal, do not block.
+			return true;
+		}
+		if (blocker.tetromino && blocker.tetromino === occupant.tetromino) {
+			// If the blocker is part of the same mino, it is not blocking.
+			return true;
+		}
+		return blocker.canMove(movement, checkedOccupants);
 	},
 	
 	/**
-	 * Move a grid occupant to a new location, if possible, pushing any other grid
-	 * occupants in its way.
-	 * @param {GridOccupant} occupant - The occupant to move
+	 * Move a grid occupant to a new location, if possible, pushing any
+	 * other grid occupants in its way.
+	 * @param {GridOccupant} initiatingOccupant - The occupant trying to move
 	 * @param {Vector2D} movement - The vector by which to move the occupant
 	 * @returns {Boolean} - Whether the occupant could be moved
 	 */
-	tryMove: function (occupant, movement) {
-		if (this.canMove(occupant, movement)) {
-			// If the destination space is occupied, attempt to push the opponent.
-			var newPos = new Vector2D(occupant.gridX + movement.x, occupant.gridY + movement.y),
-				blocker = this._occupants[newPos.x][newPos.y];
-			if (blocker) {
-				blocker.tryMove(movement);
-			}
-			
-			// Move to the new location.
-			// If the player is moving to the goal, remove the player from the grid
-			// and let Game draw it separately so the goal does not get overwirtten.
-			var playerMovingToGoal = (occupant instanceof Player) &&
-					(this._occupants[newPos.x][newPos.y] instanceof Goal);
-			this._occupants[occupant.gridX][occupant.gridY] = undefined;
-			if (!playerMovingToGoal) {
-				this._occupants[newPos.x][newPos.y] = occupant;
-			}
-			
-			return true;
-		} else {
+	tryMove: function (initiatingOccupant, movement) {
+		var checkedOccupants = [];
+		if (!this.canMove(initiatingOccupant, movement, checkedOccupants)) {
 			return false;
 		}
+		
+		// Remove the occupants from their current spaces.
+		checkedOccupants.forEach(function (occupant) {
+			// The goal does not move.
+			if (occupant instanceof Goal) { return; }
+			
+			this._occupants[occupant.gridX][occupant.gridY] = undefined;
+		}, this);
+		
+		// Move them to their new spaces.
+		checkedOccupants.forEach(function (occupant) {
+			// The goal does not move.
+			if (occupant instanceof Goal) { return; }
+			
+			var newPos = new Vector2D(occupant.gridX + movement.x, occupant.gridY + movement.y),
+				playerMovingToGoal = (occupant instanceof Player) &&
+					(this._occupants[newPos.x][newPos.y] instanceof Goal);
+			
+			// Tell the occupant it is moving.
+			occupant.move(movement);
+			
+			if (playerMovingToGoal) {
+				// If the player is moving to the goal, leave the player off the grid
+				// and let Game draw it separately so the goal does not get overwirtten.
+				return;
+			}
+			
+			// Update the occupant's position on the grid.
+			this._occupants[newPos.x][newPos.y] = occupant;
+		}, this);
+		
+		return true;
 	},
 	
 	/**
