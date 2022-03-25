@@ -155,6 +155,7 @@ MenuView.prototype._moveFocusNext = function () {
 	
 	// Focus the input.
 	this.inputs[this.activeInputIndex].focus();
+	this.inputs[this.activeInputIndex].scrollIntoView(false);
 };
 
 /**
@@ -183,6 +184,7 @@ MenuView.prototype._moveFocusPrev = function () {
 	
 	// Focus the input.
 	this.inputs[this.activeInputIndex].focus();
+	this.inputs[this.activeInputIndex].scrollIntoView(true);
 };
 
 /**
