@@ -115,7 +115,7 @@ Block.prototype.kill = function () {
 	
 	// Start the death animation.
 	this.dying = true;
-	this._deathTween = new Tween(this, {opacity: -1, rotation: 0.08 * Math.PI, scale: 0.4}, this.DEATH_DURATION)
+	this._deathTween = new Tween(this, {opacity: -1, rotation: 0.05 * Math.PI, scale: 0.4}, this.DEATH_DURATION)
 	this._deathTween.onfinish = (function () {
 		// Remove the block from the grid.
 		this._grid.removeOccupant(this);
@@ -156,7 +156,7 @@ Block.prototype.draw = function (ctx, blockSize) {
 	ctx.globalAlpha = this.opacity;
 	
 	ctx.translate(x, y);
-	ctx.rotate(-Utils.degToRad(this.rotation));
+	ctx.rotate(this.rotation);
 	ctx.scale(this.scale, this.scale);
 	ctx.translate(-x, -y);
 	GridOccupant.prototype.draw.call(this, ctx, blockSize);
