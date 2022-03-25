@@ -55,7 +55,7 @@ select {
 
 /* Engraved text */
 .top-bar,
-#resultsScreen {
+#results-screen {
 	text-shadow:
 		-1px -1px 1px rgba(0, 0, 0, 0.7),
 		1px 1px 1px rgba(255, 255, 255, 0.25);
@@ -85,8 +85,8 @@ select {
 	
 	z-index: 4;
 }
-	#levelScreen .top-bar,
-	#aboutScreen .top-bar {
+	#level-screen .top-bar,
+	#about-screen .top-bar {
 		/* Polymer/MaterialZ Z2 */
 		box-shadow:
 			0 8px 17px 0 rgba(0, 0, 0, 0.2),
@@ -337,25 +337,25 @@ select {
 }
 
 /* Title screen styles */
-#titleScreen {
+#title-screen {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-evenly;
 	padding: 0;
 }
-#titleScreen .menu {
+#title-screen .menu {
 	width: auto;
 	height: auto;
 	padding: 0;
 	margin-bottom: 2em;
 	overflow: visible;
 }
-#titleScreen .menu button {
+#title-screen .menu button {
 	padding: 0.75em 0;
 	width: 8em;
 }
-	#titleScreen .menu button#play-button {
+	#title-screen .menu button#play-button {
 		font-size: 150%;
 		width: 7em;
 	}
@@ -385,26 +385,26 @@ select {
 		left: 0;
 		animation-duration: 5s;
 	}
-		#titleScreen.open:not(.suspended) #title-glow1 {
+		#title-screen.open:not(.suspended) #title-glow1 {
 			animation-name: title-glow1;
 		}
 	#title-glow2 {
 		right: 0;
 		animation-duration: 7s;
 	}
-		#titleScreen.open:not(.suspended) #title-glow2 {
+		#title-screen.open:not(.suspended) #title-glow2 {
 			animation-name: title-glow2;
 		}
 
 /* Level select screen styles */
-#levelScreen .menu {
+#level-screen .menu {
 	padding: 0;
 	/* Vertically center the level list. */
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 }
-#levelScreen .menu ul {
+#level-screen .menu ul {
 	list-style-type: none;
 	box-sizing: border-box;
 	display: flex;
@@ -419,7 +419,7 @@ select {
 	background-repeat: repeat;
 	box-shadow: 0 1px 8rem 2rem rgba(0, 0, 0, 0.9);
 }
-#levelScreen .menu button {
+#level-screen .menu button {
 	width: 12rem; /* 192px default */
 	height: 12rem;
 	padding: 1rem 0.75rem; /* 16px 12px default */
@@ -436,30 +436,30 @@ select {
 		0px 0px 0px 0px rgba(0, 0, 0, 0.2),
 		0px 0px 0px 0px rgba(0, 0, 0, 0.15);
 }
-	#levelScreen .menu button:hover,
-	#levelScreen .menu button:focus {
+	#level-screen .menu button:hover,
+	#level-screen .menu button:focus {
 		box-shadow:
 			inset 0px 1px 4px 0px rgba(0, 0, 0, 0.125),
 			inset 0px 0px 0px 0px rgba(0, 0, 0, 0.125),
 			0px 2px 5px  0px rgba(0, 0, 0, 0.26),
 			0px 2px 10px 0px rgba(0, 0, 0, 0.16);
 	}
-	#levelScreen .menu button:active,
-	#levelScreen .menu button.active {
+	#level-screen .menu button:active,
+	#level-screen .menu button.active {
 		box-shadow:
 			inset 0px 0px 2px 0px rgba(0, 0, 0, 0.125),
 			inset 0px 0px 0px 0px rgba(0, 0, 0, 0.125),
 			0px 4px 10px 0px rgba(0, 0, 0, 0.23),
 			0px 4px 15px 0px rgba(0, 0, 0, 0.175);
 	}
-	#levelScreen .menu button .title {
+	#level-screen .menu button .title {
 		font-size: 175%;
 		margin-bottom: -0.25rem;
 	}
-	#levelScreen .menu button .number {
+	#level-screen .menu button .number {
 		font-size: 450%;
 	}
-	#levelScreen .menu button .stars {
+	#level-screen .menu button .stars {
 		/* Prevent glowing on hover/focus. */
 		color: #e5e1d3;
 		text-shadow:
@@ -467,25 +467,25 @@ select {
 			1px 1px 1px rgba(255, 255, 255, 0.25);
 	}
 	/* Color-coded level groups */
-	#levelScreen .menu button[data-level-name|="I"] {
+	#level-screen .menu button[data-level-name|="I"] {
 		background-color: #00bcd4;
 	}
-	#levelScreen .menu button[data-level-name|="J"] {
+	#level-screen .menu button[data-level-name|="J"] {
 		background-color: #2095f3;
 	}
-	#levelScreen .menu button[data-level-name|="L"] {
+	#level-screen .menu button[data-level-name|="L"] {
 		background-color: #ff9800;
 	}
-	#levelScreen .menu button[data-level-name|="O"] {
+	#level-screen .menu button[data-level-name|="O"] {
 		background-color: #e5d200;
 	}
-	#levelScreen .menu button[data-level-name|="S"] {
+	#level-screen .menu button[data-level-name|="S"] {
 		background-color: #4caf4f;
 	}
-	#levelScreen .menu button[data-level-name|="T"] {
+	#level-screen .menu button[data-level-name|="T"] {
 		background-color: #9739a3;
 	}
-	#levelScreen .menu button[data-level-name|="Z"] {
+	#level-screen .menu button[data-level-name|="Z"] {
 		background-color: #f44336;
 	}
 .stars {
@@ -493,66 +493,66 @@ select {
 }
 
 @media (min-width: 500px) and (min-height: 500px) {
-	#levelScreen .menu ul {
+	#level-screen .menu ul {
 		padding: 2rem; /* 32px default */
 		height: 28rem; /* 448px default */
 		background-size: 20rem 28rem; /* 448px 320px default */
 	}
-	#levelScreen .menu button {
+	#level-screen .menu button {
 		width: 16rem; /* 256px default */
 		height: 16rem;
 		margin: 2rem; /* 32px default */
 	}
-		#levelScreen .menu button .title {
+		#level-screen .menu button .title {
 			font-size: 200%;
 			margin-bottom: 0;
 		}
-		#levelScreen .menu button .number {
+		#level-screen .menu button .number {
 			font-size: 500%;
 		}
-		#levelScreen .menu button .stars {
+		#level-screen .menu button .stars {
 			margin-top: 0.5rem;
 			margin-bottom: 0.25rem;
 		}
 }
 @media (orientation: portrait) {
-	#levelScreen .menu {
+	#level-screen .menu {
 		display: block;
 	}
-	#levelScreen .menu ul {
+	#level-screen .menu ul {
 		flex-direction: column;
 		width: 21rem; /* 336px default */
 		height: auto;
 		background-image: url('../images/backgrounds/level_select_vert.jpg');
 		background-size: 21rem 15rem; /* 336px 240px default */
 	}
-	#levelScreen .menu button {
+	#level-screen .menu button {
 		margin-left: auto;
 		margin-right: auto;
 	}
 }
 @media (min-width: 500px) and (min-height: 500px) and (orientation: portrait) {
-	#levelScreen .menu ul {
+	#level-screen .menu ul {
 		width: 28rem; /* 448px default */
 		background-size: 28rem 20rem; /* 448px 320px default */
 	}
 }
 
 /* Game screen styles */
-#gameScreen {
+#game-screen {
 	background: #101010;
 	
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-#gameScreen .top-bar {
+#game-screen .top-bar {
 	text-align: center;
 }
-	#gameScreen .top-bar .back-button {
+	#game-screen .top-bar .back-button {
 		float: left;
 	}
-	#gameScreen .top-bar #restart-button {
+	#game-screen .top-bar #restart-button {
 		float: right;
 	}
 #game-canvas {
@@ -598,24 +598,24 @@ select {
 
 
 /* Results screen styles */
-#aboutScreen,
-#resultsScreen {
+#about-screen,
+#results-screen {
 	background-color: #4b4a4e;
 	background-image: url('../images/backgrounds/stone_light_smooth.jpg');
 	background-size: cover;
 	color: white;
 }
 
-.view#resultsScreen {
+.view#results-screen {
 	border-radius: 100%;
 	transform: scale(0);
 }
-	.view#resultsScreen.open {
+	.view#results-screen.open {
 		border-radius: 0;
 		transform: scale(1);
 	}
 
-#resultsScreen .star {
+#results-screen .star {
 	display: inline-block;
 	width: 64px;
 	height: 64px;
@@ -623,7 +623,7 @@ select {
 	border-radius: 50%;
 	transform: scale(1);
 }
-	#resultsScreen .star::before {
+	#results-screen .star::before {
 		content: '\2606';
 		display: block;
 		
@@ -636,14 +636,14 @@ select {
 			-1.5px -1.5px 1.5px rgba(0, 0, 0, 0.7),
 			1.5px 1.5px 1.5px rgba(255, 255, 255, 0.25);
 	}
-	#resultsScreen .star.active {
+	#results-screen .star.active {
 		transform: scale(1.2);
 		
 		animation-name: star-ripple;
 		animation-duration: 0.25s;
 		animation-timing-function: limit;
 	}
-		#resultsScreen .star.active::before {
+		#results-screen .star.active::before {
 			content: '\2605';
 			color: #c7c7d9;
 			text-shadow:
@@ -657,14 +657,14 @@ select {
 }
 
 /* Instructions screen styles */
-#instructionsScreen,
-#aboutScreen {
+#instructions-screen,
+#about-screen {
 	text-shadow:
 		-5px 12px 6px rgba(0, 0, 0, 0.15),
 		8px 12px 6px rgba(0, 0, 0, 0.15),
 		1px 11px 4px rgba(0, 0, 0, 0.25);
 }
-#instructionsScreen .menu img {
+#instructions-screen .menu img {
 	display: block;
 	margin: 0 auto;
 	max-width: 90%;
@@ -674,14 +674,14 @@ img.instructions-keyboard,
 img.instructions-gamepad {
 	width: 188px;
 }
-	.prefer-input-touch    #instructionsScreen .instructions-keyboard,
-	.prefer-input-touch    #instructionsScreen .instructions-gamepad,
-	.prefer-input-keyboard #instructionsScreen .instructions-touch,
-	.prefer-input-keyboard #instructionsScreen .instructions-gamepad,
-	.prefer-input-gamepad  #instructionsScreen .instructions-touch,
-	.prefer-input-gamepad  #instructionsScreen .instructions-keyboard,
-	.prefer-input-xbox     #instructionsScreen .instructions-touch,
-	.prefer-input-xbox     #instructionsScreen .instructions-keyboard {
+	.prefer-input-touch    #instructions-screen .instructions-keyboard,
+	.prefer-input-touch    #instructions-screen .instructions-gamepad,
+	.prefer-input-keyboard #instructions-screen .instructions-touch,
+	.prefer-input-keyboard #instructions-screen .instructions-gamepad,
+	.prefer-input-gamepad  #instructions-screen .instructions-touch,
+	.prefer-input-gamepad  #instructions-screen .instructions-keyboard,
+	.prefer-input-xbox     #instructions-screen .instructions-touch,
+	.prefer-input-xbox     #instructions-screen .instructions-keyboard {
 		display: none;
 	}
 .instructions-blocks {
@@ -689,31 +689,31 @@ img.instructions-gamepad {
 }
 
 /* About (credits) screen styles */
-#aboutScreen {
+#about-screen {
 	background-image: url('../images/backgrounds/stone_light_speckled.jpg');
 }
-#aboutScreen img {
+#about-screen img {
 	max-width: 90%;
 }
-#aboutScreen h2 {
+#about-screen h2 {
 	font-size: 125%;
 }
-#aboutScreen ul {
+#about-screen ul {
 	list-style-type: none;
 	padding: 0;
 	margin: 0.5em;
 }
-	#aboutScreen ul li .icon {
+	#about-screen ul li .icon {
 		width: 0.9em;
 		height: 0.9em;
 		margin: -0.15em 0;
 		fill: currentcolor;
 	}
-	#aboutScreen ul li a {
+	#about-screen ul li a {
 		text-decoration: none;
 	}
-		#aboutScreen ul li a:hover,
-		#aboutScreen ul li a:focus {
+		#about-screen ul li a:hover,
+		#about-screen ul li a:focus {
 			text-decoration: underline;
 		}
 

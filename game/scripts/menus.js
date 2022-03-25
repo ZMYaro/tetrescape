@@ -19,13 +19,13 @@ window.onload = function () {
 	
 	// Create views.
 	views = {
-		title: new TitleView(document.getElementById('titleScreen')),
-		instructions: new View(document.getElementById('instructionsScreen')),
+		title: new TitleView(document.getElementById('title-screen')),
+		instructions: new View(document.getElementById('instructions-screen')),
 		options: new OptionsView(document.getElementById('options-screen')),
-		about: new View(document.getElementById('aboutScreen')),
-		levelSelect: new MenuView(document.getElementById('levelScreen')),
-		game: new GameView(document.getElementById('gameScreen')),
-		results: new MenuView(document.getElementById('resultsScreen'))
+		about: new View(document.getElementById('about-screen')),
+		levelSelect: new MenuView(document.getElementById('level-screen')),
+		game: new GameView(document.getElementById('game-screen')),
+		results: new MenuView(document.getElementById('results-screen'))
 	};
 	
 	// Enable the results screen buttons.
