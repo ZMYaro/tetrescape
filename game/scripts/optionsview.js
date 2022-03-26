@@ -15,8 +15,10 @@ function OptionsView(elem, parent) {
 	document.body.classList.add('gamepad-controls-' + im.gamepadControls);
 	gamepadControlsSelect.addEventListener('change', this._handleControlsSelect.bind(this));
 	
+	this.elem.querySelector('#remove-ads-button')
+		.addEventListener('click', this._handleRemoveAds.bind(this));
 	this.elem.querySelector('#reset-button')
-		.addEventListener('click', this._handleResetButton.bind(this));
+		.addEventListener('click', this._handleReset.bind(this));
 }
 
 // Inherit from View.
@@ -37,9 +39,16 @@ OptionsView.prototype._handleControlsSelect = function (ev) {
 };
 
 /**
+ * Handle the remove ads button being clicked.
+ */
+OptionsView.prototype._handleRemoveAds = function () {
+	alert('Not available in this version.');
+};
+
+/**
  * Handle the reset button being clicked.
  */
-OptionsView.prototype._handleResetButton = function () {
+OptionsView.prototype._handleReset = function () {
 	var confirmed = confirm('Are you sure you want to reset your scores?  This cannot be undone!');
 	if (!confirmed) {
 		return;

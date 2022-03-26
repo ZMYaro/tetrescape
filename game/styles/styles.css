@@ -688,6 +688,61 @@ img.instructions-gamepad {
 	width: 312px;
 }
 
+/* Options screen styles */
+#options-screen h2 {
+	font-size: inherit;
+}
+#options-screen .menu {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+.options-input-group {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+	.options-input-group button,
+	.options-input-group select {
+		margin-top: 0.5em;
+	}
+	.options-input-group img {
+		width: 175px;
+	}
+.options-gamepad-controls-microsoft,
+.options-gamepad-controls-nintendo {
+	display: none;
+}
+.gamepad-controls-microsoft .options-gamepad-controls-microsoft,
+.gamepad-controls-nintendo .options-gamepad-controls-nintendo {
+	display: block;
+}
+@media (orientation: portrait) {
+	#options-screen .menu {
+		flex-direction: column;
+	}
+	.options-input-group {
+		flex-direction: row;
+	}
+		.options-input-group img {
+			margin-left: 2em;
+		}
+}
+@media (max-width: 500px), (max-height: 500px) {
+	#options-screen .menu label {
+		font-size: 90%;
+	}
+	.options-input-group button,
+	.options-input-group select {
+		padding: 0.75em;
+	}
+	.options-input-group img {
+		width: 87.5px;
+	}
+}
+
 /* About (credits) screen styles */
 #about-screen {
 	background-image: url('../images/backgrounds/stone_light_speckled.jpg');

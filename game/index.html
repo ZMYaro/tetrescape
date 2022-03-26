@@ -129,15 +129,31 @@
 				-->Options
 			</header>
 			<section class="menu">
-				<label style="display: inline-block;">
-					Gamepad selection controls
-					<br />
-					<select id="gamepad-controls-select">
-						<option value="microsoft">Microsoft</option>
-						<option value="nintendo">Nintendo</option>
-					</select>
-				</label>
-				<button id="reset-button">Reset all scores</button>
+				<div class="options-input-group">
+					<div>
+						<h2>Gamepad controls</h2>
+						<select id="gamepad-controls-select">
+							<option value="microsoft">Microsoft</option>
+							<option value="nintendo">Nintendo</option>
+						</select>
+					</div>
+					<img src="images/options/gamepad_controls_microsoft.png" alt="Gamepad with the right face button labeled, Back, and the bottom face button labeled, Select." class="options-gamepad-controls-microsoft" />
+					<img src="images/options/gamepad_controls_nintendo.png" alt="Gamepad with the right face button labeled, Select, and the bottom face button labeled, Back." class="options-gamepad-controls-nintendo" />
+				</div>
+				<div class="options-input-group">
+					<div>
+						<h2>Ads</h2>
+						<button id="remove-ads-button">Remove ads</button>
+					</div>
+					<img src="images/options/remove_ads.png" alt="Remove ads graphic." />
+				</div>
+				<div class="options-input-group">
+					<div>
+						<h2>Reset</h2>
+						<button id="reset-button">Reset all scores</button>
+					</div>
+					<img src="images/options/reset_scores.png" alt="Bomb reset graphic." />
+				</div>
 			</section>
 		</div>
 		
