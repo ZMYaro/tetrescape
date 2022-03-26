@@ -664,11 +664,20 @@ select {
 		8px 12px 6px rgba(0, 0, 0, 0.15),
 		1px 11px 4px rgba(0, 0, 0, 0.25);
 }
-#instructions-screen .menu img {
-	display: block;
-	margin: 0 auto;
-	max-width: 90%;
+.instructions-group {
+	margin: 5em 0;
 }
+	.instructions-group:first-child {
+		margin-top: 1em;
+	}
+	.instructions-group:last-child {
+		margin-bottom: 0;
+	}
+	.instructions-group img {
+		display: block;
+		margin: 0 auto;
+		max-width: 90%;
+	}
 img.instructions-touch,
 img.instructions-keyboard,
 img.instructions-gamepad {
