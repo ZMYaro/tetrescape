@@ -678,6 +678,9 @@ select {
 		margin: 0 auto;
 		max-width: 90%;
 	}
+	.instructions-group p {
+		white-space: normal;
+	}
 img.instructions-touch,
 img.instructions-keyboard,
 img.instructions-gamepad {
@@ -695,6 +698,16 @@ img.instructions-gamepad {
 	}
 .instructions-blocks {
 	width: 312px;
+}
+@media (min-width: 500px) and (min-height: 500px) and (orientation: landscape) {
+		#instructions-screen .menu {
+			display: grid;
+			grid-template-columns: 50% 50%;
+			align-items: center;
+		}
+		.instructions-group {
+			margin: 0;
+		}
 }
 
 /* Options screen styles */
