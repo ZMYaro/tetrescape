@@ -1,4 +1,4 @@
-var CACHE_NAME = 'cache-2022-03-11';
+var CACHE_NAME = 'cache-2022-03-26';
 
 self.addEventListener('install', function (ev) {
 	// Add files to cache.
@@ -58,6 +58,10 @@ self.addEventListener('install', function (ev) {
 				'/images/logo/icon_128.png',
 				'/images/logo/icon_256.png',
 				'/images/logo/icon_256_maskable.png',
+				'/images/options/gamepad_controls_microsoft.png',
+				'/images/options/gamepad_controls_nintendo.png',
+				'/images/options/remove_ads.png',
+				'/images/options/reset_scores.png',
 				'/images/logo/title.png',
 				'/images/ember.png',
 				'/images/inprod_logo.png',
@@ -81,6 +85,7 @@ self.addEventListener('install', function (ev) {
 				'/scripts/input_manager.js',
 				'/scripts/menus.js',
 				'/scripts/menuview.js',
+				'/scripts/optionsview.js',
 				'/scripts/titleparticle.js',
 				'/scripts/titleview.js',
 				'/scripts/tween.js',
