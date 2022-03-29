@@ -68,6 +68,13 @@ GridOccupant.prototype.move = function (movement) {
 	this.y = this.gridY;
 	this.gridX += movement.x;
 	this.gridY += movement.y;
+	
+	if (Utils.shouldReduceMotion) {
+		// Move instantly if reducing motion.
+		this.x = this.gridX;
+		this.y = this.gridY;
+		return;
+	}
 	this._motionTween = new Tween(this, movement, this.MOVE_DURATION);
 	this._motionTween.onfinish = (function () {
 		this._motionTween = undefined;
@@ -85,6 +92,10 @@ GridOccupant.prototype.update = function (deltaTime) {
 	}
 	
 	// Update sprite animations.
+	if (Utils.shouldReduceMotion) {
+		// Do not play frame animations if reducing motion.
+		return;
+	}
 	if (Math.floor(this._currentFrame) < this._currentAnim.length - 1) {
 		this._currentFrame += deltaTime * this._frameRate;
 		this._currentFrame = Math.min(this._currentFrame, this._currentAnim.length - 1);

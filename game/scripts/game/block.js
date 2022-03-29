@@ -115,6 +115,11 @@ Block.prototype.kill = function () {
 	
 	// Start the death animation.
 	this.dying = true;
+	if (Utils.shouldReduceMotion) {
+		// Die instantly if reducing motion.
+		this._grid.removeOccupant(this);
+		return;
+	}
 	this._deathTween = new Tween(this, {opacity: -1, rotation: 0.05 * Math.PI, scale: 0.4}, this.DEATH_DURATION)
 	this._deathTween.onfinish = (function () {
 		// Remove the block from the grid.
