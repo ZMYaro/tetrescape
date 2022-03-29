@@ -1,6 +1,12 @@
 'use strict';
 
 var Utils = {
+	/** {Boolean} Whether the user prefers reduced motion */
+	get shouldReduceMotion() {
+		return (window.matchMedia &&
+			window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+	},
+	
 	/**
 	 * Make a button appear to have been pressed (with the `active` class) and then click it.
 	 * @param {HTMLButtonElement} button - The button to press

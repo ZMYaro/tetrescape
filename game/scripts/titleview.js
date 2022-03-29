@@ -73,7 +73,7 @@ TitleView.prototype._draw = function (timestamp) {
 		particle.draw(this._ctx, deltaTime);
 	}, this);
 	
-	if (this._active) {
+	if (this._active && !Utils.shouldReduceMotion) {
 		requestAnimationFrame(this._boundDraw);
 	}
 }
@@ -84,5 +84,7 @@ TitleView.prototype._draw = function (timestamp) {
  */
 TitleView.prototype.resume = function () {
 	MenuView.prototype.resume.call(this);
-	requestAnimationFrame(this._boundDraw);
+	if (!Utils.shouldReduceMotion) {
+		requestAnimationFrame(this._boundDraw);
+	}
 };
