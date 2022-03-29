@@ -240,6 +240,11 @@ select {
 			height: calc(100% - 3.5rem)
 		}
 }
+@media (prefers-reduced-motion: reduce) {
+	.view {
+		transition-duration: 0s;
+	}
+}
 
 .menu {
 	box-sizing: border-box;
@@ -358,6 +363,12 @@ select {
 			background-image: url('../images/icons/select_arrows_horiz.png');
 		}
 }
+@media (prefers-reduced-motion: reduce) {
+	.menu button,
+	.menu select {
+		transition-duration: 0s;
+	}
+}
 
 /* Title screen styles */
 #title-screen {
@@ -409,6 +420,7 @@ select {
 		animation-duration: 5s;
 	}
 		#title-screen.open:not(.suspended) #title-glow1 {
+			box-shadow: -8vw 0 30vw 5vw;
 			animation-name: title-glow1;
 		}
 	#title-glow2 {
@@ -416,8 +428,15 @@ select {
 		animation-duration: 7s;
 	}
 		#title-screen.open:not(.suspended) #title-glow2 {
+			box-shadow: -8vw 0 35vw 5vw;
 			animation-name: title-glow2;
 		}
+@media (prefers-reduced-motion: reduce) {
+	#title-screen.open:not(.suspended) #title-glow1,
+	#title-screen.open:not(.suspended) #title-glow2 {
+		animation-name: none;
+	}
+}
 
 /* Level select screen styles */
 #level-screen .menu {
@@ -618,6 +637,14 @@ select {
 		background-image: url('../images/hints/dpad_up.png');
 		animation-name: hint-loop-tilt;
 	}
+@media (prefers-reduced-motion: reduce) {
+	#control-hint,
+	.prefer-input-touch #control-hint,
+	.prefer-input-gamepad #control-hint,
+	.prefer-input-xbox #control-hint {
+		animation-name: none;
+	}
+}
 
 
 /* Results screen styles */
@@ -673,6 +700,11 @@ select {
 				-1.5px -1.5px 1.5px rgba(0, 0, 0, 0.55),
 				1.5px 1.5px 1.5px rgba(255, 255, 255, 0.25);
 		}
+@media (prefers-reduced-motion: reduce) {
+	#results-screen .star.active {
+		animation-name: none;
+	}
+}
 
 #gameScore {
 	float: right;
