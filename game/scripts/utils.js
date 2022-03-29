@@ -2,10 +2,8 @@
 
 var Utils = {
 	/** {Boolean} Whether the user prefers reduced motion */
-	get shouldReduceMotion() {
-		return (window.matchMedia &&
-			window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-	},
+	shouldReduceMotion: (window.matchMedia &&
+			window.matchMedia('(prefers-reduced-motion: reduce)').matches),
 	
 	/**
 	 * Make a button appear to have been pressed (with the `active` class) and then click it.
@@ -95,3 +93,9 @@ var Utils = {
 		}
 	}
 };
+
+if (window.matchMedia) {
+	window.matchMedia('(prefers-reduced-motion: reduce)').addListener(function (ev) {
+		Utils.shouldReduceMotion = ev.matches;
+	});
+}
