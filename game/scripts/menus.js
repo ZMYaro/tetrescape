@@ -73,7 +73,7 @@ function getStarRating(levelIndex, type, score) {
 
 function getStarDisplayHTML(mode, score, stars) {
 	var modeLabel = (mode === MODES.MOVES ? 'Fewest moves' : 'Most blocks cleared');
-	return '<span title="Fewest moves">' +
+	return '<span title="' + modeLabel + '">' +
 		'<img alt="' + modeLabel + '" src="images/icons/' + mode + '.png" class="icon" />' +
 		score +
 		'<img alt="' + stars + ' stars." src="images/icons/' + stars + 'star.png" class="icon" />' +
