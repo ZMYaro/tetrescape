@@ -71,7 +71,7 @@ MenuView.prototype._handleRightInput = function () {
 
 /**
  * @private
- * Handle a up input.
+ * Handle an up input.
  */
 MenuView.prototype._handleUpInput = function () {
 	if (!this._active) { return; }

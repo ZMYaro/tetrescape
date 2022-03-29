@@ -83,6 +83,7 @@ self.addEventListener('install', function (ev) {
 				'/scripts/lib/raf.js',
 				'/scripts/lib/vector2d.js',
 				'/scripts/color.js',
+				'/scripts/creditsview.js',
 				'/scripts/gameview.js',
 				'/scripts/input_manager.js',
 				'/scripts/menus.js',

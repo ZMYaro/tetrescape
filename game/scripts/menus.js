@@ -22,7 +22,7 @@ window.onload = function () {
 		title: new TitleView(document.getElementById('title-screen')),
 		instructions: new View(document.getElementById('instructions-screen')),
 		options: new OptionsView(document.getElementById('options-screen')),
-		about: new View(document.getElementById('about-screen')),
+		about: new CreditsView(document.getElementById('about-screen')),
 		levelSelect: new MenuView(document.getElementById('level-screen')),
 		game: new GameView(document.getElementById('game-screen')),
 		results: new MenuView(document.getElementById('results-screen'))
