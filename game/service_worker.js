@@ -89,6 +89,7 @@ self.addEventListener('install', function (ev) {
 				'/scripts/menus.js',
 				'/scripts/menuview.js',
 				'/scripts/optionsview.js',
+				'/scripts/resultsview.js',
 				'/scripts/titleparticle.js',
 				'/scripts/titleview.js',
 				'/scripts/tween.js',

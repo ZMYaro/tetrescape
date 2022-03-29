@@ -25,7 +25,7 @@ window.onload = function () {
 		about: new CreditsView(document.getElementById('about-screen')),
 		levelSelect: new MenuView(document.getElementById('level-screen')),
 		game: new GameView(document.getElementById('game-screen')),
-		results: new MenuView(document.getElementById('results-screen'))
+		results: new ResultsView(document.getElementById('results-screen'))
 	};
 	
 	// Enable the results screen buttons.
@@ -135,17 +135,8 @@ function populateLevelSelect() {
 function endGame(moves, blocks) {
 	var currentLevel = LEVELS[currentLevelIndex],
 		levelButton = document.getElementById(getButtonID(currentLevel.name)),
-		moveStars = getStarRating(currentLevelIndex, MODES.MOVES, moves),
-		blockStars = getStarRating(currentLevelIndex, MODES.BLOCKS, blocks),
 		savedMoves = parseInt(localStorage[getLocalStorageID(currentLevel.name, MODES.MOVES)]) || MAX_MOVES,
-		savedBlocks = parseInt(localStorage[getLocalStorageID(currentLevel.name, MODES.BLOCKS)]) || -1,
-		savedMoveStars = getStarRating(currentLevelIndex, MODES.MOVES, savedMoves),
-		savedBlockStars = getStarRating(currentLevelIndex, MODES.BLOCKS, savedBlocks),
-		moveStarDifference = moveStars - savedMoveStars,
-		blockStarDifference = blockStars - savedBlockStars;
-	
-	console.log('Moves: ' + moves + ' | Blocks: ' + blocks);
-	console.log('Move\u2605: ' + moveStars + ' | Block\u2605: ' + blockStars);
+		savedBlocks = parseInt(localStorage[getLocalStorageID(currentLevel.name, MODES.BLOCKS)]) || -1;
 	
 	// Save the new score and update the UI if it is lower than the saved score.
 	if (moves < savedMoves) {
@@ -159,43 +150,12 @@ function endGame(moves, blocks) {
 	populateLevelSelect();
 	
 	// Open the results screen.
-	document.getElementById('resultsTitle').innerHTML = 'Level ' + currentLevel.name + ' complete!';
-	
-	// Feature the star count that is the greatest, or had the greatest
-	// improvement if star count is equal.  If all else is equal,
-	// feature the move star count.
-	var featuredMode = MODES.MOVES,
-		featuredModeStars = moveStars;
-	if (blockStars > moveStars ||
-			(blockStars === moveStars &&
-				blockStarDifference > moveStarDifference)) {
-		featuredMode = MODES.BLOCKS;
-		featuredModeStars = blockStars;
-	}
-	
-	if (featuredMode === MODES.MOVES) {
-		document.getElementById('resultsScore').innerHTML = 'Moves: ' + moves;
-	} else if (featuredMode === MODES.BLOCKS) {
-		document.getElementById('resultsScore').innerHTML = 'Blocks cleared: ' + blocks;
-	}
-	// Set up the big stars.
-	var resultsStars = Array.from(views.results.elem.getElementsByClassName('star'));
-	resultsStars.forEach(function (resultsStar, i) {
-		resultsStar.classList.remove('active');
-		if (i < featuredModeStars) {
-			setTimeout(function () {
-				resultsStar.classList.add('active');
-			}, 100 * (i + 1));
-		}
-	});
-	
-	// Show full star and score display.
-	views.results.elem.querySelector('.stars').innerHTML =
-		getStarDisplaysHTML(
-			Math.min(moves, savedMoves),
-			Math.max(moveStars, savedMoveStars),
-			Math.max(blocks, savedBlocks),
-			Math.max(blockStars, savedBlockStars));
-	
 	views.game.openSubview(views.results);
+	views.results.showResults({
+		levelName: currentLevel.name,
+		moves: moves,
+		blocks: blocks,
+		savedMoves: savedMoves,
+		savedBlocks: savedBlocks
+	});
 }
