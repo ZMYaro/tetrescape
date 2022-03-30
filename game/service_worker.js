@@ -86,6 +86,7 @@ self.addEventListener('install', function (ev) {
 				'/scripts/creditsview.js',
 				'/scripts/gameview.js',
 				'/scripts/input_manager.js',
+				'/scripts/level_select_view.js',
 				'/scripts/menus.js',
 				'/scripts/menuview.js',
 				'/scripts/optionsview.js',

@@ -23,7 +23,7 @@ window.onload = function () {
 		instructions: new View(document.getElementById('instructions-screen')),
 		options: new OptionsView(document.getElementById('options-screen')),
 		about: new CreditsView(document.getElementById('about-screen')),
-		levelSelect: new MenuView(document.getElementById('level-screen')),
+		levelSelect: new LevelSelectView(document.getElementById('level-screen')),
 		game: new GameView(document.getElementById('game-screen')),
 		results: new ResultsView(document.getElementById('results-screen'))
 	};
@@ -40,7 +40,7 @@ window.onload = function () {
 	};
 	
 	// Populate the level select screen.
-	populateLevelSelect();
+	views.levelSelect.repopulate();
 	
 	// Open the title screen.
 	views.title.open();
@@ -86,52 +86,6 @@ function getStarDisplaysHTML(moves, moveStars, blocks, blockStars) {
 		getStarDisplayHTML(MODES.BLOCKS, blocks, blockStars);
 }
 
-function populateLevelSelect() {
-	var levelScreenList = views.levelSelect.elem.querySelector('.menu ul');
-	
-	// Clear the menu.
-	levelScreenList.innerHTML = '';
-	views.levelSelect.inputs = [];
-	
-	var levelButtonClickHandler = function () {
-		this.view.openSubview(views.game);
-		views.game.startGame(parseInt(this.dataset.levelIndex));
-	};
-	LEVELS.forEach(function (level, i) {
-		var levelListItem = document.createElement('li'),
-			levelButton = document.createElement('button'),
-			moves = localStorage[getLocalStorageID(level.name, MODES.MOVES)],
-			blocks = localStorage[getLocalStorageID(level.name, MODES.BLOCKS)],
-			moveStars = getStarRating(i, MODES.MOVES, moves),
-			blockStars = getStarRating(i, MODES.BLOCKS, blocks);
-		levelButton.id = getButtonID(level.name);
-		
-		var buttonHTML =
-			'<div class=\"title\">Level</div>' +
-			'<div class=\"number\">' + level.name + '</div>' +
-			'<div class=\"stars\">';
-		if (typeof(moves) === 'undefined' && typeof(blocks) === 'undefined') {
-			buttonHTML += 'Not completed';
-		} else {
-			buttonHTML += getStarDisplaysHTML(moves, moveStars, blocks, blockStars);
-		}
-		buttonHTML += '</div>';
-		
-		levelButton.innerHTML = buttonHTML;
-		levelButton.className = "z1";
-		levelButton.dataset.levelIndex = i;
-		levelButton.dataset.levelName = level.name;
-		levelButton.view = views.levelSelect;
-		levelButton.addEventListener('focus', MenuView.setActiveInputToFocused);
-		levelButton.addEventListener('click', levelButtonClickHandler);
-		
-		// Add the new button to the menu.
-		levelListItem.appendChild(levelButton);
-		levelScreenList.appendChild(levelListItem);
-		views.levelSelect.inputs.push(levelButton);
-	});
-}
-
 function endGame(moves, blocks) {
 	var currentLevel = LEVELS[currentLevelIndex],
 		levelButton = document.getElementById(getButtonID(currentLevel.name)),
@@ -147,7 +101,7 @@ function endGame(moves, blocks) {
 	}
 	
 	// Update the level select screen with the new values.
-	populateLevelSelect();
+	views.levelSelect.repopulate();
 	
 	// Open the results screen.
 	views.game.openSubview(views.results);

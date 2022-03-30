@@ -66,6 +66,7 @@ ResultsView.prototype.showResults = function (scores) {
 };
 
 /**
+ * @private
  * Determine which mode should be featured at the top of the results.
  * @param {Object} stars - Contains the new and saved stars for both modes
  * @returns {String} - MODES.BLOCKS or MODES.MOVES

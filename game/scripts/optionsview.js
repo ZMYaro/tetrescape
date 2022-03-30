@@ -60,7 +60,7 @@ OptionsView.prototype._handleReset = function () {
 	});
 	
 	// Update the level select screen with the new values.
-	populateLevelSelect();
+	views.levelSelect.repopulate();
 	
 	alert('Scores reset!');
 	
