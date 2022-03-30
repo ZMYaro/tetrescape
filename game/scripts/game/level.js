@@ -794,12 +794,23 @@ var LEVELS = [{
 	 L  l  l  i  *  *  l  t
 	 l  *  *  i  l  l  l  *
 	*/
+	/*
+	 *  *  *  L  l  l  L  *
+	 *  *  T  l  O  o  l  *
+	 *  *  t  t  o  o  l  l
+	 *  *  t  *  *  *  *  *
+	[P] *  t  *  *  *  J  j
+	 *  t  t  *  j  *  j [G]
+	 *  *  t  *  j  j  j  z
+	 *  *  *  j  j  j  z  z
+	 I  i  i  i  j  j  z  *
+	 */
 	name: 'O-3',
 	starScores: {
 		moves: [
-			33,
-			32, // With extra column
-			18 // Fastest solution with top mino
+			46, // Backtracking for extra column
+			40, // With extra column
+			30 // Fastest solution
 		],
 		blocks: [
 			1,
@@ -843,7 +854,7 @@ var LEVELS = [{
 		x: 1,
 		y: 4
 	}, {
-		type: 'L',
+		type: 'J',
 		orientation: 0,
 		x: 3,
 		y: 5
