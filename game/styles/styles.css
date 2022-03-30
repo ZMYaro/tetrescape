@@ -815,6 +815,19 @@ img.instructions-gamepad {
 	.options-input-group select {
 		padding: 0.75em;
 	}
+	.options-input-group select {
+		background-position-x: calc(100% - 0.25em);
+		background-position-y: 0.125em;
+		padding-right: 2em;
+	}
+		.options-input-group select:hover,
+		.options-input-group select:focus {
+			background-position-y: -2.375em;
+		}
+		.options-input-group select:active,
+		.options-input-group select.active {
+			background-position-y: -4.875em;
+		}
 	.options-input-group img {
 		width: 87.5px;
 	}
