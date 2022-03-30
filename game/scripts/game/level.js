@@ -724,8 +724,8 @@ var LEVELS = [{
 	starScores: {
 		moves: [
 			30,
-			30,
-			27
+			27, // Pushing split T from far side
+			23
 		],
 		blocks: [
 			0,
@@ -1776,9 +1776,9 @@ var LEVELS = [{
 	name: 'Z-7',
 	starScores: {
 		moves: [
-			77,
-			74,
-			70
+			70, // Pushing split T from far side
+			66,
+			60
 		],
 		blocks: [
 			0,
