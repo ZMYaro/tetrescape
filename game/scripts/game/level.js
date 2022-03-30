@@ -783,6 +783,65 @@ var LEVELS = [{
 	}]
 }, {
 	/*
+	 *  *  J  j  J  j  j  *  *
+	 *  *  j  *  *  *  j  *  *
+	 S  *  j  * [G] *  j  *  z
+	 s  s  J  *  *  *  j  z  z
+	 *  s  j  j  j  j  j  z  *
+	 *  *  *  * [P] *  *  *  *
+	 */
+	name: 'O-3',
+	starScores: {
+		moves: [
+			//59, // With extra column
+			29, // Push Z and J all the way up
+			25, // Push Z all the way up
+			23
+		],
+		blocks: [
+			6, // 1 extra column
+			12, // 2 extra columns
+			18 // 3 extra columns
+		]
+	},
+	width: 9,
+	height: 6,
+	playerSpawn: {x: 4, y: 5},
+	goal: {x: 4, y: 2},
+	staticBlocks: [],
+	tetrominos: [{
+		type: 'J',
+		orientation: 180,
+		x: 2,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 270,
+		x: 4,
+		y: 0
+	}, {
+		type: 'S',
+		orientation: 90,
+		x: 0,
+		y: 2
+	}, {
+		type: 'J',
+		orientation: 0,
+		x: 5,
+		y: 2
+	}, {
+		type: 'Z',
+		orientation: 90,
+		x: 7,
+		y: 2
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 2,
+		y: 3
+	}]
+}, {
+	/*
 	 O  o  J [G] *  *  T  *
 	 o  o  j  j  j  *  t  t
 	 *  *  *  L  l  L  t  *
