@@ -1162,6 +1162,96 @@ var LEVELS = [{
 	}]
 }, {
 	/*
+	 J  j  J  j  j  L  L  l [G] z
+	 j  Z  z  *  j  l  *  l  z  z
+	 j [P] z  z  t  l  l  l  z  *
+	 *  L  l  t  t  t  *  *  L  l
+	 *  *  l  *  *  S  J  j  j  l
+	 *  *  l  *  *  s  s  J  j  l
+	 *  *  *  *  *  *  s  j  j  j
+	 */
+	name: 'O-8',
+	starScores: {
+		moves: [
+			29, // Subbing the L piece from first column clear :P
+			20,
+			17
+		],
+		blocks: [
+			//14, // Minimum
+			21, // 1 extra column
+			28, // 2 extra column
+			31 // 1 extra row + extra column
+		]
+	},
+	width: 10,
+	height: 7,
+	playerSpawn: {x: 1, y: 2},
+	goal: {x: 8, y: 0},
+	staticBlocks: [],
+	tetrominos: [{
+		type: 'J',
+		orientation: 180,
+		x: 0,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 270,
+		x: 2,
+		y: 0
+	}, {
+		type: 'L',
+		orientation: 0,
+		x: 5,
+		y: 0
+	}, {
+		type: 'L',
+		orientation: 180,
+		x: 6,
+		y: 0
+	}, {
+		type: 'Z',
+		orientation: 90,
+		x: 8,
+		y: 0
+	}, {
+		type: 'Z',
+		orientation: 0,
+		x: 1,
+		y: 1
+	}, {
+		type: 'T',
+		orientation: 180,
+		x: 3,
+		y: 2
+	}, {
+		type: 'L',
+		orientation: 180,
+		x: 1,
+		y: 3
+	}, {
+		type: 'L',
+		orientation: 180,
+		x: 8,
+		y: 3
+	}, {
+		type: 'S',
+		orientation: 90,
+		x: 5,
+		y: 4
+	}, {
+		type: 'J',
+		orientation: 270,
+		x: 6,
+		y: 4
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 7,
+		y: 5
+	}]
+}, {
+	/*
 	 *  *  *  L  l  l  L  *
 	 *  *  T  l  O  o  l  *
 	 *  *  t  t  o  o  l  l
