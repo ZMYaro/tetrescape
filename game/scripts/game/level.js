@@ -1252,6 +1252,81 @@ var LEVELS = [{
 	}]
 }, {
 	/*
+	 *  Z  z [G] *  s  s  s  s
+	 *  *  z  z  s  s  s  s  *
+	 *  *  J  j  *  s  s  *  *
+	 T  *  j  *  s  s  *  t  *
+	 t  t  j  *  *  *  t  t  *
+	 t  * [P] L  l  l  J  t  *
+	 *  *  *  l  *  *  j  j  j
+	*/
+	name: 'Z-1',
+	starScores: {
+		moves: [
+			//38, // Intended solution if you use the L block for 3 instead
+			32, // Intended solution, but if you forgot to push the T block in
+			26, // Intended solution
+			18 // Alternate (3-column) solution
+		],
+		blocks: [
+			21, // Alternate (3-column) solution
+			23, // Intended solution
+			30 // Extra column
+		]
+	},
+	width: 9,
+	height: 7,
+	playerSpawn: {x: 2, y: 5},
+	goal: {x: 3, y: 0},
+	staticBlocks: [],
+	tetrominos: [{
+		type: 'Z',
+		orientation: 0,
+		x: 1,
+		y: 0
+	}, {
+		type: 'S',
+		orientation: 0,
+		x: 4,
+		y: 0
+	}, {
+		type: 'S',
+		orientation: 0,
+		x: 6,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 180,
+		x: 2,
+		y: 2
+	}, {
+		type: 'S',
+		orientation: 0,
+		x: 4,
+		y: 2
+	}, {
+		type: 'T',
+		orientation: 270,
+		x: 0,
+		y: 3
+	}, {
+		type: 'T',
+		orientation: 90,
+		x: 6,
+		y: 3
+	}, {
+		type: 'L',
+		orientation: 90,
+		x: 3,
+		y: 5
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 6,
+		y: 5
+	}]
+}, {
+	/*
 	 *  *  *  L  l  l  L  *
 	 *  *  T  l  O  o  l  *
 	 *  *  t  t  o  o  l  l
@@ -1274,7 +1349,7 @@ var LEVELS = [{
 	 *  *  *  j  j  j  z  z
 	 I  i  i  i  j  j  z  *
 	 */
-	name: 'Z-1',
+	name: 'Z-2',
 	starScores: {
 		moves: [
 			46, // Backtracking for extra column
@@ -1353,7 +1428,7 @@ var LEVELS = [{
 	 *  *  *  * [P] *  l  l  l
 	 *  *  *  *  *  *  *  *  *
 	*/
-	name: 'Z-2',
+	name: 'Z-3',
 	starScores: {
 		moves: [
 			//47, // Alternate solution if you push the left block first
@@ -1408,81 +1483,6 @@ var LEVELS = [{
 		orientation: 270,
 		x: 6,
 		y: 4
-	}]
-}, {
-	/*
-	 *  Z  z [G] *  s  s  s  s
-	 *  *  z  z  s  s  s  s  *
-	 *  *  J  j  *  s  s  *  *
-	 T  *  j  *  s  s  *  t  *
-	 t  t  j  *  *  *  t  t  *
-	 t  * [P] L  l  l  J  t  *
-	 *  *  *  l  *  *  j  j  j
-	*/
-	name: 'Z-3',
-	starScores: {
-		moves: [
-			//38, // Intended solution if you use the L block for 3 instead
-			32, // Intended solution, but if you forgot to push the T block in
-			26, // Intended solution
-			18 // Alternate (3-column) solution
-		],
-		blocks: [
-			21, // Alternate (3-column) solution
-			23, // Intended solution
-			30 // Extra column
-		]
-	},
-	width: 9,
-	height: 7,
-	playerSpawn: {x: 2, y: 5},
-	goal: {x: 3, y: 0},
-	staticBlocks: [],
-	tetrominos: [{
-		type: 'Z',
-		orientation: 0,
-		x: 1,
-		y: 0
-	}, {
-		type: 'S',
-		orientation: 0,
-		x: 4,
-		y: 0
-	}, {
-		type: 'S',
-		orientation: 0,
-		x: 6,
-		y: 0
-	}, {
-		type: 'J',
-		orientation: 180,
-		x: 2,
-		y: 2
-	}, {
-		type: 'S',
-		orientation: 0,
-		x: 4,
-		y: 2
-	}, {
-		type: 'T',
-		orientation: 270,
-		x: 0,
-		y: 3
-	}, {
-		type: 'T',
-		orientation: 90,
-		x: 6,
-		y: 3
-	}, {
-		type: 'L',
-		orientation: 90,
-		x: 3,
-		y: 5
-	}, {
-		type: 'J',
-		orientation: 90,
-		x: 6,
-		y: 5
 	}]
 }, {
 	/*
