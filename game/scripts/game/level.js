@@ -1666,6 +1666,104 @@ var LEVELS = [{
 	}]
 }, {
 	/*
+	 Z  z  *  *  *  j  *  t  L  l
+	 *  z  z  *  *  j  t  t  t  l
+	 I  i  i  i  j  j  L  l  *  l
+	 *  *  *  Z  z  *  *  l  *  *
+	[P] *  *  *  z  z  *  l  *  *
+	 *  *  *  *  *  *  *  *  *  *
+	 *  *  I  i  i  i  J  J  j  j
+	 *  O  o  L  l  l  j  j  j  j
+	 *  o  o  l [G] I  i  i  i  B
+	 */
+	name: 'Z-6',
+	starScores: {
+		moves: [
+			99, // Intended solution, but forget to push Z piece out of the way
+			95, // Intended solution
+			69 // Alternate solution
+		],
+		blocks: [
+			19, // 1 column + 1 row (alternate solution)
+			29, // 1 column + 2 rows (alternate solution)
+			39 // 1 column + 3 rows (intended solution)
+		]
+	},
+	width: 10,
+	height: 9,
+	playerSpawn: {x: 0, y: 5},
+	goal: {x: 4, y: 8},
+	staticBlocks: [
+		{x: 9, y: 8}
+	],
+	tetrominos: [{
+		type: 'Z',
+		orientation: 0,
+		x: 0,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 0,
+		x: 4,
+		y: 0
+	}, {
+		type: 'T',
+		orientation: 180,
+		x: 6,
+		y: 0
+	}, {
+		type: 'L',
+		orientation: 180,
+		x: 8,
+		y: 0
+	}, {
+		type: 'I',
+		orientation: 90,
+		x: 0,
+		y: 2
+	}, {
+		type: 'L',
+		orientation: 180,
+		x: 6,
+		y: 2
+	}, {
+		type: 'Z',
+		orientation: 0,
+		x: 1,
+		y: 3
+	}, {
+		type: 'I',
+		orientation: 90,
+		x: 2,
+		y: 6
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 6,
+		y: 6
+	}, {
+		type: 'J',
+		orientation: 270,
+		x: 7,
+		y: 6
+	}, {
+		type: 'O',
+		orientation: 0,
+		x: 1,
+		y: 7
+	}, {
+		type: 'L',
+		orientation: 90,
+		x: 3,
+		y: 7
+	}, {
+		type: 'I',
+		orientation: 90,
+		x: 5,
+		y: 8
+	}]
+}, {
+	/*
 	 *  *  *  *  *  *  *  *  *  I  J  *  *
 	 *  *  *  J  j  *  *  *  *  i  j  j  j
 	 *  *  *  j  B  B  *  *  *  i  *  t  *
@@ -1675,7 +1773,7 @@ var LEVELS = [{
 	 *  T  t  t  *  *  *  *  *  O  o  O  o
 	 *  *  t  *  *  *  *  *  *  o  o  o  o
 	*/
-	name: 'Z-6',
+	name: 'Z-7',
 	starScores: {
 		moves: [
 			77,
@@ -1767,7 +1865,7 @@ var LEVELS = [{
 	 z  z  *  *  *  *  *  ?  i  ?  J  j  j
 	 z  ?  *  *  *  *  *  ?  i  *  j  j  j
 	*/
-	name: 'Z-7',
+	name: 'Z-8',
 	starScores: {
 		moves: [
 			75,
