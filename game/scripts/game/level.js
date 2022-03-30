@@ -1420,6 +1420,91 @@ var LEVELS = [{
 	}]
 }, {
 	/*
+	 *  z  J  *  T  t  t  L  l  l
+	 z  z  j  j  j  t  s  s  *  l
+	 z  *  *  *  T  s  s  *  S  *
+	 *  *  *  *  t  t  B  *  s  s
+	 *  *  * [P] t [G] *  l  *  s
+	 *  I  i  i  i  l  l  l  *  *
+	 *  *  *  *  B  *  B  Z  z  *
+	 *  *  *  *  *  *  *  *  z  z
+	 */
+	name: 'Z-3',
+	starScores: {
+		moves: [
+			48,
+			40, // Push T and S piece to the left first
+			38
+		],
+		blocks: [
+			//10, // Minimum
+			20, // 1 extra row
+			28, // 1 extra row + 1 extra column
+			30 // 2 extra rows
+		]
+	},
+	width: 10,
+	height: 8,
+	playerSpawn: {x: 3, y: 4},
+	goal: {x: 5, y: 4},
+	staticBlocks: [
+		{x: 6, y: 3},
+		{x: 4, y: 6},
+		{x: 6, y: 6}
+	],
+	tetrominos: [{
+		type: 'Z',
+		orientation: 90,
+		x: 0,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 2,
+		y: 0
+	}, {
+		type: 'T',
+		orientation: 0,
+		x: 4,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 270,
+		x: 7,
+		y: 0
+	}, {
+		type: 'S',
+		orientation: 0,
+		x: 5,
+		y: 1
+	}, {
+		type: 'T',
+		orientation: 270,
+		x: 4,
+		y: 2
+	}, {
+		type: 'S',
+		orientation: 90,
+		x: 8,
+		y: 2
+	}, {
+		type: 'L',
+		orientation: 270,
+		x: 5,
+		y: 4
+	}, {
+		type: 'I',
+		orientation: 90,
+		x: 1,
+		y: 5
+	}, {
+		type: 'Z',
+		orientation: 0,
+		x: 7,
+		y: 6
+	}]
+}, {
+	/*
 	 O  o [G] s  s  S  Z  z  *
 	 o  o  s  s  *  s  s  z  z
 	 *  *  *  *  *  *  s  *  *
@@ -1428,7 +1513,7 @@ var LEVELS = [{
 	 *  *  *  * [P] *  l  l  l
 	 *  *  *  *  *  *  *  *  *
 	*/
-	name: 'Z-3',
+	name: 'Z-4',
 	starScores: {
 		moves: [
 			//47, // Alternate solution if you push the left block first
@@ -1495,7 +1580,7 @@ var LEVELS = [{
 	 i  *  *  *  *  *  *  *  *  O  o  i
 	 B  *  *  P  *  *  *  *  *  o  o  i
 	*/
-	name: 'Z-4',
+	name: 'Z-5',
 	starScores: {
 		moves: [
 			67, // Intended solution if you forgot to push the row of blocks aside
@@ -1590,7 +1675,7 @@ var LEVELS = [{
 	 *  T  t  t  *  *  *  *  *  O  o  O  o
 	 *  *  t  *  *  *  *  *  *  o  o  o  o
 	*/
-	name: 'Z-5',
+	name: 'Z-6',
 	starScores: {
 		moves: [
 			77,
@@ -1682,7 +1767,7 @@ var LEVELS = [{
 	 z  z  *  *  *  *  *  ?  i  ?  J  j  j
 	 z  ?  *  *  *  *  *  ?  i  *  j  j  j
 	*/
-	name: 'Z-6',
+	name: 'Z-7',
 	starScores: {
 		moves: [
 			75,
