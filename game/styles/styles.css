@@ -385,14 +385,14 @@ select {
 	margin-bottom: 2em;
 	overflow: visible;
 }
-#title-screen .menu button {
-	padding: 0.75em 0;
-	width: 8em;
-}
-	#title-screen .menu button#play-button {
-		font-size: 150%;
-		width: 7em;
+	#title-screen .menu button {
+		padding: 0.75em 0;
+		width: 8em;
 	}
+		#title-screen .menu button#play-button {
+			font-size: 150%;
+			width: 7em;
+		}
 #title {
 	max-width: 100%;
 	max-width: min(100%, 720px);
@@ -431,6 +431,11 @@ select {
 			box-shadow: -8vw 0 35vw 5vw;
 			animation-name: title-glow2;
 		}
+@media (orientation: portrait) {
+	#title {
+		max-height: 55%;
+	}
+}
 @media (prefers-reduced-motion: reduce) {
 	#title-screen.open:not(.suspended) #title-glow1,
 	#title-screen.open:not(.suspended) #title-glow2 {
