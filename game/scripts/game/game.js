@@ -17,7 +17,6 @@ function Game(canvas, endCallback) {
 	this._player = undefined;
 	this._goal = undefined;
 	this._currentLevel = undefined;
-	this._blockSize = 1;
 	
 	this._blocksCleared = 0;
 	this._moves = 0;
@@ -57,6 +56,8 @@ function Game(canvas, endCallback) {
 Game.prototype.MAX_MOVES = 9999;
 /** {Number} How far from the goal the player should be to trigger the win animation in grid units */
 Game.prototype.WIN_DIST_FROM_GOAL = 0.2;
+/** {Number} The size of a grid square sprite in pixels */
+Game.prototype.DEFAULT_BLOCK_SIZE = 256;
 
 /**
  * @private
@@ -78,14 +79,14 @@ Game.prototype._update = function (timestamp) {
 	this._blocksCleared += this._grid.clearRows();
 	
 	// Draw grid elements.
-	this._grid.draw(this._ctx, this._blockSize);
+	this._grid.draw(this._ctx, this.DEFAULT_BLOCK_SIZE);
 	
 	// Check whether the player has reached the goal.
 	if (this._player.gridX === this._goal.gridX && this._player.gridY === this._goal.gridY) {
 		// If the player is moving to the goal tile, it needs to be updated
 		// and drawn manually since both are occupying the same grid space.
 		this._player.update(deltaTime);
-		this._player.draw(this._ctx, this._blockSize);
+		this._player.draw(this._ctx, this.DEFAULT_BLOCK_SIZE);
 		
 		if (Math.abs(this._player.x - this._goal.x) < this.WIN_DIST_FROM_GOAL &&
 				Math.abs(this._player.y - this._goal.y) < this.WIN_DIST_FROM_GOAL) {
@@ -201,13 +202,16 @@ Game.prototype.rescale = function () {
 		availRatio = availWidth / availHeight,
 		levelRatio = this._levelData.width / this._levelData.height;
 	
+	var blockSize;
 	if (levelRatio < availRatio) {
-		this._blockSize = availHeight / this._levelData.height;
+		blockSize = availHeight / this._levelData.height;
 	} else {
-		this._blockSize = availWidth / this._levelData.width;
+		blockSize = availWidth / this._levelData.width;
 	}
-	this._canvas.width = this._levelData.width * this._blockSize;
-	this._canvas.height = this._levelData.height * this._blockSize;
+	this._canvas.width = this._levelData.width * this.DEFAULT_BLOCK_SIZE;
+	this._canvas.height = this._levelData.height * this.DEFAULT_BLOCK_SIZE;
+	this._canvas.style.width = (this._levelData.width * blockSize) + 'px';
+	this._canvas.style.height = (this._levelData.height * blockSize) + 'px';
 	
 	// Re-disable image smoothing after resize.
 	this._ctx.imageSmoothingEnabled = false;
