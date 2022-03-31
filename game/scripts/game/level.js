@@ -1431,35 +1431,24 @@ var LEVELS = [{
 	 *  *  t  *  *  *  j [G]
 	 *  t  t  I  *  *  j  t
 	 *  *  t  i  *  *  t  t
-	 L  l  l  i  *  *  l  t
-	 l  *  *  i  l  l  l  *
+	 T  t  t  i  *  *  l  t
+	 *  t  *  i  l  l  l  *
 	*/
-	/*
-	 *  *  *  L  l  l  L  *
-	 *  *  T  l  O  o  l  *
-	 *  *  t  t  o  o  l  l
-	 *  *  t  *  *  *  *  *
-	[P] *  t  *  *  *  J  j
-	 *  t  t  *  j  *  j [G]
-	 *  *  t  *  j  j  j  z
-	 *  *  *  j  j  j  z  z
-	 I  i  i  i  j  j  z  *
-	 */
 	name: 'Z-2',
 	starScores: {
 		moves: [
-			46, // Backtracking for extra column
-			40, // With extra column
-			30 // Fastest solution
+			42, // Switch which T has 1 block remaining
+			34, // Push the Ts separately
+			32
 		],
 		blocks: [
 			1,
-			18, // Minimum
-			27 // Extra column
+			20, // Minimum
+			30 // 1 extra column
 		]
 	},
 	width: 8,
-	height: 9,
+	height: 10,
 	playerSpawn: {x: 0, y: 4},
 	goal: {x: 7, y: 5},
 	staticBlocks: [],
@@ -1492,26 +1481,26 @@ var LEVELS = [{
 		type: 'T',
 		orientation: 90,
 		x: 1,
-		y: 4
-	}, {
-		type: 'J',
-		orientation: 0,
-		x: 3,
 		y: 5
 	}, {
-		type: 'J',
+		type: 'I',
 		orientation: 0,
-		x: 4,
+		x: 3,
 		y: 6
 	}, {
-		type: 'Z',
+		type: 'T',
 		orientation: 90,
 		x: 6,
 		y: 6
 	}, {
-		type: 'I',
-		orientation: 90,
+		type: 'T',
+		orientation: 0,
 		x: 0,
+		y: 8
+	}, {
+		type: 'L',
+		orientation: 270,
+		x: 4,
 		y: 8
 	}]
 }, {
@@ -1601,6 +1590,87 @@ var LEVELS = [{
 	}]
 }, {
 	/*
+	 *  *  *  L  l  l  L  *
+	 *  *  T  l  O  o  l  *
+	 *  *  t  t  o  o  l  l
+	 *  *  t  *  *  *  *  *
+	[P] *  t  *  *  *  J  j
+	 *  t  t  *  j  *  j [G]
+	 *  *  t  *  j  j  j  z
+	 *  *  *  j  j  j  z  z
+	 I  i  i  i  j  j  z  *
+	 */
+	name: 'Z-4',
+	starScores: {
+		moves: [
+			46, // Backtracking for extra column
+			40, // With extra column
+			30 // Fastest solution
+		],
+		blocks: [
+			1,
+			18, // Minimum
+			27 // Extra column
+		]
+	},
+	width: 8,
+	height: 9,
+	playerSpawn: {x: 0, y: 4},
+	goal: {x: 7, y: 5},
+	staticBlocks: [],
+	tetrominos: [{
+		type: 'L',
+		orientation: 90,
+		x: 3,
+		y: 0
+	}, {
+		type: 'L',
+		orientation: 0,
+		x: 6,
+		y: 0
+	}, {
+		type: 'T',
+		orientation: 270,
+		x: 2,
+		y: 1
+	}, {
+		type: 'O',
+		orientation: 0,
+		x: 4,
+		y: 1
+	}, {
+		type: 'J',
+		orientation: 180,
+		x: 6,
+		y: 4
+	}, {
+		type: 'T',
+		orientation: 90,
+		x: 1,
+		y: 4
+	}, {
+		type: 'J',
+		orientation: 0,
+		x: 3,
+		y: 5
+	}, {
+		type: 'J',
+		orientation: 0,
+		x: 4,
+		y: 6
+	}, {
+		type: 'Z',
+		orientation: 90,
+		x: 6,
+		y: 6
+	}, {
+		type: 'I',
+		orientation: 90,
+		x: 0,
+		y: 8
+	}]
+}, {
+	/*
 	 O  o [G] s  s  S  Z  z  *
 	 o  o  s  s  *  s  s  z  z
 	 *  *  *  *  *  *  s  *  *
@@ -1609,7 +1679,7 @@ var LEVELS = [{
 	 *  *  *  * [P] *  l  l  l
 	 *  *  *  *  *  *  *  *  *
 	*/
-	name: 'Z-4',
+	name: 'Z-5',
 	starScores: {
 		moves: [
 			//47, // Alternate solution if you push the left block first
@@ -1676,7 +1746,7 @@ var LEVELS = [{
 	 i  *  *  *  *  *  *  *  *  O  o  i
 	 B  *  *  P  *  *  *  *  *  o  o  i
 	*/
-	name: 'Z-5',
+	name: 'Z-6',
 	starScores: {
 		moves: [
 			67, // Intended solution if you forgot to push the row of blocks aside
@@ -1772,7 +1842,7 @@ var LEVELS = [{
 	 *  O  o  L  l  l  j  j  j  j
 	 *  o  o  l [G] I  i  i  i  B
 	 */
-	name: 'Z-6',
+	name: 'Z-7',
 	starScores: {
 		moves: [
 			99, // Intended solution, but forget to push Z piece out of the way
@@ -1869,7 +1939,7 @@ var LEVELS = [{
 	 *  T  t  t  *  *  *  *  *  O  o  O  o
 	 *  *  t  *  *  *  *  *  *  o  o  o  o
 	*/
-	name: 'Z-7',
+	name: 'Z-8',
 	starScores: {
 		moves: [
 			70, // Pushing split T from far side
@@ -1961,7 +2031,7 @@ var LEVELS = [{
 	 z  z  *  *  *  *  *  ?  i  ?  J  j  j
 	 z  ?  *  *  *  *  *  ?  i  *  j  j  j
 	*/
-	name: 'Z-8',
+	name: 'Z-9',
 	starScores: {
 		moves: [
 			75,
