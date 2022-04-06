@@ -69,3 +69,14 @@ LevelSelectView.prototype.repopulate = function () {
 		views.levelSelect.inputs.push(levelButton);
 	}, this);
 };
+
+/**
+ * @override
+ * Reenable a suspended view and its event listeners.
+ */
+LevelSelectView.prototype.resume = function () {
+	MenuView.prototype.resume.call(this);
+	// Make sure the next button is in view.
+	this._moveFocusNext();
+	this._moveFocusPrev();
+};
