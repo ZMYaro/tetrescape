@@ -39,7 +39,7 @@ ResultsView.prototype.showResults = function (scores) {
 			savedMoves: getStarRating(currentLevelIndex, MODES.MOVES, scores.savedMoves),
 			savedBlocks: getStarRating(currentLevelIndex, MODES.BLOCKS, scores.savedBlocks)
 		},
-		featuredMode = this._determineFeaturedMode(stars),
+		featuredMode = this._determineFeaturedMode(scores, stars),
 		secondaryMode = (featuredMode === 'moves' ? 'blocks' : 'moves');
 	
 	this._titleDisplay.innerHTML = 'Level ' + scores.levelName + ' complete!';
@@ -78,12 +78,18 @@ ResultsView.prototype.showResults = function (scores) {
 /**
  * @private
  * Determine which mode should be featured at the top of the results.
+ * @param {Object} scores - Contains the moves, blocks cleared, and previous scores
  * @param {Object} stars - Contains the new and saved stars for both modes
  * @returns {String} - MODES.BLOCKS or MODES.MOVES
  */
-ResultsView.prototype._determineFeaturedMode = function (stars) {
+ResultsView.prototype._determineFeaturedMode = function (scores, stars) {
 	var moveStarDifference = stars.moves - stars.savedMoves,
 		blockStarDifference = stars.blocks - stars.savedBlocks;
+	
+	if (scores.blocks === 0 && stars.blocks === 3) {
+		// If there were no blocks to clear, feature moves.
+		return MODES.MOVES;
+	}
 	
 	// Feature the star count that is the greatest, or had the greatest
 	// improvement if star count is equal.  If all else is equal,
