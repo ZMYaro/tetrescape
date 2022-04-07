@@ -12,6 +12,7 @@ function ResultsView(elem, parent) {
 	this._titleDisplay = this.elem.querySelector('#results-title');
 	this._bigScoreDisplay = this.elem.querySelector('#results-score');
 	this._bigStars = Array.from(this.elem.getElementsByClassName('star'));
+	this._secondaryScoreDisplay = this.elem.querySelector('#results-score-secondary');
 	this._highScoresDisplay = this.elem.querySelector('.stars');
 }
 
@@ -38,7 +39,8 @@ ResultsView.prototype.showResults = function (scores) {
 			savedMoves: getStarRating(currentLevelIndex, MODES.MOVES, scores.savedMoves),
 			savedBlocks: getStarRating(currentLevelIndex, MODES.BLOCKS, scores.savedBlocks)
 		},
-		featuredMode = this._determineFeaturedMode(stars);
+		featuredMode = this._determineFeaturedMode(stars),
+		secondaryMode = (featuredMode === 'moves' ? 'blocks' : 'moves');
 	
 	this._titleDisplay.innerHTML = 'Level ' + scores.levelName + ' complete!';
 	
@@ -55,6 +57,14 @@ ResultsView.prototype.showResults = function (scores) {
 			}, animPauseTime * (i + 1));
 		}
 	}, this);
+	
+	this._secondaryScoreDisplay.innerHTML =
+		this.MODE_SCORE_HEADINGS[secondaryMode] + scores[secondaryMode] +
+		' &middot; <span class="stars">' +
+			(stars[secondaryMode] >= 1 ? '\u2605' : '\u2606') +
+			(stars[secondaryMode] >= 2 ? '\u2605' : '\u2606') +
+			(stars[secondaryMode] === 3 ? '\u2605' : '\u2606') +
+		'</stars>';
 	
 	// Set up small high scores and stars.
 	this._highScoresDisplay.innerHTML =

@@ -710,6 +710,10 @@ select {
 		animation-name: none;
 	}
 }
+#results-score-secondary {
+	margin: 0;
+	font-size: 87.5%;
+}
 
 #gameScore {
 	float: right;
