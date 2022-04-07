@@ -860,8 +860,10 @@ var LEVELS = [{
 			21
 		],
 		blocks: [
-			8, // Minimum moves
-			17, // 1 extra column
+			16, // 1 extra row
+			//17, // 1 extra column
+			24, // 2 extra rows
+			//25, // 1 extra row + 1 extra column
 			26 // 2 extra columns
 		]
 	},
@@ -1104,9 +1106,14 @@ var LEVELS = [{
 			19
 		],
 		blocks: [
-			28, // 1 extra column
-			32, // 1 extra column + 1 extra row
-			35 // 2 extra columns
+			//21, // Intended solution
+			//28, // 1 extra column
+			//32, // 1 extra row
+			//35, // 2 extra columns
+			39, // 1 extra row + 1 extra column
+			42, // 3 extra columns
+			//43, // 2 extra rows
+			46 // 1 extra row + 2 extra columns
 		]
 	},
 	width: 11,
@@ -1275,9 +1282,10 @@ var LEVELS = [{
 		],
 		blocks: [
 			//14, // Minimum
-			21, // 1 extra column
-			28, // 2 extra column
-			31 // 1 extra row + extra column
+			//21, // 1 extra column
+			24, // 1 extra row
+			28, // 2 extra columns
+			31 // 1 extra row + 1 extra column
 		]
 	},
 	width: 10,
@@ -1442,8 +1450,8 @@ var LEVELS = [{
 			32
 		],
 		blocks: [
-			1,
 			20, // Minimum
+			28, // 1 extra row
 			30 // 1 extra column
 		]
 	},
