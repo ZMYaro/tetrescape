@@ -1195,17 +1195,18 @@ var LEVELS = [{
 	 j  j  j  *  *  o  o  B  o  o  i
 	 *  *  *  *  *  *  *  *  *  *  i
 	 *  *  *  *  *  *  *  *  *  *  i
-	 I  *  *  t  *  *  *  *  *  *  *
-	 i  *  t  t  t  *  *  *  *  O  o
-	 i  *  *  *  *  *  *  *  *  o  o
+	 I  *  *  t  *  *  *  *  *  O  o
+	 i  *  t  t  t  *  *  *  *  o  o
+	 i  *  *  *  *  *  *  *  *  *  *
 	 i  *  *  P  *  *  *  *  *  *  B
 	*/
 	name: 'O-8',
 	starScores: {
 		moves: [
-			48,
-			39, // Push O piece in
-			37 // Do not push O piece in
+			//55, // Push O down before moving T
+			51, // Push T piece first
+			45, // Push O piece all the way in
+			43 // Do not push O piece all the way in
 		],
 		blocks: [
 			1,
@@ -1261,7 +1262,7 @@ var LEVELS = [{
 		type: 'O',
 		orientation: 0,
 		x: 9,
-		y: 5
+		y: 4
 	}]
 }, {
 	/*
