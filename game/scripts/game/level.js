@@ -1526,75 +1526,64 @@ var LEVELS = [{
 	name: 'Z-3',
 	starScores: {
 		moves: [
-			48,
-			40, // Push T and S piece to the left first
-			38
+			32, // Long way around the top (push S piece back down)
+			26, // Long way around the bottom
+			24
 		],
 		blocks: [
-			//10, // Minimum
-			20, // 1 extra row
-			28, // 1 extra row + 1 extra column
-			30 // 2 extra rows
+			//9, // Minimum
+			18, // 1 extra row
+			26, // 1 extra row + 1 extra column
+			27 // 2 extra rows
 		]
 	},
-	width: 10,
+	width: 9,
 	height: 8,
-	playerSpawn: {x: 3, y: 4},
-	goal: {x: 5, y: 4},
+	playerSpawn: {x: 1, y: 4},
+	goal: {x: 4, y: 3},
 	staticBlocks: [
-		{x: 6, y: 3},
-		{x: 4, y: 6},
-		{x: 6, y: 6}
+		{x: 4, y: 4},
+		{x: 5, y: 6}
 	],
 	tetrominos: [{
-		type: 'Z',
-		orientation: 90,
+		type: 'T',
+		orientation: 180,
 		x: 0,
 		y: 0
 	}, {
-		type: 'J',
-		orientation: 90,
-		x: 2,
-		y: 0
-	}, {
-		type: 'T',
+		type: 'Z',
 		orientation: 0,
-		x: 4,
+		x: 3,
 		y: 0
 	}, {
 		type: 'J',
 		orientation: 270,
-		x: 7,
+		x: 6,
 		y: 0
 	}, {
-		type: 'S',
-		orientation: 0,
-		x: 5,
+		type: 'L',
+		orientation: 270,
+		x: 4,
 		y: 1
 	}, {
-		type: 'T',
-		orientation: 270,
-		x: 4,
+		type: 'I',
+		orientation: 0,
+		x: 3,
 		y: 2
 	}, {
 		type: 'S',
 		orientation: 90,
-		x: 8,
+		x: 7,
 		y: 2
 	}, {
 		type: 'L',
 		orientation: 270,
-		x: 5,
+		x: 4,
 		y: 4
-	}, {
-		type: 'I',
-		orientation: 90,
-		x: 1,
-		y: 5
 	}, {
 		type: 'Z',
 		orientation: 0,
-		x: 7,
+		x: 6,
 		y: 6
 	}]
 }, {
