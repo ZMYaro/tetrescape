@@ -22,7 +22,7 @@ function GameView(elem, parent) {
 	
 	// Enable the game restart button.
 	this.restartButton = this.topBar.querySelector('#restart-button');
-	this.restartButton.addEventListener('click', this._game.reload.bind(this._game));
+	this.restartButton.addEventListener('click', this._handleRestart.bind(this));
 	im.addEventListener('restart', this._handleRestartInput.bind(this));
 	
 	im.addEventListener('quit', this._handleQuitInput.bind(this));
@@ -53,6 +53,15 @@ GameView.prototype._handleQuitInput = function () {
 GameView.prototype._handleRestartInput = function () {
 	if (!this._active) { return; }
 	Utils.animateButtonPress(this.restartButton);
+};
+
+/**
+ * @private
+ * Handle the restart button being activated.
+ */
+GameView.prototype._handleRestart = function () {
+	stats.increment('restarts');
+	this._game.reload();
 };
 
 /**

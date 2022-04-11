@@ -10,12 +10,14 @@ var GAME_PREFIX = 'tetrescape-',
 	MAX_MOVES = 999;
 
 var im, // Input manager
+	stats, // Stats manaager
 	views,
 	currentLevelIndex;
 
 window.onload = function () {
-	// Initialize input manager.
+	// Initialize input manager and stats manager.
 	im = new InputManager(document.getElementById('game-screen'));
+	stats = new StatsManager();
 	
 	// Create views.
 	views = {

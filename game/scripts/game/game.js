@@ -76,7 +76,11 @@ Game.prototype._update = function (timestamp) {
 	this._grid.update(deltaTime);
 	
 	// Check whether a new row has been formed and eliminate it.
-	this._blocksCleared += this._grid.clearRows();
+	var newBlocksCleared = this._grid.clearRows();
+	if (newBlocksCleared) {
+		this._blocksCleared += newBlocksCleared;
+		stats.increment('blocks', newBlocksCleared);
+	}
 	
 	// Draw grid elements.
 	this._grid.draw(this._ctx, this.DEFAULT_BLOCK_SIZE);
@@ -114,6 +118,10 @@ Game.prototype._tryPlayerMove = function (direction) {
 	if (successfullyMoved) {
 		// If the player moved, increment the move counter, capped at 9999.
 		this._moves = Math.min(this._moves + 1, this.MAX_MOVES);
+		stats.increment('moves');
+	} else {
+		// If not, the player crashed into a wall or immovable block.
+		stats.increment('crashes');
 	}
 };
 
