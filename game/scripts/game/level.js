@@ -1844,14 +1844,16 @@ var LEVELS = [{
 	name: 'Z-7',
 	starScores: {
 		moves: [
-			99, // Intended solution, but forget to push Z piece out of the way
 			95, // Intended solution
+			75, // Split J alternate solution
 			69 // Alternate solution
 		],
 		blocks: [
-			19, // 1 column + 1 row (alternate solution)
+			//19, // 1 column + 1 row (alternate solution)
 			29, // 1 column + 2 rows (alternate solution)
-			39 // 1 column + 3 rows (intended solution)
+			//37, // 3 columns + 1 row
+			39, // 1 column + 3 rows (intended solution)
+			47 // 3 columns + 2 rows
 		]
 	},
 	width: 10,
@@ -2038,9 +2040,10 @@ var LEVELS = [{
 			65
 		],
 		blocks: [
-			33, // Expected solution
-			44, // Extra column
+			//33, // Expected solution
+			44, // 1 extra column
 			55, // 2 extra columns
+			66, // 3 extra columns
 		]
 	},
 	width: 13,
