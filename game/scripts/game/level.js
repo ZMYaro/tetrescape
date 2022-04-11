@@ -1747,9 +1747,10 @@ var LEVELS = [{
 	name: 'Z-6',
 	starScores: {
 		moves: [
-			67, // Intended solution if you forgot to push the row of blocks aside
+			//67, // Intended solution if you forgot to push the row of blocks aside
 			61, // Intended solution
-			57 // Alternate solution
+			57, // Alternate solution
+			43 // Split T solution
 		],
 		blocks: [
 			24, // Alternate (3 vertical clear) solution
