@@ -869,7 +869,7 @@ img.instructions-gamepad {
 #about-screen ul {
 	list-style-type: none;
 	padding: 0;
-	margin: 0.5em;
+	margin: 0.5em auto;
 }
 	#about-screen ul li .icon {
 		width: 0.9em;
@@ -884,6 +884,11 @@ img.instructions-gamepad {
 		#about-screen ul li a:focus {
 			text-decoration: underline;
 		}
+	#about-screen .testers {
+		column-count: 2;
+		font-size: 87.5%;
+		max-width: 22em;
+	}
 
 /* Ad stuff */
 #ad-container {
