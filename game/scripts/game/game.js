@@ -20,6 +20,7 @@ function Game(canvas, endCallback) {
 	
 	this._blocksCleared = 0;
 	this._moves = 0;
+	this._startTime;
 	
 	this._lastFrameTime;
 	this._boundUpdate = this._update.bind(this);
@@ -163,6 +164,7 @@ Game.prototype.loadLevel = function (levelData) {
  */
 Game.prototype.start = function () {
 	this._active = true;
+	this._startTime = Date.now();
 	// Start the update loop.
 	requestAnimationFrame(this._boundUpdate);
 };
@@ -230,4 +232,11 @@ Game.prototype.rescale = function () {
  */
 Game.prototype.deactivate = function () {
 	this._active = false;
+	
+	// Store the play time.
+	if (this._startTime) {
+		var timeElapsed = Math.floor((Date.now() - this._startTime) / 1000);
+		stats.increment('time', timeElapsed);
+		this._startTime = undefined;
+	}
 };

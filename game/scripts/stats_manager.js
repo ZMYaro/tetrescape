@@ -9,7 +9,7 @@ function StatsManager() {
 		blocks: 0,   // Number of blocks cleared ever
 		restarts: 0, // Number of level restarts ever
 		crashes: 0,  // Number of walls crashed into ever
-		time: 0      // Time spent in levels
+		time: 0      // Time spent in levels in seconds
 	};
 	
 	for (var stat in this._stats) {

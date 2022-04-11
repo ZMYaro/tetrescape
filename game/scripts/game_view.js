@@ -26,7 +26,6 @@ function GameView(elem, parent) {
 	im.addEventListener('restart', this._handleRestartInput.bind(this));
 	
 	im.addEventListener('quit', this._handleQuitInput.bind(this));
-	
 }
 
 // Inherit from View.
