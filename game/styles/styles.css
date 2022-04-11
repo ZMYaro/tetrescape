@@ -85,6 +85,7 @@ select {
 	font-size: 1.25rem;
 	line-height: 100%;
 	text-align: left;
+	white-space: nowrap;
 	
 	background-color: #525250;
 	background-image: url('../images/backgrounds/top_bar.jpg');
