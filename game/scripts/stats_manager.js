@@ -58,3 +58,12 @@ StatsManager.prototype.increment = function (stat, amount) {
 	}
 	this.set(stat, (this._stats[stat] + amount));
 };
+
+/**
+ * Reset all stats to zero.
+ */
+StatsManager.prototype.resetAll = function () {
+	for (var stat in this._stats) {
+		this.set(stat, 0);
+	}
+};

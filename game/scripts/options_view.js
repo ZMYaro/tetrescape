@@ -49,7 +49,7 @@ OptionsView.prototype._handleRemoveAds = function () {
  * Handle the reset button being clicked.
  */
 OptionsView.prototype._handleReset = function () {
-	var confirmed = confirm('Are you sure you want to reset your scores?  This cannot be undone!');
+	var confirmed = confirm('Are you sure you want to reset all your scores and stats?  This cannot be undone!');
 	if (!confirmed) {
 		return;
 	}
@@ -62,7 +62,10 @@ OptionsView.prototype._handleReset = function () {
 	// Update the level select screen with the new values.
 	views.levelSelect.repopulate();
 	
-	alert('Scores reset!');
+	// Reset play stats.
+	stats.resetAll();
+	
+	alert('Your progress has been reset.');
 	
 	// Keep the options view active since this button is not for navigation.
 	this._active = true;
