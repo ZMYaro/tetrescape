@@ -795,7 +795,7 @@ var LEVELS = [{
 		moves: [
 			//59, // With extra column
 			29, // Push Z and J all the way up
-			25, // Push Z all the way up
+			25, // Push Z all the way up OR push S right for alternate solution
 			23
 		],
 		blocks: [
