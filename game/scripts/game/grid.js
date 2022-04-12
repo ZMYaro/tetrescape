@@ -19,7 +19,7 @@ function Grid(width, height) {
 
 // Define static constants.
 /** {Color} The color of the grid background */
-Grid.COLOR = new Color(49, 48, 47);
+Grid.COLOR = new Color(53, 52, 51);
 /** {Number} The size of each grid square in pixels */
 Grid.SQUARE_SIZE = 32;
 
@@ -166,7 +166,7 @@ Grid.prototype = {
 		
 		// Draw the grid.
 		ctx.lineWidth = 1;
-		ctx.strokeStyle = Grid.COLOR.darken(0.92).hex;
+		ctx.strokeStyle = Grid.COLOR.darken(0.93).hex;
 		ctx.beginPath();
 		for (var x = 0; x <= this.width; x++) {
 			ctx.moveTo(x * blockSize, 0);
