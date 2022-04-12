@@ -486,6 +486,7 @@ select {
 	padding: 1rem 0.75rem; /* 16px 12px default */
 	margin: 1.5rem; /* 24px default */
 	font-size: 100%;
+	white-space: nowrap;
 	
 	background-color: #797880;
 	background-image: url('../images/buttons/level.png');
@@ -527,6 +528,10 @@ select {
 			-1px -1px 1px rgba(0, 0, 0, 0.5),
 			1px 1px 1px rgba(255, 255, 255, 0.25);
 	}
+	#level-screen .menu button .icon {
+		width: 1.2em;
+		height: 1.2em;
+	}
 	/* Color-coded level groups */
 	#level-screen .menu button[data-level-name|="I"] {
 		background-color: #00bcd4;
@@ -549,9 +554,6 @@ select {
 	#level-screen .menu button[data-level-name|="Z"] {
 		background-color: #f44336;
 	}
-.stars {
-	font-size: 125%;
-}
 
 @media (min-width: 500px) and (min-height: 500px) {
 	#level-screen .menu ul {
@@ -574,6 +576,7 @@ select {
 		#level-screen .menu button .stars {
 			margin-top: 0.5rem;
 			margin-bottom: 0.25rem;
+			font-size: 125%;
 		}
 }
 @media (orientation: portrait) {
@@ -727,6 +730,9 @@ select {
 #results-score-secondary {
 	margin: 0;
 	font-size: 87.5%;
+}
+#results-screen .stars {
+	font-size: 125%;
 }
 
 #gameScore {
