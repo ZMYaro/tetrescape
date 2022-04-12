@@ -15,6 +15,8 @@ function Player(x, y, grid) {
 	// Start facing up.
 	this._currentAnim = this.SPRITE_SHEET_DATA.animations.n_push;
 	this._currentFrame = this._currentAnim.length - 1;
+	
+	this._crashSound = document.getElementById('cannot-move-sound');
 }
 
 // Inherit from GridOccupant.
@@ -57,7 +59,8 @@ Player.prototype.tryMove = function (movement) {
 		this._currentAnim = this.SPRITE_SHEET_DATA.animations[heading + '_push'];
 		return true;
 	} else {
-		document.getElementById('cannot-move-sound').play();
+		this._crashSound.currentTime = 0;
+		this._crashSound.play();
 		this._currentAnim = this.SPRITE_SHEET_DATA.animations[heading + '_crash'];
 		return false;
 	}
