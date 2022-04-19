@@ -7,7 +7,9 @@ var GAME_PREFIX = 'tetrescape-',
 		BLOCKS: 'blocks'
 	},
 	BUTTON_SUFFIX = '-btn',
-	MAX_MOVES = 999;
+	MAX_MOVES = 999,
+	ADSENSE_CLIENT_ID = 'ca-pub-XXXXXXXXXXXXXXXX',
+	ADSENSE_SLOT_ID = 'XXXXXXXXXX';
 
 var im, // Input manager
 	stats, // Stats manaager
@@ -44,9 +46,30 @@ window.onload = function () {
 	// Populate the level select screen.
 	views.levelSelect.repopulate();
 	
+	// Load ads if the user has not removed them.
+	initAds();
+	
 	// Open the title screen.
 	views.title.open();
 };
+
+function initAds() {
+	// TODO: Check whether the user has paid to remove ads *before* loading ads.
+	
+	document.body.classList.add('has-ads');
+	
+	var adContainer = document.querySelector('.adsbygoogle');
+	adContainer.dataset.adClient = ADSENSE_CLIENT_ID;
+	adContainer.dataset.adSlot = ADSENSE_SLOT_ID;
+	
+	var adScript = document.createElement('script');
+	adScript.async = true;
+	adScript.crossOrigin = 'anonymous';
+	adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_CLIENT_ID;
+	document.head.appendChild(adScript);
+	
+	(window.adsbygoogle = window.adsbygoogle || []).push({});
+}
 
 function getButtonID(levelName) {
 	return LEVEL_PREFIX + levelName + BUTTON_SUFFIX;
