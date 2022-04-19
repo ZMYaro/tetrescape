@@ -742,6 +742,7 @@ select {
 
 /* Instructions screen styles */
 #instructions-screen,
+#options-screen,
 #about-screen {
 	text-shadow:
 		-5px 12px 6px rgba(0, 0, 0, 0.15),
