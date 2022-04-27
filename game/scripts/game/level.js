@@ -1739,18 +1739,18 @@ var LEVELS = [{
 	 I  i  i  i  *  I  i  i  i  z  z  l
 	 *  O  o  O  o  *  *  *  *  *  *  l
 	 I  o  o  o  o  *  *  *  *  *  *  *
-	 i  O  o  *  T  t  t  *  *  *  *  I
-	 i  o  o  *  *  t  *  *  *  *  *  i
+	 i  O  o  *  *  s  s  *  *  *  *  I
+	 i  o  o  *  s  s  *  *  *  *  *  i
 	 i  *  *  *  *  *  *  *  *  O  o  i
 	 B  *  *  P  *  *  *  *  *  o  o  i
 	*/
 	name: 'Z-6',
 	starScores: {
 		moves: [
-			//67, // Intended solution if you forgot to push the row of blocks aside
-			61, // Intended solution
-			57, // Alternate solution
-			43 // Split T solution
+			79, // Intended solution slightly less efficiently
+			//77, // Intended solution slightly less efficiently
+			75, // Intended solution
+			59, // Alternate solution
 		],
 		blocks: [
 			24, // Alternate (3 vertical clear) solution
@@ -1814,7 +1814,7 @@ var LEVELS = [{
 		x: 1,
 		y: 4
 	}, {
-		type: 'T',
+		type: 'S',
 		orientation: 0,
 		x: 4,
 		y: 4
