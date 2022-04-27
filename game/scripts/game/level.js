@@ -1102,8 +1102,9 @@ var LEVELS = [{
 	name: 'O-7',
 	starScores: {
 		moves: [
-			31, // With 1 extra column
+			//31, // With 1 extra column
 			23, // Push wrong L first or forget to push first L again
+			21, // Skip the end of the puzzle and push the T up to get to the goal
 			19
 		],
 		blocks: [
