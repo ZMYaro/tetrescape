@@ -511,9 +511,10 @@ var LEVELS = [{
 			15
 		],
 		blocks: [
-			54,
-			72,
-			81
+			//54, // Basic solution (6 rows)
+			72, // 8 rows
+			81, // 9 rows
+			82 // 2 columns + 6 rows
 		]
 	},
 	width: 9,
