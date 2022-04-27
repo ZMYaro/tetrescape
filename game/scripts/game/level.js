@@ -1753,9 +1753,10 @@ var LEVELS = [{
 			59, // Alternate solution
 		],
 		blocks: [
-			24, // Alternate (3 vertical clear) solution
+			//24, // Alternate (3 vertical clear) solution
 			36, // Intended solution
-			40 // Alternate (3 vertical clear) solution + 2 additional vertical clears
+			40, // Alternate (3 vertical clear) solution + 2 additional vertical clears
+			44 // Split and free the Z
 		]
 	},
 	width: 12,
