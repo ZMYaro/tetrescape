@@ -1834,29 +1834,27 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	 Z  z  *  *  *  j  *  t  L  l
-	 *  z  z  *  *  j  t  t  t  l
-	 I  i  i  i  j  j  L  l  *  l
-	 *  *  *  Z  z  *  *  l  *  *
-	[P] *  *  *  z  z  *  l  *  *
-	 *  *  *  *  *  *  *  *  *  *
-	 *  *  I  i  i  i  J  J  j  j
-	 *  O  o  L  l  l  j  j  j  j
+	 I  i  i  i  *  s  s  t  *  *
+	 J  *  *  J  s  s  t  t  t  B
+	 j  j  j  j  j  j  I  *  *  *
+	 *  Z  z  *  *  *  i  *  *  *
+	 *  *  z  z  *  *  i  *  *  *
+	[P] *  *  *  *  *  i  *  *  *
+	 B  I  i  i  i  *  *  *  l  *
+	 *  O  o  L  l  l  l  l  l  *
 	 *  o  o  l [G] I  i  i  i  B
 	 */
 	name: 'Z-7',
 	starScores: {
 		moves: [
-			95, // Intended solution
-			75, // Split J alternate solution
-			69 // Alternate solution
+			79, // Intended solution pushing L to the right first
+			73, // Intended solution without pushing L
+			55 // Left column alternate solution
 		],
 		blocks: [
-			//19, // 1 column + 1 row (alternate solution)
-			29, // 1 column + 2 rows (alternate solution)
-			//37, // 3 columns + 1 row
-			39, // 1 column + 3 rows (intended solution)
-			47 // 3 columns + 2 rows
+			38, // 2 columns + 2 rows
+			45, // 5 columns
+			46 // 4 columns + 1 row
 		]
 	},
 	width: 10,
@@ -1864,15 +1862,17 @@ var LEVELS = [{
 	playerSpawn: {x: 0, y: 5},
 	goal: {x: 4, y: 8},
 	staticBlocks: [
+		{x: 9, y: 1},
+		{x: 0, y: 6},
 		{x: 9, y: 8}
 	],
 	tetrominos: [{
-		type: 'Z',
-		orientation: 0,
+		type: 'I',
+		orientation: 90,
 		x: 0,
 		y: 0
 	}, {
-		type: 'J',
+		type: 'S',
 		orientation: 0,
 		x: 4,
 		y: 0
@@ -1882,18 +1882,18 @@ var LEVELS = [{
 		x: 6,
 		y: 0
 	}, {
-		type: 'L',
-		orientation: 180,
-		x: 8,
-		y: 0
-	}, {
-		type: 'I',
+		type: 'J',
 		orientation: 90,
 		x: 0,
-		y: 2
+		y: 1
 	}, {
-		type: 'L',
-		orientation: 180,
+		type: 'J',
+		orientation: 90,
+		x: 3,
+		y: 1
+	}, {
+		type: 'I',
+		orientation: 0,
 		x: 6,
 		y: 2
 	}, {
@@ -1904,17 +1904,12 @@ var LEVELS = [{
 	}, {
 		type: 'I',
 		orientation: 90,
-		x: 2,
+		x: 1,
 		y: 6
 	}, {
-		type: 'J',
-		orientation: 90,
-		x: 6,
-		y: 6
-	}, {
-		type: 'J',
+		type: 'L',
 		orientation: 270,
-		x: 7,
+		x: 6,
 		y: 6
 	}, {
 		type: 'O',
