@@ -412,6 +412,15 @@ select {
 	max-width: min(100%, 720px);
 	max-height: 70%;
 }
+.version-number {
+	position: absolute;
+	left: 2px;
+	bottom: 2px;
+	margin: 0;
+	font-size: 50%;
+	opacity: 75%;
+	text-decoration: none;
+}
 #title-canvas {
 	position: absolute;
 	left: 0;
