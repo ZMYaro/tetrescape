@@ -905,6 +905,11 @@ img.instructions-gamepad {
 		font-size: 87.5%;
 		max-width: 22em;
 	}
+@media (min-width: 500px) {
+	#about-screen .testers {
+		font-size: 100%;
+	}
+}
 
 /* Ad stuff */
 #ad-container {
