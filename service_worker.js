@@ -128,6 +128,11 @@ self.addEventListener('activate', function (ev) {
 });
 
 self.addEventListener('fetch', function (ev) {
+	// Do not attempt to load external requests from cache.
+	if (ev.request.url.indexOf(self.origin) !== 0) {
+		return fetch(ev.request);
+	}
+	
 	// Serve from cache where possible.
 	ev.respondWith(
 		caches.match(ev.request).then(function (response) {
