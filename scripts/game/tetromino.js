@@ -4,7 +4,7 @@
  * Initialize a new tetromino.
  * @class
  * @param {String} type - The letter of the tetromino type
- * @param {Number|String} orientation - The orientation of the tetromino, in degrees
+ * @param {Number|String} orientation - The orientation of the tetromino in degrees
  * @param {Number} x - The the x-coordinate of the top-left corner of the tetromino
  * @param {Number} y - The the y-coordinate of the top-left corner of the tetromino
  * @param {Grid} grid - The grid to which the tetromino's blocks are to be added
@@ -141,9 +141,10 @@ Tetromino.prototype = {
 	/**
 	 * Check whether the tetromino's blocks can be moved to a new location.
 	 * @param {Vector2D} movement - The vector by which to move the blocks
+	 * @param {Array<Tetromino>} checkedOccupants - The already checked grid occupants for this move attempt
 	 * @returns {Boolean} - Whether the tetromino could be moved
 	 */
-	canMove: function (movement) {
+	canMove: function (movement, checkedOccupants) {
 		// Sort the blocks in the order in which they should attempt to be moved.
 		switch (movement) {
 			case Vector2D.LEFT:
@@ -203,26 +204,9 @@ Tetromino.prototype = {
 		// Check whether the blocks can be moved.
 		for (var i = 0; i < this._blocks.length; i++) {
 			// If any block is unable to be moved, the whole tetromino should fail to be moved.
-			if (!this._blocks[i].canMoveSingle(movement)) {
+			if (!this._blocks[i].canMoveSingle(movement, checkedOccupants)) {
 				return false;
 			}
-		}
-		return true;
-	},
-	
-	/**
-	 * Move the tetromino's blocks to a new location, if possible.
-	 * @param {Vector2D} movement - The vector by which to move the blocks
-	 * @returns {Boolean} - Whether the tetromino could be moved
-	 */
-	tryMove: function (movement) {
-		if (!this.canMove(movement)) {
-			return false;
-		}
-		// Attempt to move the blocks.
-		for (var i = 0; i < this._blocks.length; i++) {
-			// If any block is unable to be moved, the whole tetromino should fail to be moved.
-			this._blocks[i].tryMoveSingle(movement);
 		}
 		return true;
 	},

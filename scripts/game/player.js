@@ -12,61 +12,56 @@ function Player(x, y, grid) {
 	// Call the superclass constructor.
 	GridOccupant.call(this, x, y, grid);
 	
-	this._image = new Image();
-	this._image.src = 'images/player.png';
-	
 	// Start facing up.
-	this._heading = 90;
+	this._currentAnim = this.SPRITE_SHEET_DATA.animations.n_push;
+	this._currentFrame = this._currentAnim.length - 1;
+	
+	this._crashSound = document.getElementById('cannot-move-sound');
 }
 
 // Inherit from GridOccupant.
 Player.prototype = Object.create(GridOccupant.prototype);
 
+// Define constants.
+/** {String} The path from the root to the sprite sheet image file */
+Player.prototype.SPRITE_SHEET_PATH = 'images/game/player';
+/** {Image} The player sprite sheet image */
+Player.prototype.SPRITE_SHEET_IMAGE;
+/** {Object} The player sprite sheet data */
+Player.prototype.SPRITE_SHEET_DATA;
+
 /**
  * Move the player to a new location, if possible, and face in the direction of the movement.
- * @override
  * @param {Vector2D} movement - The vector by which to move the player
  * @returns {Boolean} - Whether the player could be moved
  */
 Player.prototype.tryMove = function (movement) {
 	// Face in the direction of the movement.
+	var heading = 'n';
 	switch (movement) {
 		case Vector2D.RIGHT:
-			this._heading = 0;
+			heading = 'e';
 			break;
 		case Vector2D.UP:
-			this._heading = 90;
+			heading = 'n';
 			break;
 		case Vector2D.LEFT:
-			this._heading = 180;
+			heading = 'w';
 			break;
 		case Vector2D.DOWN:
-			this._heading = 270;
+			heading = 's';
 			break;
 	}
-	// Call the superclass implementation of the function.
-	if (GridOccupant.prototype.tryMove.call(this, movement)) {
+	this._currentFrame = 0;
+	
+	// Attempt to move on the grad and handle the result.
+	if (this._grid.tryMove(this, movement)) {
+		this._currentAnim = this.SPRITE_SHEET_DATA.animations[heading + '_push'];
 		return true;
 	} else {
-		document.getElementById('cannot-move-sound').play();
+		this._crashSound.currentTime = 0;
+		this._crashSound.play();
+		this._currentAnim = this.SPRITE_SHEET_DATA.animations[heading + '_crash'];
 		return false;
 	}
 };
-
-/**
- * Draw the player to the canvas.
- * @override
- * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
- */
-Player.prototype.draw = function (ctx, blockSize) {
-	var x = this.x * blockSize + (blockSize / 2),
-		y = this.y * blockSize + (blockSize / 2);
-	
-	ctx.save();
-	
-	ctx.translate(x, y);
-	ctx.rotate(-Utils.degToRad(this._heading - 90));
-	ctx.drawImage(this._image, -0.5 * blockSize, -0.5 * blockSize, blockSize, blockSize);
-	
-	ctx.restore();
-}

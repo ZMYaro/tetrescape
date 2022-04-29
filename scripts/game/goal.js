@@ -12,44 +12,26 @@ function Goal(x, y, grid) {
 	// Call the superclass constructor.
 	GridOccupant.call(this, x, y, grid);
 	
-	this._image = new Image();
-	this._image.src = 'images/exit.png';
+	this._currentAnim = this.SPRITE_SHEET_DATA.animations.exit;
+	this._loopAnim = true;
 }
-
-// Define static constants.
-/** {Color} The color of the goal tile */
-Goal.COLOR = new Color(255, 255, 255);
-/** {Color} The outline color of the goal tile */
-Goal.LINE_COLOR = new Color(54, 0, 204);
 
 // Inherit from GridOccupant.
 Goal.prototype = Object.create(GridOccupant.prototype);
+
+// Define constants.
+//Goal.prototype.COLOR = new Color(54, 0, 204);
+/** {String} The path from the root to the sprite sheet JSON and image files */
+Goal.prototype.SPRITE_SHEET_PATH = 'images/game/exit';
+/** {Image} The goal sprite sheet image */
+Goal.prototype.SPRITE_SHEET_IMAGE;
+/** {Object} The goal sprite sheet data */
+Goal.prototype.SPRITE_SHEET_DATA;
 
 /**
  * Inform that the goal tile cannot be moved.
  * @returns {Boolean} - That the goal cannot be moved
  */
-Goal.prototype.canMove = function (movement) {
+Goal.prototype.canMove = function (movement, checkedOccupants) {
 	return false;
 };
-
-/**
- * Do not allow the goal tile to be moved.
- * @returns {Boolean} - That the goal cannot be moved
- */
-Goal.prototype.tryMove = function (movement) {
-	return false;
-};
-
-/**
- * Draw the goal tile to the canvas.
- * @override
- * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
- */
-Goal.prototype.draw = function (ctx, blockSize) {
-	var x = this.x * blockSize + Block.LINE_WIDTH / 2,
-		y = this.y * blockSize + Block.LINE_WIDTH / 2,
-		size = blockSize - Block.LINE_WIDTH / 2 - Block.LINE_WIDTH / 2;
-	
-	ctx.drawImage(this._image, x, y, size, size);
-}

@@ -18,6 +18,8 @@ function InputManager(swipeSurface) {
 	
 	this._currentInputMethod = '';
 	this._setCurrentInputMethod(this._assumeInputMethod());
+	this.gamepadControls = (localStorage[GAME_PREFIX + 'gamepad-controls'] ||
+			(this._currentInputMethod === 'xbox' ? 'microsoft' : 'nintendo'));
 	
 	// Set up key event listener.
 	window.addEventListener('keydown', this._handleKeyDown.bind(this));
@@ -75,8 +77,36 @@ InputManager.prototype.KEYS = {
 	]
 };
 
-/** @constant {Object<String, Array<String>} The Controller.js button names that map to each command */
-InputManager.prototype.GAMEPAD_BUTTONS = {
+/** @constant {Object<String, Array<String>} The Controller.js button names that map to each command for Microsoft layout */
+InputManager.prototype.GAMEPAD_BUTTONS_MICROSOFT = {
+	left: [
+		'DPAD_LEFT'
+	],
+	right: [
+		'DPAD_RIGHT'
+	],
+	up: [
+		'DPAD_UP'
+	],
+	down: [
+		'DPAD_DOWN'
+	],
+	select: [
+		'FACE_1'
+	],
+	back: [
+		'FACE_2',
+		'SELECT'
+	],
+	quit: [
+		'SELECT'
+	],
+	restart: [
+		'FACE_3'
+	]
+};
+/** @constant {Object<String, Array<String>} The Controller.js button names that map to each command for Nintendo layout */
+InputManager.prototype.GAMEPAD_BUTTONS_NINTENDO = {
 	left: [
 		'DPAD_LEFT'
 	],
@@ -194,8 +224,10 @@ InputManager.prototype._handleButtonPress = function (ev) {
 		gamepadType = (gamepadId.toLowerCase().includes('xbox') ? 'xbox' : 'gamepad');
 	this._setCurrentInputMethod(gamepadType);
 	
-	Object.keys(this.GAMEPAD_BUTTONS).forEach(function (command) {
-		if (this.GAMEPAD_BUTTONS[command].includes(ev.detail.name)) {
+	var gamepadButtons = (this.gamepadControls === 'microsoft' ?
+			this.GAMEPAD_BUTTONS_MICROSOFT : this.GAMEPAD_BUTTONS_NINTENDO);
+	Object.keys(gamepadButtons).forEach(function (command) {
+		if (gamepadButtons[command].includes(ev.detail.name)) {
 			this._dispatchEvent(command);
 		}
 	}, this);
@@ -209,6 +241,8 @@ InputManager.prototype._handleButtonPress = function (ev) {
 InputManager.prototype._handlePointerDown = function (ev) {
 	if (ev.pointerType === 'touch' || ev.pointerType === 'pen') {
 		this._setCurrentInputMethod('touch');
+	} else if (ev.pointerType === 'mouse') {
+		this._setCurrentInputMethod('keyboard');
 	}
 };
 

@@ -1,3 +1,12 @@
+@font-face {
+	font-family: 'Roboto Slab';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Roboto Slab Regular'),
+		url('../fonts/roboto_slab_regular.woff2'),
+		url('../fonts/roboto_slab_regular.ttf');
+}
+
 html,
 body {
 	margin: 0;
@@ -7,10 +16,6 @@ body {
 	
 	background-color: #3b3a3d;
 	color: #fdfcfb;
-}
-
-body,
-button {
 	font-family: 'Roboto Slab', sans-serif;
 }
 
@@ -31,14 +36,24 @@ h2 {
 	margin-bottom: 0;
 }
 
-button {
+button,
+select {
+	-webkit-appearance: none;
+	   -moz-appearance: none;
+	        appearance: none;
 	border: 0 none;
 	outline: 0 none;
 	background-color: #4b4a4e;
 	color: inherit;
+	font-family: inherit;
 	cursor: pointer;
+	user-select: none;
 	-webkit-tap-highlight-color: transparent;
 }
+	button * {
+		/* Ensure the button is always the target of any pointer event on it. */
+		pointer-events: none;
+	}
 
 .icon {
 	width: 1.5rem;
@@ -46,10 +61,13 @@ button {
 	margin: -4px 0;
 }
 
+.wrap-point {
+	display: inline-block;
+}
+
 /* Engraved text */
 .top-bar,
-.menu button,
-#resultsScreen {
+#results-screen {
 	text-shadow:
 		-1px -1px 1px rgba(0, 0, 0, 0.7),
 		1px 1px 1px rgba(255, 255, 255, 0.25);
@@ -67,8 +85,12 @@ button {
 	font-size: 1.25rem;
 	line-height: 100%;
 	text-align: left;
+	white-space: nowrap;
 	
 	background-color: #525250;
+	background-image: url('../images/backgrounds/top_bar.jpg');
+	background-size: 3.5rem 3.5rem; /* Same as height */
+	background-repeat: repeat-x;
 	/* Polymer/MaterialZ Z1 */
 	box-shadow:
 		0 2px 5px 0 rgba(0, 0, 0, 0.26),
@@ -76,17 +98,21 @@ button {
 	
 	z-index: 4;
 }
-	#levelScreen .top-bar,
-	#aboutScreen .top-bar {
+	#level-screen .top-bar,
+	#about-screen .top-bar {
 		/* Polymer/MaterialZ Z2 */
 		box-shadow:
 			0 8px 17px 0 rgba(0, 0, 0, 0.2),
 			0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	}
+	.top-bar h1 {
+		display: inline;
+		font-size: inherit;
+	}
 	.top-bar button {
 		width: 3.5rem;
 		height: 3.5rem;
-		margin: -1.1rem 0.5rem;
+		margin: -1.1rem 0.875rem;
 		vertical-align: top;
 		
 		border-radius: 0;
@@ -107,7 +133,7 @@ button {
 			box-shadow:
 				 5px 0 1px -1px rgba(255, 255, 255, 0.2),
 				-5px 0 1px -1px rgba(0, 0, 0, 0.1),
-				inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+				inset 0 1px 3px 0 rgba(0, 0, 0, 0.35);
 		}
 
 		.top-bar button.back-button {
@@ -120,9 +146,15 @@ button {
 			.prefer-input-gamepad .top-bar button.back-button {
 				background-image: url('../images/buttons/back_face_bottom.jpg');
 			}
+				.prefer-input-gamepad.gamepad-controls-microsoft .top-bar button.back-button {
+					background-image: url('../images/buttons/back_face_right.jpg');
+				}
 			.prefer-input-xbox .top-bar button.back-button {
 				background-image: url('../images/buttons/back_a.jpg');
 			}
+				.prefer-input-xbox.gamepad-controls-microsoft .top-bar button.back-button {
+					background-image: url('../images/buttons/back_b.jpg');
+				}
 			.top-bar button.back-button.close-button {
 				background-image: url('../images/buttons/close.jpg');
 			}
@@ -173,25 +205,31 @@ button {
 	transition-property: opacity, transform, box-shadow;
 	transition-duration: 0.2s;
 }
+	.has-ads .view {
+		height: calc(100% - 50px);
+	}
 	.view.open {
 		transform: translateY(0%);
 		opacity: 1;
 		pointer-events: auto;
 	}
+	.view.open.suspended {
+		pointer-events: none;
+	}
 	.view p {
 		box-sizing: border-box;
-		padding: 0 72px;
 	}
 @media (min-width: 500px) and (min-height: 500px) {
 	.top-bar {
 		height: 4rem; /* 64px default */
 		padding: 1.25rem;
 		font-size: 1.4rem;
+		background-size: 4rem;
 	}
 		.top-bar button {
 			width: 4rem;
 			height: 4rem;
-			margin: -1.25rem 1rem;
+			margin: -1.25rem 1.325rem;
 			background-size: 12rem 4rem;
 		}
 			.top-bar button:hover,
@@ -212,6 +250,14 @@ button {
 	.view {
 		padding-top: 4rem;
 	}
+		.has-ads .view {
+			height: calc(100% - 3.5rem)
+		}
+}
+@media (prefers-reduced-motion: reduce) {
+	.view {
+		transition-duration: 0s;
+	}
 }
 
 .menu {
@@ -224,18 +270,29 @@ button {
 	overflow: auto;
 	text-align: center;
 }
-	.menu button {
+	.menu button,
+	.menu select {
 		min-width: 0;
+		font-size: 110%;
 		margin: 1em 0.5em;
 		padding: 1em 2em;
 		
 		position: relative;
 		
+		color: #e5e1d3;
+		text-shadow:
+			-1px -1px 1px rgba(0, 0, 0, 0.5),      /* Engraving shadow */
+			 1px  1px 1px rgba(255, 255, 255, 0.25), /* Engraving highlight */
+			0px 0px 0px rgba(188, 188, 204, 0),          /* Active weak glow */
+			0px 0px 0px rgba(188, 188, 204, 0);          /* Active strong glow */
+		
 		box-shadow:
-			inset 0 1px 3px 0 rgba(0, 0, 0, 0.25),
-			inset 1px 1px 2px 0 rgba(0, 0, 0, 0.25),
-			0 0 0 0 rgba(0, 0, 0, 0.2),
-			0 0 0 0 rgba(0, 0, 0, 0.15);
+			inset -7px -7px 2px 0px rgba(0, 0, 0, 0.2),        /* Bevel shadow */
+			inset  7px  7px 2px 0px rgba(255, 255, 255, 0.05), /* Bevel highlight */
+			inset  0px  1px 3px 1px rgba(0, 0, 0, 0.25),       /* Inactive inset shadow 1 */
+			inset  2px  2px 3px 1px rgba(0, 0, 0, 0.35),       /* Inactive inset shadow 2 */
+			0px 0px 0px 0px rgba(0, 0, 0, 0.2),                /* Active drop shadow 1 */
+			0px 0px 0px 0px rgba(0, 0, 0, 0.1);                /* Active drop shadow 2 */
 		
 		transform: scale(1);
 		
@@ -243,65 +300,126 @@ button {
 		transition-duration: 0.1s;
 		transition-timing-function: linear;
 	}
+	.menu select {
+		padding-left: 1.5em;
+		padding-right: 2.75em;
+		background-image: url('../images/icons/select_arrows_vert.png');
+		background-repeat: no-repeat;
+		background-size: 2em 7.5em;
+		background-position-x: calc(100% - 0.5em);
+		background-position-y: 0.4em;
+	}
 		.menu button:hover,
+		.menu select:hover,
 		.menu button:focus,
-		#results-back-button:not(:active):not(.active) {
+		.menu select:focus {
 			z-index: 1;
+			color: #bebece;
+			text-shadow:
+				-1px -1px 1px rgba(0, 0, 0, 0.2),
+				 1px  1px 1px rgba(255, 255, 255, 0.1),
+				0px 0px 24px rgba(188, 188, 204, 0.4),
+				0px 0px  4px rgba(188, 188, 204, 0.5);
 			box-shadow:
-				inset 0 1px 4px 0 rgba(0, 0, 0, 0.125),
-				inset 0 0 0 rgba(0, 0, 0, 0.125),
-				0 2px 5px 0 rgba(0, 0, 0, 0.26),
-				0 2px 10px 0 rgba(0, 0, 0, 0.16);
+				inset -7px -7px 2px 0px rgba(0, 0, 0, 0.2),
+				inset  7px  7px 2px 0px rgba(255, 255, 255, 0.05),
+				inset  0px  1px 2px 0px rgba(0, 0, 0, 0.15),
+				inset  1px  1px 1px 0px rgba(0, 0, 0, 0.25),
+				0px 2px 5px  0px rgba(0, 0, 0, 0.26),
+				0px 2px 10px 0px rgba(0, 0, 0, 0.16);
 			filter: brightness(1.05);
 			transform: scale(1.2);
 		}
-		.menu button:active,
-		.menu button.active {
+		.menu select:hover,
+		.menu select:focus {
+			background-position-y: -2.1em;
+		}
+		.menu button:hover,
+		.menu select:hover {
 			z-index: 2;
+		}
+		.menu button:active,
+		.menu select:active,
+		.menu button.active,
+		.menu select.active {
+			z-index: 3;
+			color: #c4c4d6;
+			text-shadow:
+				-1px -1px 1px rgba(0, 0, 0, 0.1),
+				 1px  1px 1px rgba(255, 255, 255, 0.05),
+				0px 0px 22px rgba(188, 188, 204, 1),
+				0px 0px  6px rgba(188, 188, 204, 1);
 			box-shadow:
-				inset 0 0 2px 0 rgba(0, 0, 0, 0.125),
-				inset 0 0 0 rgba(0, 0, 0, 0.125),
-				0 4px 10px 0 rgba(0, 0, 0, 0.23),
-				0 4px 15px 0 rgba(0, 0, 0, 0.175);
+				inset -7px -7px 2px 0px rgba(0, 0, 0, 0.2),
+				inset  7px  7px 2px 0px rgba(255, 255, 255, 0.05),
+				inset  0px  0px 1px 0px rgba(0, 0, 0, 0.05),
+				inset  1px  1px 1px 0px rgba(0, 0, 0, 0.05),
+				0px 4px 10px 0px rgba(0, 0, 0, 0.23),
+				0px 4px 15px 0px rgba(0, 0, 0, 0.175);
 			filter: brightness(1.07);
 			transform: scale(1.3);
+		}
+		.menu select:active,
+		.menu select.active {
+			background-position-y: -4.6em;
 		}
 @media (orientation: portrait) {
 	.menu {
 		white-space: normal;
 	}
-		.menu button {
+		.menu button,
+		.menu select {
 			display: block;
 			margin-left: auto;
 			margin-right: auto;
 		}
+		.menu select {
+			background-image: url('../images/icons/select_arrows_horiz.png');
+		}
+}
+@media (prefers-reduced-motion: reduce) {
+	.menu button,
+	.menu select {
+		transition-duration: 0s;
+	}
 }
 
 /* Title screen styles */
-#titleScreen {
+#title-screen {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-evenly;
 	padding: 0;
 }
-#titleScreen .menu {
+#title-screen .menu {
 	width: auto;
 	height: auto;
 	padding: 0;
 	margin-bottom: 2em;
 	overflow: visible;
 }
-#titleScreen .menu button {
-	width: 184px;
-	padding-left: 16px;
-	padding-right: 16px;
-	font-size: 120%;
-}
+	#title-screen .menu button {
+		padding: 0.75em 0;
+		width: 8em;
+	}
+		#title-screen .menu button#play-button {
+			font-size: 150%;
+			width: 7em;
+		}
 #title {
 	max-width: 100%;
 	max-width: min(100%, 720px);
 	max-height: 70%;
+}
+.version-number {
+	position: absolute;
+	left: 2px;
+	bottom: 2px;
+	margin: 0;
+	font-size: 50%;
+	opacity: 75%;
+	text-decoration: none;
 }
 #title-canvas {
 	position: absolute;
@@ -324,26 +442,39 @@ button {
 		left: 0;
 		animation-duration: 5s;
 	}
-		#titleScreen.open:not(.suspended) #title-glow1 {
+		#title-screen.open:not(.suspended) #title-glow1 {
+			box-shadow: -8vw 0 30vw 5vw;
 			animation-name: title-glow1;
 		}
 	#title-glow2 {
 		right: 0;
 		animation-duration: 7s;
 	}
-		#titleScreen.open:not(.suspended) #title-glow2 {
+		#title-screen.open:not(.suspended) #title-glow2 {
+			box-shadow: -8vw 0 35vw 5vw;
 			animation-name: title-glow2;
 		}
+@media (orientation: portrait) {
+	#title {
+		max-height: 55%;
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	#title-screen.open:not(.suspended) #title-glow1,
+	#title-screen.open:not(.suspended) #title-glow2 {
+		animation-name: none;
+	}
+}
 
 /* Level select screen styles */
-#levelScreen .menu {
+#level-screen .menu {
 	padding: 0;
 	/* Vertically center the level list. */
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 }
-#levelScreen .menu ul {
+#level-screen .menu ul {
 	list-style-type: none;
 	box-sizing: border-box;
 	display: flex;
@@ -358,95 +489,150 @@ button {
 	background-repeat: repeat;
 	box-shadow: 0 1px 8rem 2rem rgba(0, 0, 0, 0.9);
 }
-#levelScreen .menu button {
+#level-screen .menu button {
 	width: 12rem; /* 192px default */
 	height: 12rem;
 	padding: 1rem 0.75rem; /* 16px 12px default */
 	margin: 1.5rem; /* 24px default */
 	font-size: 100%;
+	white-space: nowrap;
 	
-	background-image: url('../images/buttons/level.jpg');
+	background-color: #797880;
+	background-image: url('../images/buttons/level.png');
 	background-size: contain;
+	
+	box-shadow:
+		inset 0px 1px 3px 0px rgba(0, 0, 0, 0.25),
+		inset 1px 1px 2px 0px rgba(0, 0, 0, 0.25),
+		0px 0px 0px 0px rgba(0, 0, 0, 0.2),
+		0px 0px 0px 0px rgba(0, 0, 0, 0.15);
 }
-	#levelScreen .menu button .title {
+	#level-screen .menu button:hover,
+	#level-screen .menu button:focus {
+		box-shadow:
+			inset 0px 1px 4px 0px rgba(0, 0, 0, 0.125),
+			inset 0px 0px 0px 0px rgba(0, 0, 0, 0.125),
+			0px 2px 5px  0px rgba(0, 0, 0, 0.26),
+			0px 2px 10px 0px rgba(0, 0, 0, 0.16);
+	}
+	#level-screen .menu button:active,
+	#level-screen .menu button.active {
+		box-shadow:
+			inset 0px 0px 2px 0px rgba(0, 0, 0, 0.125),
+			inset 0px 0px 0px 0px rgba(0, 0, 0, 0.125),
+			0px 4px 10px 0px rgba(0, 0, 0, 0.23),
+			0px 4px 15px 0px rgba(0, 0, 0, 0.175);
+	}
+	#level-screen .menu button .title {
 		font-size: 175%;
 		margin-bottom: -0.25rem;
 	}
-	#levelScreen .menu button .number {
+	#level-screen .menu button .number {
 		font-size: 450%;
 	}
-	#levelScreen .menu button .score {
-		font-size: 100%;
+	#level-screen .menu button .stars {
+		/* Prevent glowing on hover/focus. */
+		color: #e5e1d3;
+		text-shadow:
+			-1px -1px 1px rgba(0, 0, 0, 0.5),
+			1px 1px 1px rgba(255, 255, 255, 0.25);
 	}
-.stars {
-	font-size: 125%;
-}
+	#level-screen .menu button .icon {
+		width: 1.2em;
+		height: 1.2em;
+	}
+	/* Color-coded level groups */
+	#level-screen .menu button[data-level-name|="I"] {
+		background-color: #00bcd4;
+	}
+	#level-screen .menu button[data-level-name|="J"] {
+		background-color: #2095f3;
+	}
+	#level-screen .menu button[data-level-name|="L"] {
+		background-color: #ff9800;
+	}
+	#level-screen .menu button[data-level-name|="O"] {
+		background-color: #e5d200;
+	}
+	#level-screen .menu button[data-level-name|="S"] {
+		background-color: #4caf4f;
+	}
+	#level-screen .menu button[data-level-name|="T"] {
+		background-color: #9739a3;
+	}
+	#level-screen .menu button[data-level-name|="Z"] {
+		background-color: #f44336;
+	}
 
 @media (min-width: 500px) and (min-height: 500px) {
-	#levelScreen .menu ul {
+	#level-screen .menu ul {
 		padding: 2rem; /* 32px default */
 		height: 28rem; /* 448px default */
 		background-size: 20rem 28rem; /* 448px 320px default */
 	}
-	#levelScreen .menu button {
+	#level-screen .menu button {
 		width: 16rem; /* 256px default */
 		height: 16rem;
 		margin: 2rem; /* 32px default */
 	}
-		#levelScreen .menu button .title {
+		#level-screen .menu button .title {
 			font-size: 200%;
 			margin-bottom: 0;
 		}
-		#levelScreen .menu button .number {
+		#level-screen .menu button .number {
 			font-size: 500%;
 		}
-		#levelScreen .menu button .stars {
+		#level-screen .menu button .stars {
 			margin-top: 0.5rem;
 			margin-bottom: 0.25rem;
+			font-size: 125%;
 		}
 }
 @media (orientation: portrait) {
-	#levelScreen .menu {
+	#level-screen .menu {
 		display: block;
 	}
-	#levelScreen .menu ul {
+	#level-screen .menu ul {
 		flex-direction: column;
 		width: 21rem; /* 336px default */
 		height: auto;
 		background-image: url('../images/backgrounds/level_select_vert.jpg');
 		background-size: 21rem 15rem; /* 336px 240px default */
 	}
-	#levelScreen .menu button {
+	#level-screen .menu button {
 		margin-left: auto;
 		margin-right: auto;
 	}
 }
 @media (min-width: 500px) and (min-height: 500px) and (orientation: portrait) {
-	#levelScreen .menu ul {
+	#level-screen .menu ul {
 		width: 28rem; /* 448px default */
 		background-size: 28rem 20rem; /* 448px 320px default */
 	}
 }
 
 /* Game screen styles */
-#gameScreen {
+#game-screen {
 	background: #101010;
 	
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-#gameScreen .top-bar {
+#game-screen .top-bar {
 	text-align: center;
 }
-	#gameScreen .top-bar .back-button {
+	#game-screen .top-bar .back-button {
 		float: left;
 	}
-	#gameScreen .top-bar #restart-button {
+	#game-screen .top-bar #restart-button {
 		float: right;
 	}
 #game-canvas {
 	flex: none;
+}
+#level-name-display {
+	float: left;
 }
 .score-display {
 	display: inline-block;
@@ -464,46 +650,53 @@ button {
 	width: 30%;
 	height: 50%;
 	
-	background-image: url('../images/hints/pointer_finger.png');
+	background-image: url('../images/hints/arrow_up.png');
 	background-size: contain;
 	background-repeat: no-repeat;
+	transform-origin: 50% 10%;
 	
 	animation-duration: 1s;
 	animation-iteration-count: infinite;
-	animation-name: hint-loop-swipe;
+	animation-name: hint-loop-press;
 }
-	.prefer-input-keyboard #control-hint {
-		background-image: url('../images/hints/arrow_up.png');
-		transform-origin: 50% 10%;
-		animation-name: hint-loop-press;
+	.prefer-input-touch #control-hint {
+		background-image: url('../images/hints/pointer_finger.png');
+		animation-name: hint-loop-swipe;
 	}
 	.prefer-input-gamepad #control-hint,
 	.prefer-input-xbox #control-hint {
 		background-image: url('../images/hints/dpad_up.png');
-		transform-origin: 50% 10%;
 		animation-name: hint-loop-tilt;
 	}
+@media (prefers-reduced-motion: reduce) {
+	#control-hint,
+	.prefer-input-touch #control-hint,
+	.prefer-input-gamepad #control-hint,
+	.prefer-input-xbox #control-hint {
+		animation-name: none;
+	}
+}
 
 
 /* Results screen styles */
-#aboutScreen,
-#resultsScreen {
+#about-screen,
+#results-screen {
 	background-color: #4b4a4e;
 	background-image: url('../images/backgrounds/stone_light_smooth.jpg');
 	background-size: cover;
 	color: white;
 }
 
-.view#resultsScreen {
+.view#results-screen {
 	border-radius: 100%;
 	transform: scale(0);
 }
-	.view#resultsScreen.open {
+	.view#results-screen.open {
 		border-radius: 0;
 		transform: scale(1);
 	}
 
-#resultsScreen .star {
+#results-screen .star {
 	display: inline-block;
 	width: 64px;
 	height: 64px;
@@ -511,7 +704,7 @@ button {
 	border-radius: 50%;
 	transform: scale(1);
 }
-	#resultsScreen .star::before {
+	#results-screen .star::before {
 		content: '\2606';
 		display: block;
 		
@@ -524,56 +717,215 @@ button {
 			-1.5px -1.5px 1.5px rgba(0, 0, 0, 0.7),
 			1.5px 1.5px 1.5px rgba(255, 255, 255, 0.25);
 	}
-	#resultsScreen .star.active {
+	#results-screen .star.active {
 		transform: scale(1.2);
 		
 		animation-name: star-ripple;
 		animation-duration: 0.25s;
 		animation-timing-function: limit;
 	}
-		#resultsScreen .star.active::before {
+		#results-screen .star.active::before {
 			content: '\2605';
 			color: #c7c7d9;
 			text-shadow:
 				-1.5px -1.5px 1.5px rgba(0, 0, 0, 0.55),
 				1.5px 1.5px 1.5px rgba(255, 255, 255, 0.25);
 		}
+@media (prefers-reduced-motion: reduce) {
+	#results-screen .star.active {
+		animation-name: none;
+	}
+}
+#results-score-secondary {
+	margin: 0;
+	font-size: 87.5%;
+}
+#results-screen .stars {
+	font-size: 125%;
+}
 
 #gameScore {
 	float: right;
 	margin-right: 8px;
 }
 
-/* About (credits) screen styles */
-#aboutScreen {
-	background-image: url('../images/backgrounds/stone_light_speckled.jpg');
-	
+/* Instructions screen styles */
+#instructions-screen,
+#options-screen,
+#about-screen {
 	text-shadow:
 		-5px 12px 6px rgba(0, 0, 0, 0.15),
 		8px 12px 6px rgba(0, 0, 0, 0.15),
 		1px 11px 4px rgba(0, 0, 0, 0.25);
 }
-#aboutScreen img {
+.instructions-group {
+	margin: 5em 0;
+}
+	.instructions-group:first-child {
+		margin-top: 1em;
+	}
+	.instructions-group:last-child {
+		margin-bottom: 0;
+	}
+	.instructions-group img {
+		display: block;
+		margin: 0 auto;
+		max-width: 90%;
+	}
+	.instructions-group p {
+		white-space: normal;
+	}
+img.instructions-touch,
+img.instructions-keyboard,
+img.instructions-gamepad {
+	width: 188px;
+}
+	.prefer-input-touch    #instructions-screen .instructions-keyboard,
+	.prefer-input-touch    #instructions-screen .instructions-gamepad,
+	.prefer-input-keyboard #instructions-screen .instructions-touch,
+	.prefer-input-keyboard #instructions-screen .instructions-gamepad,
+	.prefer-input-gamepad  #instructions-screen .instructions-touch,
+	.prefer-input-gamepad  #instructions-screen .instructions-keyboard,
+	.prefer-input-xbox     #instructions-screen .instructions-touch,
+	.prefer-input-xbox     #instructions-screen .instructions-keyboard {
+		display: none;
+	}
+.instructions-blocks {
+	width: 312px;
+}
+@media (min-width: 500px) and (min-height: 500px) and (orientation: landscape) {
+		#instructions-screen .menu {
+			display: grid;
+			grid-template-columns: 50% 50%;
+			align-items: center;
+		}
+		.instructions-group {
+			margin: 0;
+		}
+}
+
+/* Options screen styles */
+#options-screen h2 {
+	font-size: inherit;
+}
+#options-screen .menu {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+.options-input-group {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+	.options-input-group button,
+	.options-input-group select {
+		margin-top: 0.5em;
+	}
+	.options-input-group img {
+		width: 175px;
+	}
+.options-gamepad-controls-microsoft,
+.options-gamepad-controls-nintendo {
+	display: none;
+}
+.gamepad-controls-microsoft .options-gamepad-controls-microsoft,
+.gamepad-controls-nintendo .options-gamepad-controls-nintendo {
+	display: block;
+}
+@media (orientation: portrait) {
+	#options-screen .menu {
+		flex-direction: column;
+	}
+	.options-input-group {
+		flex-direction: row;
+	}
+		.options-input-group img {
+			margin-left: 2em;
+		}
+}
+@media (max-width: 500px), (max-height: 500px) {
+	#options-screen .menu label {
+		font-size: 90%;
+	}
+	.options-input-group button,
+	.options-input-group select {
+		padding: 0.75em;
+	}
+	.options-input-group select {
+		background-position-x: calc(100% - 0.25em);
+		background-position-y: 0.125em;
+		padding-right: 2em;
+	}
+		.options-input-group select:hover,
+		.options-input-group select:focus {
+			background-position-y: -2.375em;
+		}
+		.options-input-group select:active,
+		.options-input-group select.active {
+			background-position-y: -4.875em;
+		}
+	.options-input-group img {
+		width: 87.5px;
+	}
+}
+
+/* About (credits) screen styles */
+#about-screen {
+	background-image: url('../images/backgrounds/stone_light_speckled.jpg');
+}
+#about-screen img {
 	max-width: 90%;
 }
-#aboutScreen h2 {
+#about-screen h2 {
 	font-size: 125%;
 }
-#aboutScreen ul {
+#about-screen ul {
 	list-style-type: none;
 	padding: 0;
-	margin: 0.5em;
+	margin: 0.5em auto;
 }
-	#aboutScreen ul li .icon {
+	#about-screen ul li .icon {
 		width: 0.9em;
 		height: 0.9em;
 		margin: -0.15em 0;
 		fill: currentcolor;
 	}
-	#aboutScreen ul li a {
+	#about-screen ul li a {
 		text-decoration: none;
 	}
-		#aboutScreen ul li a:hover,
-		#aboutScreen ul li a:focus {
+		#about-screen ul li a:hover,
+		#about-screen ul li a:focus {
 			text-decoration: underline;
 		}
+	#about-screen .testers {
+		column-count: 2;
+		font-size: 87.5%;
+		max-width: 22em;
+	}
+@media (min-width: 500px) {
+	#about-screen .testers {
+		font-size: 100%;
+	}
+}
+
+/* Ad stuff */
+#ad-container {
+	position: fixed;
+	left: 0;
+	width: 100%;
+	bottom: 0;
+	height: 50px;
+	z-index: 10;
+	
+	background-color: black;
+	color: white;
+	text-align: center;
+}
+@media (min-width: 500px) and (min-height: 500px) {
+	#ad-container {
+		height: 3.5rem;
+	}
+}

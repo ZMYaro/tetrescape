@@ -21,102 +21,83 @@ function Block(x, y, grid, minoType, tetromino, hasNeighbors) {
 	this.opacity = 1;
 	this.scale = 1;
 	
+	this.moveSound = document.getElementById('move-sound');
+	
 	this.dying = false;
 	this._deathTween = undefined;
 	
 	// Determine the block's image.
 	this._image = new Image();
 	hasNeighbors = hasNeighbors || {left: false, top: false, right: false, bottom: false};
-	var fileName = 'images/blocks/' + (minoType || 'static').toLowerCase() + '_block';
+	var spriteName = (minoType || 'static').toLowerCase() + '_block';
 	if (hasNeighbors.top || hasNeighbors.bottom || hasNeighbors.left || hasNeighbors.right) {
-		fileName += '_' +
+		spriteName += '_' +
 			(hasNeighbors.top ?    'n' : '') +
 			(hasNeighbors.bottom ? 's' : '') +
 			(hasNeighbors.right ?  'e' : '') +
 			(hasNeighbors.left ?   'w' : '');
 	}
-	fileName += '.png';
-	this._image.src = fileName;
+	this._currentAnim = [spriteName];
 }
-
-// Initialize static constants.
-/** {Color} The default block color */
-Block.DEFAULT_COLOR = new Color(117, 117, 117); // Gray
-/** {Number} The width of block outlines */
-Block.LINE_WIDTH = 3;
-/** {Number} The duration of the block death animation in frames. */
-Block.DEATH_DURATION = 12;
 
 // Inherit from GridOccupant.
 Block.prototype = Object.create(GridOccupant.prototype);
 
+// Define constants.
+/** {Color} The default block color */
+//Block.DEFAULT_COLOR = new Color(117, 117, 117);
+/** {String} The path from the root to the sprite sheet JSON and image files */
+Block.prototype.SPRITE_SHEET_PATH = 'images/game/blocks';
+/** {Image} The goal sprite sheet image */
+Block.prototype.SPRITE_SHEET_IMAGE;
+/** {Object} The goal sprite sheet data */
+Block.prototype.SPRITE_SHEET_DATA;
+/** {Number} The duration of the block death animation in milliseconds */
+Block.prototype.DEATH_DURATION = 200;
+
 /**
- * Check whether the block's tetromino can be moved to a new location.
  * @override
+ * Check whether the block's tetromino can be moved to a new location.
  * @param {Vector2D} movement - The vector by which the block would be moved
+ * @param {Array<Tetromino>} checkedOccupants - The already checked grid occupants for this move attempt
  * @returns {Boolean} - Whether the block could be moved
  */
-Block.prototype.canMove = function (movement) {
+Block.prototype.canMove = function (movement, checkedOccupants) {
 	// Do not move while dying.
 	if (this.dying) {
 		return false;
 	}
 	if (this.tetromino) {
-		return this.tetromino.canMove(movement);
+		return this.tetromino.canMove(movement, checkedOccupants);
 	} else {
-		return this.canMoveSingle(movement);
+		return this.canMoveSingle(movement, checkedOccupants);
 	}
 };
 
 /**
  * Check whether the block can be moved to a new location, independent of its tetromino.
  * @param {Vector2D} movement - The vector by which the block would be moved
+ * @param {Array<Tetromino>} checkedOccupants - The already checked grid occupants for this move attempt
  * @returns {Boolean} - Whether the block could be moved
  */
-Block.prototype.canMoveSingle = function (movement) {
+Block.prototype.canMoveSingle = function (movement, checkedOccupants) {
 	// Do not move while dying.
 	if (this.dying) {
 		return false;
 	}
 	// Call the superclass implementation of canMove.
-	return GridOccupant.prototype.canMove.call(this, movement);
+	return GridOccupant.prototype.canMove.call(this, movement, checkedOccupants);
 };
 
 /**
- * Move the block's tetromino to a new location, if possible.
- * @override
- * @param {Vector2D} movement - The vector by which to move the block
- * @returns {Boolean} - Whether the block could be moved
- */
-Block.prototype.tryMove = function (movement) {
-	// Do not move while dying.
-	if (this.dying) {
-		return false;
-	}
-	if (this.tetromino) {
-		return this.tetromino.tryMove(movement);
-	} else {
-		return this.tryMoveSingle(movement);
-	}
-};
-
-/**
- * Move the block to a new location, if possible, independent of its tetromino.
+ * Move the block to a new location.
  * @param {Vector2D} movement - The vector by which to move the block
  * @return {Boolean} - Whether the block could be moved
  */
-Block.prototype.tryMoveSingle = function (movement) {
-	// Do not move while dying.
-	if (this.dying) {
-		return false;
-	}
-	// Call the superclass implementation of tryMove.
-	if (GridOccupant.prototype.tryMove.call(this, movement)) {
-		document.getElementById('move-sound').play();
-		return true;
-	} else {
-		return false;
-	}
+Block.prototype.move = function (movement) {
+	GridOccupant.prototype.move.call(this, movement);
+	this.moveSound.currentTime = 0;
+	this.moveSound.play();
 };
 
 /**
@@ -134,7 +115,12 @@ Block.prototype.kill = function () {
 	
 	// Start the death animation.
 	this.dying = true;
-	this._deathTween = new Tween(this, {opacity: -1, rotation: 0.08 * Math.PI, scale: 0.4}, Block.DEATH_DURATION)
+	if (Utils.shouldReduceMotion) {
+		// Die instantly if reducing motion.
+		this._grid.removeOccupant(this);
+		return;
+	}
+	this._deathTween = new Tween(this, {opacity: -1, rotation: 0.05 * Math.PI, scale: 0.4}, this.DEATH_DURATION)
 	this._deathTween.onfinish = (function () {
 		// Remove the block from the grid.
 		this._grid.removeOccupant(this);
@@ -142,39 +128,43 @@ Block.prototype.kill = function () {
 };
 
 /**
- * Update the block.
  * @override
+ * Update the block.
+ * @param {Number} deltaTime - The time since the last frame in milliseconds
  */
-Block.prototype.update = function () {
+Block.prototype.update = function (deltaTime) {
 	// If dying, update the death animation and do nothing else.
 	if (this.dying && this._deathTween) {
-		this._deathTween.update();
+		this._deathTween.update(deltaTime);
 	}
 	
 	// Call the superclass implementation of update.
-	GridOccupant.prototype.update.call(this);
+	GridOccupant.prototype.update.call(this, deltaTime);
 };
 
 /**
- * Draw the block to the canvas.
  * @override
+ * Draw the block to the canvas.
  * @param {CanvasRenderingContext2D} ctx - The drawing context for the game canvas
  */
 Block.prototype.draw = function (ctx, blockSize) {
+	if (!this.dying) {
+		GridOccupant.prototype.draw.call(this, ctx, blockSize);
+		return;
+	}
+	
 	var x = this.x * blockSize + (blockSize / 2),
 		y = this.y * blockSize + (blockSize / 2);
 	
 	ctx.save();
 	
-	ctx.lineWidth = Block.LINE_WIDTH;
 	ctx.globalAlpha = this.opacity;
 	
 	ctx.translate(x, y);
-	ctx.rotate(-Utils.degToRad(this.rotation));
+	ctx.rotate(this.rotation);
 	ctx.scale(this.scale, this.scale);
-	
-	// Draw the block.
-	ctx.drawImage(this._image, -0.5 * blockSize, -0.5 * blockSize, blockSize, blockSize);
+	ctx.translate(-x, -y);
+	GridOccupant.prototype.draw.call(this, ctx, blockSize);
 	
 	ctx.restore();
 };

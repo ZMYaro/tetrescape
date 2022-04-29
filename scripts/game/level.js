@@ -5,13 +5,14 @@
 
 var LEVELS = [{
 	/*
-	*  I  i  i  i  *
-	I  *  * [G] *  I
-	i  *  *  *  *  i
-	i  *  *  *  *  i
-	i  *  P  *  *  i
-	*  I  i  i  i  *
+	 *  I  i  i  i  *
+	 I  *  * [G] *  I
+	 i  *  *  *  *  i
+	 i  *  *  *  *  i
+	 i  *  P  *  *  i
+	 *  I  i  i  i  *
 	*/
+	name: 'I-1',
 	starScores: {
 		moves: [
 			8,
@@ -58,12 +59,13 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	*  *  * [G] *
-	*  O  o  *  *
-	*  o  o  *  *
-	O  o  *  O  o
-	o  o  P  o  o
+	 *  *  * [G] *
+	 *  O  o  *  *
+	 *  o  o  *  *
+	 O  o  *  O  o
+	 o  o  P  o  o
 	*/
+	name: 'I-2',
 	starScores: {
 		moves: [
 			9,
@@ -105,12 +107,13 @@ var LEVELS = [{
 	}],
 }, {
 	/*
-	*  *  * [G] *  *
-	*  B  B  *  *  *
-	*  B  B  *  *  *
-	O  o  *  O  o  *
-	o  o  P  o  o  *
+	 *  *  * [G] *  *
+	 *  B  B  *  *  *
+	 *  B  B  *  *  *
+	 O  o  *  O  o  *
+	 o  o  P  o  o  *
 	*/
+	name: 'I-3',
 	starScores: {
 		moves: [
 			9,
@@ -152,15 +155,16 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	B  B  B  B  *  B  B [G] B
-	I  i  i  i     I  i  i  i
-	*  *  *  *  I  *  *  *  *
-	*  *  *  *  i  *  *  *  *
-	*  *  *  *  i  *  *  *  *
-	*  *  *  *  i  *  *  *  *
-	O  o  O  o  *  O  o  O  o
-	o  o  o  o  P  o  o  o  o
+	 B  B  B  B  *  B  B [G] B
+	 I  i  i  i     I  i  i  i
+	 *  *  *  *  I  *  *  *  *
+	 *  *  *  *  i  *  *  *  *
+	 *  *  *  *  i  *  *  *  *
+	 *  *  *  *  i  *  *  *  *
+	 O  o  O  o  *  O  o  O  o
+	 o  o  o  o  P  o  o  o  o
 	*/
+	name: 'I-4',
 	starScores: {
 		moves: [
 			13,
@@ -230,13 +234,14 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	J  j  B [G] B  B
-	j  B  *  J  j  j
-	j  *  t  *  B  j
-	*  t  t  t  *  *
-	O  o  *  L  *  *
-	o  o  P  l  l  l
+	 J  j  B [G] B  B
+	 j  B  *  J  j  j
+	 j  *  t  *  B  j
+	 *  t  t  t  *  *
+	 O  o  *  L  *  *
+	 o  o  P  l  l  l
 	*/
+	name: 'I-5',
 	starScores: {
 		moves: [
 			8,
@@ -294,14 +299,15 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	I  i  i  i [G] B  B
-	J  j  *  I  i  i  i
-	j  *  *  *  J  j  j
-	j  T  t  t  *  *  j
-	*  *  t  *  *  *  *
-	O  o  *  I  i  i  i
-	o  o  P  I  i  i  i
+	 I  i  i  i [G] B  B
+	 J  j  *  I  i  i  i
+	 j  *  *  *  J  j  j
+	 j  T  t  t  *  *  j
+	 *  *  t  *  *  *  *
+	 O  o  *  I  i  i  i
+	 o  o  P  I  i  i  i
 	*/
+	name: 'I-6',
 	starScores: {
 		moves: [
 			13,
@@ -369,13 +375,74 @@ var LEVELS = [{
 	}]
 }, {
 	/*
+	 *  z  *  B  B [G]
+	 z  z  *  *  B  B
+	 z  *  *  *  *  *
+	 B  B  B  *  B  B
+	 *  *  *  *  *  *
+	 L  *  *  z  *  j
+	 l  *  z  z  *  j
+	 l  l  z [P] j  j
+	*/
+	name: 'I-7',
+	starScores: {
+		moves: [
+			13, // Satisfyingly pushing the last block against the top wall
+			11,
+			9
+		],
+		blocks: [
+			1,
+			12,
+			18 // Extra row
+		]
+	},
+	width: 6,
+	height: 8,
+	playerSpawn: {x: 3, y: 7},
+	goal: {x: 5, y: 0},
+	staticBlocks: [
+		{x: 3, y: 0},
+		{x: 4, y: 0},
+		{x: 4, y: 1},
+		{x: 5, y: 1},
+		{x: 0, y: 3},
+		{x: 1, y: 3},
+		{x: 2, y: 3},
+		{x: 4, y: 3},
+		{x: 5, y: 3}
+	],
+	tetrominos: [{
+		type: 'Z',
+		orientation: 90,
+		x: 0,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 0,
+		x: 0,
+		y: 5
+	}, {
+		type: 'Z',
+		orientation: 90,
+		x: 2,
+		y: 5
+	}, {
+		type: 'L',
+		orientation: 0,
+		x: 4,
+		y: 5
+	}]
+}, {
+	/*
 	 *  *  l  I  L  l  l [G] l
 	 l  l  l  i  l  *  l  l  l
 	 *  *  *  i  *  *  *  *  *
 	 *  *  *  i  *  *  *  *  *
 	 *  T  t  t  *  *  *  *  *
 	[P] *  t  *  *  *  *  *  *
-	 */
+	*/
+	name: 'I-8',
 	starScores: {
 		moves: [
 			19,
@@ -421,21 +488,22 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	*  *  *  *  *  *  * [G] *
-	Z  z  *  *  *  *  J  j  j
-	I  z  z  *  *  J  j  j  j
-	i  O  o  *  S  Z  z  j  I
-	i  o  o  *  s  s  z  z  i
-	i  z  *  *  J  s  L  l  i
-	z  z  *  *  j  j  j  l  i
-	z  z  O  o  *  *  *  l  *
-	z  z  o  o  *  *  *  *  *
-	z  z  *  L  *  *  *  z  *
-	z  z  *  l  *  *  z  z  *
-	z  z  *  l  l  *  z  z  *
-	z  z  I  i  i  i  z  z  *
-	z  I  i  i  i  P  z  B  *
+	 *  *  *  *  *  *  * [G] *
+	 Z  z  *  *  *  *  J  j  j
+	 I  z  z  *  *  J  j  j  j
+	 i  O  o  *  S  Z  z  j  I
+	 i  o  o  *  s  s  z  z  i
+	 i  z  *  *  J  s  L  l  i
+	 z  z  *  *  j  j  j  l  i
+	 z  z  O  o  *  *  *  l  *
+	 z  z  o  o  *  *  *  *  *
+	 z  z  *  L  *  *  *  z  *
+	 z  z  *  l  *  *  z  z  *
+	 z  z  *  l  l  *  z  z  *
+	 z  z  I  i  i  i  z  z  *
+	 z  I  i  i  i  P  z  B  *
 	*/
+	name: 'I-9',
 	starScores: {
 		moves: [
 			19,
@@ -443,9 +511,10 @@ var LEVELS = [{
 			15
 		],
 		blocks: [
-			54,
-			72,
-			82
+			//54, // Basic solution (6 rows)
+			72, // 8 rows
+			81, // 9 rows
+			82 // 2 columns + 6 rows
 		]
 	},
 	width: 9,
@@ -561,17 +630,18 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	*  *  *  *  *  *  *  *  *  *
-	* [G] *  *  *  *  *  *  *  *
-	*  *  B  B  B  B  O  o  *  *
-	*  *  B  B  B  B  o  o  *  *
-	B  B  *  *  *  *  *  *  B  B
-	B  B  *  *  *  *  *  *  B  B
-	*  *  O  o  O  o  O  o  *  *
-	*  *  o  o  o  o  o  o  *  *
-	O  o  *  *  B  B  *  *  O  o
-	o  o [P] *  B  B  *  *  o  o
+	 *  *  *  *  *  *  *  *  *  *
+	 * [G] *  *  *  *  *  *  *  *
+	 *  *  B  B  B  B  O  o  *  *
+	 *  *  B  B  B  B  o  o  *  *
+	 B  B  *  *  *  *  *  *  B  B
+	 B  B  *  *  *  *  *  *  B  B
+	 *  *  O  o  O  o  O  o  *  *
+	 *  *  o  o  o  o  o  o  *  *
+	 O  o  *  *  B  B  *  *  O  o
+	 o  o [P] *  B  B  *  *  o  o
 	*/
+	name: 'O-1',
 	starScores: {
 		moves: [
 			28,
@@ -650,12 +720,13 @@ var LEVELS = [{
 	 * [P] *  T  t  t  *  j  *  *
 	 *  *  *  *  t  *  *  *  *  *
 	 *  *  *  *  *  *  *  *  *  *
-	 */
+	*/
+	name: 'O-2',
 	starScores: {
 		moves: [
 			30,
-			30,
-			27
+			27, // Pushing split T from far side
+			23
 		],
 		blocks: [
 			0,
@@ -713,84 +784,140 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	 *  *  *  L  l  l  L  *
-	 *  *  T  l  O  o  l  *
-	 *  *  t  t  o  o  l  l
-	 *  *  t  *  *  *  *  *
-	[P] *  *  *  *  *  J  j
-	 *  *  t  *  *  *  j [G]
-	 *  t  t  I  *  *  j  t
-	 *  *  t  i  *  *  t  t
-	 L  l  l  i  *  *  l  t
-	 l  *  *  i  l  l  l  *
+	 *  *  J  j  J  j  j  *  *
+	 *  *  j  *  *  *  j  *  *
+	 S  *  j  * [G] *  j  *  z
+	 s  s  J  *  *  *  j  z  z
+	 *  s  j  j  j  j  j  z  *
+	 *  *  *  * [P] *  *  *  *
 	 */
+	name: 'O-3',
 	starScores: {
 		moves: [
-			33,
-			30,
-			28
+			//59, // With extra column
+			29, // Push Z and J all the way up
+			25, // Push Z all the way up OR push S right for alternate solution
+			23
 		],
 		blocks: [
-			17,
-			18,
-			27
+			6, // 1 extra column
+			12, // 2 extra columns
+			18 // 3 extra columns
+		]
+	},
+	width: 9,
+	height: 6,
+	playerSpawn: {x: 4, y: 5},
+	goal: {x: 4, y: 2},
+	staticBlocks: [],
+	tetrominos: [{
+		type: 'J',
+		orientation: 180,
+		x: 2,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 270,
+		x: 4,
+		y: 0
+	}, {
+		type: 'S',
+		orientation: 90,
+		x: 0,
+		y: 2
+	}, {
+		type: 'J',
+		orientation: 0,
+		x: 5,
+		y: 2
+	}, {
+		type: 'Z',
+		orientation: 90,
+		x: 7,
+		y: 2
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 2,
+		y: 3
+	}]
+}, {
+	/*
+	 O  o  J [G] *  *  T  *
+	 o  o  j  j  j  *  t  t
+	 *  *  *  L  l  L  t  *
+	 *  *  * [P] l  l  *  j
+	 *  *  *  *  l  l  l  j
+	 *  *  *  *  z  *  j  j
+	 *  *  *  z  z  *  *  *
+	 *  Z  z  z  *  J  j  j
+	 *  *  z  z  *  *  *  j
+	*/
+	name: 'O-4',
+	starScores: {
+		moves: [
+			75, // Clearing 1 extra column
+			25, // Pushing a block back unnecessarily
+			21
+		],
+		blocks: [
+			16, // 1 extra row
+			//17, // 1 extra column
+			24, // 2 extra rows
+			//25, // 1 extra row + 1 extra column
+			26 // 2 extra columns
 		]
 	},
 	width: 8,
 	height: 9,
-	playerSpawn: {x: 0, y: 4},
-	goal: {x: 7, y: 5},
+	playerSpawn: {x: 3, y: 3},
+	goal: {x: 3, y: 0},
 	staticBlocks: [],
 	tetrominos: [{
-		type: 'L',
-		orientation: 90,
-		x: 3,
+		type: 'O',
+		orientation: 0,
+		x: 0,
 		y: 0
 	}, {
-		type: 'L',
-		orientation: 0,
-		x: 6,
+		type: 'J',
+		orientation: 90,
+		x: 2,
 		y: 0
 	}, {
 		type: 'T',
 		orientation: 270,
-		x: 2,
-		y: 1
-	}, {
-		type: 'O',
-		orientation: 0,
-		x: 4,
-		y: 1
-	}, {
-		type: 'J',
-		orientation: 180,
 		x: 6,
-		y: 4
+		y: 0
 	}, {
-		type: 'T',
-		orientation: 90,
-		x: 1,
-		y: 4
+		type: 'L',
+		orientation: 180,
+		x: 3,
+		y: 2
 	}, {
 		type: 'L',
 		orientation: 0,
-		x: 3,
-		y: 5
+		x: 5,
+		y: 2
 	}, {
 		type: 'J',
 		orientation: 0,
-		x: 4,
-		y: 6
+		x: 6,
+		y: 3
 	}, {
 		type: 'Z',
 		orientation: 90,
-		x: 6,
-		y: 6
+		x: 3,
+		y: 5
 	}, {
-		type: 'I',
-		orientation: 90,
-		x: 0,
-		y: 8
+		type: 'Z',
+		orientation: 0,
+		x: 1,
+		y: 7
+	}, {
+		type: 'J',
+		orientation: 270,
+		x: 5,
+		y: 7
 	}]
 }, {
 	/*
@@ -805,14 +932,17 @@ var LEVELS = [{
 	 *  i  *  *  B  *  *  *  B  *  B [G]
 	 *  *  *  *  B  *  B  *  B  *  B  *
 	*/
+	name: 'O-5',
 	starScores: {
 		moves: [
-			85,
-			71,
-			59
+			//73, // Pushing the T with the J and nothing else
+			69, // Pushing the T and the J and the T piece with the J piece
+			//61, // Pushing the T with the J and the pieces with the I inefficiently
+			55, // Pushing the T with the J and the pieces with the I efficiently
+			49 // Pushing blocks with blocks as much as possible
 		],
 		blocks: [
-			0,
+			1,
 			1,
 			40
 		]
@@ -873,23 +1003,24 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	*  *  B  j  *  *  *  *  *  I  I  *  *
-	*  *  B  j  *  *  *  *  *  i  i  *  *
-	*  *  j  j  *  *  *  *  *  i  i  *  z
-	L  l  *  *  *  *  *  *  *  i  i  z  z
-	*  l  I  I  *  I  i  i  i  * [P] z  z
-	*  l  i  i  *  *  *  *  *  J  j  z  z
-	*  *  i  i  *  *  *  *  *  j  J  z [G]
-	*  *  i  i  *  *  *  *  *  j  j  j  j
+	 *  *  B  j  *  *  *  *  *  I  I  *  *
+	 *  *  B  j  *  *  *  *  *  i  i  *  *
+	 *  *  j  j  *  *  *  *  *  i  i  *  z
+	 L  l  *  *  *  *  *  *  *  i  i  z  z
+	 *  l  I  I  *  I  i  i  i  * [P] z  z
+	 *  l  i  i  *  *  *  *  *  J  j  z  z
+	 *  *  i  i  *  *  *  *  *  j  J  z [G]
+	 *  *  i  i  *  *  *  *  *  j  j  j  j
 	*/
+	name: 'O-6',
 	starScores: {
 		moves: [
 			56,
-			50,
-			42
+			50, // Push the I piece with the L inefficiently
+			42 // Push the lined-up I piece with the L
 		],
 		blocks: [
-			0,
+			1,
 			1,
 			40
 		]
@@ -960,23 +1091,127 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	J  *  *  *  *  O  o [G] O  o  I
-	j  j  j  *  *  o  o  B  o  o  i
-	*  *  *  *  *  *  *  *  *  *  i
-	*  *  *  *  *  *  *  *  *  *  i
-	I  *  *  t  *  *  *  *  *  *  *
-	i  *  t  t  t  *  *  *  *  O  o
-	i  *  *  *  *  *  *  *  *  o  o
-	i  *  *  P  *  *  *  *  *  *  B
-	*/
+	 *  z  I  i  i  i  J  I  i  i  i
+	 z  z  *  L  l  l  j  j  j  *  *
+	 z  *  *  l  *  I  i  i  i  L  l
+	 I [P] *  *  B  L  l  l  *  *  l
+	 i  *  L  l  l  l  *  *  *  t  l
+	 i  *  l  *  *  T  t  t  t  t [G]
+	 i  I  i  i  i  *  t  *  *  t  *
+	 */
+	name: 'O-7',
 	starScores: {
 		moves: [
-			50,
-			48,
-			37
+			//31, // With 1 extra column
+			23, // Push wrong L first or forget to push first L again
+			21, // Skip the end of the puzzle and push the T up to get to the goal
+			19
 		],
 		blocks: [
-			0,
+			//21, // Intended solution
+			//28, // 1 extra column
+			//32, // 1 extra row
+			//35, // 2 extra columns
+			39, // 1 extra row + 1 extra column
+			42, // 3 extra columns
+			//43, // 2 extra rows
+			46 // 1 extra row + 2 extra columns
+		]
+	},
+	width: 11,
+	height: 7,
+	playerSpawn: {x: 1, y: 3},
+	goal: {x: 10, y: 5},
+	staticBlocks: [
+		{x: 4, y: 3}
+	],
+	tetrominos: [{
+		type: 'Z',
+		orientation: 90,
+		x: 0,
+		y: 0
+	}, {
+		type: 'I',
+		orientation: 90,
+		x: 2,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 6,
+		y: 0
+	}, {
+		type: 'I',
+		orientation: 90,
+		x: 7,
+		y: 0
+	}, {
+		type: 'L',
+		orientation: 90,
+		x: 3,
+		y: 1
+	}, {
+		type: 'I',
+		orientation: 90,
+		x: 5,
+		y: 2
+	}, {
+		type: 'L',
+		orientation: 180,
+		x: 9,
+		y: 2
+	}, {
+		type: 'I',
+		orientation: 0,
+		x: 0,
+		y: 3
+	}, {
+		type: 'L',
+		orientation: 90,
+		x: 5,
+		y: 3
+	}, {
+		type: 'L',
+		orientation: 90,
+		x: 2,
+		y: 4
+	}, {
+		type: 'T',
+		orientation: 90,
+		x: 8,
+		y: 4
+	}, {
+		type: 'T',
+		orientation: 0,
+		x: 5,
+		y: 5
+	}, {
+		type: 'I',
+		orientation: 90,
+		x: 1,
+		y: 6
+	}]
+}, {
+	/*
+	 J  *  *  *  *  O  o [G] O  o  I
+	 j  j  j  *  *  o  o  B  o  o  i
+	 *  *  *  *  *  *  *  *  *  *  i
+	 *  *  *  *  *  *  *  *  *  *  i
+	 I  *  *  t  *  *  *  *  *  O  o
+	 i  *  t  t  t  *  *  *  *  o  o
+	 i  *  *  *  *  *  *  *  *  *  *
+	 i  *  *  P  *  *  *  *  *  *  B
+	*/
+	name: 'O-8',
+	starScores: {
+		moves: [
+			//55, // Push O down before moving T
+			51, // Push T piece first
+			45, // Push O piece all the way in
+			43 // Do not push O piece all the way in
+		],
+		blocks: [
+			1,
 			1,
 			19
 		]
@@ -1029,33 +1264,439 @@ var LEVELS = [{
 		type: 'O',
 		orientation: 0,
 		x: 9,
+		y: 4
+	}]
+}, {
+	/*
+	 J  j  J  j  j  L  L  l [G] z
+	 j  Z  z  *  j  l  *  l  z  z
+	 j [P] z  z  t  l  l  l  z  *
+	 *  L  l  t  t  t  *  *  L  l
+	 *  *  l  *  *  S  J  j  j  l
+	 *  *  l  *  *  s  s  J  j  l
+	 *  *  *  *  *  *  s  j  j  j
+	 */
+	name: 'O-9',
+	starScores: {
+		moves: [
+			29, // Subbing the L piece from first column clear :P
+			20,
+			17
+		],
+		blocks: [
+			//14, // Minimum
+			//21, // 1 extra column
+			24, // 1 extra row
+			28, // 2 extra columns
+			31 // 1 extra row + 1 extra column
+		]
+	},
+	width: 10,
+	height: 7,
+	playerSpawn: {x: 1, y: 2},
+	goal: {x: 8, y: 0},
+	staticBlocks: [],
+	tetrominos: [{
+		type: 'J',
+		orientation: 180,
+		x: 0,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 270,
+		x: 2,
+		y: 0
+	}, {
+		type: 'L',
+		orientation: 0,
+		x: 5,
+		y: 0
+	}, {
+		type: 'L',
+		orientation: 180,
+		x: 6,
+		y: 0
+	}, {
+		type: 'Z',
+		orientation: 90,
+		x: 8,
+		y: 0
+	}, {
+		type: 'Z',
+		orientation: 0,
+		x: 1,
+		y: 1
+	}, {
+		type: 'T',
+		orientation: 180,
+		x: 3,
+		y: 2
+	}, {
+		type: 'L',
+		orientation: 180,
+		x: 1,
+		y: 3
+	}, {
+		type: 'L',
+		orientation: 180,
+		x: 8,
+		y: 3
+	}, {
+		type: 'S',
+		orientation: 90,
+		x: 5,
+		y: 4
+	}, {
+		type: 'J',
+		orientation: 270,
+		x: 6,
+		y: 4
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 7,
 		y: 5
+	}]
+}, {
+	/*
+	 *  Z  z [G] *  s  s  s  s
+	 *  *  z  z  s  s  s  s  *
+	 *  *  J  j  *  s  s  *  *
+	 T  *  j  *  s  s  *  t  *
+	 t  t  j  *  *  *  t  t  *
+	 t  * [P] L  l  l  J  t  *
+	 *  *  *  l  *  *  j  j  j
+	*/
+	name: 'Z-1',
+	starScores: {
+		moves: [
+			//38, // Intended solution if you use the L block for 3 instead
+			32, // Intended solution, but if you forgot to push the T block in
+			26, // Intended solution
+			18 // Alternate (3-column) solution
+		],
+		blocks: [
+			21, // Alternate (3-column) solution
+			23, // Intended solution
+			30 // Extra column
+		]
+	},
+	width: 9,
+	height: 7,
+	playerSpawn: {x: 2, y: 5},
+	goal: {x: 3, y: 0},
+	staticBlocks: [],
+	tetrominos: [{
+		type: 'Z',
+		orientation: 0,
+		x: 1,
+		y: 0
+	}, {
+		type: 'S',
+		orientation: 0,
+		x: 4,
+		y: 0
+	}, {
+		type: 'S',
+		orientation: 0,
+		x: 6,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 180,
+		x: 2,
+		y: 2
+	}, {
+		type: 'S',
+		orientation: 0,
+		x: 4,
+		y: 2
+	}, {
+		type: 'T',
+		orientation: 270,
+		x: 0,
+		y: 3
+	}, {
+		type: 'T',
+		orientation: 90,
+		x: 6,
+		y: 3
+	}, {
+		type: 'L',
+		orientation: 90,
+		x: 3,
+		y: 5
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 6,
+		y: 5
+	}]
+}, {
+	/*
+	 *  *  *  L  l  l  L  *
+	 *  *  T  l  O  o  l  *
+	 *  *  t  t  o  o  l  l
+	 *  *  t  *  *  *  *  *
+	[P] *  *  *  *  *  J  j
+	 *  *  t  *  *  *  j [G]
+	 *  t  t  I  *  *  j  t
+	 *  *  t  i  *  *  t  t
+	 T  t  t  i  *  *  l  t
+	 *  t  *  i  l  l  l  *
+	*/
+	name: 'Z-2',
+	starScores: {
+		moves: [
+			42, // Switch which T has 1 block remaining
+			34, // Push the Ts separately
+			32
+		],
+		blocks: [
+			20, // Minimum
+			28, // 1 extra row
+			30 // 1 extra column
+		]
+	},
+	width: 8,
+	height: 10,
+	playerSpawn: {x: 0, y: 4},
+	goal: {x: 7, y: 5},
+	staticBlocks: [],
+	tetrominos: [{
+		type: 'L',
+		orientation: 90,
+		x: 3,
+		y: 0
+	}, {
+		type: 'L',
+		orientation: 0,
+		x: 6,
+		y: 0
+	}, {
+		type: 'T',
+		orientation: 270,
+		x: 2,
+		y: 1
+	}, {
+		type: 'O',
+		orientation: 0,
+		x: 4,
+		y: 1
+	}, {
+		type: 'J',
+		orientation: 180,
+		x: 6,
+		y: 4
+	}, {
+		type: 'T',
+		orientation: 90,
+		x: 1,
+		y: 5
+	}, {
+		type: 'I',
+		orientation: 0,
+		x: 3,
+		y: 6
+	}, {
+		type: 'T',
+		orientation: 90,
+		x: 6,
+		y: 6
+	}, {
+		type: 'T',
+		orientation: 0,
+		x: 0,
+		y: 8
+	}, {
+		type: 'L',
+		orientation: 270,
+		x: 4,
+		y: 8
+	}]
+}, {
+	/*
+	 *  z  J  *  T  t  t  L  l  l
+	 z  z  j  j  j  t  s  s  *  l
+	 z  *  *  *  T  s  s  *  S  *
+	 *  *  *  *  t  t  B  *  s  s
+	 *  *  * [P] t [G] *  l  *  s
+	 *  I  i  i  i  l  l  l  *  *
+	 *  *  *  *  B  *  B  Z  z  *
+	 *  *  *  *  *  *  *  *  z  z
+	 */
+	name: 'Z-3',
+	starScores: {
+		moves: [
+			32, // Long way around the top (push S piece back down)
+			26, // Long way around the bottom
+			24
+		],
+		blocks: [
+			//9, // Minimum
+			18, // 1 extra row
+			26, // 1 extra row + 1 extra column
+			27 // 2 extra rows
+		]
+	},
+	width: 9,
+	height: 8,
+	playerSpawn: {x: 1, y: 4},
+	goal: {x: 4, y: 3},
+	staticBlocks: [
+		{x: 4, y: 4},
+		{x: 5, y: 6}
+	],
+	tetrominos: [{
+		type: 'T',
+		orientation: 180,
+		x: 0,
+		y: 0
+	}, {
+		type: 'Z',
+		orientation: 0,
+		x: 3,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 270,
+		x: 6,
+		y: 0
+	}, {
+		type: 'L',
+		orientation: 270,
+		x: 4,
+		y: 1
+	}, {
+		type: 'I',
+		orientation: 0,
+		x: 3,
+		y: 2
+	}, {
+		type: 'S',
+		orientation: 90,
+		x: 7,
+		y: 2
+	}, {
+		type: 'L',
+		orientation: 270,
+		x: 4,
+		y: 4
+	}, {
+		type: 'Z',
+		orientation: 0,
+		x: 6,
+		y: 6
+	}]
+}, {
+	/*
+	 *  *  *  L  l  l  L  *
+	 *  *  T  l  O  o  l  *
+	 *  *  t  t  o  o  l  l
+	 *  *  t  *  *  *  *  *
+	[P] *  t  *  *  *  J  j
+	 *  t  t  *  j  *  j [G]
+	 *  *  t  *  j  j  j  z
+	 *  *  *  j  j  j  z  z
+	 I  i  i  i  j  j  z  *
+	 */
+	name: 'Z-4',
+	starScores: {
+		moves: [
+			46, // Backtracking for extra column
+			40, // With extra column
+			30 // Fastest solution
+		],
+		blocks: [
+			1,
+			18, // Minimum
+			27 // Extra column
+		]
+	},
+	width: 8,
+	height: 9,
+	playerSpawn: {x: 0, y: 4},
+	goal: {x: 7, y: 5},
+	staticBlocks: [],
+	tetrominos: [{
+		type: 'L',
+		orientation: 90,
+		x: 3,
+		y: 0
+	}, {
+		type: 'L',
+		orientation: 0,
+		x: 6,
+		y: 0
+	}, {
+		type: 'T',
+		orientation: 270,
+		x: 2,
+		y: 1
+	}, {
+		type: 'O',
+		orientation: 0,
+		x: 4,
+		y: 1
+	}, {
+		type: 'J',
+		orientation: 180,
+		x: 6,
+		y: 4
+	}, {
+		type: 'T',
+		orientation: 90,
+		x: 1,
+		y: 4
+	}, {
+		type: 'J',
+		orientation: 0,
+		x: 3,
+		y: 5
+	}, {
+		type: 'J',
+		orientation: 0,
+		x: 4,
+		y: 6
+	}, {
+		type: 'Z',
+		orientation: 90,
+		x: 6,
+		y: 6
+	}, {
+		type: 'I',
+		orientation: 90,
+		x: 0,
+		y: 8
 	}]
 }, {
 	/*
 	 O  o [G] s  s  S  Z  z  *
 	 o  o  s  s  *  s  s  z  z
 	 *  *  *  *  *  *  s  *  *
-	 *  *  L  l  l  L  l  l  l
-	 *  *  l  *  *  l  l  l  l
-	 * [P] *  *  *  *  *  *  *
+	 *  L  l  l  *  L  l  l  *
+	 *  l  *  *  *  l  *  *  l
+	 *  *  *  * [P] *  l  l  l
 	 *  *  *  *  *  *  *  *  *
-	 */
+	*/
+	name: 'Z-5',
 	starScores: {
 		moves: [
-			30,
-			26,
-			24
+			//47, // Alternate solution if you push the left block first
+			43, // Alternate solution
+			//39, // Start going toward alternate solution, but push left block it so it splits anyway
+			35,
+			33
 		],
 		blocks: [
-			0,
+			1,
 			1,
 			16
 		]
 	},
 	width: 9,
 	height: 7,
-	playerSpawn: {x: 1, y: 5},
+	playerSpawn: {x: 4, y: 5},
 	goal: {x: 2, y: 0},
 	staticBlocks: [],
 	tetrominos: [{
@@ -1081,7 +1722,7 @@ var LEVELS = [{
 	}, {
 		type: 'L',
 		orientation: 90,
-		x: 2,
+		x: 1,
 		y: 3
 	}, {
 		type: 'L',
@@ -1092,41 +1733,38 @@ var LEVELS = [{
 		type: 'L',
 		orientation: 270,
 		x: 6,
-		y: 3
+		y: 4
 	}]
 }, {
 	/*
-	B  B  B  I  i  i  i [G] Z  z  L  l
-	I  i  i  i  *  I  i  i  i  z  z  l
-	*  O  o  O  o  *  *  *  *  *  *  l
-	I  o  o  o  o  *  *  *  *  *  *  *
-	i  O  o  *  T  t  t  *  *  *  *  I
-	i  o  o  *  *  t  *  *  *  *  *  i
-	i  *  *  *  *  *  *  *  *  O  o  i
-	B  *  *  P  *  *  *  *  *  o  o  i
+	 B  B  B  I  i  i  i [G] Z  z  L  l
+	 I  i  i  i  *  I  i  i  i  z  z  l
+	 *  O  o  O  o  *  *  *  *  *  *  l
+	 I  o  o  o  o  *  *  *  *  *  *  *
+	 i  O  o  *  *  s  s  *  *  *  *  I
+	 i  o  o  *  s  s  *  *  *  *  *  i
+	 i  *  *  *  *  *  *  *  *  O  o  i
+	 B  *  *  P  *  *  *  *  *  o  o  i
 	*/
+	name: 'Z-6',
 	starScores: {
 		moves: [
-			70,
-			64,
-			62
+			79, // Intended solution slightly less efficiently
+			//77, // Intended solution slightly less efficiently
+			75, // Intended solution
+			59, // Alternate solution
 		],
 		blocks: [
-			0,
-			1,
-			36
+			//24, // Alternate (3 vertical clear) solution
+			36, // Intended solution
+			40, // Alternate (3 vertical clear) solution + 2 additional vertical clears
+			44 // Split and free the Z
 		]
 	},
 	width: 12,
 	height: 8,
-	playerSpawn: {
-		x: 3,
-		y: 7
-	},
-	goal: {
-		x: 7,
-		y: 0
-	},
+	playerSpawn: {x: 3, y: 7},
+	goal: {x: 7, y: 0},
 	staticBlocks: [
 		{x: 0, y: 0},
 		{x: 1, y: 0},
@@ -1179,7 +1817,7 @@ var LEVELS = [{
 		x: 1,
 		y: 4
 	}, {
-		type: 'T',
+		type: 'S',
 		orientation: 0,
 		x: 4,
 		y: 4
@@ -1196,20 +1834,116 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	*  *  *  *  *  *  *  *  *  I  J  *  *
-	*  *  *  J  j  *  *  *  *  i  j  j  j
-	*  *  *  j  B  B  *  *  *  i  *  t  *
-	P  B  *  j [G] s  s  *  *  i  t  t  t
-	*  B  *  J  s  s  B  *  *  *  *  *  *
-	*  B  B  j  j  j  *  *  *  *  *  *  *
-	*  T  t  t  *  *  *  *  *  O  o  O  o
-	*  *  t  *  *  *  *  *  *  o  o  o  o
-	*/
+	 I  i  i  i  *  s  s  t  *  *
+	 J  *  *  J  s  s  t  t  t  B
+	 j  j  j  j  j  j  I  *  *  *
+	 *  Z  z  *  *  *  i  *  *  *
+	 *  *  z  z  *  *  i  *  *  *
+	[P] *  *  *  *  *  i  *  *  *
+	 B  I  i  i  i  *  *  *  l  *
+	 *  O  o  L  l  l  l  l  l  *
+	 *  o  o  l [G] I  i  i  i  B
+	 */
+	name: 'Z-7',
 	starScores: {
 		moves: [
-			77,
-			74,
-			71
+			79, // Intended solution pushing L to the right first
+			73, // Intended solution without pushing L
+			55 // Left column alternate solution
+		],
+		blocks: [
+			38, // 2 columns + 2 rows
+			45, // 5 columns
+			46 // 4 columns + 1 row
+		]
+	},
+	width: 10,
+	height: 9,
+	playerSpawn: {x: 0, y: 5},
+	goal: {x: 4, y: 8},
+	staticBlocks: [
+		{x: 9, y: 1},
+		{x: 0, y: 6},
+		{x: 9, y: 8}
+	],
+	tetrominos: [{
+		type: 'I',
+		orientation: 90,
+		x: 0,
+		y: 0
+	}, {
+		type: 'S',
+		orientation: 0,
+		x: 4,
+		y: 0
+	}, {
+		type: 'T',
+		orientation: 180,
+		x: 6,
+		y: 0
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 0,
+		y: 1
+	}, {
+		type: 'J',
+		orientation: 90,
+		x: 3,
+		y: 1
+	}, {
+		type: 'I',
+		orientation: 0,
+		x: 6,
+		y: 2
+	}, {
+		type: 'Z',
+		orientation: 0,
+		x: 1,
+		y: 3
+	}, {
+		type: 'I',
+		orientation: 90,
+		x: 1,
+		y: 6
+	}, {
+		type: 'L',
+		orientation: 270,
+		x: 6,
+		y: 6
+	}, {
+		type: 'O',
+		orientation: 0,
+		x: 1,
+		y: 7
+	}, {
+		type: 'L',
+		orientation: 90,
+		x: 3,
+		y: 7
+	}, {
+		type: 'I',
+		orientation: 90,
+		x: 5,
+		y: 8
+	}]
+}, {
+	/*
+	 *  *  *  *  *  *  *  *  *  I  J  *  *
+	 *  *  *  J  j  *  *  *  *  i  j  j  j
+	 *  *  *  j  B  B  *  *  *  i  *  t  *
+	[P] B  *  j [G] s  s  *  *  i  t  t  t
+	 *  B  *  J  s  s  B  *  *  *  *  *  *
+	 *  B  B  j  j  j  *  *  *  *  *  *  *
+	 *  T  t  t  *  *  *  *  *  O  o  O  o
+	 *  *  t  *  *  *  *  *  *  o  o  o  o
+	*/
+	name: 'Z-8',
+	starScores: {
+		moves: [
+			70, // Pushing split T from far side
+			66,
+			60
 		],
 		blocks: [
 			0,
@@ -1284,28 +2018,30 @@ var LEVELS = [{
 	}]
 }, {
 	/*
-	J  j  s  s  *  *  *  ?  ?  Z  z  L  l
-	j  s  s  *  *  *  *  ?  ?  *  z  z  l
-	j  *  *  *  *  J  *  ?  ?  *  O  o  l
-	*  *  *  *  *  j  j  j  ?  *  o  o [G]
-	L  l  L  * [P] *  *  *  ?  *  *  O  o
-	I  l  l  *  *  *  *  *  ?  *  *  o  o
-	i  l  l  l  *  *  *  ?  *  *  *  *  *
-	i  ?  *  *  *  *  *  ?  I  *  O  o  j
-	i  z  *  *  *  *  *  ?  i  *  o  o  j
-	z  z  *  *  *  *  *  ?  i  ?  J  j  j
-	z  ?  *  *  *  *  *  ?  i  *  j  j  j
+	 J  j  s  s  *  *  *  ?  ?  Z  z  L  l
+	 j  s  s  *  *  *  *  ?  ?  *  z  z  l
+	 j  *  *  *  *  J  *  ?  ?  *  O  o  l
+	 *  *  *  *  *  j  j  j  ?  *  o  o [G]
+	 L  l  L  * [P] *  *  *  ?  *  *  O  o
+	 I  l  l  *  *  *  *  *  ?  *  *  o  o
+	 i  l  l  l  *  *  *  ?  *  *  *  *  *
+	 i  ?  *  *  *  *  *  ?  I  *  O  o  j
+	 i  z  *  *  *  *  *  ?  i  *  o  o  j
+	 z  z  *  *  *  *  *  ?  i  ?  J  j  j
+	 z  ?  *  *  *  *  *  ?  i  *  j  j  j
 	*/
+	name: 'Z-9',
 	starScores: {
 		moves: [
-			113,
-			80,
-			67
+			75,
+			70, // Fairly inefficient
+			65
 		],
 		blocks: [
-			26,
-			44,
-			59
+			//33, // Expected solution
+			44, // 1 extra column
+			55, // 2 extra columns
+			66, // 3 extra columns
 		]
 	},
 	width: 13,

@@ -2,13 +2,19 @@
 <html>
 	<head>
 		<title>TetrEscape</title>
+		<meta property="og:title" content="TetrEscape" />
+		<meta name="description" content="Escape the room in a puzzle game that twists sliding block puzzles with the classic block-based line-clearing game." />
+		<meta property="og:description" content="Escape the room in a puzzle game that twists sliding block puzzles with the classic block-based line-clearing game." />
+		<meta property="og:image" content="https://tetrescape.inprod.co/images/og_image.png" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="@TetrEscape" />
 		
 		<!-- PWA features -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="manifest" href="manifest.webmanifest" />
 		<meta name="mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="theme-color" content="#525250" />
+		<meta name="theme-color" content="#3b3a3d" />
 		<script type="text/javascript">
 			window.addEventListener('load', function () {
 				if (!navigator.serviceWorker) {
@@ -25,11 +31,10 @@
 		
 		<!-- Icons -->
 		<link rel="shortcut icon" type="image/x-icon" href="images/logo/favicon.ico" />
-		<link rel="icon" sizes="128x128" href="images/logo/128.png" />
-		<link rel="apple-touch-icon-precomposed" sizes="128x128" href="images/logo/128.png" />
+		<link rel="icon" sizes="128x128" href="images/logo/icon_128.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="128x128" href="images/logo/icon_128.png" />
 		
 		<!-- Style sheets -->
-		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto+Slab:400,400italic,500,500italic,700,700italic" />
 		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
 		<link rel="stylesheet" type="text/css" href="styles/animations.css" />
 		
@@ -44,15 +49,20 @@
 		<!-- Helper classes -->
 		<script type="text/javascript" src="scripts/color.js"></script>
 		<script type="text/javascript" src="scripts/input_manager.js"></script>
+		<script type="text/javascript" src="scripts/stats_manager.js"></script>
 		<script type="text/javascript" src="scripts/tween.js"></script>
 		<script type="text/javascript" src="scripts/utils.js"></script>
 		
 		<!-- Menu navigation classes -->
-		<script type="text/javascript" src="scripts/titleparticle.js"></script>
+		<script type="text/javascript" src="scripts/title_particle.js"></script>
 		<script type="text/javascript" src="scripts/view.js"></script>
-		<script type="text/javascript" src="scripts/menuview.js"></script>
-		<script type="text/javascript" src="scripts/gameview.js"></script>
-		<script type="text/javascript" src="scripts/titleview.js"></script>
+		<script type="text/javascript" src="scripts/menu_view.js"></script>
+		<script type="text/javascript" src="scripts/credits_view.js"></script>
+		<script type="text/javascript" src="scripts/game_view.js"></script>
+		<script type="text/javascript" src="scripts/level_select_view.js"></script>
+		<script type="text/javascript" src="scripts/options_view.js"></script>
+		<script type="text/javascript" src="scripts/results_view.js"></script>
+		<script type="text/javascript" src="scripts/title_view.js"></script>
 		<script type="text/javascript" src="scripts/menus.js"></script>
 		
 		<!-- Game classes -->
@@ -67,52 +77,118 @@
 		<script type="text/javascript" src="scripts/game/level.js"></script>
 	</head>
 	<body>
-		<div class="view" id="titleScreen">
+		<p style="text-align: center;">Coming soon...</p>
+		
+		<div class="view" id="title-screen">
 			<img src="images/logo/title.png" alt="TetrEscape" id="title" />
 			<div class="menu">
-				<button class="z1" id="playButton">Play</button>
-				<button class="z1" id="instructionsButton">Instructions</button>
-				<button class="z1" id="aboutButton">About</button>
+				<button class="z1" id="play-button">Play</button>
+				<button class="z1" id="instructions-button">How to play</button>
+				<button class="z1" id="options-button">Options</button>
+				<button class="z1" id="about-button">Credits</button>
 			</div>
+			<abbr class="version-number" title="Version 0.9.5 beta">
+				v0.9.5&beta;
+			</abbr>
 			<div id="title-glow1"></div>
 			<div id="title-glow2"></div>
 			<canvas id="title-canvas"></canvas>
 		</div>
 		
-		<div class="view" id="instructionsScreen">
+		<div class="view" id="instructions-screen">
 			<header role="toolbar" class="top-bar z2">
-				<button class="back-button" aria-label="Back" title="Back (Esc)"></button>
-				Instructions
+				<button class="back-button" aria-label="Back" title="Back (Esc)"></button><!--
+				--><h1>How to play</h1>
 			</header>
 			<section class="menu">
-				<br />
-				<br />
-				<img src="images/instructions/controls.png" alt="Use the arrow keys or touch swipes to move." style="width: 480px; max-width: 90%; display: block; margin: auto;" />
-				<p>Move around using directional keys or touch swipes.</p>
-				<br />
-				<br />
-				<br />
-				<img src="images/instructions/blocks.png" alt="Fill a row with blocks." style="width: 480px; max-width: 90%; display: block; margin: auto;" />
-				<p>Fill a row with blocks to clear them.</p>
-				<br />
-				<br />
-				<br />
-				<img src="images/exit.png" alt="The exit tile." style="display: block; margin: auto; width: 128px; height: 128px;" />
-				<p>Slide blocks around, and try to reach the exit portal!</p>
+				<div class="instructions-group" style="grid-row: 1 / 4;">
+					<img src="images/instructions/touch.png" alt="Use touch swipes to move." class="instructions-touch" />
+					<img src="images/instructions/arrow_keys.png" alt="Use the arrow keys to move." class="instructions-keyboard" />
+					<img src="images/instructions/d-pad.png" alt="Use the directional pad to move." class="instructions-gamepad" />
+					<p>
+						Move around using
+						<span class="instructions-touch wrap-point">touch swipes.</span>
+						<span class="instructions-keyboard wrap-point">the arrow keys</span>
+						<span class="instructions-keyboard wrap-point">(or WASD).</span>
+						<span class="instructions-gamepad wrap-point">the directional pad</span>
+						<span class="instructions-gamepad wrap-point">(or control stick).</span>
+					</p>
+				</div>
+				<div class="instructions-group" style="grid-row: 1 / 3;">
+					<img src="images/instructions/blocks.png" alt="Complete a line of blocks." class="instructions-blocks" />
+					<p>
+						Fill a row or column with blocks
+						<span class="wrap-point">to clear them.</span>
+					</p>
+				</div>
+				<div class="instructions-group" style="grid-row: 4 / 7;">
+					<img src="images/instructions/goal.png" alt="The exit portal." style="width: 128px;" />
+					<p>
+						Slide blocks around, and
+						<span class="wrap-point">try to reach the exit portal.</span>
+					</p>
+				</div>
+				<div class="instructions-group" style="grid-row: 3 / 5;">
+					<img src="images/instructions/restart.png" alt="Restart icon." style="height: 32px;" />
+					<p>
+						If you get yourself stuck,
+						<span class="wrap-point">don't panic&mdash;just restart.</span>
+					</p>
+				</div>
+				<div class="instructions-group" style="grid-row: 5 / 7;">
+					<img src="images/instructions/moves_blocks_stars.png" alt="Icons for moves, blocks cleared, and stars." style="height: 32px;" />
+					<p>
+						Earn stars for getting there in the fewest moves or
+						<span class="wrap-point">clearing the most blocks.</span>
+					</p>
+				</div>
 			</section>
 		</div>
 		
-		<div class="view" id="aboutScreen">
+		<div class="view" id="options-screen">
 			<header role="toolbar" class="top-bar z2">
-				<button class="back-button" aria-label="Back" title="Back (Esc)"></button>
-				About TetrEscape
+				<button class="back-button" aria-label="Back" title="Back (Esc)"></button><!--
+				--><h1>Options</h1>
+			</header>
+			<section class="menu">
+				<div class="options-input-group">
+					<div>
+						<h2>Gamepad controls</h2>
+						<select id="gamepad-controls-select">
+							<option value="microsoft">Microsoft</option>
+							<option value="nintendo">Nintendo</option>
+						</select>
+					</div>
+					<img src="images/options/gamepad_controls_microsoft.png" alt="Gamepad with the right face button labeled, Back, and the bottom face button labeled, Select." class="options-gamepad-controls-microsoft" />
+					<img src="images/options/gamepad_controls_nintendo.png" alt="Gamepad with the right face button labeled, Select, and the bottom face button labeled, Back." class="options-gamepad-controls-nintendo" />
+				</div>
+				<div class="options-input-group">
+					<div>
+						<h2>Ads</h2>
+						<button id="remove-ads-button">Remove ads</button>
+					</div>
+					<img src="images/options/remove_ads.png" alt="Remove ads graphic." />
+				</div>
+				<div class="options-input-group">
+					<div>
+						<h2>Reset</h2>
+						<button id="reset-button">Reset progress</button>
+					</div>
+					<img src="images/options/reset_scores.png" alt="Bomb reset graphic." />
+				</div>
+			</section>
+		</div>
+		
+		<div class="view" id="about-screen">
+			<header role="toolbar" class="top-bar z2">
+				<button class="back-button" aria-label="Back" title="Back (Esc)"></button><!--
+				--><h1>Credits</h1>
 			</header>
 			<section class="menu">
 				<br />
 				<br />
 				<br />
-				<h1>TetrEscape</h1>
-				<br />
+				<h1><img src="images/logo/credits_logo.png" alt="TetrEscape" style="width: 321px;" /></h1>
 				<h2>Creation, design, development</h2>
 				<ul>
 					<li><a href="http://zmyaro.com" target="_blank">Zachary Yaro</a></li>
@@ -159,7 +235,19 @@
 					<li><a href="https://gist.github.com/paulirish/1579671" target="_blank">Erik M&ouml;ller and Paul Irish's requestAnimationFrame polyfill</a></li>
 				</ul>
 				<br />
-				<h2>Inspirations</h2>
+				<h2>Testing</h2>
+				<ul class="testers">
+					<li>Andrew Martin</li>
+					<li>Ashley Smith</li>
+					<li>Denis Yaro</li>
+					<li>Ethan Yaro</li>
+					<li>DEX</li>
+					<li>Kyle Flores</li>
+					<li>Marjorie Yaro</li>
+					<li>Taylor V. Braun</li>
+				</ul>
+				<br />
+				<h2>Inspiration</h2>
 				<ul>
 					<li><a href="https://www.sokoban.jp" target="_blank">Sokoban</a></li>
 					<li><a href="https://tetris.com" target="_blank">Tetris</a></li>
@@ -172,44 +260,55 @@
 					<li>Soba Noodle Braun</li>
 				</ul>
 				<br />
+				<p>Dedicated to everyone who has ever been a round peg in a square hole.</p>
 				<br />
-				<a href="https://inprod.co" target="_blank"><img src="images/inprod_logo.png" alt="Inverted Productions" /></a>
+				<br />
+				<a href="https://inprod.co" target="_blank"><img src="images/inprod_logo.png" alt="Inverted Productions" style="width: 503px;" /></a>
+				<p style="font-size: 75%; margin-top: -2.5em;">
+					&copy; 2022
+				</p>
+				<br />
+				<br />
+				<br />
+				<p>Thank you for playing!</p>
 			</section>
 		</div>
 		
-		<div class="view" id="levelScreen">
+		<div class="view" id="level-screen">
 			<header role="toolbar" class="top-bar z2">
-				<button class="back-button" aria-label="Back" title="Back (Esc)"></button>
-				Select level
+				<button class="back-button" aria-label="Back" title="Back (Esc)"></button><!--
+				--><h1>Select level</h1>
 			</header>
 			<div class="menu">
 				<ul></ul>
 			</div>
 		</div>
 		
-		<div class="view" id="gameScreen">
+		<div class="view" id="game-screen">
 			<header role="toolbar" class="top-bar z1">
 				<button class="back-button close-button" aria-label="Quit" title="Quit (Esc)"></button>
+				<h1 id="level-name-display"></h1>
 				<button id="restart-button" aria-label="Retry" title="Retry (R)"></button>
 				<span class="score-display" title="Moves">
 					<img alt="Moves" src="images/icons/moves.png" class="icon" />
-					<span id="movesDisplay"></span>
+					<span id="moves-display"></span>
 				</span><!--
-				--><span class="score-display"title="Blocks cleared">
+				--><span class="score-display" title="Blocks cleared">
 					<img alt="Blocks cleared" src="images/icons/blocks.png" class="icon" />
-					<span id="blocksDisplay"></span>
+					<span id="blocks-display"></span>
 				</span>
 			</header>
 			<canvas id="game-canvas" width="640" height="480"></canvas>
 			<figure id="control-hint"></figure>
 		</div>
 		
-		<div class="view" id="resultsScreen">
-			<h1 id="resultsTitle">Level complete!</h1>
-			<h2 id="resultsScore"></h2>
+		<div class="view" id="results-screen">
+			<h1 id="results-title">Level complete!</h1>
+			<h2 id="results-score"></h2>
 			<div class="star"></div>
 			<div class="star"></div>
 			<div class="star"></div>
+			<p id="results-score-secondary"></p>
 			<br />
 			<br />
 			<br />
@@ -221,6 +320,13 @@
 				<!--<button class="z1" id="resultsReplayButton">Replay level</button>-->
 			</div>
 			<button>
+		</div>
+		
+		<div id="ad-container">
+			<ins class="adsbygoogle"
+				style="display: block;"
+				data-full-width-responsive="true"
+			></ins>
 		</div>
 		
 		<audio src="audio/block_slide.mp3" id="move-sound"></audio>

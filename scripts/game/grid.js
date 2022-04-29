@@ -19,7 +19,7 @@ function Grid(width, height) {
 
 // Define static constants.
 /** {Color} The color of the grid background */
-Grid.COLOR = new Color(49, 48, 47);
+Grid.COLOR = new Color(53, 52, 51);
 /** {Number} The size of each grid square in pixels */
 Grid.SQUARE_SIZE = 32;
 
@@ -55,17 +55,24 @@ Grid.prototype = {
 	 * Check whether a grid occupant can be moved to a new location.
 	 * @param {GridOccupant} occupant - The occupant to move
 	 * @param {Vector2D} movement - The vector by which the occupant would be moved
+	 * @param {Array<Tetromino>} checkedOccupants - The already checked grid occupants for this move attempt
 	 * @returns {Boolean} - Whether the occupant could be moved
 	 */
-	canMove: function (occupant, movement) {
+	canMove: function (occupant, movement, checkedOccupants) {
+		if (checkedOccupants.includes(occupant)) {
+			// If checking movement has recursed back to this occupant, move on.
+			return true;
+		}
+		checkedOccupants.push(occupant);
+		
 		// Calculate the potential new position of the occupant.
 		var newPos = new Vector2D(occupant.gridX + movement.x, occupant.gridY + movement.y);
 		
-		// Prevent moving off the grid.
 		if (newPos.x < 0 ||
 				newPos.x > this.width - 1 ||
 				newPos.y < 0 ||
 				newPos.y > this.height - 1) {
+			// Prevent moving off the grid.
 			return false;
 		}
 		
@@ -73,51 +80,76 @@ Grid.prototype = {
 		// this occupant's group, attempt to push the blocking occupant unless it is the
 		// goal tile blocking the player.
 		var blocker = this._occupants[newPos.x][newPos.y];
-		if (blocker && !(blocker.tetromino && blocker.tetromino === occupant.tetromino) &&
-				!(occupant instanceof Player && blocker instanceof Goal)) {
-			if (blocker.canMove(movement)) {
-				return true;
-			} else {
-				return false;
-			}
+		if (!blocker) {
+			// If there is no blocker, no problem.
+			return true;
 		}
+		if (occupant instanceof Player && blocker instanceof Goal) {
+			// If this is the player moving onto the goal, do not block.
+			return true;
+		}
+		if (blocker.tetromino && blocker.tetromino === occupant.tetromino) {
+			// If the blocker is part of the same mino, it is not blocking.
+			return true;
+		}
+		return blocker.canMove(movement, checkedOccupants);
+	},
+	
+	/**
+	 * Move a grid occupant to a new location, if possible, pushing any
+	 * other grid occupants in its way.
+	 * @param {GridOccupant} initiatingOccupant - The occupant trying to move
+	 * @param {Vector2D} movement - The vector by which to move the occupant
+	 * @returns {Boolean} - Whether the occupant could be moved
+	 */
+	tryMove: function (initiatingOccupant, movement) {
+		var checkedOccupants = [];
+		if (!this.canMove(initiatingOccupant, movement, checkedOccupants)) {
+			return false;
+		}
+		
+		// Remove the occupants from their current spaces.
+		checkedOccupants.forEach(function (occupant) {
+			// The goal does not move.
+			if (occupant instanceof Goal) { return; }
+			
+			this._occupants[occupant.gridX][occupant.gridY] = undefined;
+		}, this);
+		
+		// Move them to their new spaces.
+		checkedOccupants.forEach(function (occupant) {
+			// The goal does not move.
+			if (occupant instanceof Goal) { return; }
+			
+			var newPos = new Vector2D(occupant.gridX + movement.x, occupant.gridY + movement.y),
+				playerMovingToGoal = (occupant instanceof Player) &&
+					(this._occupants[newPos.x][newPos.y] instanceof Goal);
+			
+			// Tell the occupant it is moving.
+			occupant.move(movement);
+			
+			if (playerMovingToGoal) {
+				// If the player is moving to the goal, leave the player off the grid
+				// and let Game draw it separately so the goal does not get overwirtten.
+				return;
+			}
+			
+			// Update the occupant's position on the grid.
+			this._occupants[newPos.x][newPos.y] = occupant;
+		}, this);
+		
 		return true;
 	},
 	
 	/**
-	 * Move a grid occupant to a new location, if possible, pushing any other grid
-	 * occupants in its way.
-	 * @param {GridOccupant} occupant - The occupant to move
-	 * @param {Vector2D} movement - The vector by which to move the occupant
-	 * @returns {Boolean} - Whether the occupant could be moved
-	 */
-	tryMove: function (occupant, movement) {
-		if (this.canMove(occupant, movement)) {
-			// If the destination space is occupied, attempt to push the opponent.
-			var newPos = new Vector2D(occupant.gridX + movement.x, occupant.gridY + movement.y),
-				blocker = this._occupants[newPos.x][newPos.y];
-			if (blocker) {
-				blocker.tryMove(movement);
-			}
-			
-			// Move to the new location.
-			this._occupants[occupant.gridX][occupant.gridY] = undefined;
-			this._occupants[newPos.x][newPos.y] = occupant;
-			
-			return true;
-		} else {
-			return false;
-		}
-	},
-	
-	/**
 	 * Update the grid's occupants.
+	 * @param {Number} deltaTime - The time since the last frame in milliseconds
 	 */
-	update: function () {
+	update: function (deltaTime) {
 		for (var x = 0; x < this.width; x++) {
 			for (var y = 0; y < this.height; y++) {
 				if (this._occupants[x][y]) {
-					this._occupants[x][y].update();
+					this._occupants[x][y].update(deltaTime);
 				}
 			}
 		}
@@ -134,7 +166,7 @@ Grid.prototype = {
 		
 		// Draw the grid.
 		ctx.lineWidth = 1;
-		ctx.strokeStyle = Grid.COLOR.darken(0.92).hex;
+		ctx.strokeStyle = Grid.COLOR.darken(0.93).hex;
 		ctx.beginPath();
 		for (var x = 0; x <= this.width; x++) {
 			ctx.moveTo(x * blockSize, 0);
