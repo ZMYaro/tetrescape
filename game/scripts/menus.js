@@ -51,9 +51,14 @@ function initAds() {
 	
 	document.body.classList.add('has-ads');
 	
-	var adContainer = document.querySelector('.adsbygoogle');
-	adContainer.dataset.adClient = ADSENSE_CLIENT_ID;
-	adContainer.dataset.adSlot = ADSENSE_SLOT_ID;
+	var adContainer = document.getElementById('ad-container');
+	adContainer.innerHTML = '<ins class="adsbygoogle" ' +
+		'style="display: block;" ' +
+		'data-full-width-responsive="true" ' +
+		'data-ad-client="' + ADSENSE_CLIENT_ID + '" ' +
+		'data-ad-slot="' + ADSENSE_SLOT_ID + '" ' +
+		'data-adbreak-test="on" ' + // Fake ads for testing
+		'></ins>';
 	
 	var adScript = document.createElement('script');
 	adScript.async = true;
