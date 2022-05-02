@@ -1,16 +1,5 @@
 'use strict';
 
-var GAME_PREFIX = 'tetrescape-',
-	LEVEL_PREFIX = 'lvl-',
-	MODES = {
-		MOVES: 'moves',
-		BLOCKS: 'blocks'
-	},
-	BUTTON_SUFFIX = '-btn',
-	MAX_MOVES = 999,
-	ADSENSE_CLIENT_ID = 'ca-pub-XXXXXXXXXXXXXXXX',
-	ADSENSE_SLOT_ID = 'XXXXXXXXXX';
-
 var im, // Input manager
 	stats, // Stats manaager
 	views,
@@ -114,7 +103,7 @@ function getStarDisplaysHTML(moves, moveStars, blocks, blockStars) {
 function endGame(moves, blocks) {
 	var currentLevel = LEVELS[currentLevelIndex],
 		levelButton = document.getElementById(getButtonID(currentLevel.name)),
-		savedMoves = parseInt(localStorage[getLocalStorageID(currentLevel.name, MODES.MOVES)]) || MAX_MOVES,
+		savedMoves = parseInt(localStorage[getLocalStorageID(currentLevel.name, MODES.MOVES)]) || Game.prototype.MAX_MOVES,
 		savedBlocks = parseInt(localStorage[getLocalStorageID(currentLevel.name, MODES.BLOCKS)]) || -1;
 	
 	// Save the new score and update the UI if it is lower than the saved score.
