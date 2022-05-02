@@ -44,6 +44,10 @@ window.onload = function () {
 
 function initAds() {
 	// TODO: Check whether the user has paid to remove ads *before* loading ads.
+	if (BUILD_TYPE === 'packaged-paid') {
+		views.options.hideRemoveAds();
+		return;
+	}
 	
 	document.body.classList.add('has-ads');
 	

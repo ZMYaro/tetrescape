@@ -1,6 +1,7 @@
 'use strict';
 
-var GAME_PREFIX = 'tetrescape-',
+var BUILD_TYPE = 'web',//'packaged-paid'
+	GAME_PREFIX = 'tetrescape-',
 	LEVEL_PREFIX = 'lvl-',
 	MODES = {
 		MOVES: 'moves',

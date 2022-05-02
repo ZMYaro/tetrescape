@@ -25,6 +25,15 @@ function OptionsView(elem, parent) {
 OptionsView.prototype = Object.create(MenuView.prototype);
 
 /**
+ * Hide the option to remove ads.
+ */
+OptionsView.prototype.hideRemoveAds = function () {
+	this.elem.querySelector('#remove-ads-input-group').parentElement.removeChild(
+		this.elem.querySelector('#remove-ads-input-group'));
+};
+
+/**
+ * @private
  * Handle the gamepad controls selection being changed.
  * @param {Event} ev
  */
@@ -39,6 +48,7 @@ OptionsView.prototype._handleControlsSelect = function (ev) {
 };
 
 /**
+ * @private
  * Handle the remove ads button being clicked.
  */
 OptionsView.prototype._handleRemoveAds = function () {
@@ -46,6 +56,7 @@ OptionsView.prototype._handleRemoveAds = function () {
 };
 
 /**
+ * @private
  * Handle the reset button being clicked.
  */
 OptionsView.prototype._handleReset = function () {
