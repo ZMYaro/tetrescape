@@ -923,7 +923,12 @@ img.instructions-gamepad {
 	background-color: black;
 	color: white;
 	text-align: center;
+	
+	display: none;
 }
+	.has-ads #ad-container {
+		display: block;
+	}
 @media (min-width: 500px) and (min-height: 500px) {
 	#ad-container {
 		height: 3.5rem;
