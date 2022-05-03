@@ -19,6 +19,11 @@ function OptionsView(elem, parent) {
 		.addEventListener('click', this._handleRemoveAds.bind(this));
 	this.elem.querySelector('#reset-button')
 		.addEventListener('click', this._handleReset.bind(this));
+	
+	if (!window.getDigitalGoodsService) {
+		// Hide the option to remove ads if the digital goods API is not available.
+		this.hideRemoveAds();
+	}
 }
 
 // Inherit from View.
@@ -28,8 +33,7 @@ OptionsView.prototype = Object.create(MenuView.prototype);
  * Hide the option to remove ads.
  */
 OptionsView.prototype.hideRemoveAds = function () {
-	this.elem.querySelector('#remove-ads-input-group').parentElement.removeChild(
-		this.elem.querySelector('#remove-ads-input-group'));
+	this.elem.querySelector('#remove-ads-input-group').style.display = 'none';
 };
 
 /**
