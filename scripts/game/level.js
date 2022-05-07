@@ -1848,7 +1848,7 @@ var LEVELS = [{
 	starScores: {
 		moves: [
 			79, // Intended solution pushing L to the right first
-			73, // Intended solution without pushing L
+			65, // Intended solution without pushing L
 			55 // Left column alternate solution
 		],
 		blocks: [

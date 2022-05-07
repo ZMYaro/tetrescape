@@ -1,16 +1,5 @@
 'use strict';
 
-var GAME_PREFIX = 'tetrescape-',
-	LEVEL_PREFIX = 'lvl-',
-	MODES = {
-		MOVES: 'moves',
-		BLOCKS: 'blocks'
-	},
-	BUTTON_SUFFIX = '-btn',
-	MAX_MOVES = 999,
-	ADSENSE_CLIENT_ID = 'ca-pub-9563245442880944',
-	ADSENSE_SLOT_ID = '4255299962';
-
 var im, // Input manager
 	stats, // Stats manaager
 	views,
@@ -62,12 +51,21 @@ window.onload = function () {
 
 function initAds() {
 	// TODO: Check whether the user has paid to remove ads *before* loading ads.
+	if (BUILD_TYPE === 'packaged-paid') {
+		views.options.hideRemoveAds();
+		return;
+	}
 	
 	document.body.classList.add('has-ads');
 	
-	var adContainer = document.querySelector('.adsbygoogle');
-	adContainer.dataset.adClient = ADSENSE_CLIENT_ID;
-	adContainer.dataset.adSlot = ADSENSE_SLOT_ID;
+	var adContainer = document.getElementById('ad-container');
+	adContainer.innerHTML = '<ins class="adsbygoogle" ' +
+		'style="display: block;" ' +
+		'data-full-width-responsive="true" ' +
+		'data-ad-client="' + ADSENSE_CLIENT_ID + '" ' +
+		'data-ad-slot="' + ADSENSE_SLOT_ID + '" ' +
+		'data-adbreak-test="on" ' + // Fake ads for testing
+		'></ins>';
 	
 	var adScript = document.createElement('script');
 	adScript.async = true;
@@ -121,7 +119,7 @@ function getStarDisplaysHTML(moves, moveStars, blocks, blockStars) {
 function endGame(moves, blocks) {
 	var currentLevel = LEVELS[currentLevelIndex],
 		levelButton = document.getElementById(getButtonID(currentLevel.name)),
-		savedMoves = parseInt(localStorage[getLocalStorageID(currentLevel.name, MODES.MOVES)]) || MAX_MOVES,
+		savedMoves = parseInt(localStorage[getLocalStorageID(currentLevel.name, MODES.MOVES)]) || Game.prototype.MAX_MOVES,
 		savedBlocks = parseInt(localStorage[getLocalStorageID(currentLevel.name, MODES.BLOCKS)]) || -1;
 	
 	// Save the new score and update the UI if it is lower than the saved score.

@@ -47,6 +47,7 @@
 		<script type="text/javascript" src="scripts/lib/vector2d.js"></script>
 		
 		<!-- Helper classes -->
+		<script type="text/javascript" src="scripts/constants.js"></script>
 		<script type="text/javascript" src="scripts/color.js"></script>
 		<script type="text/javascript" src="scripts/input_manager.js"></script>
 		<script type="text/javascript" src="scripts/stats_manager.js"></script>
@@ -162,7 +163,7 @@
 					<img src="images/options/gamepad_controls_microsoft.png" alt="Gamepad with the right face button labeled, Back, and the bottom face button labeled, Select." class="options-gamepad-controls-microsoft" />
 					<img src="images/options/gamepad_controls_nintendo.png" alt="Gamepad with the right face button labeled, Select, and the bottom face button labeled, Back." class="options-gamepad-controls-nintendo" />
 				</div>
-				<div class="options-input-group">
+				<div class="options-input-group" id="remove-ads-input-group">
 					<div>
 						<h2>Ads</h2>
 						<button id="remove-ads-button">Remove ads</button>
@@ -322,12 +323,7 @@
 			<button>
 		</div>
 		
-		<div id="ad-container">
-			<ins class="adsbygoogle"
-				style="display: block;"
-				data-full-width-responsive="true"
-			></ins>
-		</div>
+		<div id="ad-container"></div>
 		
 		<audio src="audio/block_slide.mp3" id="move-sound"></audio>
 		<audio src="audio/block_hit.mp3" id="cannot-move-sound"></audio>

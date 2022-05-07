@@ -19,12 +19,25 @@ function OptionsView(elem, parent) {
 		.addEventListener('click', this._handleRemoveAds.bind(this));
 	this.elem.querySelector('#reset-button')
 		.addEventListener('click', this._handleReset.bind(this));
+	
+	if (!window.getDigitalGoodsService) {
+		// Hide the option to remove ads if the digital goods API is not available.
+		this.hideRemoveAds();
+	}
 }
 
 // Inherit from View.
 OptionsView.prototype = Object.create(MenuView.prototype);
 
 /**
+ * Hide the option to remove ads.
+ */
+OptionsView.prototype.hideRemoveAds = function () {
+	this.elem.querySelector('#remove-ads-input-group').style.display = 'none';
+};
+
+/**
+ * @private
  * Handle the gamepad controls selection being changed.
  * @param {Event} ev
  */
@@ -39,6 +52,7 @@ OptionsView.prototype._handleControlsSelect = function (ev) {
 };
 
 /**
+ * @private
  * Handle the remove ads button being clicked.
  */
 OptionsView.prototype._handleRemoveAds = function () {
@@ -46,6 +60,7 @@ OptionsView.prototype._handleRemoveAds = function () {
 };
 
 /**
+ * @private
  * Handle the reset button being clicked.
  */
 OptionsView.prototype._handleReset = function () {
