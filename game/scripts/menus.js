@@ -65,10 +65,6 @@ function initAds() {
 	(window.adsbygoogle = window.adsbygoogle || []).push({});
 }
 
-function getLocalStorageID(levelName, mode) {
-	return GAME_PREFIX + LEVEL_PREFIX + levelName + '-' + mode;
-}
-
 function getStarRating(levelIndex, type, score) {
 	var level = LEVELS[levelIndex],
 		starScore1 = level.starScores[type][0],
@@ -88,15 +84,15 @@ function getStarRating(levelIndex, type, score) {
 
 function endGame(moves, blocks) {
 	var currentLevel = LEVELS[currentLevelIndex],
-		savedMoves = parseInt(localStorage[getLocalStorageID(currentLevel.name, MODES.MOVES)]) || Game.prototype.MAX_MOVES,
-		savedBlocks = parseInt(localStorage[getLocalStorageID(currentLevel.name, MODES.BLOCKS)]) || -1;
+		savedMoves = parseInt(localStorage[Utils.getLocalStorageKey(currentLevel.name, MODES.MOVES)]) || Game.prototype.MAX_MOVES,
+		savedBlocks = parseInt(localStorage[Utils.getLocalStorageKey(currentLevel.name, MODES.BLOCKS)]) || -1;
 	
 	// Save the new score and update the UI if it is lower than the saved score.
 	if (moves < savedMoves) {
-		localStorage[getLocalStorageID(currentLevel.name, MODES.MOVES)] = moves;
+		localStorage[Utils.getLocalStorageKey(currentLevel.name, MODES.MOVES)] = moves;
 	}
 	if (blocks > savedBlocks) {
-		localStorage[getLocalStorageID(currentLevel.name, MODES.BLOCKS)] = blocks;
+		localStorage[Utils.getLocalStorageKey(currentLevel.name, MODES.BLOCKS)] = blocks;
 	}
 	
 	// Update the level select screen with the new values.

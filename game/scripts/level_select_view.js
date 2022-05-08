@@ -20,7 +20,7 @@ LevelSelectView.prototype = Object.create(MenuView.prototype);
 /**
  * @static
  * Get the HTML ID for a given level's button.
- * @param {String} levelName - The name of the level
+ * @param {String} levelName - The letter-number name of the level
  * @returns {String}
  */
 LevelSelectView.getButtonID = function (levelName) {
@@ -48,8 +48,8 @@ LevelSelectView.prototype.repopulate = function () {
 	LEVELS.forEach(function (level, i) {
 		var levelListItem = document.createElement('li'),
 			levelButton = document.createElement('button'),
-			moves = localStorage[getLocalStorageID(level.name, MODES.MOVES)],
-			blocks = localStorage[getLocalStorageID(level.name, MODES.BLOCKS)],
+			moves = localStorage[Utils.getLocalStorageKey(level.name, MODES.MOVES)],
+			blocks = localStorage[Utils.getLocalStorageKey(level.name, MODES.BLOCKS)],
 			moveStars = getStarRating(i, MODES.MOVES, moves),
 			blockStars = getStarRating(i, MODES.BLOCKS, blocks);
 		levelButton.id = LevelSelectView.getButtonID(level.name);

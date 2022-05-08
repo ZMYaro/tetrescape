@@ -49,6 +49,16 @@ var Utils = {
 	},
 	
 	/**
+	 * Get the local storage key for a high score
+	 * @param {String} levelName - The letter-number name of the level
+	 * @param {String} mode - moves or blocks
+	 * @returns {String} - The local storage key
+	 */
+	getLocalStorageKey: function (levelName, mode) {
+		return GAME_PREFIX + LEVEL_PREFIX + levelName + '-' + mode;
+	},
+	
+	/**
 	 * Get the HTML to display a small star score
 	 * @param {String} mode - moves or blocks
 	 * @param {Number} score - The high score for that mode
