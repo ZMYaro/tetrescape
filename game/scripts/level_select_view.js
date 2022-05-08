@@ -18,6 +18,16 @@ function LevelSelectView(elem, parent) {
 LevelSelectView.prototype = Object.create(MenuView.prototype);
 
 /**
+ * @static
+ * Get the HTML ID for a given level's button.
+ * @param {String} levelName - The name of the level
+ * @returns {String}
+ */
+LevelSelectView.getButtonID = function (levelName) {
+	return LEVEL_PREFIX + levelName + BUTTON_SUFFIX;
+};
+
+/**
  * @private
  * Handle a level select button being selected.
  * @param {PointerEvent|MouseEvent} ev
@@ -42,7 +52,7 @@ LevelSelectView.prototype.repopulate = function () {
 			blocks = localStorage[getLocalStorageID(level.name, MODES.BLOCKS)],
 			moveStars = getStarRating(i, MODES.MOVES, moves),
 			blockStars = getStarRating(i, MODES.BLOCKS, blocks);
-		levelButton.id = getButtonID(level.name);
+		levelButton.id = LevelSelectView.getButtonID(level.name);
 		
 		var buttonHTML =
 			'<div class=\"title\">Level</div>' +

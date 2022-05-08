@@ -25,11 +25,7 @@ window.onload = function () {
 	document.getElementById('results-back-button').onclick = function () {
 		this.view.close();
 		views.game.close();
-		
 		views.levelSelect.resume();
-		// Focus the button for the last-played level.
-		document.activeElement.blur();
-		document.getElementById(getButtonID(LEVELS[currentLevelIndex].name)).focus();
 	};
 	
 	// Populate the level select screen.
@@ -67,10 +63,6 @@ function initAds() {
 	document.head.appendChild(adScript);
 	
 	(window.adsbygoogle = window.adsbygoogle || []).push({});
-}
-
-function getButtonID(levelName) {
-	return LEVEL_PREFIX + levelName + BUTTON_SUFFIX;
 }
 
 function getLocalStorageID(levelName, mode) {
@@ -111,7 +103,6 @@ function getStarDisplaysHTML(moves, moveStars, blocks, blockStars) {
 
 function endGame(moves, blocks) {
 	var currentLevel = LEVELS[currentLevelIndex],
-		levelButton = document.getElementById(getButtonID(currentLevel.name)),
 		savedMoves = parseInt(localStorage[getLocalStorageID(currentLevel.name, MODES.MOVES)]) || Game.prototype.MAX_MOVES,
 		savedBlocks = parseInt(localStorage[getLocalStorageID(currentLevel.name, MODES.BLOCKS)]) || -1;
 	
