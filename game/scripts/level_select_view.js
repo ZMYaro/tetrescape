@@ -61,7 +61,7 @@ LevelSelectView.prototype.repopulate = function () {
 		if (typeof(moves) === 'undefined' && typeof(blocks) === 'undefined') {
 			buttonHTML += 'Not completed';
 		} else {
-			buttonHTML += getStarDisplaysHTML(moves, moveStars, blocks, blockStars);
+			buttonHTML += Utils.getStarDisplaysHTML(moves, moveStars, blocks, blockStars);
 		}
 		buttonHTML += '</div>';
 		

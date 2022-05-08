@@ -49,6 +49,36 @@ var Utils = {
 	},
 	
 	/**
+	 * Get the HTML to display a small star score
+	 * @param {String} mode - moves or blocks
+	 * @param {Number} score - The high score for that mode
+	 * @param {Number} stars - The number of stars awarded for the score
+	 * @returns {String} - The HTML to display the mode icon, score, and stars
+	 */
+	getStarDisplayHTML: function (mode, score, stars) {
+		var modeLabel = (mode === MODES.MOVES ? 'Fewest moves' : 'Most blocks cleared');
+		return '<span title="' + modeLabel + '">' +
+				'<img alt="' + modeLabel + '" src="images/icons/' + mode + '.png" class="icon" />' +
+				score +
+				'<img alt="' + stars + ' stars." src="images/icons/' + stars + 'star.png" class="icon" />' +
+			'</span>';
+	},
+	
+	/**
+	 * Get the HTML to display a level's star scores
+	 * @param {Number} moves - The number of moves the level was completed in
+	 * @param {Number} moveStars - The number of stars awarded for those moves
+	 * @param {Number} blocks - The number of blocks cleared in the level
+	 * @param {Number} blockStars - The number of stars awarded for those block clears
+	 * @returns {String} - The HTML to display the mode icons, scores, and stars
+	 */
+	getStarDisplaysHTML: function (moves, moveStars, blocks, blockStars) {
+		return Utils.getStarDisplayHTML(MODES.MOVES, moves, moveStars) +
+			'&nbsp;&nbsp;&middot;&nbsp;&nbsp;' +
+			Utils.getStarDisplayHTML(MODES.BLOCKS, blocks, blockStars);
+	},
+	
+	/**
 	 * Load a sprite sheet's JSON data.
 	 * @param {String} path - The path from the root to the sprite sheet, minus file extension
 	 * @returns {Promise<Object>} - Resolves when the data has loaded, or rejects if it fails to load or parse

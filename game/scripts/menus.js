@@ -86,21 +86,6 @@ function getStarRating(levelIndex, type, score) {
 	}
 }
 
-function getStarDisplayHTML(mode, score, stars) {
-	var modeLabel = (mode === MODES.MOVES ? 'Fewest moves' : 'Most blocks cleared');
-	return '<span title="' + modeLabel + '">' +
-		'<img alt="' + modeLabel + '" src="images/icons/' + mode + '.png" class="icon" />' +
-		score +
-		'<img alt="' + stars + ' stars." src="images/icons/' + stars + 'star.png" class="icon" />' +
-	'</span>';
-}
-
-function getStarDisplaysHTML(moves, moveStars, blocks, blockStars) {
-	return getStarDisplayHTML(MODES.MOVES, moves, moveStars) +
-		'&nbsp;&nbsp;&middot;&nbsp;&nbsp;' +
-		getStarDisplayHTML(MODES.BLOCKS, blocks, blockStars);
-}
-
 function endGame(moves, blocks) {
 	var currentLevel = LEVELS[currentLevelIndex],
 		savedMoves = parseInt(localStorage[getLocalStorageID(currentLevel.name, MODES.MOVES)]) || Game.prototype.MAX_MOVES,

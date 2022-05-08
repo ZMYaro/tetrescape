@@ -68,7 +68,7 @@ ResultsView.prototype.showResults = function (scores) {
 	
 	// Set up small high scores and stars.
 	this._highScoresDisplay.innerHTML =
-		getStarDisplaysHTML(
+		Utils.getStarDisplaysHTML(
 			Math.min(scores.moves, scores.savedMoves),
 			Math.max(stars.moves, stars.savedMoves),
 			Math.max(scores.blocks, scores.savedBlocks),
