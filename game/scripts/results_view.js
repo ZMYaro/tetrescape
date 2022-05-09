@@ -9,11 +9,19 @@ function ResultsView(elem, parent) {
 	// Call the superclass constructor.
 	MenuView.call(this, elem, parent);
 	
+	// Get element references.
 	this._titleDisplay = this.elem.querySelector('#results-title');
 	this._bigScoreDisplay = this.elem.querySelector('#results-score');
 	this._bigStars = Array.from(this.elem.getElementsByClassName('star'));
 	this._secondaryScoreDisplay = this.elem.querySelector('#results-score-secondary');
 	this._highScoresDisplay = this.elem.querySelector('.stars');
+	
+	// Enable the button to go back to level select.
+	this.elem.querySelector('#results-back-button').onclick = function () {
+		this.view.close();
+		views.game.close();
+		views.levelSelect.resume();
+	};
 }
 
 // Inherit from View.

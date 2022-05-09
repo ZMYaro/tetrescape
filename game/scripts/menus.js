@@ -21,13 +21,6 @@ window.onload = function () {
 		results: new ResultsView(document.getElementById('results-screen'))
 	};
 	
-	// Enable the results screen buttons.
-	document.getElementById('results-back-button').onclick = function () {
-		this.view.close();
-		views.game.close();
-		views.levelSelect.resume();
-	};
-	
 	// Populate the level select screen.
 	views.levelSelect.repopulate();
 	
