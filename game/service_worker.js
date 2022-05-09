@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cache-2022-05-02',
+const CACHE_NAME = 'cache-2022-05-08',
 	CACHE_MANIFEST = [
 		'/',
 		'/index.html',
@@ -85,6 +85,7 @@ const CACHE_NAME = 'cache-2022-05-02',
 		'/scripts/credits_view.js',
 		'/scripts/game_view.js',
 		'/scripts/input_manager.js',
+		'/scripts/instructions_view.js',
 		'/scripts/level_select_view.js',
 		'/scripts/menus.js',
 		'/scripts/menu_view.js',

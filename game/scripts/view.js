@@ -26,6 +26,10 @@ function View(elem, parent) {
 	im.addEventListener('back', this._handleBackInput.bind(this));
 }
 
+// Define constants.
+/** @constant {String} The URL hash path for this view if static (should be overridden by subclasses) */
+View.prototype.HASH_PATH;
+
 /**
  * @private
  * Handle a back input.
@@ -66,6 +70,11 @@ View.prototype.resume = function () {
 	this.elem.classList.remove('suspended');
 	
 	views.active = this;
+	
+	// If the view has an associated path, update the URL.
+	if (typeof(this.HASH_PATH) !== 'undefined') {
+		location.hash = this.HASH_PATH;
+	}
 };
 
 /**

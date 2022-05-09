@@ -13,12 +13,13 @@ window.onload = function () {
 	// Create views.
 	views = {
 		title: new TitleView(document.getElementById('title-screen')),
-		instructions: new View(document.getElementById('instructions-screen')),
+		instructions: new InstructionsView(document.getElementById('instructions-screen')),
 		options: new OptionsView(document.getElementById('options-screen')),
 		about: new CreditsView(document.getElementById('about-screen')),
 		levelSelect: new LevelSelectView(document.getElementById('level-screen')),
 		game: new GameView(document.getElementById('game-screen')),
-		results: new ResultsView(document.getElementById('results-screen'))
+		results: new ResultsView(document.getElementById('results-screen')),
+		active: undefined // ← Holds a reference to the current active view.
 	};
 	
 	// Populate the level select screen.

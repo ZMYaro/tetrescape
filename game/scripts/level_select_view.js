@@ -17,6 +17,10 @@ function LevelSelectView(elem, parent) {
 // Inherit from View.
 LevelSelectView.prototype = Object.create(MenuView.prototype);
 
+// Define constants.
+/** @override @constant {String} The hash path for this view */
+LevelSelectView.prototype.HASH_PATH = 'play';
+
 /**
  * @static
  * Get the HTML ID for a given level's button.

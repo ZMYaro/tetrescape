@@ -29,6 +29,10 @@ function OptionsView(elem, parent) {
 // Inherit from View.
 OptionsView.prototype = Object.create(MenuView.prototype);
 
+// Define constants.
+/** @override @constant {String} The hash path for this view */
+OptionsView.prototype.HASH_PATH = 'options';
+
 /**
  * Hide the option to remove ads.
  */
