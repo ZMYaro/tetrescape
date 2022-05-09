@@ -41,8 +41,8 @@ function TitleView(elem, parent) {
 TitleView.prototype = Object.create(MenuView.prototype);
 
 // Define constants.
-/** @override @constant {String} The hash path for this view */
-TitleView.prototype.HASH_PATH = '';
+/** @override @constant {String} The fragment path for this view */
+TitleView.prototype.ROUTE = '';
 /** @constant {Number} The number of particles to create for the screen area */
 TitleView.prototype.PARTICLE_COUNT = Math.floor(window.screen.availWidth * window.screen.availHeight / 50000);
 

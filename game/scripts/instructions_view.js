@@ -14,5 +14,5 @@ function InstructionsView(elem, parent) {
 InstructionsView.prototype = Object.create(View.prototype);
 
 // Define constants.
-/** @override @constant {String} The hash path for this view */
-InstructionsView.prototype.HASH_PATH = 'instructions';
+/** @override @constant {String} The fragment path for this view */
+InstructionsView.prototype.ROUTE = 'instructions';

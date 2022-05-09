@@ -27,8 +27,8 @@ function View(elem, parent) {
 }
 
 // Define constants.
-/** @constant {String} The URL hash path for this view if static (should be overridden by subclasses) */
-View.prototype.HASH_PATH;
+/** @constant {String} The URL fragment path for this view if static (should be overridden by subclasses) */
+View.prototype.ROUTE;
 
 /**
  * @private
@@ -71,9 +71,9 @@ View.prototype.resume = function () {
 	
 	views.active = this;
 	
-	// If the view has an associated path, update the URL.
-	if (typeof(this.HASH_PATH) !== 'undefined') {
-		location.hash = this.HASH_PATH;
+	// If the view has an associated route, update the URL.
+	if (typeof(this.ROUTE) !== 'undefined') {
+		location.hash = this.ROUTE;
 	}
 };
 

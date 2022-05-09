@@ -20,8 +20,8 @@ function CreditsView(elem, parent) {
 CreditsView.prototype = Object.create(View.prototype);
 
 // Define constants.
-/** @override @constant {String} The hash path for this view */
-CreditsView.prototype.HASH_PATH = 'credits';
+/** @override @constant {String} The fragment path for this view */
+CreditsView.prototype.ROUTE = 'credits';
 /** @constant {Number} The amount scrolled per arrow or d-pad input */
 CreditsView.prototype.SCROLL_AMOUNT = 32;
 

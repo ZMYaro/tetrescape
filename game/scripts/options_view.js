@@ -30,8 +30,8 @@ function OptionsView(elem, parent) {
 OptionsView.prototype = Object.create(MenuView.prototype);
 
 // Define constants.
-/** @override @constant {String} The hash path for this view */
-OptionsView.prototype.HASH_PATH = 'options';
+/** @override @constant {String} The fragment path for this view */
+OptionsView.prototype.ROUTE = 'options';
 
 /**
  * Hide the option to remove ads.

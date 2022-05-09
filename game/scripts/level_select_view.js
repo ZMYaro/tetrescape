@@ -18,8 +18,8 @@ function LevelSelectView(elem, parent) {
 LevelSelectView.prototype = Object.create(MenuView.prototype);
 
 // Define constants.
-/** @override @constant {String} The hash path for this view */
-LevelSelectView.prototype.HASH_PATH = 'play';
+/** @override @constant {String} The fragment path for this view */
+LevelSelectView.prototype.ROUTE = 'play';
 
 /**
  * @static
