@@ -28,7 +28,7 @@ function ResultsView(elem, parent) {
 ResultsView.prototype = Object.create(MenuView.prototype);
 
 // Define constants.
-/** {Object<String,String>} The score display heading for each mode time */
+/** @constant {Object<String,String>} The score display heading for each mode time */
 ResultsView.prototype.MODE_SCORE_HEADINGS = {
 	moves: 'Moves: ',
 	blocks: 'Blocks cleared: '

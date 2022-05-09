@@ -21,11 +21,11 @@ Goal.prototype = Object.create(GridOccupant.prototype);
 
 // Define constants.
 //Goal.prototype.COLOR = new Color(54, 0, 204);
-/** {String} The path from the root to the sprite sheet JSON and image files */
+/** @constant {String} The path from the root to the sprite sheet JSON and image files */
 Goal.prototype.SPRITE_SHEET_PATH = 'images/game/exit';
-/** {Image} The goal sprite sheet image */
+/** @constant {Image} The goal sprite sheet image */
 Goal.prototype.SPRITE_SHEET_IMAGE;
-/** {Object} The goal sprite sheet data */
+/** @constant {Object} The goal sprite sheet data */
 Goal.prototype.SPRITE_SHEET_DATA;
 
 /**

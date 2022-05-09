@@ -23,11 +23,11 @@ function Player(x, y, grid) {
 Player.prototype = Object.create(GridOccupant.prototype);
 
 // Define constants.
-/** {String} The path from the root to the sprite sheet image file */
+/** @constant {String} The path from the root to the sprite sheet image file */
 Player.prototype.SPRITE_SHEET_PATH = 'images/game/player';
-/** {Image} The player sprite sheet image */
+/** @constant {Image} The player sprite sheet image */
 Player.prototype.SPRITE_SHEET_IMAGE;
-/** {Object} The player sprite sheet data */
+/** @constant {Object} The player sprite sheet data */
 Player.prototype.SPRITE_SHEET_DATA;
 
 /**

@@ -44,15 +44,15 @@ function Block(x, y, grid, minoType, tetromino, hasNeighbors) {
 Block.prototype = Object.create(GridOccupant.prototype);
 
 // Define constants.
-/** {Color} The default block color */
+/** @constant {Color} The default block color */
 //Block.DEFAULT_COLOR = new Color(117, 117, 117);
-/** {String} The path from the root to the sprite sheet JSON and image files */
+/** @constant {String} The path from the root to the sprite sheet JSON and image files */
 Block.prototype.SPRITE_SHEET_PATH = 'images/game/blocks';
-/** {Image} The goal sprite sheet image */
+/** @constant {Image} The goal sprite sheet image */
 Block.prototype.SPRITE_SHEET_IMAGE;
-/** {Object} The goal sprite sheet data */
+/** @constant {Object} The goal sprite sheet data */
 Block.prototype.SPRITE_SHEET_DATA;
-/** {Number} The duration of the block death animation in milliseconds */
+/** @constant {Number} The duration of the block death animation in milliseconds */
 Block.prototype.DEATH_DURATION = 200;
 
 /**

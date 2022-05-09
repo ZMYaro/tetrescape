@@ -20,7 +20,7 @@ function CreditsView(elem, parent) {
 CreditsView.prototype = Object.create(View.prototype);
 
 // Define constants.
-/** {Number} The amount scrolled per arrow or d-pad input */
+/** @constant {Number} The amount scrolled per arrow or d-pad input */
 CreditsView.prototype.SCROLL_AMOUNT = 32;
 
 /**
