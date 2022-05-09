@@ -34,10 +34,10 @@ ResultsView.prototype.BIG_STAR_ANIM_PAUSE_TIME = 100;
  */
 ResultsView.prototype.showResults = function (scores) {
 	var stars = {
-			moves: getStarRating(currentLevelIndex, MODES.MOVES, scores.moves),
-			blocks: getStarRating(currentLevelIndex, MODES.BLOCKS, scores.blocks),
-			savedMoves: getStarRating(currentLevelIndex, MODES.MOVES, scores.savedMoves),
-			savedBlocks: getStarRating(currentLevelIndex, MODES.BLOCKS, scores.savedBlocks)
+			moves: Utils.getStarRating(currentLevelIndex, MODES.MOVES, scores.moves),
+			blocks: Utils.getStarRating(currentLevelIndex, MODES.BLOCKS, scores.blocks),
+			savedMoves: Utils.getStarRating(currentLevelIndex, MODES.MOVES, scores.savedMoves),
+			savedBlocks: Utils.getStarRating(currentLevelIndex, MODES.BLOCKS, scores.savedBlocks)
 		},
 		featuredMode = this._determineFeaturedMode(scores, stars),
 		secondaryMode = (featuredMode === 'moves' ? 'blocks' : 'moves');

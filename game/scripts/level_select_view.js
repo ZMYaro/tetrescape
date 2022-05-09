@@ -50,8 +50,8 @@ LevelSelectView.prototype.repopulate = function () {
 			levelButton = document.createElement('button'),
 			moves = localStorage[Utils.getLocalStorageKey(level.name, MODES.MOVES)],
 			blocks = localStorage[Utils.getLocalStorageKey(level.name, MODES.BLOCKS)],
-			moveStars = getStarRating(i, MODES.MOVES, moves),
-			blockStars = getStarRating(i, MODES.BLOCKS, blocks);
+			moveStars = Utils.getStarRating(i, MODES.MOVES, moves),
+			blockStars = Utils.getStarRating(i, MODES.BLOCKS, blocks);
 		levelButton.id = LevelSelectView.getButtonID(level.name);
 		
 		var buttonHTML =

@@ -49,7 +49,7 @@ var Utils = {
 	},
 	
 	/**
-	 * Get the local storage key for a high score
+	 * Get the local storage key for a high score.
 	 * @param {String} levelName - The letter-number name of the level
 	 * @param {String} mode - moves or blocks
 	 * @returns {String} - The local storage key
@@ -59,9 +59,9 @@ var Utils = {
 	},
 	
 	/**
-	 * Get the HTML to display a small star score
+	 * Get the HTML to display a small star score.
 	 * @param {String} mode - moves or blocks
-	 * @param {Number} score - The high score for that mode
+	 * @param {Number} score - The score for that mode
 	 * @param {Number} stars - The number of stars awarded for the score
 	 * @returns {String} - The HTML to display the mode icon, score, and stars
 	 */
@@ -75,7 +75,7 @@ var Utils = {
 	},
 	
 	/**
-	 * Get the HTML to display a level's star scores
+	 * Get the HTML to display a level's star scores.
 	 * @param {Number} moves - The number of moves the level was completed in
 	 * @param {Number} moveStars - The number of stars awarded for those moves
 	 * @param {Number} blocks - The number of blocks cleared in the level
@@ -86,6 +86,30 @@ var Utils = {
 		return Utils.getStarDisplayHTML(MODES.MOVES, moves, moveStars) +
 			'&nbsp;&nbsp;&middot;&nbsp;&nbsp;' +
 			Utils.getStarDisplayHTML(MODES.BLOCKS, blocks, blockStars);
+	},
+	
+	/**
+	 * Get the star rating for a given score on a given level.
+	 * @param {Number} levelIndex - The index of the level on the levels list
+	 * @param {String} mode - moves or blocks
+	 * @param {Number} score - The score for that mode
+	 * @returns {Number} - The number of stars
+	 */
+	getStarRating: function (levelIndex, mode, score) {
+		var level = LEVELS[levelIndex],
+			starScore1 = level.starScores[mode][0],
+			starScore2 = level.starScores[mode][1],
+			starScore3 = level.starScores[mode][2];
+		
+		if (mode === MODES.MOVES) {
+			return (score <= starScore3 ? 3 :
+				score <= starScore2 ? 2 :
+					score <= starScore1 ? 1 : 0);
+		} else if (mode === MODES.BLOCKS) {
+			return (score >= starScore3 ? 3 :
+				score >= starScore2 ? 2 :
+					score >= starScore1 ? 1 : 0);
+		}
 	},
 	
 	/**

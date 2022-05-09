@@ -65,23 +65,6 @@ function initAds() {
 	(window.adsbygoogle = window.adsbygoogle || []).push({});
 }
 
-function getStarRating(levelIndex, type, score) {
-	var level = LEVELS[levelIndex],
-		starScore1 = level.starScores[type][0],
-		starScore2 = level.starScores[type][1],
-		starScore3 = level.starScores[type][2];
-	
-	if (type === MODES.MOVES) {
-		return (score <= starScore3 ? 3 :
-			score <= starScore2 ? 2 :
-				score <= starScore1 ? 1 : 0);
-	} else if (type === MODES.BLOCKS) {
-		return (score >= starScore3 ? 3 :
-			score >= starScore2 ? 2 :
-				score >= starScore1 ? 1 : 0);
-	}
-}
-
 function endGame(moves, blocks) {
 	var currentLevel = LEVELS[currentLevelIndex],
 		savedMoves = parseInt(localStorage[Utils.getLocalStorageKey(currentLevel.name, MODES.MOVES)]) || Game.prototype.MAX_MOVES,
