@@ -1,0 +1,29 @@
+{
+	"name": "TetrEscape",
+	"version": "0.9.6",
+	"description": "Slide the tetrominos and escape the room!",
+	"repository": "https://github.com/inProdGames/TetrEscape",
+	"homepage": "https://inprod.co/games/TetrEscape",
+	"author": "Inverted Productions <contact@inprod.co> (https://inprod.co)",
+	"main": "main.js",
+	"scripts": {
+		"start": "electron ."
+	},
+	"build": {
+		"appId": "co.inprod.TetrEscape",
+		"linux": {
+			"target": "deb"
+		},
+		"deb": {},
+		"win": {
+			"target": "portable"
+		},
+		"portable": {
+			"unicode": false,
+			"artifactName": "TetrEscape.exe"
+		}
+	},
+	"devDependencies": {
+		"electron": "~18.2.0"
+	}
+}
