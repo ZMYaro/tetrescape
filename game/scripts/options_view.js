@@ -74,8 +74,8 @@ OptionsView.prototype._handleReset = function () {
 	}
 	
 	LEVELS.forEach(function (level, i) {
-		localStorage.removeItem(getLocalStorageID(level.name, MODES.MOVES));
-		localStorage.removeItem(getLocalStorageID(level.name, MODES.BLOCKS));
+		localStorage.removeItem(Utils.getLocalStorageKey(level.name, MODES.MOVES));
+		localStorage.removeItem(Utils.getLocalStorageKey(level.name, MODES.BLOCKS));
 	});
 	
 	// Update the level select screen with the new values.
