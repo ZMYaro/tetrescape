@@ -1,6 +1,7 @@
 {
 	"short_name": "TetrEscape",
 	"name": "TetrEscape",
+	"description": "Slide the tetrominos and escape the room!",
 	
 	"start_url": "/",
 	"display": "standalone",
@@ -35,5 +36,10 @@
 			"type": "image/png",
 			"purpose": "maskable"
 		}
-	]
+	],
+	
+	"related_applications": [{
+		"platform": "play",
+		"url": "https://play.google.com/store/apps/details?id=co.inprod.TetrEscape"
+	}]
 }
