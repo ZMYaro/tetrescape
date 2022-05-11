@@ -44,7 +44,7 @@ function initAds() {
 	
 	document.body.classList.add('has-ads');
 	
-	var adContainer = document.getElementById('ad-container');
+	var adContainer = document.getElementById('place-where-an-ad-could-go');
 	adContainer.innerHTML = '<ins class="adsbygoogle" ' +
 		'style="display: block;" ' +
 		'data-full-width-responsive="true" ' +

@@ -911,8 +911,8 @@ img.instructions-gamepad {
 	}
 }
 
-/* Ad stuff */
-#ad-container {
+/* Ad stuff (ridiculous name because of adblockers) */
+#place-where-an-ad-could-go {
 	position: fixed;
 	left: 0;
 	width: 100%;
@@ -926,11 +926,11 @@ img.instructions-gamepad {
 	
 	display: none;
 }
-	.has-ads #ad-container {
+	.has-ads #place-where-an-ad-could-go {
 		display: block;
 	}
 @media (min-width: 500px) and (min-height: 500px) {
-	#ad-container {
+	#place-where-an-ad-could-go {
 		height: 3.5rem;
 	}
 }
