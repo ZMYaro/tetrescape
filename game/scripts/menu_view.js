@@ -149,9 +149,13 @@ MenuView.prototype._moveFocusNext = function () {
 			this.activeInputIndex = 0;
 		}
 		
-		// Keep going until the focused element is not an unchecked checkbox or radio button.
-	} while ((this.inputs[this.activeInputIndex].type === 'checkbox' || this.inputs[this.activeInputIndex].type === 'radio') &&
-		!this.inputs[this.activeInputIndex].checked);
+		// Keep going until the focused element is not disabled or
+		// an unchecked checkbox or radio button.
+	} while (
+		this.inputs[this.activeInputIndex].disabled ||
+		((this.inputs[this.activeInputIndex].type === 'checkbox' ||
+				this.inputs[this.activeInputIndex].type === 'radio') &&
+			!this.inputs[this.activeInputIndex].checked));
 	
 	// Focus the input.
 	this.inputs[this.activeInputIndex].focus();
@@ -178,9 +182,13 @@ MenuView.prototype._moveFocusPrev = function () {
 			this.activeInputIndex = this.inputs.length - 1;
 		}
 		
-		// Keep going until the focused element is not an unchecked checkbox or radio button.
-	} while ((this.inputs[this.activeInputIndex].type === 'checkbox' || this.inputs[this.activeInputIndex].type === 'radio') &&
-		!this.inputs[this.activeInputIndex].checked);
+		// Keep going until the focused element is not disabled or
+		// an unchecked checkbox or radio button.
+	} while (
+		this.inputs[this.activeInputIndex].disabled ||
+		((this.inputs[this.activeInputIndex].type === 'checkbox' ||
+				this.inputs[this.activeInputIndex].type === 'radio') &&
+			!this.inputs[this.activeInputIndex].checked));
 	
 	// Focus the input.
 	this.inputs[this.activeInputIndex].focus();

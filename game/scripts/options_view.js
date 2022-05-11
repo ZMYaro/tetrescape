@@ -38,6 +38,7 @@ OptionsView.prototype.ROUTE = 'options';
  */
 OptionsView.prototype.hideRemoveAds = function () {
 	this.elem.querySelector('#remove-ads-input-group').style.display = 'none';
+	this.elem.querySelector('#remove-ads-input-group button').disabled = true;
 };
 
 /**
