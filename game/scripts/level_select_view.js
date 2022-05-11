@@ -49,6 +49,8 @@ LevelSelectView.prototype.repopulate = function () {
 	this._list.innerHTML = '';
 	this.inputs = [];
 	
+	var incompleteLevel = false;
+	
 	LEVELS.forEach(function (level, i) {
 		var levelListItem = document.createElement('li'),
 			levelButton = document.createElement('button'),
@@ -64,6 +66,7 @@ LevelSelectView.prototype.repopulate = function () {
 			'<div class=\"stars\">';
 		if (typeof(moves) === 'undefined' && typeof(blocks) === 'undefined') {
 			buttonHTML += 'Not completed';
+			incompleteLevel = true;
 		} else {
 			buttonHTML += Utils.getStarDisplaysHTML(moves, moveStars, blocks, blockStars);
 		}
@@ -81,6 +84,12 @@ LevelSelectView.prototype.repopulate = function () {
 		levelListItem.appendChild(levelButton);
 		this._list.appendChild(levelListItem);
 		views.levelSelect.inputs.push(levelButton);
+		
+		// Update the title image if there are no remaining incomplete levels.
+		document.getElementById('title').src =
+			(incompleteLevel ?
+				'images/logo/title_robot.png' :
+				'images/logo/title.png');
 	}, this);
 };
 

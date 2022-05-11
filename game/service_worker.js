@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cache-2022-05-08',
+const CACHE_NAME = 'cache-2022-05-11',
 	CACHE_MANIFEST = [
 		'/',
 		'/index.html',
@@ -63,6 +63,7 @@ const CACHE_NAME = 'cache-2022-05-08',
 		'/images/options/remove_ads.png',
 		'/images/options/reset_scores.png',
 		'/images/logo/title.png',
+		'/images/logo/title_robot.png',
 		'/images/ember.png',
 		'/images/inprod_logo.png',
 		'/scripts/game/block.js',
