@@ -17,7 +17,7 @@ function ResultsView(elem, parent) {
 	this._highScoresDisplay = this.elem.querySelector('.stars');
 	
 	// Enable the button to go back to level select.
-	this.elem.querySelector('#results-back-button').onclick = function () {
+	this.backButton.onclick = function () {
 		this.view.close();
 		views.game.close();
 		views.levelSelect.resume();
