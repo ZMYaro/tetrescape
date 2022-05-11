@@ -79,6 +79,7 @@ GameView.prototype._handleResize = function () {
  * @param {Number} levelIndex - The index of the level in the list of levels
  */
 GameView.prototype.startGame = function (levelIndex) {
+	location.hash = LevelSelectView.prototype.ROUTE + '/' + levelIndex;
 	window.currentLevelIndex = levelIndex; // TODO: Make this non-global.
 	this._game.loadLevel(LEVELS[levelIndex]);
 	this._game.start();

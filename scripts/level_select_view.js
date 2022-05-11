@@ -17,6 +17,20 @@ function LevelSelectView(elem, parent) {
 // Inherit from View.
 LevelSelectView.prototype = Object.create(MenuView.prototype);
 
+// Define constants.
+/** @override @constant {String} The fragment path for this view */
+LevelSelectView.prototype.ROUTE = 'play';
+
+/**
+ * @static
+ * Get the HTML ID for a given level's button.
+ * @param {String} levelName - The letter-number name of the level
+ * @returns {String}
+ */
+LevelSelectView.getButtonID = function (levelName) {
+	return LEVEL_PREFIX + levelName + BUTTON_SUFFIX;
+};
+
 /**
  * @private
  * Handle a level select button being selected.
@@ -35,14 +49,16 @@ LevelSelectView.prototype.repopulate = function () {
 	this._list.innerHTML = '';
 	this.inputs = [];
 	
+	var incompleteLevel = false;
+	
 	LEVELS.forEach(function (level, i) {
 		var levelListItem = document.createElement('li'),
 			levelButton = document.createElement('button'),
-			moves = localStorage[getLocalStorageID(level.name, MODES.MOVES)],
-			blocks = localStorage[getLocalStorageID(level.name, MODES.BLOCKS)],
-			moveStars = getStarRating(i, MODES.MOVES, moves),
-			blockStars = getStarRating(i, MODES.BLOCKS, blocks);
-		levelButton.id = getButtonID(level.name);
+			moves = localStorage[Utils.getLocalStorageKey(level.name, MODES.MOVES)],
+			blocks = localStorage[Utils.getLocalStorageKey(level.name, MODES.BLOCKS)],
+			moveStars = Utils.getStarRating(i, MODES.MOVES, moves),
+			blockStars = Utils.getStarRating(i, MODES.BLOCKS, blocks);
+		levelButton.id = LevelSelectView.getButtonID(level.name);
 		
 		var buttonHTML =
 			'<div class=\"title\">Level</div>' +
@@ -50,8 +66,9 @@ LevelSelectView.prototype.repopulate = function () {
 			'<div class=\"stars\">';
 		if (typeof(moves) === 'undefined' && typeof(blocks) === 'undefined') {
 			buttonHTML += 'Not completed';
+			incompleteLevel = true;
 		} else {
-			buttonHTML += getStarDisplaysHTML(moves, moveStars, blocks, blockStars);
+			buttonHTML += Utils.getStarDisplaysHTML(moves, moveStars, blocks, blockStars);
 		}
 		buttonHTML += '</div>';
 		
@@ -67,6 +84,12 @@ LevelSelectView.prototype.repopulate = function () {
 		levelListItem.appendChild(levelButton);
 		this._list.appendChild(levelListItem);
 		views.levelSelect.inputs.push(levelButton);
+		
+		// Update the title image if there are no remaining incomplete levels.
+		document.getElementById('title').src =
+			(incompleteLevel ?
+				'images/logo/title_robot.png' :
+				'images/logo/title.png');
 	}, this);
 };
 

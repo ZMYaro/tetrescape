@@ -1,6 +1,6 @@
 'use strict';
 
-var BUILD_TYPE = 'web',//'packaged-paid',
+var BUILD_TYPE = 'web',//'packaged-paid'
 	GAME_PREFIX = 'tetrescape-',
 	LEVEL_PREFIX = 'lvl-',
 	MODES = {

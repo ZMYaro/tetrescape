@@ -40,7 +40,10 @@ function TitleView(elem, parent) {
 // Inherit from View.
 TitleView.prototype = Object.create(MenuView.prototype);
 
-// Initialize constants.
+// Define constants.
+/** @override @constant {String} The fragment path for this view */
+TitleView.prototype.ROUTE = '';
+/** @constant {Number} The number of particles to create for the screen area */
 TitleView.prototype.PARTICLE_COUNT = Math.floor(window.screen.availWidth * window.screen.availHeight / 50000);
 
 

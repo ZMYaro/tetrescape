@@ -9,18 +9,26 @@ function ResultsView(elem, parent) {
 	// Call the superclass constructor.
 	MenuView.call(this, elem, parent);
 	
+	// Get element references.
 	this._titleDisplay = this.elem.querySelector('#results-title');
 	this._bigScoreDisplay = this.elem.querySelector('#results-score');
 	this._bigStars = Array.from(this.elem.getElementsByClassName('star'));
 	this._secondaryScoreDisplay = this.elem.querySelector('#results-score-secondary');
 	this._highScoresDisplay = this.elem.querySelector('.stars');
+	
+	// Enable the button to go back to level select.
+	this.backButton.onclick = function () {
+		this.view.close();
+		views.game.close();
+		views.levelSelect.resume();
+	};
 }
 
 // Inherit from View.
 ResultsView.prototype = Object.create(MenuView.prototype);
 
 // Define constants.
-/** {Object<String,String>} The score display heading for each mode time */
+/** @constant {Object<String,String>} The score display heading for each mode time */
 ResultsView.prototype.MODE_SCORE_HEADINGS = {
 	moves: 'Moves: ',
 	blocks: 'Blocks cleared: '
@@ -34,10 +42,10 @@ ResultsView.prototype.BIG_STAR_ANIM_PAUSE_TIME = 100;
  */
 ResultsView.prototype.showResults = function (scores) {
 	var stars = {
-			moves: getStarRating(currentLevelIndex, MODES.MOVES, scores.moves),
-			blocks: getStarRating(currentLevelIndex, MODES.BLOCKS, scores.blocks),
-			savedMoves: getStarRating(currentLevelIndex, MODES.MOVES, scores.savedMoves),
-			savedBlocks: getStarRating(currentLevelIndex, MODES.BLOCKS, scores.savedBlocks)
+			moves: Utils.getStarRating(currentLevelIndex, MODES.MOVES, scores.moves),
+			blocks: Utils.getStarRating(currentLevelIndex, MODES.BLOCKS, scores.blocks),
+			savedMoves: Utils.getStarRating(currentLevelIndex, MODES.MOVES, scores.savedMoves),
+			savedBlocks: Utils.getStarRating(currentLevelIndex, MODES.BLOCKS, scores.savedBlocks)
 		},
 		featuredMode = this._determineFeaturedMode(scores, stars),
 		secondaryMode = (featuredMode === 'moves' ? 'blocks' : 'moves');
@@ -68,7 +76,7 @@ ResultsView.prototype.showResults = function (scores) {
 	
 	// Set up small high scores and stars.
 	this._highScoresDisplay.innerHTML =
-		getStarDisplaysHTML(
+		Utils.getStarDisplaysHTML(
 			Math.min(scores.moves, scores.savedMoves),
 			Math.max(stars.moves, stars.savedMoves),
 			Math.max(scores.blocks, scores.savedBlocks),
