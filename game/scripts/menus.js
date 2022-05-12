@@ -2,6 +2,7 @@
 
 var im, // Input manager
 	stats, // Stats manaager
+	ads, // Ads manager
 	views,
 	currentLevelIndex;
 
@@ -26,7 +27,7 @@ window.onload = function () {
 	views.levelSelect.repopulate();
 	
 	// Load ads if the user has not removed them.
-	initAds();
+	Ads.init();
 	
 	// Add the listener for the user navigating with the back button.
 	window.addEventListener('hashchange', handleHashChange);
@@ -34,33 +35,6 @@ window.onload = function () {
 	// Open the title screen (or requested screen) once assets have loaded.
 	views.game._game.loadPromise.then(handleHashChange);
 };
-
-function initAds() {
-	// TODO: Check whether the user has paid to remove ads *before* loading ads.
-	if (BUILD_TYPE === 'packaged-paid') {
-		views.options.hideRemoveAds();
-		return;
-	}
-	
-	document.body.classList.add('has-ads');
-	
-	var adContainer = document.getElementById('place-where-an-ad-could-go');
-	adContainer.innerHTML = '<ins class="adsbygoogle" ' +
-		'style="display: block;" ' +
-		'data-full-width-responsive="true" ' +
-		'data-ad-client="' + ADSENSE_CLIENT_ID + '" ' +
-		'data-ad-slot="' + ADSENSE_SLOT_ID + '" ' +
-		'data-adbreak-test="on" ' + // Fake ads for testing
-		'></ins>';
-	
-	var adScript = document.createElement('script');
-	adScript.async = true;
-	adScript.crossOrigin = 'anonymous';
-	adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_CLIENT_ID;
-	document.head.appendChild(adScript);
-	
-	(window.adsbygoogle = window.adsbygoogle || []).push({});
-}
 
 function handleHashChange() {
 	function goBackTo(view) {
