@@ -7,6 +7,4 @@ var BUILD_TYPE = 'web',//'packaged-paid'
 		MOVES: 'moves',
 		BLOCKS: 'blocks'
 	},
-	BUTTON_SUFFIX = '-btn',
-	ADSENSE_CLIENT_ID = 'ca-pub-XXXXXXXXXXXXXXXX',
-	ADSENSE_SLOT_ID = 'XXXXXXXXXX';
+	BUTTON_SUFFIX = '-btn';

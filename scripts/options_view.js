@@ -20,7 +20,7 @@ function OptionsView(elem, parent) {
 	this.elem.querySelector('#reset-button')
 		.addEventListener('click', this._handleReset.bind(this));
 	
-	if (!window.getDigitalGoodsService) {
+	if (!window.PaymentRequest || !window.getDigitalGoodsService) {
 		// Hide the option to remove ads if the digital goods API is not available.
 		this.hideRemoveAds();
 	}
@@ -61,7 +61,17 @@ OptionsView.prototype._handleControlsSelect = function (ev) {
  * Handle the remove ads button being clicked.
  */
 OptionsView.prototype._handleRemoveAds = function () {
-	alert('Not available in this version.');
+	Ads.initRemovalPayment()
+		.then(function () {
+			// If successful, remove ads!
+			Ads.removeAds();
+			views.options.hideRemoveAds();
+		})
+		.catch(function (err) {
+			// If the user cancelled the transaction, ignore the error, otherwise alert the user.
+			if (err.name === 'AbortError') { return; }
+			alert(err);
+		});
 };
 
 /**
