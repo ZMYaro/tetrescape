@@ -66,7 +66,7 @@ function sum(a, b) { ... }
 
 ## Open-source _TetrEscape_ code
 
-This code may be used as an educational reference, but may not be copied or redistributed without permission.
+This code may be used as an educational reference, but may not be copied or redistributed without permission.  This project is not seeking and does not promise credit for unsolicited input or contributions.
 
 
 ## Running as a web app
