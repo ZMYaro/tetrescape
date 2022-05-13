@@ -58,6 +58,7 @@ function sum(a, b) { ... }
 
 ## Libraries
 
+* [AdMob Plus](https://admob-plus.github.io)
 * [Controller.js](https://samiare.github.io/Controller.js/)
 * [Cordova](https://cordova.apache.org)
 * [Cordova in-app purchases plugin](https://github.com/AlexDisler/cordova-plugin-inapppurchase)
