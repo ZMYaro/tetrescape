@@ -59,8 +59,12 @@ function sum(a, b) { ... }
 ## Libraries
 
 * [Controller.js](https://samiare.github.io/Controller.js/)
-* [Hammer.js](http://hammerjs.github.io)
-* [MaterialZ](https://github.com/zmyaro/materialz)
+* [Cordova](https://cordova.apache.org)
+* [Cordova in-app purchases plugin](https://github.com/AlexDisler/cordova-plugin-inapppurchase)
+* [Electron](https://www.electronjs.org)
+* [Freesound](https://freesound.org)
+* [Hammer.js](https://hammerjs.github.io)
+* [MaterialZ](https://materialz.dev)
 * [Erik Möller and Paul Irish's requestAnimationFrame polyfill](https://gist.github.com/paulirish/1579671)
 
 
