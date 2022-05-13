@@ -20,8 +20,10 @@ function OptionsView(elem, parent) {
 	this.elem.querySelector('#reset-button')
 		.addEventListener('click', this._handleReset.bind(this));
 	
-	if (!window.PaymentRequest || !window.getDigitalGoodsService) {
-		// Hide the option to remove ads if the digital goods API is not available.
+	var hasWebDigitalGoodsAPI = (!!window.PaymentRequest && !!window.getDigitalGoodsService),
+		hasCordovaAPI = (!!window.cordova && !!window.inAppPurchase);
+	if (!hasWebDigitalGoodsAPI && !hasCordovaAPI) {
+		// Hide the option to remove ads if in-app purchases are not available.
 		this.hideRemoveAds();
 	}
 }
@@ -69,8 +71,10 @@ OptionsView.prototype._handleRemoveAds = function () {
 		})
 		.catch(function (err) {
 			// If the user cancelled the transaction, ignore the error, otherwise alert the user.
-			if (err.name === 'AbortError') { return; }
-			alert(err);
+			if (err.name === 'AbortError' || err.message === 'Purchase Cancelled') {
+				return;
+			}
+			alert(err.message);
 		});
 };
 

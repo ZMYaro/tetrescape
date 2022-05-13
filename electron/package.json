@@ -1,6 +1,6 @@
 {
-	"name": "TetrEscape",
 	"version": "0.9.6",
+	"name": "TetrEscape",
 	"description": "Slide the tetrominos and escape the room!",
 	"repository": "https://github.com/inProdGames/TetrEscape",
 	"homepage": "https://inprod.co/games/TetrEscape",

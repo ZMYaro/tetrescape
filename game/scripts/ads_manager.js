@@ -19,12 +19,6 @@ Ads.init = function () {
 		return;
 	}
 	
-	// If this is a web version without in-app purchases, show ads.
-	if (!window.getDigitalGoodsService) {
-		Ads.addAds();
-		return;
-	}
-	
 	// Check whether the user already paid to remove ads.
 	Ads.checkForPastPurchase()
 		.then(function () {
@@ -62,6 +56,20 @@ Ads.addAds = function () {
  * @returns {Promise} - Resolves if the user already paid, or rejects if not
  */
 Ads.checkForPastPurchase = function () {
+	if (window.inAppPurchase) {
+		return Ads.checkPurchaseCordova();
+	}
+	if (window.getDigitalGoodsService) {
+		return Ads.checkPurchaseWeb();
+	}
+	return Promise.reject(new Error('The browser/platform does not support in-app purchases.'));
+};
+
+/**
+ * Check for past ad removal with the web digital goods API.
+ * @returns {Promise} - Resolves if the user already paid, or rejects if not
+ */
+Ads.checkPurchaseWeb = function () {
 	return window.getDigitalGoodsService(Ads.GPLAY_DIGITAL_GOODS_SERVICE_URL)
 		.then(function (service) {
 			if (!service) { throw new Error('The digital goods service was not available.'); }
@@ -75,16 +83,40 @@ Ads.checkForPastPurchase = function () {
 };
 
 /**
+ * Check for past ad removal with the Cordova API.
+ * @returns {Promise} - Resolves if the user already paid, or rejects if not
+ */
+Ads.checkPurchaseCordova = function () {
+	return inAppPurchase.restorePurchases()
+		.then(function (purchases) {
+			if (purchases.length === 0) { throw new Error('The user did not pay to remove ads.'); }
+			// If a second purchasable item is ever added, will need to update this to check which.
+			return true;
+		});
+};
+
+/**
  * Start a payment request to remove ads.
  * @returns {Promise} - Resolves if the request is successful, or rejects if not
  */
 Ads.initRemovalPayment = function () {
-	if (!window.PaymentRequest || !window.getDigitalGoodsService) {
-		return Promise.reject(new Error('Your browser/platform does not support this in-app purchase.'));
-	}
 	if (!navigator.onLine) {
 		return Promise.reject(new Error('Cannot connect to Google Play service while offline.'));
 	}
+	if (window.inAppPurchase) {
+		return Ads.initPaymentCordova();
+	}
+	if (window.getDigitalGoodsService) {
+		return Ads.initPaymentWeb();
+	}
+	return Promise.reject(new Error('Your browser/platform does not support this in-app purchase.'));
+};
+
+/**
+ * Do the payment request with the web digital goods API.
+ * @returns {Promise} - Resolves if the request is successful, or rejects if not
+ */
+Ads.initPaymentWeb = function () {
 	return window.getDigitalGoodsService(Ads.GPLAY_DIGITAL_GOODS_SERVICE_URL)
 		.then(function (service) {
 			if (!service) { throw new Error('The Google Play service was not available.'); }
@@ -109,6 +141,14 @@ Ads.initRemovalPayment = function () {
 			// TODO: Call endpoint to acknowledge payment with Google Play before reporting success.
 			return paymentResponse.complete('success');
 		});
+};
+
+/**
+ * Do the payment request with the Cordova API.
+ * @returns {Promise} - Resolves if the request is successful, or rejects if not
+ */
+Ads.initPaymentCordova = function () {
+	return inAppPurchase.buy(Ads.REMOVE_ADS_PRODUCT_ID);
 };
 
 /**

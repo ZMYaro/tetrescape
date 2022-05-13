@@ -1,0 +1,26 @@
+{
+	"version": "0.9.6",
+	"name": "co.inprod.TetrEscape",
+	"displayName": "TetrEscape",
+	"description": "Slide the tetrominos and escape the room!",
+	"author": "Inverted Productions <contact@inprod.co> (https://inprod.co)",
+	"main": "index.js",
+	"scripts": {},
+	"keywords": [
+		"ecosystem:cordova"
+	],
+	"cordova": {
+		"platforms": [
+			"browser",
+			"android"
+		],
+		"plugins": {
+			"cordova-plugin-inapppurchase": {}
+		}
+	},
+	"devDependencies": {
+		"cordova-android": "^10.1.2",
+		"cordova-browser": "^6.0.0",
+		"cordova-plugin-inapppurchase": "^1.2.0"
+	}
+}

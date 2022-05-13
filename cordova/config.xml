@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget
+		xmlns="http://www.w3.org/ns/widgets"
+		xmlns:cdv="http://cordova.apache.org/ns/1.0"
+		id="co.inprod.TetrEscape"
+		version="0.9.6"
+		android-versionCode="4">
+	<name>TetrEscape</name>
+	<description>Slide the tetrominos and escape the room!</description>
+	<author email="contact@inprod.co" href="https://inprod.co">
+		Inverted Productions
+	</author>
+	<content src="index.html" />
+	<allow-intent href="http://*/*" />
+	<allow-intent href="https://*/*" />
+	<preference name="BackgroundColor" value="0xff3b3a3d"/>
+	<platform name="android">
+		<icon
+			density="xxxhdpi"
+			src="icons/legacy_xxxhdpi.png"
+			background="icons/bg_xxxhdpi.png"
+			foreground="icons/fg_xxxhdpi.png" />
+	</platform>
+</widget>

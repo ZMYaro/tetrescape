@@ -6,7 +6,13 @@ var im, // Input manager
 	views,
 	currentLevelIndex;
 
-window.onload = function () {
+if (window.cordova) {
+	document.addEventListener('deviceready', init);
+} else {
+	window.addEventListener('load', init);
+}
+
+function init() {
 	// Initialize input manager and stats manager.
 	im = new InputManager(document.getElementById('game-screen'));
 	stats = new StatsManager();
@@ -34,7 +40,7 @@ window.onload = function () {
 	
 	// Open the title screen (or requested screen) once assets have loaded.
 	views.game._game.loadPromise.then(handleHashChange);
-};
+}
 
 function handleHashChange() {
 	function goBackTo(view) {

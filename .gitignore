@@ -1,3 +1,7 @@
+cordova/node_modules
+cordova/platforms
+cordova/plugins
+cordova/www
 electron/game
 electron/node_modules
 electron/dist
