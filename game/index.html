@@ -17,6 +17,10 @@
 		<meta name="theme-color" content="#3b3a3d" />
 		<script type="text/javascript">
 			window.addEventListener('load', function () {
+				if (window.cordova) {
+					// Do not attempt to install a service worker if this is a packaged version.
+					return;
+				}
 				if (!navigator.serviceWorker) {
 					console.log('TetrEscape will not work offline in this browser because it does not support service workers.');
 					return;
