@@ -106,3 +106,15 @@ Prereqs: [Cordova Android platform guide](https://cordova.apache.org/docs/en/11.
 8. Build (`cordova build android`).
   - To build for Google Play release, `cordova build android --release -- --keystore=path/to/android_keystore.keystore --storePassword=yourpassword --alias=keystore_name --password=yourpassword --packageType=bundle`.
   - To build and run on a connected device or emulator, run `cordova run` instead of `cordova build`.
+
+\*\*There is also an inconsistent issue where the Play Store flags the app as having an outdated version of Play billing.  [A workaround](https://github.com/budiselic/cordova-plugin-inapppurchase-fixed/issues/1#issuecomment-968428292) that seems to wark is edit `plugins/cordova-plugin-inapppurchase/plugin.xml` and replace
+```
+<config-file target="AndroidManifest.xml" parent="/manifest">
+	<uses-permission android:name="com.android.vending.BILLING" />
+</config-file>
+```
+with
+```
+<framework src="com.android.billingclient:billing:3.0.3" />
+```
+and have Cordova remake the Android project.

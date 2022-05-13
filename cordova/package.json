@@ -15,11 +15,11 @@
 			"android"
 		],
 		"plugins": {
-			"cordova-plugin-inapppurchase": {},
 			"admob-plus-cordova": {
 				"APP_ID_ANDROID": "ca-app-pub-XXXXXXXXXXXXXXXX~XXXXXXXXXX",
 				"PLAY_SERVICES_VERSION": "20.4.0"
-			}
+			},
+			"cordova-plugin-inapppurchase": {}
 		}
 	},
 	"devDependencies": {
