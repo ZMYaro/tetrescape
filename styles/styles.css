@@ -476,6 +476,7 @@ select {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	overflow-y: hidden;
 }
 #level-screen .menu ul {
 	list-style-type: none;
@@ -594,6 +595,8 @@ select {
 @media (orientation: portrait) {
 	#level-screen .menu {
 		display: block;
+		overflow-y: auto;
+		overflow-x: hidden;
 	}
 	#level-screen .menu ul {
 		flex-direction: column;
