@@ -95,9 +95,13 @@ Prereq: `npm install -g electron-builder`
 Prereqs: [Cordova Android platform guide](https://cordova.apache.org/docs/en/11.x/guide/platforms/android/index.html)
 1. Navigate to the `cordova` directory (`cd cordova`).
 2. Install dependencies (`npm install`).
-3. Symlink game directory as `www` (`ln -s ../game ./www` or `mklink /D www ..\game`)
-4. Add Google Play billing key to `www/manifest.json`.
-  - Retrieve from Google Play Console → App → Monetization setup
-5. Build (`cordova build android`).
+3. Set up Android project (`cordova platform add android`).
+4. Symlink game directory as `www` (`ln -s ../game ./www` or `mklink /D www ..\game`)
+5. Uncomment loading the Cordova script in `www/index.html` (`<script type="text/javascript" src="cordova.js"></script>`).
+6. Add Google Play billing key to `www/manifest.json`.
+  - Retrieve from Google Play Console → App → Monetization setup.
+7. Add AdMob app ID to `platforms/android/app/src/main/AndroidManifest.xml` (`<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-XXXXXXXXXXXXXXXX~XXXXXXXXXX" />`).
+  - Retrieve from AdMob → Apps → TetrEscape → Ad units.
+8. Build (`cordova build android`).
   - To build for Google Play release, `cordova build android --release -- --keystore=path/to/android_keystore.keystore --storePassword=yourpassword --alias=keystore_name --password=yourpassword --packageType=bundle`.
   - To build and run on a connected device or emulator, run `cordova run` instead of `cordova build`.

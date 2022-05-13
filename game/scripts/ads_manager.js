@@ -6,8 +6,11 @@ var Ads = {};
 Ads.GPLAY_DIGITAL_GOODS_SERVICE_URL = 'https://play.google.com/billing';
 /** @constant {String} The ID in Google Play for the remove ads in-app “product” */
 Ads.REMOVE_ADS_PRODUCT_ID = 'remove_ads'
-Ads.ADSENSE_CLIENT_ID = 'ca-pub-XXXXXXXXXXXXXXXX';
-Ads.ADSENSE_SLOT_ID = 'XXXXXXXXXX';
+Ads.GOOGLE_AD_CLIENT_ID = '3940256099942544'; // This is the test client ID; replace it for production builds!
+Ads.ADSENSE_UNIT_ID = 'XXXXXXXXXX'; // Replace this placeholder for production builds!
+Ads.ADMOB_UNIT_ID = '6300978111'; // This is the test unit ID; replace it for production builds!
+
+Ads.adMobBannerAd = undefined;
 
 /**
  * Check whether the user has paid to remove ads, and load ads if not.
@@ -25,31 +28,57 @@ Ads.init = function () {
 			views.options.hideRemoveAds();
 		})
 		.catch(Ads.addAds);
-}
+};
 
 /**
  * Add the necessary code to load and show ads.
  */
 Ads.addAds = function () {
+	if (window.admob) {
+		Ads.addAdMobAds();
+		return;
+	}
+	
+	Ads.addAdSenseAds();
+};
+
+/**
+ * Add the necessary code to load AdSense ads.
+ */
+Ads.addAdSenseAds = function () {
 	document.body.classList.add('has-ads');
 	
 	var adContainer = document.getElementById('place-where-an-ad-could-go');
 	adContainer.innerHTML = '<ins class="adsbygoogle" ' +
 		'style="display: block;" ' +
 		'data-full-width-responsive="true" ' +
-		'data-ad-client="' + Ads.ADSENSE_CLIENT_ID + '" ' +
-		'data-ad-slot="' + Ads.ADSENSE_SLOT_ID + '" ' +
+		'data-ad-client="ca-pub-' + Ads.GOOGLE_AD_CLIENT_ID + '" ' +
+		'data-ad-slot="' + Ads.ADSENSE_UNIT_ID + '" ' +
 		'data-adbreak-test="on" ' + // Fake ads for testing
 		'></ins>';
 	
 	var adScript = document.createElement('script');
 	adScript.async = true;
 	adScript.crossOrigin = 'anonymous';
-	adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + Ads.ADSENSE_CLIENT_ID;
+	adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-' + Ads.GOOGLE_AD_CLIENT_ID;
 	document.head.appendChild(adScript);
 	
 	(window.adsbygoogle = window.adsbygoogle || []).push({});
-}
+};
+
+/**
+ * Add the necessary code to load AdMob ads.
+ */
+Ads.addAdMobAds = function () {
+	if (Ads.adMobBannerAd) {
+		return;
+	}
+	Ads.adMobBannerAd = new admob.BannerAd({
+		adUnitId: 'ca-app-pub-' + Ads.GOOGLE_AD_CLIENT_ID + '/' + Ads.ADMOB_UNIT_ID,
+		position: 'bottom'
+	});
+	Ads.adMobBannerAd.show();
+};
 
 /**
  * Check whether the user paid to remove ads on Google Play.
@@ -159,4 +188,7 @@ Ads.initPaymentCordova = function () {
 Ads.removeAds = function () {
 	document.body.classList.remove('has-ads');
 	document.body.removeChild(document.getElementById('place-where-an-ad-could-go'));
+	if (Ads.adMobBannerAd) {
+		Ads.adMobBannerAd.hide();
+	}
 };
