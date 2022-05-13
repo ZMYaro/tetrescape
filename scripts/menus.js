@@ -6,7 +6,13 @@ var im, // Input manager
 	views,
 	currentLevelIndex;
 
-window.onload = function () {
+if (window.cordova) {
+	document.addEventListener('deviceready', init);
+} else {
+	window.addEventListener('load', init);
+}
+
+function init() {
 	// Initialize input manager and stats manager.
 	im = new InputManager(document.getElementById('game-screen'));
 	stats = new StatsManager();
@@ -32,16 +38,9 @@ window.onload = function () {
 	// Add the listener for the user navigating with the back button.
 	window.addEventListener('hashchange', handleHashChange);
 	
-	// Do not show menus by default since this is not meant to be live yet.
-	document.body.ondblclick = function () {
-		document.body.ondblclick = function () {
-			document.body.ondblclick = function () {
-				views.game._game.loadPromise.then(handleHashChange);
-				document.body.ondblclick = null;
-			};
-		};
-	};
-};
+	// Open the title screen (or requested screen) once assets have loaded.
+	views.game._game.loadPromise.then(handleHashChange);
+}
 
 function handleHashChange() {
 	function goBackTo(view) {

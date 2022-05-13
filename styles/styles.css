@@ -19,6 +19,10 @@ body {
 	font-family: 'Roboto Slab', sans-serif;
 }
 
+abbr {
+	text-decoration: none;
+}
+
 a {
 	color: white;
 }
@@ -419,7 +423,6 @@ select {
 	margin: 0;
 	font-size: 50%;
 	opacity: 75%;
-	text-decoration: none;
 }
 #title-canvas {
 	position: absolute;
@@ -900,13 +903,13 @@ img.instructions-gamepad {
 		#about-screen ul li a:focus {
 			text-decoration: underline;
 		}
-	#about-screen .testers {
+	#about-screen .multicolumn {
 		column-count: 2;
 		font-size: 87.5%;
 		max-width: 22em;
 	}
 @media (min-width: 500px) {
-	#about-screen .testers {
+	#about-screen .multicolumn {
 		font-size: 100%;
 	}
 }

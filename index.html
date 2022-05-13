@@ -17,6 +17,10 @@
 		<meta name="theme-color" content="#3b3a3d" />
 		<script type="text/javascript">
 			window.addEventListener('load', function () {
+				if (window.cordova) {
+					// Do not attempt to install a service worker if this is a packaged version.
+					return;
+				}
 				if (!navigator.serviceWorker) {
 					console.log('TetrEscape will not work offline in this browser because it does not support service workers.');
 					return;
@@ -28,7 +32,6 @@
 				});
 			});
 		</script>
-		<meta http-equiv="origin-trial" content="AsmlDashu/+kgmdc+DoKBZvqN1da/snUrSpYP6DhkjC92uiP+MggNPRwPX77DDQGQ2fuSu7kKiYfw50uFHCuygYAAABceyJvcmlnaW4iOiJodHRwczovL3RldHJlc2NhcGUuaW5wcm9kLmNvOjQ0MyIsImZlYXR1cmUiOiJEaWdpdGFsR29vZHNWMiIsImV4cGlyeSI6MTY1MzI2Mzk5OX0=" />
 		
 		<!-- Icons -->
 		<link rel="shortcut icon" type="image/x-icon" href="images/logo/favicon.ico" />
@@ -40,6 +43,7 @@
 		<link rel="stylesheet" type="text/css" href="styles/animations.css" />
 		
 		<!-- External libraries and polyfills -->
+		<!--<script type="text/javascript" src="cordova.js"></script>-->
 		<script type="text/javascript" src="scripts/lib/controller.min.js"></script>
 		<script type="text/javascript" src="scripts/lib/polyfills.js"></script>
 		<script type="text/javascript" src="scripts/lib/raf.js"></script>
@@ -81,8 +85,6 @@
 		<script type="text/javascript" src="scripts/game/level.js"></script>
 	</head>
 	<body>
-		<p style="text-align: center;">Coming soon...</p>
-		
 		<div class="view" id="title-screen">
 			<img src="images/logo/title_robot.png" alt="TetrEscape" id="title" />
 			<div class="menu">
@@ -91,8 +93,8 @@
 				<button id="options-button">Options</button>
 				<button id="about-button">Credits</button>
 			</div>
-			<abbr class="version-number" title="Version 0.9.5 beta">
-				v0.9.5&beta;
+			<abbr class="version-number" title="Version 1.0.0">
+				v1.0.0
 			</abbr>
 			<div id="title-glow1"></div>
 			<div id="title-glow2"></div>
@@ -230,22 +232,26 @@
 				</ul>
 				<br />
 				<h2>Libraries &amp; references</h2>
-				<ul>
+				<ul class="multicolumn">
+					<li><a href="https://admob-plus.github.io" target="_blank">AdMob Plus</a></li>
 					<li><a href="https://samiare.github.io/Controller.js" target="_blank">Controller.js</a></li>
-					<li><a href="http://freesound.org" target="_blank">Freesound.org</a></li>
-					<li><a href="http://hammerjs.github.io" target="_blank">Hammer.js</a></li>
+					<li><a href="https://cordova.apache.org" target="_blank">Cordova</a></li>
+					<li><a href="https://github.com/AlexDisler/cordova-plugin-inapppurchase" target="_blank">Cordova <abbr title="In-app purchases">IAP</abbr> plugin</a></li>
+					<li><a href="https://www.electronjs.org" target="_blank">Electron</a></li>
+					<li><a href="https://freesound.org" target="_blank">Freesound</a></li>
+					<li><a href="https://hammerjs.github.io" target="_blank">Hammer.js</a></li>
 					<li><a href="https://material.io" target="_blank">Material Design</a></li>
 					<li><a href="https://materialz.dev" target="_blank">MaterialZ</a></li>
-					<li><a href="https://gist.github.com/paulirish/1579671" target="_blank">Erik M&ouml;ller and Paul Irish's requestAnimationFrame polyfill</a></li>
+					<li><a href="https://gist.github.com/paulirish/1579671" target="_blank"><abbr title="Request animation frame">RAF</abbr> polyfill</a></li>
 				</ul>
 				<br />
 				<h2>Testing</h2>
-				<ul class="testers">
+				<ul class="multicolumn">
 					<li>Andrew Martin</li>
 					<li>Ashley Smith</li>
 					<li>Denis Yaro</li>
-					<li>Ethan Yaro</li>
 					<li>DEX</li>
+					<li>Ethan Yaro</li>
 					<li>Kyle Flores</li>
 					<li>Marjorie Yaro</li>
 					<li>Taylor V. Braun</li>
