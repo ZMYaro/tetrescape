@@ -71,16 +71,29 @@ This code may be used as an educational reference, but may not be copied or redi
 
 ## Running as a web app
 
-Prereq: `npm install -g http-server` (or your preferred local HTTP server).
-1. `cd game`.
-2. `http-server` (or start your preferred HTTP server).
+Prereq: `npm install -g http-server` (or your preferred local HTTP server)
+1. `cd game`
+2. `http-server` (or start your preferred HTTP server)
 3. Navigate to `http://localhost:8080` (or whichever port you specified if not 8080) in your browser.
 
 
-## Buliding as a desktop app
+## Building as a desktop app
 
 Prereq: `npm install -g electron-builder`
-1. `cp -r game electron`.
-2. `cd electron`.
-3. `electron-builder`.
+1. Navigate to the `electron` directory (`cd electron`).
+2. Symlink `game` (`ln -s ../game` or `mklink /D game ..\game`).
+3. Build (`electron-builder`).
   - Or [specify platform and architecture](https://www.electron.build/cli) (e.g., `electron-builder --win --arm64`).
+
+
+## Building as an Android app
+
+Prereqs: [Cordova Android platform guide](https://cordova.apache.org/docs/en/11.x/guide/platforms/android/index.html)
+1. Navigate to the `cordova` directory (`cd cordova`).
+2. Install dependencies (`npm install`).
+3. Symlink game directory as `www` (`ln -s ../game ./www` or `mklink /D www ..\game`)
+4. Add Google Play billing key to `www/manifest.json`.
+  - Retrieve from Google Play Console → App → Monetization setup
+5. Build (`cordova build android`).
+  - To build for Google Play release, `cordova build android --release -- --keystore=path/to/android_keystore.keystore --storePassword=yourpassword --alias=keystore_name --password=yourpassword --packageType=bundle`.
+  - To build and run on a connected device or emulator, run `cordova run` instead of `cordova build`.
