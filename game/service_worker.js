@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cache-2022-05-11',
+const CACHE_NAME = 'cache-2022-05-13',
 	CACHE_MANIFEST = [
 		'/',
 		'/index.html',

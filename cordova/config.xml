@@ -3,8 +3,8 @@
 		xmlns="http://www.w3.org/ns/widgets"
 		xmlns:cdv="http://cordova.apache.org/ns/1.0"
 		id="co.inprod.TetrEscape"
-		version="0.9.6"
-		android-versionCode="4">
+		version="1.0.0"
+		android-versionCode="5">
 	<name>TetrEscape</name>
 	<description>Slide the tetrominos and escape the room!</description>
 	<author email="contact@inprod.co" href="https://inprod.co">
