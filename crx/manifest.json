@@ -3,7 +3,7 @@
 	
 	"name": "TetrEscape",
 	"description": "Slide the tetrominos and escape the room!",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	
 	"icons": {
 		"128": "icon_128.png",
