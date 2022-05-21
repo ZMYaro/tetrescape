@@ -31,6 +31,12 @@
 					console.log('Service worker registration failed: ' + err);
 				});
 			});
+			
+			// Set up Google Analytics tag.
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-6E20F5L6P0');
 		</script>
 		
 		<!-- Icons -->
@@ -44,6 +50,7 @@
 		
 		<!-- External libraries and polyfills -->
 		<!--<script type="text/javascript" src="cordova.js"></script>-->
+		<script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-6E20F5L6P0"></script>
 		<script type="text/javascript" src="scripts/lib/controller.min.js"></script>
 		<script type="text/javascript" src="scripts/lib/polyfills.js"></script>
 		<script type="text/javascript" src="scripts/lib/raf.js"></script>
@@ -93,8 +100,8 @@
 				<button id="options-button">Options</button>
 				<button id="about-button">Credits</button>
 			</div>
-			<abbr class="version-number" title="Version 1.0.0">
-				v1.0.0
+			<abbr class="version-number" title="Version 1.0.1">
+				v1.0.1
 			</abbr>
 			<div id="title-glow1"></div>
 			<div id="title-glow2"></div>

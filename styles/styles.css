@@ -210,7 +210,7 @@ select {
 	transition-duration: 0.2s;
 }
 	.has-ads .view {
-		height: calc(100% - 50px);
+		height: calc(100% - 66px); /* 100% - Google mobile ad height */
 	}
 	.view.open {
 		transform: translateY(0%);
@@ -255,7 +255,7 @@ select {
 		padding-top: 4rem;
 	}
 		.has-ads .view {
-			height: calc(100% - 3.5rem)
+			height: calc(100% - 128px); /* 100% - Google desktop ad height */
 		}
 }
 @media (prefers-reduced-motion: reduce) {
@@ -919,24 +919,24 @@ img.instructions-gamepad {
 
 /* Ad stuff (ridiculous name because of adblockers) */
 #place-where-an-ad-could-go {
-	position: fixed;
-	left: 0;
-	width: 100%;
-	bottom: 0;
-	height: 50px;
-	z-index: 10;
-	
-	background-color: black;
-	color: white;
-	text-align: center;
-	
 	display: none;
 }
 	.has-ads #place-where-an-ad-could-go {
 		display: block;
+		
+		position: fixed;
+		left: 0;
+		width: 100%;
+		bottom: 0;
+		height: 66px; /* Google mobile ad height */
+		z-index: 10;
+		
+		background-color: black;
+		color: white;
+		text-align: center;
 	}
 @media (min-width: 500px) and (min-height: 500px) {
-	#place-where-an-ad-could-go {
-		height: 3.5rem;
+	.has-ads #place-where-an-ad-could-go {
+		height: 128px; /* Google desktop ad height */
 	}
 }
