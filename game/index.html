@@ -31,6 +31,12 @@
 					console.log('Service worker registration failed: ' + err);
 				});
 			});
+			
+			// Set up Google Analytics tag.
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-XXXXXXXXXX');
 		</script>
 		
 		<!-- Icons -->
@@ -44,6 +50,7 @@
 		
 		<!-- External libraries and polyfills -->
 		<!--<script type="text/javascript" src="cordova.js"></script>-->
+		<script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 		<script type="text/javascript" src="scripts/lib/controller.min.js"></script>
 		<script type="text/javascript" src="scripts/lib/polyfills.js"></script>
 		<script type="text/javascript" src="scripts/lib/raf.js"></script>
