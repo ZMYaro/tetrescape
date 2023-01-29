@@ -7,7 +7,7 @@ Room escape meets block-pushing puzzles meets _Tetris_.
 
 ## Platform
 
-_TetrEscape_ is designed for the web first, but the intent is to port it to other platforms in the future.
+_TetrEscape_ is designed for the web first.  It is made available on Android via Cordova and on Windows via Electron.
 
 
 ## Gameplay
